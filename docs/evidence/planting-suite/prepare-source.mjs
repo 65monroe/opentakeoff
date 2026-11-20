@@ -1,0 +1,24 @@
+// Download the public source outside the repository; never commit the PDF.
+import assert from 'node:assert/strict';
+import { createHash } from 'node:crypto';
+import { mkdir, readFile, writeFile } from 'node:fs/promises';
+import { createRequire } from 'node:module';
+import { resolve } from 'node:path';
+const require = createRequire(new URL('../../../mcp/package.json', import.meta.url));
+const { PDFDocument } = require('pdf-lib');
+const source = JSON.parse(await readFile(new URL('./source.json', import.meta.url), 'utf8'));
+const dir = resolve(process.argv[2] ?? 'tmp/planting-suite');
+await mkdir(dir, { recursive: true });
+const response = await fetch(source.url);
+assert.ok(response.ok, `Source download: HTTP ${response.status}`);
+const bytes = new Uint8Array(await response.arrayBuffer());
+assert.equal(createHash('sha256').update(bytes).digest('hex'), source.sha256, 'Public source changed: recheck the sheet before reusing coordinates');
+const original = await PDFDocument.load(bytes);
+const subset = await PDFDocument.create();
+const [page] = await subset.copyPages(original, [source.pdf_page - 1]);
+subset.addPage(page);
+subset.setTitle('CCFP Nature Center L1.0 - public test source');
+subset.setAuthor('');
+const path = resolve(dir, 'ccfp-L1.0.pdf');
+await writeFile(path, await subset.save());
+console.log(path);

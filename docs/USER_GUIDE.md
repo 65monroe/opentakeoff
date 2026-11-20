@@ -270,6 +270,18 @@ The **`ft` / `m`** toggle beside the Scale chip switches the whole display layer
 
 ## 4. Conditions — your finishes
 
+### Landscape planting
+
+Choose **Landscape planting** in a condition's **Trade** properties to group
+plant conditions, then choose that trade in the status bar's **Trade** picker.
+Keep the exact plant code and capitalization from the drawing. A plant code
+has no automatic trade prefix; existing conditions keep their current grouping.
+
+An MCP planting takeoff can include individual plant counts and linked source
+notes. A note that quotes a printed bed quantity is not a measured count and
+does not appear as a measurement-review entry. Keep those quantities separate
+when checking the report. See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).
+
 A **condition** is one finish—`LVT-1`, `CPT-2`, `RB-1`—and it's what every measurement commits into. A fresh workspace seeds a flooring starter set (CPT-1, BRD-1, LVT-1, WD-1, VCT-1, SV-1, CT-1, RB-1, TR-1), several with real supporting materials already attached—CT-1 arrives with thinset and a grout line whose coverage derives from tile geometry.
 
 ### Creating, editing, deleting

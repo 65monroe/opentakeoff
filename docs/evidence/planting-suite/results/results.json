@@ -1,0 +1,33 @@
+{
+  "suite_available": true,
+  "core_tools": 70,
+  "measured_ea": {
+    "GDI": 1,
+    "TAM": 2,
+    "SET": 0
+  },
+  "printed_callout_ea": {
+    "SET": 185
+  },
+  "schedule_ea": {
+    "GDI": 1,
+    "TAM": 2,
+    "SET": 185
+  },
+  "shape_count": 3,
+  "pending_review": 3,
+  "reopen_exact": [
+    "sheets",
+    "shapes",
+    "conditions",
+    "markups",
+    "proposals"
+  ],
+  "text_items": 782,
+  "planting_schedule_reader": {
+    "error": "No \"planting\" schedule found in the set. Found: no schedules at all."
+  },
+  "scale_unconfirmed": [
+    "ccfp-L1.0.pdf"
+  ]
+}

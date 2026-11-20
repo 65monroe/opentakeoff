@@ -53,12 +53,12 @@ test("suites: a default build lists open_suite and hides every suite tool", asyn
 test("suites: open_suite with no arguments is the catalog; its description carries one line per suite", async () => {
   const client = await pair();
   const tool = (await client.listTools()).tools.find((t) => t.name === "open_suite")!;
-  for (const id of ["roofing", "siding", "soffit_fascia", "glazing", "plumbing", "electrical", "finishes", "acoustical_ceilings", "doors"]) {
+  for (const id of ["roofing", "siding", "soffit_fascia", "glazing", "plumbing", "electrical", "finishes", "acoustical_ceilings", "doors", "planting"]) {
     assert.match(tool.description!, new RegExp(`- ${id} \\(Div`));
   }
   const r = await call(client, "open_suite");
   assert.equal(r.isError, false);
-  assert.equal(r.data.catalog.length, 9);
+  assert.equal(r.data.catalog.length, 10);
   assert.deepEqual(r.data.opened, []);
 });
 
@@ -95,11 +95,58 @@ test("suites: calling a closed suite tool names its suite and the opener", async
   assert.match(text, /Roofing suite.*open_suite \{suite:"roofing"\}/);
 });
 
+test("planting: method-only opening preserves the existing takeoff and tool list", async () => {
+  const client = await pair();
+  try {
+    await ready(client);
+    await call(client, "place_count", { sheet: KEY, condition: "pa", points: [[120, 140], [180, 140]] });
+    const before = (await call(client, "export_takeoff")).data;
+    const tools = (await client.listTools()).tools.map((t) => t.name).sort();
+    const opened = await call(client, "open_suite", { suite: "planting" });
+    assert.equal(opened.isError, false);
+    assert.deepEqual(opened.data.opened, ["planting"]);
+    assert.deepEqual(opened.data.tools_enabled, []);
+    assert.deepEqual(opened.data.suites[0].presets.map((p: any) => p.measure), ["count"]);
+    const division = await call(client, "open_suite", { division: "32" });
+    assert.deepEqual(division.data.opened, ["planting"]);
+    assert.deepEqual(division.data.tools_enabled, []);
+    assert.deepEqual((await client.listTools()).tools.map((t) => t.name).sort(), tools);
+    assert.deepEqual((await call(client, "export_takeoff")).data, before,
+      "opening a method cannot change IDs, geometry, quantities, metadata, calibration or review");
+    assert.equal(row((await call(client, "takeoff_summary")).data, "pa").ea, 2);
+  } finally { await client.close(); }
+});
+
+test("planting: a printed-quantity source note never invents measured EA", async () => {
+  const client = await pair();
+  try {
+    await ready(client);
+    await call(client, "open_suite", { suite: "planting" });
+    // Synthetic safety case on the bundled plan, not a claimed plant on it.
+    // Two printed quantities, 12 + 8 = 20 EA, are notes until a source-callout
+    // quantity model exists. Zero individual locations must stay zero counts.
+    for (const [x, qty] of [[100, 12], [250, 8]]) {
+      await call(client, "annotate", { sheet: KEY, type: "callout", condition: "pa",
+        at: [x, 100], target: [x, 160],
+        text: `Printed ${qty} pa; source-callout only; excluded from measured EA` });
+    }
+    const payload = (await call(client, "export_takeoff")).data;
+    assert.equal(payload.shapes.length, 0);
+    assert.equal(payload.markups.length, 2);
+    assert.equal(payload.conditions.find((c: any) => c.finish_tag === "pa").finish_tag, "pa");
+    assert.equal(row((await call(client, "takeoff_summary")).data, "pa").ea, 0);
+    await call(client, "place_count", { sheet: KEY, condition: "Pa", points: [[400, 200]] });
+    const totals = (await call(client, "takeoff_summary")).data;
+    assert.equal(row(totals, "pa").ea, 0);
+    assert.equal(row(totals, "Pa").ea, 1, "case-distinct codes stay distinct");
+  } finally { await client.close(); }
+});
+
 test("suites: pre-opened by option or OPENTAKEOFF_MCP_SUITES", async () => {
   const client = await pair({ suites: ["glazing"] });
   const names = (await client.listTools()).tools.map((t) => t.name);
   assert.ok(names.includes("glazing_takeoff") && !names.includes("roof_takeoff"));
-  assert.deepEqual(preopenedSuites("all").length, 9);
+  assert.deepEqual(preopenedSuites("all").length, 10);
   const prev = process.env.OPENTAKEOFF_MCP_SUITES;
   process.env.OPENTAKEOFF_MCP_SUITES = "plumbing, nonsense";
   try { assert.deepEqual(preopenedSuites(), ["plumbing"]); } finally {

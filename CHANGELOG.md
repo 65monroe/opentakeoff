@@ -1,5 +1,9 @@
 # Changelog
 
+## Unreleased
+
+- **Landscape planting method (Division 32, #659).** `open_suite {suite: "planting"}` returns a source-backed workflow for exact-code plant counts and schedule comparison using core tools. Printed bed quantities remain separately disclosed source notes, excluded from measured EA; this does not add a callout quantity model. The canvas Trade menus include **Landscape planting**, with explicit assignment so existing plant and finish codes remain unchanged.
+
 ## 2026-11-20 — Public test sheets
 
 - **`demo/public-sheets/`: nine real sheets to test against.** Footing and foundation plan, a fire station floor plan and exterior elevations, a veterans home overall plan with letter-prefixed room numbers, four area plans that meet at match lines, and an overall reflected ceiling plan. All are from Missouri state public bid sets, extracted unchanged with the document metadata removed. The README links each source and records what `main` reads today, including three misses: S-101's sheet number and scale, and no scale on the fire station plan.

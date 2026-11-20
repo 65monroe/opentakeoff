@@ -1,0 +1,5804 @@
+[
+  {
+    "tool": "open_suite",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "opened": [],
+      "tools_enabled": [],
+      "open_suites": [],
+      "catalog": [
+        {
+          "id": "planting",
+          "label": "Landscape planting",
+          "divisions": [
+            "32"
+          ],
+          "summary": "plant schedules, individually located plants and separately disclosed bed callouts: core tools",
+          "tools": [],
+          "open": false
+        },
+        {
+          "id": "finishes",
+          "label": "Finishes",
+          "divisions": [
+            "09"
+          ],
+          "summary": "flooring, base, transitions, wall finishes: core tools, no extra tools",
+          "tools": [],
+          "open": false
+        },
+        {
+          "id": "acoustical_ceilings",
+          "label": "Acoustical ceilings",
+          "divisions": [
+            "09"
+          ],
+          "summary": "lay-in tiles, main runners, cross tees, hanger wires and wall angle from areas on the reflected ceiling plan",
+          "tools": [
+            "ceiling_takeoff"
+          ],
+          "open": false
+        },
+        {
+          "id": "roofing",
+          "label": "Roofing",
+          "divisions": [
+            "07"
+          ],
+          "summary": "sloped roof area and squares, true rake/hip/valley LF, drip edge, starter, ridge cap, underlayment",
+          "tools": [
+            "roof_takeoff"
+          ],
+          "open": false
+        },
+        {
+          "id": "siding",
+          "label": "Siding",
+          "divisions": [
+            "07"
+          ],
+          "summary": "net wall area and squares from elevations, opening trim, starter, corners, lap pieces",
+          "tools": [
+            "siding_takeoff"
+          ],
+          "open": false
+        },
+        {
+          "id": "soffit_fascia",
+          "label": "Soffit & fascia",
+          "divisions": [
+            "07"
+          ],
+          "summary": "soffit SF from eave/rake LF × depth, fascia LF, wall receiver, attic intake vent area",
+          "tools": [
+            "soffit_takeoff"
+          ],
+          "open": false
+        },
+        {
+          "id": "glazing",
+          "label": "Glazing & storefront",
+          "divisions": [
+            "08"
+          ],
+          "summary": "storefront / curtain wall: frame SF, lites, glass SF, mullion LF, perimeter sealant",
+          "tools": [
+            "glazing_takeoff"
+          ],
+          "open": false
+        },
+        {
+          "id": "doors",
+          "label": "Doors, frames & hardware",
+          "divisions": [
+            "08"
+          ],
+          "summary": "doors per type and size from the door schedule, matched to tags on the plans: core tools",
+          "tools": [],
+          "open": false
+        },
+        {
+          "id": "plumbing",
+          "label": "Plumbing",
+          "divisions": [
+            "22"
+          ],
+          "summary": "fixture counts checked against the schedule QTY, pipe LF by system/size, hangers, fittings, insulation",
+          "tools": [
+            "plumbing_rollup"
+          ],
+          "open": false
+        },
+        {
+          "id": "electrical",
+          "label": "Electrical & low voltage",
+          "divisions": [
+            "26",
+            "27",
+            "28"
+          ],
+          "summary": "legend devices and fixtures counted, conduit LF with drops, wire LF by conductors, boxes, whips",
+          "tools": [
+            "electrical_rollup"
+          ],
+          "open": false
+        }
+      ],
+      "next": "Call open_suite {suite} for the trade you are taking off."
+    }
+  },
+  {
+    "tool": "load_plan",
+    "arguments": {
+      "path": "<SOURCE_PDF>"
+    },
+    "isError": false,
+    "result": {
+      "file": "ccfp-L1.0.pdf",
+      "files": [
+        "ccfp-L1.0.pdf"
+      ],
+      "page_count": 1,
+      "sheets": [
+        {
+          "sheet": "ccfp-L1.0.pdf",
+          "page": 1,
+          "width_pt": 2592,
+          "height_pt": 1728,
+          "width_px": 5184,
+          "height_px": 3456,
+          "sheet_number": "L1.0"
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [],
+      "conditions": [],
+      "shapes": [],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "open_suite",
+    "arguments": {
+      "suite": "planting"
+    },
+    "isError": false,
+    "result": {
+      "opened": [
+        "planting"
+      ],
+      "tools_enabled": [],
+      "open_suites": [
+        "planting"
+      ],
+      "suites": [
+        {
+          "id": "planting",
+          "label": "Landscape planting",
+          "divisions": [
+            "32"
+          ],
+          "tools": [],
+          "method": "Planting plans, schedules, details and addenda: load_plan, sheet_info, read_sheet_text and view_sheet. Establish the revision, bid alternate and sampled extent before counting; set_scale from the relevant printed scale before measuring areas or lengths.\nRead the planting schedule visually with view_sheet; read_sheet_text helps when text is available. find_schedule has no dedicated planting reader: do not assume it resolves plant rows. Preserve the exact code and capitalization, botanical/common names, size, container, caliper/height, spacing and schedule sheet/row. Missing or ambiguous document requirements: create_rfi; never expand a code from memory.\npropose_takeoff per code and scope: put the schedule identity, specified size, sheet/row and quantity basis in its rationale. annotate with condition set to the exact code to retain a concise source note. The MCP edit_condition tool does not set spec or trade; opening this suite does not retag existing conditions. In the canvas, choose Landscape planting in the condition's Trade properties without renaming its code.\nIndividually identifiable plants: inspect each symbol and its leader, then place_count at the actual plant center under its exact code. One point is one EA. symbol_sweep can find candidates on vector plans, but inspect identities, withheld matches and legend symbols before committing. Keep each installed plant once across overall and enlarged plans. list_shapes before continuing an existing takeoff; do not repeat an already committed count pass.\nPrinted bed quantities without individual locations: annotate each source callout under its exact code with its printed quantity, sheet/location and 'Printed callout only; excluded from measured EA'. Keep a separate source-callout ledger in the handoff. This method does not add callout quantities to measured totals or make them measurement-review entries. count_marks counts tag occurrences, not the adjacent plant quantity, and normalizes codes: do not use it for this pass. Do not invent points or use a condition multiplier to represent a bed. A callout describing plants already located is supporting evidence, never additional EA.\nCompare individually located EA, separately recorded callout EA and schedule quantities only over the same scope. Name partial samples, unresolved callouts and differences; never force a match. Measure only explicitly specified material coverage with measure_polygon and linear work with measure_line, under separate material tags. Keep SF and LF separate from plant EA. CY or tons need stated depth/density and the ton unit; this suite derives neither. Coordinate sod, seed and paving with the sitework scope.\nFinish with view_sheet overlay:true at a readable crop, takeoff_summary, export_report, export_takeoff and export_marked_pdf. Reopen the editable export against the same source and verify IDs, locations, quantities and pending review. Disclose source-callout and condition-metadata limitations; leave human review and scale confirmation to the estimator.",
+          "presets": [
+            {
+              "tag": "<exact plant code>",
+              "measure": "count",
+              "what": "one EA per individually located plant; preserve printed capitalization and schedule identity"
+            }
+          ]
+        }
+      ],
+      "next": "This trade uses core tools only; follow the method."
+    }
+  },
+  {
+    "tool": "open_suite",
+    "arguments": {
+      "division": "32"
+    },
+    "isError": false,
+    "result": {
+      "opened": [
+        "planting"
+      ],
+      "tools_enabled": [],
+      "open_suites": [
+        "planting"
+      ],
+      "suites": [
+        {
+          "id": "planting",
+          "label": "Landscape planting",
+          "divisions": [
+            "32"
+          ],
+          "tools": [],
+          "method": "Planting plans, schedules, details and addenda: load_plan, sheet_info, read_sheet_text and view_sheet. Establish the revision, bid alternate and sampled extent before counting; set_scale from the relevant printed scale before measuring areas or lengths.\nRead the planting schedule visually with view_sheet; read_sheet_text helps when text is available. find_schedule has no dedicated planting reader: do not assume it resolves plant rows. Preserve the exact code and capitalization, botanical/common names, size, container, caliper/height, spacing and schedule sheet/row. Missing or ambiguous document requirements: create_rfi; never expand a code from memory.\npropose_takeoff per code and scope: put the schedule identity, specified size, sheet/row and quantity basis in its rationale. annotate with condition set to the exact code to retain a concise source note. The MCP edit_condition tool does not set spec or trade; opening this suite does not retag existing conditions. In the canvas, choose Landscape planting in the condition's Trade properties without renaming its code.\nIndividually identifiable plants: inspect each symbol and its leader, then place_count at the actual plant center under its exact code. One point is one EA. symbol_sweep can find candidates on vector plans, but inspect identities, withheld matches and legend symbols before committing. Keep each installed plant once across overall and enlarged plans. list_shapes before continuing an existing takeoff; do not repeat an already committed count pass.\nPrinted bed quantities without individual locations: annotate each source callout under its exact code with its printed quantity, sheet/location and 'Printed callout only; excluded from measured EA'. Keep a separate source-callout ledger in the handoff. This method does not add callout quantities to measured totals or make them measurement-review entries. count_marks counts tag occurrences, not the adjacent plant quantity, and normalizes codes: do not use it for this pass. Do not invent points or use a condition multiplier to represent a bed. A callout describing plants already located is supporting evidence, never additional EA.\nCompare individually located EA, separately recorded callout EA and schedule quantities only over the same scope. Name partial samples, unresolved callouts and differences; never force a match. Measure only explicitly specified material coverage with measure_polygon and linear work with measure_line, under separate material tags. Keep SF and LF separate from plant EA. CY or tons need stated depth/density and the ton unit; this suite derives neither. Coordinate sod, seed and paving with the sitework scope.\nFinish with view_sheet overlay:true at a readable crop, takeoff_summary, export_report, export_takeoff and export_marked_pdf. Reopen the editable export against the same source and verify IDs, locations, quantities and pending review. Disclose source-callout and condition-metadata limitations; leave human review and scale confirmation to the estimator.",
+          "presets": [
+            {
+              "tag": "<exact plant code>",
+              "measure": "count",
+              "what": "one EA per individually located plant; preserve printed capitalization and schedule identity"
+            }
+          ]
+        }
+      ],
+      "next": "This trade uses core tools only; follow the method."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [],
+      "conditions": [],
+      "shapes": [],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "read_sheet_text",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf"
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "items": [
+        {
+          "str": "UG ELEC",
+          "x": 3992.3,
+          "y": 1795.3
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3898.3,
+          "y": 1710.1
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3800.8,
+          "y": 1629.6
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3709.7,
+          "y": 1542.6
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3620.6,
+          "y": 1452.7
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3531.6,
+          "y": 1362.8
+        },
+        {
+          "str": "E",
+          "x": 3446.5,
+          "y": 1294
+        },
+        {
+          "str": "2'-0\"",
+          "x": 2763,
+          "y": 1399
+        },
+        {
+          "str": "1'-0\"",
+          "x": 2952.1,
+          "y": 1513.2
+        },
+        {
+          "str": "1'-0\"",
+          "x": 3137.2,
+          "y": 1175.8
+        },
+        {
+          "str": "12'-7\"",
+          "x": 3197.2,
+          "y": 1518.8
+        },
+        {
+          "str": "3'-0\"",
+          "x": 2967.6,
+          "y": 1531.3
+        },
+        {
+          "str": "W",
+          "x": 1355.3,
+          "y": 2590.6
+        },
+        {
+          "str": "W",
+          "x": 1424,
+          "y": 2543.5
+        },
+        {
+          "str": "W",
+          "x": 1492.8,
+          "y": 2496.5
+        },
+        {
+          "str": "W",
+          "x": 1561.6,
+          "y": 2449.6
+        },
+        {
+          "str": "W",
+          "x": 1630.3,
+          "y": 2402.5
+        },
+        {
+          "str": "W",
+          "x": 1699.1,
+          "y": 2355.5
+        },
+        {
+          "str": "W",
+          "x": 1767.8,
+          "y": 2308.4
+        },
+        {
+          "str": "W",
+          "x": 1847.3,
+          "y": 2297.4
+        },
+        {
+          "str": "W",
+          "x": 1930.3,
+          "y": 2290.6
+        },
+        {
+          "str": "W",
+          "x": 2013.2,
+          "y": 2283.6
+        },
+        {
+          "str": "W",
+          "x": 2096.3,
+          "y": 2276.8
+        },
+        {
+          "str": "W",
+          "x": 2179.3,
+          "y": 2269.9
+        },
+        {
+          "str": "W",
+          "x": 2262.4,
+          "y": 2263.1
+        },
+        {
+          "str": "W",
+          "x": 2345.4,
+          "y": 2256.1
+        },
+        {
+          "str": "W",
+          "x": 2428.4,
+          "y": 2249.3
+        },
+        {
+          "str": "W",
+          "x": 2511.5,
+          "y": 2242.4
+        },
+        {
+          "str": "W",
+          "x": 2594.3,
+          "y": 2237.3
+        },
+        {
+          "str": "W",
+          "x": 2677.6,
+          "y": 2236.7
+        },
+        {
+          "str": "W",
+          "x": 2761,
+          "y": 2236.1
+        },
+        {
+          "str": "W",
+          "x": 2844.2,
+          "y": 2235.5
+        },
+        {
+          "str": "W",
+          "x": 2927.5,
+          "y": 2234.9
+        },
+        {
+          "str": "W",
+          "x": 3010.8,
+          "y": 2234.3
+        },
+        {
+          "str": "W",
+          "x": 3094.2,
+          "y": 2233.7
+        },
+        {
+          "str": "W",
+          "x": 3177.5,
+          "y": 2233.1
+        },
+        {
+          "str": "W",
+          "x": 3260.8,
+          "y": 2232.5
+        },
+        {
+          "str": "W",
+          "x": 3344.2,
+          "y": 2231.9
+        },
+        {
+          "str": "W",
+          "x": 3425.5,
+          "y": 2233.4
+        },
+        {
+          "str": "W",
+          "x": 3503.8,
+          "y": 2262.2
+        },
+        {
+          "str": "W",
+          "x": 3581.9,
+          "y": 2291
+        },
+        {
+          "str": "W",
+          "x": 3660.1,
+          "y": 2319.8
+        },
+        {
+          "str": "W",
+          "x": 3738.2,
+          "y": 2348.6
+        },
+        {
+          "str": "W",
+          "x": 3816.5,
+          "y": 2377.4
+        },
+        {
+          "str": "W",
+          "x": 3894.6,
+          "y": 2406.2
+        },
+        {
+          "str": "W",
+          "x": 3972.8,
+          "y": 2435
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 2178.2
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 2095
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 2011.6
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 1928.3
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 1845
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 1761.6
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 1678.3
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 1079.3
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 995.9
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 912.6
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 829.3
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 746
+        },
+        {
+          "str": "W",
+          "x": 3424.8,
+          "y": 662.6
+        },
+        {
+          "str": "W",
+          "x": 3427.7,
+          "y": 581.8
+        },
+        {
+          "str": "W",
+          "x": 3462.2,
+          "y": 505.9
+        },
+        {
+          "str": "W",
+          "x": 3496.9,
+          "y": 430.2
+        },
+        {
+          "str": "W",
+          "x": 3531.6,
+          "y": 354.5
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 2426.2
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 2299.7
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 2173.1
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 2046.6
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 1920.1
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 1793.6
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 1667
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 1540.6
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 1414.1
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2427.7,
+          "y": 1287.5
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2518.2,
+          "y": 1204.9
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2612.2,
+          "y": 1120.2
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2725.8,
+          "y": 1088.3
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2851.9,
+          "y": 1079.2
+        },
+        {
+          "str": "UG ELEC",
+          "x": 2978.2,
+          "y": 1070
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3104.4,
+          "y": 1060.9
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3230.5,
+          "y": 1051.9
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3356.8,
+          "y": 1042.8
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3482.9,
+          "y": 1033.7
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3527.6,
+          "y": 1103.4
+        },
+        {
+          "str": "UG ELEC",
+          "x": 3503.2,
+          "y": 1205.5
+        },
+        {
+          "str": "\u0010\u0014",
+          "x": 2861.5,
+          "y": 2196.5
+        },
+        {
+          "str": "\u000e\u0014\u0011\u0013",
+          "x": 3155.3,
+          "y": 2007.5
+        },
+        {
+          "str": "\u000e\u0013\u0011\u0018",
+          "x": 3153.2,
+          "y": 1967.6
+        },
+        {
+          "str": "\u000e\u0013\u0011\u0018",
+          "x": 2937.6,
+          "y": 1973.9
+        },
+        {
+          "str": "\u000e\u0014\u0011\u0013",
+          "x": 2939.4,
+          "y": 2016.5
+        },
+        {
+          "str": "\u000e\u0014\u0011\u0018",
+          "x": 2955,
+          "y": 2060
+        },
+        {
+          "str": "\u000e\u0014\u0011\u0018",
+          "x": 3124.3,
+          "y": 2048.6
+        },
+        {
+          "str": "\u000e\u0014\u0011\u0018",
+          "x": 3074.8,
+          "y": 2068.4
+        },
+        {
+          "str": "\u000e\u0013\u0011\u0013",
+          "x": 3088.2,
+          "y": 1902.7
+        },
+        {
+          "str": "7",
+          "x": 2788.1,
+          "y": 1277.5
+        },
+        {
+          "str": "7",
+          "x": 3157.6,
+          "y": 1546.2
+        },
+        {
+          "str": "\u0016 \u0010 95'",
+          "x": 3286.2,
+          "y": 1023.7
+        },
+        {
+          "str": "\u0016 \u0010 +$5",
+          "x": 3550.9,
+          "y": 882.5
+        },
+        {
+          "str": "\u0017 \u0010 'L2",
+          "x": 3656.3,
+          "y": 1147.2
+        },
+        {
+          "str": "\u0016 \u0010 C6)",
+          "x": 3655.7,
+          "y": 1340.6
+        },
+        {
+          "str": "\u0016 \u0010 6<2",
+          "x": 3655.7,
+          "y": 1368.6
+        },
+        {
+          "str": "\u0016 \u0010 6<2",
+          "x": 3655.7,
+          "y": 1492.4
+        },
+        {
+          "str": "\u0014\u0016 \u0010 3)U",
+          "x": 3499.7,
+          "y": 1815.4
+        },
+        {
+          "str": "\u0015 \u0010 'L2",
+          "x": 2721.5,
+          "y": 1948.3
+        },
+        {
+          "str": "\u0014\u0017 \u0010 EC3",
+          "x": 3253.9,
+          "y": 2070.6
+        },
+        {
+          "str": "\u0014\u0017 \u0010 53,",
+          "x": 3253.9,
+          "y": 2094.7
+        },
+        {
+          "str": "\u0014\u0017 \u0010 6C6",
+          "x": 3253.9,
+          "y": 2119
+        },
+        {
+          "str": "\u0014\u0017 \u0010 9E)",
+          "x": 3253.9,
+          "y": 2143
+        },
+        {
+          "str": "\u0018 \u0010 $7U",
+          "x": 3255.2,
+          "y": 2178.8
+        },
+        {
+          "str": "\u0017 \u0010 GE7",
+          "x": 3255.8,
+          "y": 2203.1
+        },
+        {
+          "str": "\u0018 \u0010 L$6",
+          "x": 3255.2,
+          "y": 2227.4
+        },
+        {
+          "str": "\u0018 \u0010 3%,",
+          "x": 3255.2,
+          "y": 2251.4
+        },
+        {
+          "str": "\u0017 \u0010 6+E",
+          "x": 3255.8,
+          "y": 2275.7
+        },
+        {
+          "str": "\u0018 \u0010 93E",
+          "x": 3255.2,
+          "y": 2299.7
+        },
+        {
+          "str": "\u0016 \u0010 C3E",
+          "x": 3286.2,
+          "y": 964
+        },
+        {
+          "str": "\u0016 \u0010 G0$",
+          "x": 3286.2,
+          "y": 988.2
+        },
+        {
+          "str": "\u0015\u0014 \u0010 E+<",
+          "x": 3551.2,
+          "y": 822.1
+        },
+        {
+          "str": "\u0015\u0014 \u0010 3%6",
+          "x": 3551.2,
+          "y": 846.4
+        },
+        {
+          "str": "\u0015\u0019 \u0010 $C'",
+          "x": 3782.6,
+          "y": 1234.8
+        },
+        {
+          "str": "\u0015\u0017 \u0010 C3E",
+          "x": 3782.6,
+          "y": 1259
+        },
+        {
+          "str": "\u0015\u0017 \u0010 C31",
+          "x": 3782.6,
+          "y": 1283.3
+        },
+        {
+          "str": "\u0015\u0017 \u0010 E5$",
+          "x": 3782.6,
+          "y": 1307.3
+        },
+        {
+          "str": "\u0015\u0017 \u0010 +$C",
+          "x": 3782.6,
+          "y": 1331.5
+        },
+        {
+          "str": "\u0015\u0019 \u0010 3+'",
+          "x": 3782.6,
+          "y": 1355.6
+        },
+        {
+          "str": "\u0015\u0019 \u0010 325",
+          "x": 3782.6,
+          "y": 1379.9
+        },
+        {
+          "str": "\u0018\u001b \u0010 6E7",
+          "x": 3782.4,
+          "y": 1404.1
+        },
+        {
+          "str": "\u0014\u001c \u0010 E+<",
+          "x": 3654.4,
+          "y": 1081.9
+        },
+        {
+          "str": "\u0015\u0017 \u0010 $4C",
+          "x": 3782.6,
+          "y": 1442.6
+        },
+        {
+          "str": "\u0015\u0019 \u0010 '20",
+          "x": 3782.6,
+          "y": 1466.9
+        },
+        {
+          "str": "\u0015\u0019 \u0010 E3U",
+          "x": 3782.6,
+          "y": 1490.9
+        },
+        {
+          "str": "\u0015\u0017 \u0010 EU0",
+          "x": 3782.6,
+          "y": 1515
+        },
+        {
+          "str": "\u0015\u0017 \u0010 0CE",
+          "x": 3782.6,
+          "y": 1539.2
+        },
+        {
+          "str": "\u0015\u0017 \u0010 752",
+          "x": 3782.6,
+          "y": 1563.5
+        },
+        {
+          "str": "\u0015\u0017 \u0010 UG5",
+          "x": 3782.6,
+          "y": 1587.7
+        },
+        {
+          "str": "\u0014\u0013 \u0010 E0$",
+          "x": 3236,
+          "y": 1549.8
+        },
+        {
+          "str": "\u001c \u0010 $CE",
+          "x": 3237.5,
+          "y": 1610
+        },
+        {
+          "str": "\u001c \u0010 %CU",
+          "x": 3237.5,
+          "y": 1634.3
+        },
+        {
+          "str": "\u001c \u0010 62%",
+          "x": 3237.5,
+          "y": 1658.5
+        },
+        {
+          "str": "\u0019 \u0010 3E'",
+          "x": 3237.5,
+          "y": 1446.5
+        },
+        {
+          "str": "\u0019 \u0010 569",
+          "x": 3237.5,
+          "y": 1470.7
+        },
+        {
+          "str": "\u0019 \u0010 6+E",
+          "x": 3237.5,
+          "y": 1495
+        },
+        {
+          "str": "\u0015 \u0010 3E'",
+          "x": 3079.2,
+          "y": 1381.1
+        },
+        {
+          "str": "\u0015 \u0010 569",
+          "x": 3079.2,
+          "y": 1405.3
+        },
+        {
+          "str": "\u0015 \u0010 6+E",
+          "x": 3079.2,
+          "y": 1429.6
+        },
+        {
+          "str": "\u0014\u0014 \u0010 E3U",
+          "x": 2349.6,
+          "y": 1524.6
+        },
+        {
+          "str": "\u0014\u0014 \u0010 0%5",
+          "x": 2349.6,
+          "y": 1548.6
+        },
+        {
+          "str": "\u0014\u0014 \u0010 6+E",
+          "x": 2349.6,
+          "y": 1573
+        },
+        {
+          "str": "\u001a \u0010 $4C",
+          "x": 2719,
+          "y": 2019.5
+        },
+        {
+          "str": "\u001a \u0010 E3U",
+          "x": 2719,
+          "y": 2043.5
+        },
+        {
+          "str": "\u001a \u0010 3E'",
+          "x": 2719,
+          "y": 2067.5
+        },
+        {
+          "str": "\u001a \u0010 6+E",
+          "x": 2719,
+          "y": 2091.7
+        },
+        {
+          "str": "\u001a \u0010 62%",
+          "x": 2719,
+          "y": 2116.1
+        },
+        {
+          "str": "\u0016 \u0010 L3<",
+          "x": 2724,
+          "y": 1971.2
+        },
+        {
+          "str": "\u0016 \u0010 6,5",
+          "x": 2724,
+          "y": 1995.5
+        },
+        {
+          "str": "\u0015 \u0010 'L2",
+          "x": 2531,
+          "y": 815.6
+        },
+        {
+          "str": "\u0015 \u0010 C2<",
+          "x": 3103.3,
+          "y": 738.8
+        },
+        {
+          "str": "\u0014 \u0010 CC$",
+          "x": 3102.2,
+          "y": 852.1
+        },
+        {
+          "str": "\u0014 \u0010 +$5",
+          "x": 2239.1,
+          "y": 1305.4
+        },
+        {
+          "str": "\u0014\u0019 \u0010 6,5",
+          "x": 2356.2,
+          "y": 1496.2
+        },
+        {
+          "str": "\u0014\u0015 \u0010 3)U",
+          "x": 2801.3,
+          "y": 1427.2
+        },
+        {
+          "str": "\u0017 \u0010 'L2",
+          "x": 3238.1,
+          "y": 1522.8
+        },
+        {
+          "str": "\u0014 \u0010 C6)",
+          "x": 3236,
+          "y": 1580.4
+        },
+        {
+          "str": "\u0016 \u0010 6<2",
+          "x": 3079,
+          "y": 1453.6
+        },
+        {
+          "str": "\u0016 \u0010 L%E",
+          "x": 2363.8,
+          "y": 1603.1
+        },
+        {
+          "str": "\u0016\u001a \u0010 $CE",
+          "x": 3655.7,
+          "y": 1520.8
+        },
+        {
+          "str": "\u0016\u001a \u0010 G0$",
+          "x": 3655.7,
+          "y": 1545.1
+        },
+        {
+          "str": "\u0019 W22' )E1CE\u000f %,' $L7E51$7E \u0015",
+          "x": 3656,
+          "y": 1114.1
+        },
+        {
+          "str": "67E33,1G 6721E6\u000f %,' $L7E51$7E \u0015",
+          "x": 3551.2,
+          "y": 918.7
+        },
+        {
+          "str": ")U7U5E %,5'%$7+ \u0012",
+          "x": 3655.2,
+          "y": 1178.5
+        },
+        {
+          "str": "W$7E5 )E$7U5E",
+          "x": 3656.6,
+          "y": 1202.5
+        },
+        {
+          "str": "2U7C5233,1G",
+          "x": 3255.1,
+          "y": 2340.7
+        },
+        {
+          "str": "%2UL'E5 W$LL",
+          "x": 3254.6,
+          "y": 2365
+        },
+        {
+          "str": "%L$1.E7 $1' L2W 352),LE",
+          "x": 1873.3,
+          "y": 1750.1
+        },
+        {
+          "str": "35$,5,E 6EE' 0,;\u000f",
+          "x": 1969,
+          "y": 1774.3
+        },
+        {
+          "str": "%$6E %,'",
+          "x": 2063.3,
+          "y": 1798.6
+        },
+        {
+          "str": "\u0019 \u0010 $,1",
+          "x": 2344.8,
+          "y": 1877.2
+        },
+        {
+          "str": "\u0015\u0016 \u0010 %CU",
+          "x": 2324.8,
+          "y": 1901.4
+        },
+        {
+          "str": "\u0014\u0014 \u0010 G0$",
+          "x": 2319.7,
+          "y": 1925.6
+        },
+        {
+          "str": "\u0019 \u0010 02)",
+          "x": 2332.9,
+          "y": 1949.9
+        },
+        {
+          "str": "\u0014\u0014 \u0010 3$,",
+          "x": 2335,
+          "y": 1974
+        },
+        {
+          "str": "\u0014\u0014 \u0010 3E'",
+          "x": 2325.2,
+          "y": 1998
+        },
+        {
+          "str": "\u0014\u0014 \u0010 3+9",
+          "x": 2324.4,
+          "y": 2022.1
+        },
+        {
+          "str": "\u0019 \u0010 575",
+          "x": 2335.7,
+          "y": 2046.1
+        },
+        {
+          "str": "\u0019 \u0010 5+U",
+          "x": 2334.7,
+          "y": 2070.2
+        },
+        {
+          "str": "\u0015\u0016 \u0010 6+E",
+          "x": 2325.2,
+          "y": 2094.5
+        },
+        {
+          "str": "\u0014 \u0010 +$5",
+          "x": 3077.5,
+          "y": 1355.9
+        },
+        {
+          "str": "\u0014\u0016 \u0010 +$5",
+          "x": 3654.4,
+          "y": 1610.6
+        },
+        {
+          "str": "\u0014\u001a \u0010 3E'",
+          "x": 3654.4,
+          "y": 1289
+        },
+        {
+          "str": "\u0014\u001a \u0010 6)L",
+          "x": 3654.4,
+          "y": 1313.3
+        },
+        {
+          "str": "C21C5E7E 'EC. W,7+ %U,L7\u0010,1",
+          "x": 1991.3,
+          "y": 1045.4
+        },
+        {
+          "str": "%E1C+E6\u000f 67$,56\u000f $1' 5$036\u000f",
+          "x": 1994.8,
+          "y": 1069.7
+        },
+        {
+          "str": "6EE $5C+,7EC7U5E $1'",
+          "x": 2059.9,
+          "y": 1093.9
+        },
+        {
+          "str": "675UC7U5$L 3L$16",
+          "x": 2104.7,
+          "y": 1118.2
+        },
+        {
+          "str": "\u0015 \u0010 $$'",
+          "x": 3655.9,
+          "y": 1576.4
+        },
+        {
+          "str": "2U7C5233,1G %2UL'E56\u000f",
+          "x": 2267.8,
+          "y": 1672.8
+        },
+        {
+          "str": "C%,' $L7E51$7E \u0015",
+          "x": 2357.5,
+          "y": 1696.9
+        },
+        {
+          "str": "\u0014 \u0010 G',",
+          "x": 1194.7,
+          "y": 2272.4
+        },
+        {
+          "str": "\u0015 \u0010 7$0",
+          "x": 1196.3,
+          "y": 2300.8
+        },
+        {
+          "str": "7U5) 6EE'\u000f",
+          "x": 2480.2,
+          "y": 911.6
+        },
+        {
+          "str": "%$6E %,'",
+          "x": 2506.2,
+          "y": 935.9
+        },
+        {
+          "str": "7U5) 6EE'\u000f",
+          "x": 1196.4,
+          "y": 2217.5
+        },
+        {
+          "str": "%$6E %,'",
+          "x": 1195.4,
+          "y": 2241.7
+        },
+        {
+          "str": "7U5) 6EE'\u000f",
+          "x": 3108.8,
+          "y": 2725.7
+        },
+        {
+          "str": "%$6E %,'",
+          "x": 3107.8,
+          "y": 2749.9
+        },
+        {
+          "str": "7U5) 6EE'\u000f",
+          "x": 1999.4,
+          "y": 3138.8
+        },
+        {
+          "str": "%$6E %,'",
+          "x": 2025.5,
+          "y": 3163.1
+        },
+        {
+          "str": "\u0019\u0016 \u0010 6E$",
+          "x": 2710.4,
+          "y": 1795.6
+        },
+        {
+          "str": "\u0014\u001b \u0010 6E$",
+          "x": 2349.2,
+          "y": 1633.1
+        },
+        {
+          "str": "7U5) 6EE'\u000f",
+          "x": 2419.8,
+          "y": 1729.9
+        },
+        {
+          "str": "%$6E %,'",
+          "x": 2445.8,
+          "y": 1754.2
+        },
+        {
+          "str": "75$6+ 5ECE37$CLE",
+          "x": 2011.8,
+          "y": 1153.7
+        },
+        {
+          "str": "\u0015 \u000f 7<3\u0011\u000f",
+          "x": 2232,
+          "y": 1153.7
+        },
+        {
+          "str": "2)2, %,' $L7E51$7E \u0015",
+          "x": 2075.9,
+          "y": 1177.9
+        },
+        {
+          "str": "%,.E 5$C.6",
+          "x": 3254.6,
+          "y": 2464
+        },
+        {
+          "str": "\u001a \u000f 7<3\u0011\u000f",
+          "x": 3387.7,
+          "y": 2464
+        },
+        {
+          "str": "2)2, %,' $L7E51$7E \u0015",
+          "x": 3261.7,
+          "y": 2488.2
+        },
+        {
+          "str": "%E1C+E6",
+          "x": 3194,
+          "y": 1384.9
+        },
+        {
+          "str": "\u0015 \u000f 7<3\u0011\u000f",
+          "x": 3303.6,
+          "y": 1384.9
+        },
+        {
+          "str": "2)2, %,' $L7E51$7E \u0015",
+          "x": 3201.1,
+          "y": 1409.3
+        },
+        {
+          "str": "\u0018 \u0010 5UL",
+          "x": 2241.8,
+          "y": 1275.1
+        },
+        {
+          "str": "\u0017 \u0010 E3U",
+          "x": 2236.9,
+          "y": 1336.8
+        },
+        {
+          "str": "\u0017 \u0010 0%5",
+          "x": 2236.9,
+          "y": 1360.8
+        },
+        {
+          "str": "\u0017 \u0010 6+E",
+          "x": 2236.9,
+          "y": 1385
+        },
+        {
+          "str": "\u0014\u0015\u001a \u0010 6E7",
+          "x": 2510.4,
+          "y": 782
+        },
+        {
+          "str": "\u0019 \u0010 'L2",
+          "x": 3103.7,
+          "y": 881.3
+        },
+        {
+          "str": "\u0014\u0014 \u0010 %CU",
+          "x": 2518.8,
+          "y": 849
+        },
+        {
+          "str": "\u0014\u0014 \u0010 62%",
+          "x": 2518.8,
+          "y": 873.2
+        },
+        {
+          "str": "\u0016\u0014 \u0010 $CE",
+          "x": 3103.1,
+          "y": 773.9
+        },
+        {
+          "str": "\u0016\u0015 \u0010 C31",
+          "x": 3103.1,
+          "y": 798.1
+        },
+        {
+          "str": "\u0016\u0014 \u0010 09,",
+          "x": 3103.1,
+          "y": 822.1
+        },
+        {
+          "str": "\u0014\u0017 \u0010 C3E",
+          "x": 3284.9,
+          "y": 852.1
+        },
+        {
+          "str": "\u0014\u0017 \u0010 G0$",
+          "x": 3284.9,
+          "y": 876.4
+        },
+        {
+          "str": "\u0014\u0016 \u0010 E+<",
+          "x": 3284.9,
+          "y": 908.4
+        },
+        {
+          "str": "\u0014\u0016 \u0010 EU0",
+          "x": 3284.9,
+          "y": 932.5
+        },
+        {
+          "str": "\u0015 \u0010\u0014\u0005",
+          "x": 2657.6,
+          "y": 2345.3
+        },
+        {
+          "str": "\u0016 \u0010\u0013\u0005 7<3\u0011",
+          "x": 2684.8,
+          "y": 2288.8
+        },
+        {
+          "str": "\u0015 \u0010\u0014\u0005",
+          "x": 2782.6,
+          "y": 2205.1
+        },
+        {
+          "str": "\u0016\u0014 \u0010\u0013\u0005",
+          "x": 2670.4,
+          "y": 2227.7
+        },
+        {
+          "str": "\u0014 \u0010 +9,",
+          "x": 3499.7,
+          "y": 2098.3
+        },
+        {
+          "str": "\u0018 \u0010 $4C",
+          "x": 3501,
+          "y": 2131
+        },
+        {
+          "str": "\u0018 \u0010 E3U",
+          "x": 3501,
+          "y": 2155
+        },
+        {
+          "str": "\u0018 \u0010 3E'",
+          "x": 3501,
+          "y": 2179
+        },
+        {
+          "str": "\u0018 \u0010 6+E",
+          "x": 3501,
+          "y": 2203.2
+        },
+        {
+          "str": "\u0018 \u0010 62%",
+          "x": 3501,
+          "y": 2227.4
+        },
+        {
+          "str": "\u001a \u0010 $CE",
+          "x": 3500.9,
+          "y": 1924.3
+        },
+        {
+          "str": "\u001a \u0010 %CU",
+          "x": 3500.9,
+          "y": 1948.6
+        },
+        {
+          "str": "\u001a \u0010 62%",
+          "x": 3500.9,
+          "y": 1972.8
+        },
+        {
+          "str": "\u0016 \u0010 6<2",
+          "x": 3501,
+          "y": 2062.8
+        },
+        {
+          "str": "\u001a \u0010 EC3",
+          "x": 3500.9,
+          "y": 2005.9
+        },
+        {
+          "str": "\u001a \u0010 6C6",
+          "x": 3500.9,
+          "y": 2030.2
+        },
+        {
+          "str": "\u0014\u001a \u0010 GE7",
+          "x": 3499.7,
+          "y": 1846.1
+        },
+        {
+          "str": "\u0014\u001a \u0010 +E5",
+          "x": 3499.7,
+          "y": 1870.2
+        },
+        {
+          "str": "\u0014\u001a \u0010 6+E",
+          "x": 3499.7,
+          "y": 1894.4
+        },
+        {
+          "str": "7U5) 6EE'\u000f 7<3\u0011\u000f",
+          "x": 3682.7,
+          "y": 1842.5
+        },
+        {
+          "str": "7+52UG+2U7\u000f %$6E %,'",
+          "x": 3688.8,
+          "y": 1866.7
+        },
+        {
+          "str": "3L$17,1G6 ,1 7+,6 $5E$ $5E U1'E5 %,' $L7E51$7E \u0015\u0011",
+          "x": 1568,
+          "y": 2254.9
+        },
+        {
+          "str": "GC 72 C225',1$7E W,7+ 2W1E5 $1' 3529,'E",
+          "x": 1605,
+          "y": 2279.2
+        },
+        {
+          "str": "L$1'6C$3,1G $)7E5 3$5.,1G L27 ,6 ),1,6+E'\u0011",
+          "x": 1605.6,
+          "y": 2303.4
+        },
+        {
+          "str": ",167$LL W$7E5 )2U17$,1\u000f",
+          "x": 3254.3,
+          "y": 2406.8
+        },
+        {
+          "str": "6EE C,9,L 3L$16\u000f %$6E %,'",
+          "x": 3255.2,
+          "y": 2431.1
+        },
+        {
+          "str": "\u0017\u0005 C2%%LE 6721E",
+          "x": 2648.6,
+          "y": 1835.9
+        },
+        {
+          "str": "72 %5E$. )$LL 2)",
+          "x": 2640,
+          "y": 1860.1
+        },
+        {
+          "str": "W$7E5 )520",
+          "x": 2692.1,
+          "y": 1884.4
+        },
+        {
+          "str": "6CU33E5\u000f %$6E %,'",
+          "x": 2627.8,
+          "y": 1908.6
+        },
+        {
+          "str": "\u0015 \u0010 $,1",
+          "x": 2344.8,
+          "y": 2135
+        },
+        {
+          "str": "\u001a \u0010 %CU",
+          "x": 2335.9,
+          "y": 2159.3
+        },
+        {
+          "str": "\u0016 \u0010 G0$",
+          "x": 2330.9,
+          "y": 2183.5
+        },
+        {
+          "str": "\u0015 \u0010 02)",
+          "x": 2332.9,
+          "y": 2207.8
+        },
+        {
+          "str": "\u0016 \u0010 3$,",
+          "x": 2346.1,
+          "y": 2231.9
+        },
+        {
+          "str": "\u0016 \u0010 3E'",
+          "x": 2336.4,
+          "y": 2255.9
+        },
+        {
+          "str": "\u0016 \u0010 3+9",
+          "x": 2335.6,
+          "y": 2280
+        },
+        {
+          "str": "\u0015 \u0010 575",
+          "x": 2335.7,
+          "y": 2304
+        },
+        {
+          "str": "\u0015 \u0010 5+U",
+          "x": 2334.7,
+          "y": 2328.1
+        },
+        {
+          "str": "\u001a \u0010 6+E",
+          "x": 2336.4,
+          "y": 2352.4
+        },
+        {
+          "str": "C2'E",
+          "x": 263.6,
+          "y": 157.8
+        },
+        {
+          "str": "%27$1,C$L 1$0E",
+          "x": 364.9,
+          "y": 157.8
+        },
+        {
+          "str": "C20021 1$0E",
+          "x": 844,
+          "y": 157.8
+        },
+        {
+          "str": "6,=E",
+          "x": 1203.8,
+          "y": 157.8
+        },
+        {
+          "str": "63$C,1G",
+          "x": 1320.8,
+          "y": 157.8
+        },
+        {
+          "str": "47<",
+          "x": 1461.7,
+          "y": 156.7
+        },
+        {
+          "str": "5E0$5.6",
+          "x": 1542.7,
+          "y": 157.8
+        },
+        {
+          "str": "'EC,'U2U6 75EE6",
+          "x": 263,
+          "y": 211.7
+        },
+        {
+          "str": "G',",
+          "x": 263.9,
+          "y": 233.8
+        },
+        {
+          "str": "G\\PQRFODGXV GLRLFXV",
+          "x": 365.6,
+          "y": 233.8
+        },
+        {
+          "str": "PDOH",
+          "x": 569.1,
+          "y": 233.8
+        },
+        {
+          "str": ".HQWXFN\\ CRIIHHWUHH",
+          "x": 843.7,
+          "y": 233.8
+        },
+        {
+          "str": "\u0015\u0011\u0018\u0005 CDO\u0011",
+          "x": 1204.3,
+          "y": 233.8
+        },
+        {
+          "str": "\u0014",
+          "x": 1460.6,
+          "y": 233.6
+        },
+        {
+          "str": "0DOH",
+          "x": 1543.1,
+          "y": 233.5
+        },
+        {
+          "str": "7$0",
+          "x": 264.5,
+          "y": 259.9
+        },
+        {
+          "str": "7LOLD DPHULFDQD",
+          "x": 366.2,
+          "y": 259.9
+        },
+        {
+          "str": "$PHULFDQ LLQGHQ",
+          "x": 845.2,
+          "y": 259.9
+        },
+        {
+          "str": "\u0015\u0011\u0018\u0005 CDO\u0011",
+          "x": 1204.3,
+          "y": 260.2
+        },
+        {
+          "str": "\u0015",
+          "x": 1462.2,
+          "y": 260
+        },
+        {
+          "str": "251$0E17$L 75EE",
+          "x": 263.8,
+          "y": 318.4
+        },
+        {
+          "str": "$$'",
+          "x": 264.8,
+          "y": 340.2
+        },
+        {
+          "str": "$PHODQFKLHU DUERUHD",
+          "x": 366.7,
+          "y": 340.2
+        },
+        {
+          "str": "'RZQ\\ 6HUYLFHEHUU\\",
+          "x": 843.6,
+          "y": 340.6
+        },
+        {
+          "str": "\u0019C +W\u0011",
+          "x": 1204.2,
+          "y": 340.3
+        },
+        {
+          "str": "\u0015",
+          "x": 1462.2,
+          "y": 340.3
+        },
+        {
+          "str": "0XOWL\u0010VWHP",
+          "x": 1543.1,
+          "y": 340.2
+        },
+        {
+          "str": "CC$",
+          "x": 263.9,
+          "y": 367
+        },
+        {
+          "str": "CDUSLQXV FDUROLQLDQD",
+          "x": 365.6,
+          "y": 367
+        },
+        {
+          "str": "$PHULFDQ +RUQEHDP",
+          "x": 845.2,
+          "y": 366.6
+        },
+        {
+          "str": "\u0019C +W\u0011",
+          "x": 1204.2,
+          "y": 366.7
+        },
+        {
+          "str": "\u0014",
+          "x": 1460.6,
+          "y": 366.7
+        },
+        {
+          "str": "0XOWL\u0010VWHP",
+          "x": 1543.1,
+          "y": 366.6
+        },
+        {
+          "str": "+9,",
+          "x": 263.3,
+          "y": 393.1
+        },
+        {
+          "str": "+DPDPHOLV YLUJLQLDQD",
+          "x": 365,
+          "y": 393.1
+        },
+        {
+          "str": "CRPPRQ WLWFKKD]HO",
+          "x": 844.2,
+          "y": 393.4
+        },
+        {
+          "str": "\u0019C +W\u0011",
+          "x": 1204.2,
+          "y": 393.1
+        },
+        {
+          "str": "\u0014",
+          "x": 1460.6,
+          "y": 393.1
+        },
+        {
+          "str": "0XOWL\u0010VWHP",
+          "x": 1543.1,
+          "y": 393.1
+        },
+        {
+          "str": "'EC,'U2U6 6+5U%6",
+          "x": 263,
+          "y": 451.4
+        },
+        {
+          "str": "C6)",
+          "x": 263.9,
+          "y": 473.6
+        },
+        {
+          "str": "CRUQXV VHULFHD C)DUURZC",
+          "x": 365.6,
+          "y": 473.6
+        },
+        {
+          "str": "$UFWLF )LUH 5HG 7ZLJ 'RJZRRG",
+          "x": 845.2,
+          "y": 473.6
+        },
+        {
+          "str": "\u0016\u0019\u0005 +W\u0011",
+          "x": 1204.1,
+          "y": 473.4
+        },
+        {
+          "str": "\u0017",
+          "x": 1462.6,
+          "y": 473.4
+        },
+        {
+          "str": "C2<",
+          "x": 263.9,
+          "y": 500
+        },
+        {
+          "str": "CRU\\OXV DPHULFDQD",
+          "x": 365.6,
+          "y": 500
+        },
+        {
+          "str": "$PHULFDQ )LOEHUW",
+          "x": 845.2,
+          "y": 499.8
+        },
+        {
+          "str": "\u0016\u0019\u0005 +W\u0011",
+          "x": 1204.1,
+          "y": 499.8
+        },
+        {
+          "str": "\u0015",
+          "x": 1462.2,
+          "y": 499.8
+        },
+        {
+          "str": "'L2",
+          "x": 263.4,
+          "y": 526.4
+        },
+        {
+          "str": "'LHUYLOOD ORQLFHUD",
+          "x": 365.2,
+          "y": 526.2
+        },
+        {
+          "str": "'ZDUI %XVK +RQH\\VXFNOH",
+          "x": 843.6,
+          "y": 526.4
+        },
+        {
+          "str": "\u0015\u0017\u0005 +W\u0011",
+          "x": 1204.3,
+          "y": 526.2
+        },
+        {
+          "str": "\u0014\u001b",
+          "x": 1460.6,
+          "y": 526.2
+        },
+        {
+          "str": "+$5",
+          "x": 263.3,
+          "y": 552.6
+        },
+        {
+          "str": "+\\GUDQJHD DUERUHVFHQV",
+          "x": 365,
+          "y": 552.6
+        },
+        {
+          "str": "6PRRWK +\\GUDQJHD",
+          "x": 844.3,
+          "y": 552.8
+        },
+        {
+          "str": "\u0015\u0017\u0005 +W\u0011",
+          "x": 1204.3,
+          "y": 552.6
+        },
+        {
+          "str": "\u0014\u001b",
+          "x": 1460.6,
+          "y": 552.6
+        },
+        {
+          "str": "L%E",
+          "x": 263.4,
+          "y": 579
+        },
+        {
+          "str": "LLQGHUD EHQ]RLQ",
+          "x": 365.2,
+          "y": 579
+        },
+        {
+          "str": "6SLFHEXVK",
+          "x": 844.3,
+          "y": 579.2
+        },
+        {
+          "str": "\u0016\u0013\u0005 +W\u0011",
+          "x": 1204.1,
+          "y": 579
+        },
+        {
+          "str": "\u0016",
+          "x": 1462,
+          "y": 579
+        },
+        {
+          "str": "\u0014 0DOH\u000f \u0015 )HPDOH",
+          "x": 1542.4,
+          "y": 579
+        },
+        {
+          "str": "3)U",
+          "x": 263.4,
+          "y": 605.4
+        },
+        {
+          "str": "3RWHQWLOOD IUXWLFRVD LXQG\\",
+          "x": 365.2,
+          "y": 605.6
+        },
+        {
+          "str": "+DSS\\ )DFH <HOORZ %XVK CLQTXHIRLO",
+          "x": 843.6,
+          "y": 605.6
+        },
+        {
+          "str": "\u0014\u001b\u0005 +W\u0011",
+          "x": 1202.8,
+          "y": 605.4
+        },
+        {
+          "str": "\u0015\u0018",
+          "x": 1462.2,
+          "y": 605.4
+        },
+        {
+          "str": "6<2",
+          "x": 264,
+          "y": 632
+        },
+        {
+          "str": "6\\PSKRULFDUSRV RUELFXODWXV",
+          "x": 365.8,
+          "y": 632
+        },
+        {
+          "str": "CRUDOEHUU\\",
+          "x": 844.2,
+          "y": 632
+        },
+        {
+          "str": "\u0014\u001b\u0005 +W\u0011",
+          "x": 1202.8,
+          "y": 631.8
+        },
+        {
+          "str": "\u0014\u0015",
+          "x": 1460.6,
+          "y": 631.8
+        },
+        {
+          "str": "95'",
+          "x": 264.8,
+          "y": 658.2
+        },
+        {
+          "str": "9LEXUQXP UDILQHVTXLDQXP",
+          "x": 366.6,
+          "y": 658.4
+        },
+        {
+          "str": "'RZQ\\ $UURZZRRG",
+          "x": 843.6,
+          "y": 658.2
+        },
+        {
+          "str": "\u0015\u0017\u0005 +W\u0011",
+          "x": 1204.3,
+          "y": 658.2
+        },
+        {
+          "str": "\u0016",
+          "x": 1462,
+          "y": 658.2
+        },
+        {
+          "str": "G52U1' C29E56",
+          "x": 263.6,
+          "y": 716.5
+        },
+        {
+          "str": "$CE",
+          "x": 264.8,
+          "y": 738.7
+        },
+        {
+          "str": "$OOLXP FHUQXXP",
+          "x": 366.7,
+          "y": 738.5
+        },
+        {
+          "str": "1RGGLQJ 2QLRQ",
+          "x": 843.7,
+          "y": 738.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 738.7
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 738.5
+        },
+        {
+          "str": "\u001b\u0017",
+          "x": 1462,
+          "y": 738.5
+        },
+        {
+          "str": "$4C",
+          "x": 264.8,
+          "y": 765.1
+        },
+        {
+          "str": "$TXLOHJLD FDQDGHQVLV",
+          "x": 366.7,
+          "y": 764.9
+        },
+        {
+          "str": "EDVWHUQ CROXPELQH",
+          "x": 843.6,
+          "y": 765.1
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 765.1
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 764.9
+        },
+        {
+          "str": "\u0016\u0019",
+          "x": 1462,
+          "y": 764.9
+        },
+        {
+          "str": "$C'",
+          "x": 264.8,
+          "y": 791.5
+        },
+        {
+          "str": "$VDUXP FDQDGHQVH",
+          "x": 366.7,
+          "y": 791.3
+        },
+        {
+          "str": "WLOG GLQJHU",
+          "x": 844.9,
+          "y": 791.5
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 791.5
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 791.3
+        },
+        {
+          "str": "\u0015\u0019",
+          "x": 1462.2,
+          "y": 791.3
+        },
+        {
+          "str": "$,1",
+          "x": 264.8,
+          "y": 817.7
+        },
+        {
+          "str": "$VFOHSLDV LQFDUQDWD",
+          "x": 366.7,
+          "y": 817.7
+        },
+        {
+          "str": "6ZDPS 0LONZHHG",
+          "x": 844.3,
+          "y": 817.9
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 817.9
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 817.7
+        },
+        {
+          "str": "\u001b",
+          "x": 1462,
+          "y": 817.7
+        },
+        {
+          "str": "$7U",
+          "x": 264.8,
+          "y": 844.1
+        },
+        {
+          "str": "$VFOHSLDV WXEHURVD",
+          "x": 366.7,
+          "y": 844.1
+        },
+        {
+          "str": "%XWWHUIO\\ 0LONZHHG",
+          "x": 843.7,
+          "y": 844.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 844.3
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 844.1
+        },
+        {
+          "str": "\u0018",
+          "x": 1462,
+          "y": 844.1
+        },
+        {
+          "str": "%CU",
+          "x": 263.4,
+          "y": 870.7
+        },
+        {
+          "str": "%RXWHORXD FXUWLSHQGXOD",
+          "x": 365.2,
+          "y": 870.5
+        },
+        {
+          "str": "6LGH 2DWV GUDPD",
+          "x": 844.3,
+          "y": 870.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 870.7
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 870.5
+        },
+        {
+          "str": "\u0018\u001a",
+          "x": 1462,
+          "y": 870.5
+        },
+        {
+          "str": "C3E",
+          "x": 263.9,
+          "y": 897.1
+        },
+        {
+          "str": "CDUH[ SHQV\\OYDQLFD",
+          "x": 365.6,
+          "y": 897.1
+        },
+        {
+          "str": "3HQQV\\OYDQLD 6HGJH",
+          "x": 843.6,
+          "y": 897.1
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 897.1
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 896.9
+        },
+        {
+          "str": "\u0017\u0014",
+          "x": 1462.6,
+          "y": 896.9
+        },
+        {
+          "str": "C31",
+          "x": 263.9,
+          "y": 923.5
+        },
+        {
+          "str": "CDUH[ SODQWDJLQHD",
+          "x": 365.6,
+          "y": 923.5
+        },
+        {
+          "str": "3ODQWDLQ\u0010OHDYHG 6HGJH",
+          "x": 843.6,
+          "y": 923.5
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 923.5
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 923.3
+        },
+        {
+          "str": "\u0018\u0019",
+          "x": 1462,
+          "y": 923.3
+        },
+        {
+          "str": "'20",
+          "x": 263.4,
+          "y": 949.9
+        },
+        {
+          "str": "'RGHFDWKHRQ PHDGLD",
+          "x": 365.2,
+          "y": 949.7
+        },
+        {
+          "str": "6KRRWLQJ 6WDU",
+          "x": 844.3,
+          "y": 949.9
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 949.9
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 949.7
+        },
+        {
+          "str": "\u0015\u0019",
+          "x": 1462.2,
+          "y": 949.7
+        },
+        {
+          "str": "EC3",
+          "x": 263.3,
+          "y": 976.3
+        },
+        {
+          "str": "EFKLQDFHD SDOOLGD",
+          "x": 365,
+          "y": 976.1
+        },
+        {
+          "str": "3DOH 3XUSOH CRQHIORZHU",
+          "x": 843.6,
+          "y": 976.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 976.3
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 976.1
+        },
+        {
+          "str": "\u0015\u0014",
+          "x": 1462.2,
+          "y": 976.1
+        },
+        {
+          "str": "E3U",
+          "x": 263.3,
+          "y": 1002.5
+        },
+        {
+          "str": "EFKLQDFHD SXUSXUHD",
+          "x": 365,
+          "y": 1002.5
+        },
+        {
+          "str": "CRQHIORZHU",
+          "x": 844.2,
+          "y": 1002.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1002.7
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1002.5
+        },
+        {
+          "str": "\u0018\u0016",
+          "x": 1462,
+          "y": 1002.5
+        },
+        {
+          "str": "E+<",
+          "x": 263.3,
+          "y": 1028.9
+        },
+        {
+          "str": "EO\\PXV K\\VWUL[",
+          "x": 365,
+          "y": 1028.9
+        },
+        {
+          "str": "%RWWOHEUXVK GUDVV",
+          "x": 843.7,
+          "y": 1029.1
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1029.1
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1028.9
+        },
+        {
+          "str": "\u0018\u0016",
+          "x": 1462,
+          "y": 1028.9
+        },
+        {
+          "str": "E5$",
+          "x": 263.3,
+          "y": 1055.3
+        },
+        {
+          "str": "EU\\WKURQLXP DOELGXP",
+          "x": 365,
+          "y": 1055.3
+        },
+        {
+          "str": "WKLWH )DZQ LLO\\",
+          "x": 844.9,
+          "y": 1055.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1055.5
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1055.3
+        },
+        {
+          "str": "\u0015\u0017",
+          "x": 1462.2,
+          "y": 1055.3
+        },
+        {
+          "str": "EU0",
+          "x": 263.3,
+          "y": 1081.7
+        },
+        {
+          "str": "EXU\\ELD PDFURSK\\OOD",
+          "x": 365,
+          "y": 1081.7
+        },
+        {
+          "str": "%LJOHDI $VWHU",
+          "x": 843.7,
+          "y": 1081.9
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1081.9
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1081.7
+        },
+        {
+          "str": "\u0016\u001a",
+          "x": 1462,
+          "y": 1081.7
+        },
+        {
+          "str": "E0$",
+          "x": 263.3,
+          "y": 1108.1
+        },
+        {
+          "str": "EXWURFKLXP PDFXODWXP",
+          "x": 365,
+          "y": 1108.1
+        },
+        {
+          "str": "6SRWWHG -RH 3\\H WHHG",
+          "x": 844.3,
+          "y": 1108.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1108.3
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1108.2
+        },
+        {
+          "str": "\u0014\u0013",
+          "x": 1460.6,
+          "y": 1108.2
+        },
+        {
+          "str": "G0$",
+          "x": 263.9,
+          "y": 1134.7
+        },
+        {
+          "str": "GHUDQLXP PDFXODWXP",
+          "x": 365.6,
+          "y": 1134.7
+        },
+        {
+          "str": "WLOG CUDQHVELOO GHUDQLXP",
+          "x": 844.9,
+          "y": 1134.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1134.7
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1134.6
+        },
+        {
+          "str": "\u0019\u001b",
+          "x": 1462.1,
+          "y": 1134.6
+        },
+        {
+          "str": "GE7",
+          "x": 263.9,
+          "y": 1161.1
+        },
+        {
+          "str": "GHXP WULIORUXP",
+          "x": 365.6,
+          "y": 1161.1
+        },
+        {
+          "str": "3UDLULH 6PRNH",
+          "x": 843.6,
+          "y": 1161.1
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1161.1
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1161
+        },
+        {
+          "str": "\u0015\u0014",
+          "x": 1462.2,
+          "y": 1161
+        },
+        {
+          "str": "+$C",
+          "x": 263.3,
+          "y": 1187.5
+        },
+        {
+          "str": "+HSDWLFD DFXWLORED",
+          "x": 365,
+          "y": 1187.3
+        },
+        {
+          "str": "6KDUSOREHG +HSDWLFD",
+          "x": 844.3,
+          "y": 1187.5
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1187.5
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1187.4
+        },
+        {
+          "str": "\u0015\u0017",
+          "x": 1462.2,
+          "y": 1187.4
+        },
+        {
+          "str": "+E5",
+          "x": 263.3,
+          "y": 1213.7
+        },
+        {
+          "str": "+HXFKHUD ULFKDUGVRQLL",
+          "x": 365,
+          "y": 1213.7
+        },
+        {
+          "str": "3UDLULH $OXPURRW",
+          "x": 843.6,
+          "y": 1213.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1213.9
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1213.8
+        },
+        {
+          "str": "\u0014\u001a",
+          "x": 1460.6,
+          "y": 1213.8
+        },
+        {
+          "str": "L$6",
+          "x": 263.4,
+          "y": 1240.3
+        },
+        {
+          "str": "LLDWULV DVSHUD",
+          "x": 365.2,
+          "y": 1240.1
+        },
+        {
+          "str": "5RXJK %OD]LQJ 6WDU",
+          "x": 843.6,
+          "y": 1240.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1240.3
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1240.2
+        },
+        {
+          "str": "\u0018",
+          "x": 1462,
+          "y": 1240.1
+        },
+        {
+          "str": "L3<",
+          "x": 263.4,
+          "y": 1266.5
+        },
+        {
+          "str": "LLDWULV S\\FQRVWDFK\\D",
+          "x": 365.2,
+          "y": 1266.5
+        },
+        {
+          "str": "3UDLULH %OD]LQJVWDU",
+          "x": 843.6,
+          "y": 1266.5
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1266.7
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1266.6
+        },
+        {
+          "str": "\u0016",
+          "x": 1462,
+          "y": 1266.6
+        },
+        {
+          "str": "0CE",
+          "x": 263.4,
+          "y": 1293.1
+        },
+        {
+          "str": "0DLDQWKHPXP UDFHPRVXP",
+          "x": 365.2,
+          "y": 1292.9
+        },
+        {
+          "str": ")DOVH 6RORPRQ V 6HDO",
+          "x": 843.6,
+          "y": 1293.1
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1293.1
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1293
+        },
+        {
+          "str": "\u0015\u0017",
+          "x": 1462.2,
+          "y": 1293
+        },
+        {
+          "str": "09,",
+          "x": 263.4,
+          "y": 1319.3
+        },
+        {
+          "str": "0HUWHQVLD YLUJLQLFD",
+          "x": 365.2,
+          "y": 1319.3
+        },
+        {
+          "str": "9LUJLQLD %OXHEHOOV",
+          "x": 845.2,
+          "y": 1319.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1319.5
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1319.4
+        },
+        {
+          "str": "\u0016\u0014",
+          "x": 1462,
+          "y": 1319.4
+        },
+        {
+          "str": "0%5",
+          "x": 263.4,
+          "y": 1345.7
+        },
+        {
+          "str": "0RQDUGD EUDGEXULDQD",
+          "x": 365.2,
+          "y": 1345.7
+        },
+        {
+          "str": "EDVWHUQ %HH %DOP",
+          "x": 843.6,
+          "y": 1345.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1345.9
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1345.8
+        },
+        {
+          "str": "\u0014\u0018",
+          "x": 1460.6,
+          "y": 1345.8
+        },
+        {
+          "str": "02)",
+          "x": 263.4,
+          "y": 1372.3
+        },
+        {
+          "str": "0RQDUGD ILVWXORVD",
+          "x": 365.2,
+          "y": 1372.3
+        },
+        {
+          "str": "WLOG %HUJDPRW",
+          "x": 844.9,
+          "y": 1372.1
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1372.3
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1372.2
+        },
+        {
+          "str": "\u001b",
+          "x": 1462,
+          "y": 1372.2
+        },
+        {
+          "str": "3$,",
+          "x": 263.4,
+          "y": 1398.5
+        },
+        {
+          "str": "3DUWKHQLXP LQWHJULIROLXP",
+          "x": 365.2,
+          "y": 1398.7
+        },
+        {
+          "str": "WLOG 4XLQLQH",
+          "x": 844.9,
+          "y": 1398.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1398.7
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1398.6
+        },
+        {
+          "str": "\u0014\u0017",
+          "x": 1460.6,
+          "y": 1398.6
+        },
+        {
+          "str": "3E'",
+          "x": 263.4,
+          "y": 1424.9
+        },
+        {
+          "str": "3HQVWHPRQ GLJLWDOLV",
+          "x": 365.2,
+          "y": 1424.9
+        },
+        {
+          "str": "%HDUGWRQJXH",
+          "x": 843.7,
+          "y": 1424.9
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1425.1
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1425
+        },
+        {
+          "str": "\u0018\u0014",
+          "x": 1462,
+          "y": 1425
+        },
+        {
+          "str": "3%,",
+          "x": 263.4,
+          "y": 1451.3
+        },
+        {
+          "str": "3KOR[ ELILGD",
+          "x": 365.2,
+          "y": 1451.5
+        },
+        {
+          "str": "6DQG 3KOR[",
+          "x": 844.3,
+          "y": 1451.5
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1451.5
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1451.4
+        },
+        {
+          "str": "\u0018",
+          "x": 1462,
+          "y": 1451.3
+        },
+        {
+          "str": "3+'",
+          "x": 263.4,
+          "y": 1477.7
+        },
+        {
+          "str": "3KOR[ GLYDULFDWD",
+          "x": 365.2,
+          "y": 1477.7
+        },
+        {
+          "str": "WRRGODQG 3KOR[",
+          "x": 844.9,
+          "y": 1477.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1477.9
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1477.8
+        },
+        {
+          "str": "\u0015\u0019",
+          "x": 1462.2,
+          "y": 1477.8
+        },
+        {
+          "str": "3+9",
+          "x": 263.4,
+          "y": 1504.1
+        },
+        {
+          "str": "3K\\VRVWHJLD YLUJLQLDQD",
+          "x": 365.2,
+          "y": 1504.1
+        },
+        {
+          "str": "2EHGLHQW 3ODQW",
+          "x": 844.2,
+          "y": 1504.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1504.3
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1504.2
+        },
+        {
+          "str": "\u0014\u0017",
+          "x": 1460.6,
+          "y": 1504.2
+        },
+        {
+          "str": "325",
+          "x": 263.4,
+          "y": 1530.7
+        },
+        {
+          "str": "3ROHPRQLXP UHSWDQV",
+          "x": 365.2,
+          "y": 1530.5
+        },
+        {
+          "str": "GUHHN 9DOHULDQ",
+          "x": 844.1,
+          "y": 1530.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1530.7
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1530.6
+        },
+        {
+          "str": "\u0015\u0019",
+          "x": 1462.2,
+          "y": 1530.6
+        },
+        {
+          "str": "3%6",
+          "x": 263.4,
+          "y": 1557.1
+        },
+        {
+          "str": "3RO\\JRQDWXP ELIORUXP",
+          "x": 365.2,
+          "y": 1557.1
+        },
+        {
+          "str": "6RORPRQ V 6HDO",
+          "x": 844.3,
+          "y": 1557.1
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1557.1
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1557
+        },
+        {
+          "str": "\u0015\u0014",
+          "x": 1462.2,
+          "y": 1557
+        },
+        {
+          "str": "53,",
+          "x": 263.3,
+          "y": 1583.3
+        },
+        {
+          "str": "5DWLELGD SLQQDWD",
+          "x": 365,
+          "y": 1583.3
+        },
+        {
+          "str": "<HOORZ CRQHIORZHU",
+          "x": 845.2,
+          "y": 1583.5
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1583.5
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1583.4
+        },
+        {
+          "str": "\u0014\u0017",
+          "x": 1460.6,
+          "y": 1583.4
+        },
+        {
+          "str": "569",
+          "x": 263.3,
+          "y": 1609.9
+        },
+        {
+          "str": "5XGEHFNLD IXOJLGD YDU\u0011 VSHFLRVD 9LHWWH V LLWWOH 6X]\\",
+          "x": 365,
+          "y": 1609.9
+        },
+        {
+          "str": "9LHWWH V LLWWOH 6X]\\ %ODFN\u0010H\\HG 6XVDQ",
+          "x": 845.2,
+          "y": 1609.9
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1609.9
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1609.8
+        },
+        {
+          "str": "\u001b",
+          "x": 1462,
+          "y": 1609.8
+        },
+        {
+          "str": "5UL",
+          "x": 263.3,
+          "y": 1636.1
+        },
+        {
+          "str": "5XGEHFNLD ODFLQLDWD",
+          "x": 365,
+          "y": 1636.1
+        },
+        {
+          "str": "CXWOHDI CRQHIORZHU",
+          "x": 844.2,
+          "y": 1636.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1636.3
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1636.2
+        },
+        {
+          "str": "\u0018",
+          "x": 1462,
+          "y": 1636.1
+        },
+        {
+          "str": "575",
+          "x": 263.3,
+          "y": 1662.5
+        },
+        {
+          "str": "5XGEHFNLD WULORED",
+          "x": 365,
+          "y": 1662.5
+        },
+        {
+          "str": "%URZQ E\\HG 6XVDQ",
+          "x": 843.7,
+          "y": 1662.7
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1662.7
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1662.6
+        },
+        {
+          "str": "\u001b",
+          "x": 1462,
+          "y": 1662.6
+        },
+        {
+          "str": "5+U",
+          "x": 263.3,
+          "y": 1688.9
+        },
+        {
+          "str": "5XHOOLD KXPLOLV",
+          "x": 365,
+          "y": 1688.9
+        },
+        {
+          "str": "WLOG 3HWXQLD",
+          "x": 844.9,
+          "y": 1688.9
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1689.1
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1689
+        },
+        {
+          "str": "\u001b",
+          "x": 1462,
+          "y": 1689
+        },
+        {
+          "str": "6C6",
+          "x": 264,
+          "y": 1715.5
+        },
+        {
+          "str": "6FKL]DFK\\ULXP VFRSDULXP",
+          "x": 365.8,
+          "y": 1715.5
+        },
+        {
+          "str": "LLWWOH %OXHVWHP",
+          "x": 843.7,
+          "y": 1715.3
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1715.5
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1715.4
+        },
+        {
+          "str": "\u0015\u0014",
+          "x": 1462.2,
+          "y": 1715.4
+        },
+        {
+          "str": "6E7",
+          "x": 264,
+          "y": 1742
+        },
+        {
+          "str": "6HGXP WHUQDWXP",
+          "x": 365.8,
+          "y": 1742
+        },
+        {
+          "str": "WLOG 6WRQHFURS",
+          "x": 844.9,
+          "y": 1742
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1742
+        },
+        {
+          "str": "\u0014\u0015\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1741.8
+        },
+        {
+          "str": "\u0014\u001b\u0018",
+          "x": 1460.6,
+          "y": 1741.8
+        },
+        {
+          "str": "6,5",
+          "x": 264,
+          "y": 1768.4
+        },
+        {
+          "str": "6LOSKLXP WHUHELQWKLQDFHXP",
+          "x": 365.8,
+          "y": 1768.4
+        },
+        {
+          "str": "3UDLULH 'RFN",
+          "x": 843.6,
+          "y": 1768.1
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1768.4
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1768.2
+        },
+        {
+          "str": "\u0014\u001c",
+          "x": 1460.6,
+          "y": 1768.2
+        },
+        {
+          "str": "6)L",
+          "x": 264,
+          "y": 1794.8
+        },
+        {
+          "str": "6ROLGDJR IOH[LFDXOLV",
+          "x": 365.8,
+          "y": 1794.8
+        },
+        {
+          "str": "=LJ]DJ GROGHQURG",
+          "x": 844.8,
+          "y": 1794.8
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1794.8
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1794.6
+        },
+        {
+          "str": "\u0014\u001a",
+          "x": 1460.6,
+          "y": 1794.6
+        },
+        {
+          "str": "6+E",
+          "x": 264,
+          "y": 1821.2
+        },
+        {
+          "str": "6SRUREROXV KHWHUROHSLV",
+          "x": 365.8,
+          "y": 1821.2
+        },
+        {
+          "str": "3UDLULH 'URSVHHG",
+          "x": 843.6,
+          "y": 1821
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1821.2
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1821
+        },
+        {
+          "str": "\u001b\u0019",
+          "x": 1462,
+          "y": 1821
+        },
+        {
+          "str": "6E$",
+          "x": 264,
+          "y": 1847.6
+        },
+        {
+          "str": "6\\PSK\\RWULFKXP HULFRLGHV 6QRZ )OXUU\\",
+          "x": 365.8,
+          "y": 1847.6
+        },
+        {
+          "str": "6QRZ )OXUU\\ +HDWK $VWHU",
+          "x": 844.3,
+          "y": 1847.6
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1847.6
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1847.4
+        },
+        {
+          "str": "\u001b\u0014",
+          "x": 1462,
+          "y": 1847.4
+        },
+        {
+          "str": "62%",
+          "x": 264,
+          "y": 1874
+        },
+        {
+          "str": "6\\PSK\\RWULFKXP REORQJLIROLXP",
+          "x": 365.8,
+          "y": 1874
+        },
+        {
+          "str": ")DOO $VWHU",
+          "x": 843.6,
+          "y": 1873.8
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1874
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1873.8
+        },
+        {
+          "str": "\u0016\u001c",
+          "x": 1462,
+          "y": 1873.8
+        },
+        {
+          "str": "752",
+          "x": 264.5,
+          "y": 1900.4
+        },
+        {
+          "str": "7UDGHVFDQWLD RKLHQVLV",
+          "x": 366.2,
+          "y": 1900.2
+        },
+        {
+          "str": "2KLR 6SLGHUZRUW",
+          "x": 844.2,
+          "y": 1900.4
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1900.4
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1900.2
+        },
+        {
+          "str": "\u0015\u0017",
+          "x": 1462.2,
+          "y": 1900.2
+        },
+        {
+          "str": "UG5",
+          "x": 263.3,
+          "y": 1926.8
+        },
+        {
+          "str": "UYXODULD JUDQGLIORUD",
+          "x": 365,
+          "y": 1926.8
+        },
+        {
+          "str": "LDUJHIORZHU %HOOZRUW",
+          "x": 843.7,
+          "y": 1926.8
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1926.8
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1926.6
+        },
+        {
+          "str": "\u0015\u0017",
+          "x": 1462.2,
+          "y": 1926.6
+        },
+        {
+          "str": "9E)",
+          "x": 264.8,
+          "y": 1953
+        },
+        {
+          "str": "9HUQRQLD IDVFLFXODWD",
+          "x": 366.6,
+          "y": 1953.2
+        },
+        {
+          "str": ",URQZHHG",
+          "x": 843.4,
+          "y": 1953
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1953.2
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1953
+        },
+        {
+          "str": "\u0014\u0017",
+          "x": 1460.6,
+          "y": 1953
+        },
+        {
+          "str": "93E",
+          "x": 264.8,
+          "y": 1979.4
+        },
+        {
+          "str": "9LROD SHGDWD",
+          "x": 366.6,
+          "y": 1979.4
+        },
+        {
+          "str": "%LUG V\u0010IRRW 9LROHW",
+          "x": 843.7,
+          "y": 1979.6
+        },
+        {
+          "str": "\u0014 GDO\u0011",
+          "x": 1202.8,
+          "y": 1979.6
+        },
+        {
+          "str": "\u0014\u001b\u0005 R\u0011F\u0011",
+          "x": 1319.8,
+          "y": 1979.4
+        },
+        {
+          "str": "\u0018",
+          "x": 1462,
+          "y": 1979.4
+        },
+        {
+          "str": "3L$17 6C+E'ULE",
+          "x": 268.4,
+          "y": 92.5
+        },
+        {
+          "str": "\u0010 $LL 3L$17,1G6 %,' $L7E51$7E 12\u0011\u0015",
+          "x": 543,
+          "y": 92.6
+        },
+        {
+          "str": "BE Project No.",
+          "x": 4897.3,
+          "y": 3151.7
+        },
+        {
+          "str": "Expiration Date of Seal: 11-30-2026",
+          "x": 4608.1,
+          "y": 3163.8
+        },
+        {
+          "str": "Drawn By:",
+          "x": 4897.2,
+          "y": 3245.5
+        },
+        {
+          "str": "Drawing No.",
+          "x": 4897.2,
+          "y": 3302.2
+        },
+        {
+          "str": "Drawing Title",
+          "x": 4608.1,
+          "y": 2856.8
+        },
+        {
+          "str": "t 217.363.3375",
+          "x": 4698,
+          "y": 492.1
+        },
+        {
+          "str": "f 312.440.2303",
+          "x": 4698.1,
+          "y": 521
+        },
+        {
+          "str": "www.baileyedward.com",
+          "x": 4698.4,
+          "y": 550
+        },
+        {
+          "str": "1103 South Mattis Ave",
+          "x": 4696.2,
+          "y": 607.7
+        },
+        {
+          "str": "Champaign, IL",
+          "x": 4697.4,
+          "y": 636.5
+        },
+        {
+          "str": "61821-4829",
+          "x": 4697.6,
+          "y": 665.4
+        },
+        {
+          "str": "©2025 Bailey Edward Design",
+          "x": 4698.4,
+          "y": 723.1
+        },
+        {
+          "str": "Design Firm License No. 184-001962",
+          "x": 4696.8,
+          "y": 752
+        },
+        {
+          "str": "Landscape Architect",
+          "x": 4699,
+          "y": 869.4
+        },
+        {
+          "str": "RVi Planning + Landscape Architecture",
+          "x": 4699,
+          "y": 898.2
+        },
+        {
+          "str": "22 E Chicago Ave, Ste 200A",
+          "x": 4699.8,
+          "y": 927.1
+        },
+        {
+          "str": "Naperville, IL 60540",
+          "x": 4698.8,
+          "y": 955.9
+        },
+        {
+          "str": "Civil/Structural Engineer",
+          "x": 4699.4,
+          "y": 1047.1
+        },
+        {
+          "str": "Bacon Farmer Workman",
+          "x": 4699,
+          "y": 1075.9
+        },
+        {
+          "str": "907 Arrow Road, Suite 2",
+          "x": 4699.6,
+          "y": 1104.8
+        },
+        {
+          "str": "Champaign, IL 61821",
+          "x": 4699.4,
+          "y": 1133.8
+        },
+        {
+          "str": "MEP Engineer",
+          "x": 4698.8,
+          "y": 1224.7
+        },
+        {
+          "str": "Bailey Edward Design",
+          "x": 4699,
+          "y": 1253.5
+        },
+        {
+          "str": "104 Northwest Highway",
+          "x": 4698.2,
+          "y": 1282.4
+        },
+        {
+          "str": "Fox River Grove, IL 60021",
+          "x": 4698.7,
+          "y": 1311.4
+        },
+        {
+          "str": "847-516-0992",
+          "x": 4699.6,
+          "y": 1340.2
+        },
+        {
+          "str": "Owner",
+          "x": 4699.4,
+          "y": 1476.7
+        },
+        {
+          "str": "Champaign County Forest Preserve",
+          "x": 4699.4,
+          "y": 1505.5
+        },
+        {
+          "str": "District",
+          "x": 4699,
+          "y": 1534.4
+        },
+        {
+          "str": "P.O. Box 1040",
+          "x": 4698.8,
+          "y": 1563.4
+        },
+        {
+          "str": "Mahomet, IL 61853",
+          "x": 4698.8,
+          "y": 1592.2
+        },
+        {
+          "str": "CCFP NATURE CENTER",
+          "x": 4671.5,
+          "y": 2623.7
+        },
+        {
+          "str": "2573 S HOMER LAKE RD.",
+          "x": 4726.7,
+          "y": 2781.6
+        },
+        {
+          "str": "HOMER, IL",
+          "x": 4797.4,
+          "y": 2810.5
+        },
+        {
+          "str": "24133",
+          "x": 4914.7,
+          "y": 3172.4
+        },
+        {
+          "str": "SF",
+          "x": 4979.4,
+          "y": 3267
+        },
+        {
+          "str": "REVISION SCHEDULE",
+          "x": 4744.2,
+          "y": 2103.7
+        },
+        {
+          "str": "DATE",
+          "x": 4637.8,
+          "y": 2151
+        },
+        {
+          "str": "DRAWING SET TITLE",
+          "x": 4827.6,
+          "y": 2151
+        },
+        {
+          "str": "01.19.2026",
+          "x": 4591.8,
+          "y": 2185.9
+        },
+        {
+          "str": "ISSUED FOR BID",
+          "x": 4747.1,
+          "y": 2185.9
+        },
+        {
+          "str": "02.11.2026",
+          "x": 4591.8,
+          "y": 2220.8
+        },
+        {
+          "str": "ADDENDUM #1",
+          "x": 4749.1,
+          "y": 2220.8
+        },
+        {
+          "str": "L1.0",
+          "x": 4946.9,
+          "y": 3356
+        },
+        {
+          "str": "PLANTING PLAN",
+          "x": 4633.8,
+          "y": 2944.9
+        },
+        {
+          "str": "3L$17,1G 127E6",
+          "x": 4027.1,
+          "y": 118.1
+        },
+        {
+          "str": "\u0014\u0011",
+          "x": 4026.7,
+          "y": 151.1
+        },
+        {
+          "str": "FOR BASE BID",
+          "x": 4063.3,
+          "y": 151.1
+        },
+        {
+          "str": "3529,'E 72362,L\u000f 7U5) 6EE'\u000f",
+          "x": 4213,
+          "y": 151.1
+        },
+        {
+          "str": "$1' %L$1.E7 ,1 $LL 7U5) $1' L$1'6C$3E",
+          "x": 4057.7,
+          "y": 175.3
+        },
+        {
+          "str": "$5E$6\u000f $1' %E'6 6+2W1 21 7+E 3L$16\u0011",
+          "x": 4057.7,
+          "y": 199.6
+        },
+        {
+          "str": "\u0015\u0011",
+          "x": 4028.3,
+          "y": 247.8
+        },
+        {
+          "str": "ALTERNATE BID 2\u001d 3529,'E $1' ,167$LL",
+          "x": 4063.3,
+          "y": 247.8
+        },
+        {
+          "str": "L$1'6C$3,1G ,1CLU',1G 62'\u000f 6EE',1G\u000f",
+          "x": 4056.2,
+          "y": 272.2
+        },
+        {
+          "str": "3L$176 $1' $662C,$7E' ,7E06 $6 6+2W1 21",
+          "x": 4056.1,
+          "y": 296.4
+        },
+        {
+          "str": "6+EE76 L\u0014\u0011\u0013\u000f L\u0015\u0011\u0013\u000f $1' $6 63EC,),E' ,1 7+E",
+          "x": 4056.8,
+          "y": 320.6
+        },
+        {
+          "str": "352-EC7 0$1U$L\u0011",
+          "x": 4056.1,
+          "y": 344.9
+        },
+        {
+          "str": "\u0016\u0011 6EE' L,0,7 L,1E ,6 $3352;,0$7E\u0011 6EE' 72",
+          "x": 4028,
+          "y": 393.1
+        },
+        {
+          "str": "L,0,76 2) G5$',1G $1' ',67U5%$1CE\u0011",
+          "x": 4056.2,
+          "y": 417.4
+        },
+        {
+          "str": "C2175$C725 5E63216,%LE )25 5E6725$7,21",
+          "x": 4056.7,
+          "y": 441.6
+        },
+        {
+          "str": "2) $1< U1$U7+25,=E' ',65U37,21 2U76,'E 2)",
+          "x": 4056.7,
+          "y": 465.8
+        },
+        {
+          "str": "'E6,G1$7E' C21675UC7,21 $5E$ $7 12",
+          "x": 4056.1,
+          "y": 490.1
+        },
+        {
+          "str": "$'',7,21$L C267 72 2W1E5\u0011",
+          "x": 4057.7,
+          "y": 514.4
+        },
+        {
+          "str": "\u0017\u0011 C2175$C725 5E63216,%LE )25 E526,21",
+          "x": 4028.6,
+          "y": 562.7
+        },
+        {
+          "str": "C21752L ,1 $LL 6EE'E' $5E$6\u0011",
+          "x": 4056.7,
+          "y": 586.9
+        },
+        {
+          "str": "\u0018\u0011",
+          "x": 4028,
+          "y": 635.2
+        },
+        {
+          "str": "75EE 0ULC+ 5,1G6 ,1 7U5) $5E$6 $5E \u0018 )227",
+          "x": 4057.2,
+          "y": 635.2
+        },
+        {
+          "str": "',$0E7E5\u000f 7<3,C$L\u0011 C2175$C725 6+$LL",
+          "x": 4056.1,
+          "y": 659.4
+        },
+        {
+          "str": "3529,'E $ 0ULC+ 5,1G $52U1' $LL E;,67,1G",
+          "x": 4056.1,
+          "y": 683.6
+        },
+        {
+          "str": "75EE6 W,7+,1 7+E L,0,7 2) W25.\u0011 5E029E $LL",
+          "x": 4057.2,
+          "y": 707.9
+        },
+        {
+          "str": "E;,67,1G G5$66 )520 $5E$ 72 %E 0ULC+E'",
+          "x": 4056.1,
+          "y": 732.1
+        },
+        {
+          "str": "$1' 3529,'E $ 7<3,C$L 9\u001075E1C+ E'GE\u0011",
+          "x": 4057.7,
+          "y": 756.4
+        },
+        {
+          "str": "\u0019\u0011 %E'L,1E6 $5E 72 %E 63$'E CU7 72 $ 0,1,0U0",
+          "x": 4028.2,
+          "y": 804.7
+        },
+        {
+          "str": "'E37+ 2) \u0016 ,1C+E6 U1LE66 27+E5W,6E 6+2W1",
+          "x": 4056.1,
+          "y": 829
+        },
+        {
+          "str": "21 7+E 3L$16\u0011 CU59E' %E'L,1E6 $5E 72 %E",
+          "x": 4056.7,
+          "y": 853.2
+        },
+        {
+          "str": "60227+ $1' 127 6EG0E17E'\u0011",
+          "x": 4056.8,
+          "y": 877.4
+        },
+        {
+          "str": "\u001a\u0011 '2 127 L2C$7E 3L$176 W,7+,1 \u0014\u0013 )EE7 2)",
+          "x": 4027.9,
+          "y": 925.7
+        },
+        {
+          "str": "U7,L,7< 675UC7U5E6\u000f 25 W,7+,1 \u0018 )EE7",
+          "x": 4056.1,
+          "y": 949.9
+        },
+        {
+          "str": "+25,=217$LL< 2) U1'E5G52U1' U7,L,7< L,1E6",
+          "x": 4056.1,
+          "y": 974.2
+        },
+        {
+          "str": "U1LE66 27+E5W,6E 6+2W1 21 7+E 3L$16\u0011",
+          "x": 4056.1,
+          "y": 998.4
+        },
+        {
+          "str": "C216UL7 W,7+ 2W1E5 ,) 7+E6E C21',7,216",
+          "x": 4056.7,
+          "y": 1022.8
+        },
+        {
+          "str": "E;,67\u0011",
+          "x": 4056.1,
+          "y": 1047
+        },
+        {
+          "str": "\u001b\u0011 )25 LU03 6U0 C2175$C76\u000f 3L$176 $1' 27+E5",
+          "x": 4028,
+          "y": 1095.2
+        },
+        {
+          "str": "0$7E5,$L6 $5E 4U$17,),E' $1' 6U00$5,=E'",
+          "x": 4056.2,
+          "y": 1119.5
+        },
+        {
+          "str": ")25 7+E C219E1,E1CE 2) 7+E 2W1E5 $1'",
+          "x": 4056,
+          "y": 1143.7
+        },
+        {
+          "str": "-U5,6',C7,21$L $GE1C,E6 21L<\u0011 C21),50 $1'",
+          "x": 4057.2,
+          "y": 1168
+        },
+        {
+          "str": ",167$LL 6U)),C,E17 4U$17,7,E6 72 C203LE7E",
+          "x": 4055.8,
+          "y": 1192.2
+        },
+        {
+          "str": "7+E W25. $6 '5$W1 $1' 63EC,),E'\u0011 12",
+          "x": 4057.2,
+          "y": 1216.4
+        },
+        {
+          "str": "$'',7,21$L 3$<0E176 W,LL %E 0$'E )25",
+          "x": 4057.7,
+          "y": 1240.7
+        },
+        {
+          "str": "0$7E5,$L6 5E4U,5E' 72 C203LE7E 7+E W25.",
+          "x": 4056.2,
+          "y": 1265
+        },
+        {
+          "str": "$6 '5$W1 $1' 63EC,),E'\u0011",
+          "x": 4057.7,
+          "y": 1289.3
+        },
+        {
+          "str": "\u001c\u0011 5E)E5 72 63EC,),C$7,216 )25 $'',7,21$L",
+          "x": 4028,
+          "y": 1337.5
+        },
+        {
+          "str": "C21',7,216\u000f 67$1'$5'6 $1' 127E6\u0011",
+          "x": 4056.7,
+          "y": 1361.8
+        },
+        {
+          "str": "3L$17,1G LEGE1'",
+          "x": 4027.1,
+          "y": 1487.3
+        },
+        {
+          "str": "6+$'E 75EE\u000f 7<3,C$L\u0011",
+          "x": 4208,
+          "y": 1572.7
+        },
+        {
+          "str": "6EE 'E7$,L )25 ,167$LL$7,21\u0011",
+          "x": 4208,
+          "y": 1597
+        },
+        {
+          "str": "251$0E17$L 75EE\u000f 7<3,C$L\u0011",
+          "x": 4207.9,
+          "y": 1690
+        },
+        {
+          "str": "6EE 'E7$,L )25 ,167$LL$7,21\u0011",
+          "x": 4208,
+          "y": 1714.2
+        },
+        {
+          "str": "E9E5G5EE1 75EE\u000f 7<3,C$L\u0011",
+          "x": 4207.3,
+          "y": 1788.7
+        },
+        {
+          "str": "6EE 'E7$,L )25 ,167$LL$7,21\u0011",
+          "x": 4208,
+          "y": 1813
+        },
+        {
+          "str": "6+5U%\u000f 7<3,C$L\u0011",
+          "x": 4208,
+          "y": 1878.7
+        },
+        {
+          "str": "6EE 'E7$,L )25 ,167$LL$7,21\u0011",
+          "x": 4208,
+          "y": 1903
+        },
+        {
+          "str": "3E5E11,$L\u000f G52U1'C29E5 $1'",
+          "x": 4207.3,
+          "y": 1956.6
+        },
+        {
+          "str": "$11U$L\u000f 7<3,C$L\u0011",
+          "x": 4208.9,
+          "y": 1980.8
+        },
+        {
+          "str": "6EE 'E7$,L )25 ,167$LL$7,21\u0011",
+          "x": 4208,
+          "y": 2005.1
+        },
+        {
+          "str": "7U5) 6EE'",
+          "x": 4208.4,
+          "y": 2070.8
+        },
+        {
+          "str": "%,26W$LE 0,;",
+          "x": 4207.4,
+          "y": 2160.8
+        },
+        {
+          "str": "L2W 352),LE 35$,5,E 6EE' 0,;",
+          "x": 4207.4,
+          "y": 2250.8
+        },
+        {
+          "str": "\u0017\u0005 G5$1,7E C2%%LE 6721E",
+          "x": 4208.6,
+          "y": 2340.8
+        },
+        {
+          "str": "6C$LE ,1 )EE7",
+          "x": 4365.2,
+          "y": 3204.7
+        },
+        {
+          "str": "\u0013",
+          "x": 4261.6,
+          "y": 3326.9
+        },
+        {
+          "str": "\u0017\u0013",
+          "x": 4516.7,
+          "y": 3326.9
+        },
+        {
+          "str": "\u0015\u0013",
+          "x": 4392.6,
+          "y": 3326.9
+        },
+        {
+          "str": "\u0014\u0013",
+          "x": 4319.5,
+          "y": 3326.9
+        },
+        {
+          "str": "\u0014\u0005",
+          "x": 4464.8,
+          "y": 3246.6
+        },
+        {
+          "str": "\u0015\u0013",
+          "x": 4516.4,
+          "y": 3246.6
+        },
+        {
+          "str": "NORTH",
+          "x": 4134.1,
+          "y": 3327.2
+        },
+        {
+          "str": "\u0014",
+          "x": 2399.5,
+          "y": 858.8
+        },
+        {
+          "str": "\u0014",
+          "x": 1940.8,
+          "y": 1090.7
+        },
+        {
+          "str": "\u0014",
+          "x": 1795.6,
+          "y": 1678.9
+        },
+        {
+          "str": "\u0014",
+          "x": 2203.2,
+          "y": 1607.9
+        },
+        {
+          "str": "\u0014",
+          "x": 3956.2,
+          "y": 1751.4
+        },
+        {
+          "str": "\u0014",
+          "x": 3581.6,
+          "y": 2341.2
+        },
+        {
+          "str": "\u0014",
+          "x": 3927.7,
+          "y": 843.6
+        },
+        {
+          "str": "\u0014",
+          "x": 3956.2,
+          "y": 1036.9
+        },
+        {
+          "str": "\u0014",
+          "x": 3289,
+          "y": 2650.7
+        },
+        {
+          "str": "\u0014",
+          "x": 2591.5,
+          "y": 2009.4
+        },
+        {
+          "str": "\u0014",
+          "x": 1381.1,
+          "y": 2140.9
+        },
+        {
+          "str": "\u0014",
+          "x": 2190.8,
+          "y": 3226.6
+        },
+        {
+          "str": "\u0014",
+          "x": 2165.4,
+          "y": 2159.4
+        },
+        {
+          "str": "\u0014",
+          "x": 1203.6,
+          "y": 102.5
+        },
+        {
+          "str": "\u0014",
+          "x": 1714.1,
+          "y": 420.4
+        },
+        {
+          "str": "\u0014",
+          "x": 3981.6,
+          "y": 206.3
+        },
+        {
+          "str": "\u0014",
+          "x": 4485.1,
+          "y": 218.2
+        },
+        {
+          "str": "\u0014",
+          "x": 3980.6,
+          "y": 115.2
+        },
+        {
+          "str": "\u0014",
+          "x": 3399.2,
+          "y": 1312.1
+        },
+        {
+          "str": "\u0014",
+          "x": 4916.8,
+          "y": 2225.5
+        }
+      ],
+      "text": "UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC E 2'-0\" 1'-0\" 1'-0\" 12'-7\" 3'-0\" W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W W UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC UG ELEC \u0010\u0014 \u000e\u0014\u0011\u0013 \u000e\u0013\u0011\u0018 \u000e\u0013\u0011\u0018 \u000e\u0014\u0011\u0013 \u000e\u0014\u0011\u0018 \u000e\u0014\u0011\u0018 \u000e\u0014\u0011\u0018 \u000e\u0013\u0011\u0013 7 7 \u0016 \u0010 95' \u0016 \u0010 +$5 \u0017 \u0010 'L2 \u0016 \u0010 C6) \u0016 \u0010 6<2 \u0016 \u0010 6<2 \u0014\u0016 \u0010 3)U \u0015 \u0010 'L2 \u0014\u0017 \u0010 EC3 \u0014\u0017 \u0010 53, \u0014\u0017 \u0010 6C6 \u0014\u0017 \u0010 9E) \u0018 \u0010 $7U \u0017 \u0010 GE7 \u0018 \u0010 L$6 \u0018 \u0010 3%, \u0017 \u0010 6+E \u0018 \u0010 93E \u0016 \u0010 C3E \u0016 \u0010 G0$ \u0015\u0014 \u0010 E+< \u0015\u0014 \u0010 3%6 \u0015\u0019 \u0010 $C' \u0015\u0017 \u0010 C3E \u0015\u0017 \u0010 C31 \u0015\u0017 \u0010 E5$ \u0015\u0017 \u0010 +$C \u0015\u0019 \u0010 3+' \u0015\u0019 \u0010 325 \u0018\u001b \u0010 6E7 \u0014\u001c \u0010 E+< \u0015\u0017 \u0010 $4C \u0015\u0019 \u0010 '20 \u0015\u0019 \u0010 E3U \u0015\u0017 \u0010 EU0 \u0015\u0017 \u0010 0CE \u0015\u0017 \u0010 752 \u0015\u0017 \u0010 UG5 \u0014\u0013 \u0010 E0$ \u001c \u0010 $CE \u001c \u0010 %CU \u001c \u0010 62% \u0019 \u0010 3E' \u0019 \u0010 569 \u0019 \u0010 6+E \u0015 \u0010 3E' \u0015 \u0010 569 \u0015 \u0010 6+E \u0014\u0014 \u0010 E3U \u0014\u0014 \u0010 0%5 \u0014\u0014 \u0010 6+E \u001a \u0010 $4C \u001a \u0010 E3U \u001a \u0010 3E' \u001a \u0010 6+E \u001a \u0010 62% \u0016 \u0010 L3< \u0016 \u0010 6,5 \u0015 \u0010 'L2 \u0015 \u0010 C2< \u0014 \u0010 CC$ \u0014 \u0010 +$5 \u0014\u0019 \u0010 6,5 \u0014\u0015 \u0010 3)U \u0017 \u0010 'L2 \u0014 \u0010 C6) \u0016 \u0010 6<2 \u0016 \u0010 L%E \u0016\u001a \u0010 $CE \u0016\u001a \u0010 G0$ \u0019 W22' )E1CE\u000f %,' $L7E51$7E \u0015 67E33,1G 6721E6\u000f %,' $L7E51$7E \u0015 )U7U5E %,5'%$7+ \u0012 W$7E5 )E$7U5E 2U7C5233,1G %2UL'E5 W$LL %L$1.E7 $1' L2W 352),LE 35$,5,E 6EE' 0,;\u000f %$6E %,' \u0019 \u0010 $,1 \u0015\u0016 \u0010 %CU \u0014\u0014 \u0010 G0$ \u0019 \u0010 02) \u0014\u0014 \u0010 3$, \u0014\u0014 \u0010 3E' \u0014\u0014 \u0010 3+9 \u0019 \u0010 575 \u0019 \u0010 5+U \u0015\u0016 \u0010 6+E \u0014 \u0010 +$5 \u0014\u0016 \u0010 +$5 \u0014\u001a \u0010 3E' \u0014\u001a \u0010 6)L C21C5E7E 'EC. W,7+ %U,L7\u0010,1 %E1C+E6\u000f 67$,56\u000f $1' 5$036\u000f 6EE $5C+,7EC7U5E $1' 675UC7U5$L 3L$16 \u0015 \u0010 $$' 2U7C5233,1G %2UL'E56\u000f C%,' $L7E51$7E \u0015 \u0014 \u0010 G', \u0015 \u0010 7$0 7U5) 6EE'\u000f %$6E %,' 7U5) 6EE'\u000f %$6E %,' 7U5) 6EE'\u000f %$6E %,' 7U5) 6EE'\u000f %$6E %,' \u0019\u0016 \u0010 6E$ \u0014\u001b \u0010 6E$ 7U5) 6EE'\u000f %$6E %,' 75$6+ 5ECE37$CLE \u0015 \u000f 7<3\u0011\u000f 2)2, %,' $L7E51$7E \u0015 %,.E 5$C.6 \u001a \u000f 7<3\u0011\u000f 2)2, %,' $L7E51$7E \u0015 %E1C+E6 \u0015 \u000f 7<3\u0011\u000f 2)2, %,' $L7E51$7E \u0015 \u0018 \u0010 5UL \u0017 \u0010 E3U \u0017 \u0010 0%5 \u0017 \u0010 6+E \u0014\u0015\u001a \u0010 6E7 \u0019 \u0010 'L2 \u0014\u0014 \u0010 %CU \u0014\u0014 \u0010 62% \u0016\u0014 \u0010 $CE \u0016\u0015 \u0010 C31 \u0016\u0014 \u0010 09, \u0014\u0017 \u0010 C3E \u0014\u0017 \u0010 G0$ \u0014\u0016 \u0010 E+< \u0014\u0016 \u0010 EU0 \u0015 \u0010\u0014\u0005 \u0016 \u0010\u0013\u0005 7<3\u0011 \u0015 \u0010\u0014\u0005 \u0016\u0014 \u0010\u0013\u0005 \u0014 \u0010 +9, \u0018 \u0010 $4C \u0018 \u0010 E3U \u0018 \u0010 3E' \u0018 \u0010 6+E \u0018 \u0010 62% \u001a \u0010 $CE \u001a \u0010 %CU \u001a \u0010 62% \u0016 \u0010 6<2 \u001a \u0010 EC3 \u001a \u0010 6C6 \u0014\u001a \u0010 GE7 \u0014\u001a \u0010 +E5 \u0014\u001a \u0010 6+E 7U5) 6EE'\u000f 7<3\u0011\u000f 7+52UG+2U7\u000f %$6E %,' 3L$17,1G6 ,1 7+,6 $5E$ $5E U1'E5 %,' $L7E51$7E \u0015\u0011 GC 72 C225',1$7E W,7+ 2W1E5 $1' 3529,'E L$1'6C$3,1G $)7E5 3$5.,1G L27 ,6 ),1,6+E'\u0011 ,167$LL W$7E5 )2U17$,1\u000f 6EE C,9,L 3L$16\u000f %$6E %,' \u0017\u0005 C2%%LE 6721E 72 %5E$. )$LL 2) W$7E5 )520 6CU33E5\u000f %$6E %,' \u0015 \u0010 $,1 \u001a \u0010 %CU \u0016 \u0010 G0$ \u0015 \u0010 02) \u0016 \u0010 3$, \u0016 \u0010 3E' \u0016 \u0010 3+9 \u0015 \u0010 575 \u0015 \u0010 5+U \u001a \u0010 6+E C2'E %27$1,C$L 1$0E C20021 1$0E 6,=E 63$C,1G 47< 5E0$5.6 'EC,'U2U6 75EE6 G', G\\PQRFODGXV GLRLFXV PDOH .HQWXFN\\ CRIIHHWUHH \u0015\u0011\u0018\u0005 CDO\u0011 \u0014 0DOH 7$0 7LOLD DPHULFDQD $PHULFDQ LLQGHQ \u0015\u0011\u0018\u0005 CDO\u0011 \u0015 251$0E17$L 75EE $$' $PHODQFKLHU DUERUHD 'RZQ\\ 6HUYLFHEHUU\\ \u0019C +W\u0011 \u0015 0XOWL\u0010VWHP CC$ CDUSLQXV FDUROLQLDQD $PHULFDQ +RUQEHDP \u0019C +W\u0011 \u0014 0XOWL\u0010VWHP +9, +DPDPHOLV YLUJLQLDQD CRPPRQ WLWFKKD]HO \u0019C +W\u0011 \u0014 0XOWL\u0010VWHP 'EC,'U2U6 6+5U%6 C6) CRUQXV VHULFHD C)DUURZC $UFWLF )LUH 5HG 7ZLJ 'RJZRRG \u0016\u0019\u0005 +W\u0011 \u0017 C2< CRU\\OXV DPHULFDQD $PHULFDQ )LOEHUW \u0016\u0019\u0005 +W\u0011 \u0015 'L2 'LHUYLOOD ORQLFHUD 'ZDUI %XVK +RQH\\VXFNOH \u0015\u0017\u0005 +W\u0011 \u0014\u001b +$5 +\\GUDQJHD DUERUHVFHQV 6PRRWK +\\GUDQJHD \u0015\u0017\u0005 +W\u0011 \u0014\u001b L%E LLQGHUD EHQ]RLQ 6SLFHEXVK \u0016\u0013\u0005 +W\u0011 \u0016 \u0014 0DOH\u000f \u0015 )HPDOH 3)U 3RWHQWLOOD IUXWLFRVD LXQG\\ +DSS\\ )DFH <HOORZ %XVK CLQTXHIRLO \u0014\u001b\u0005 +W\u0011 \u0015\u0018 6<2 6\\PSKRULFDUSRV RUELFXODWXV CRUDOEHUU\\ \u0014\u001b\u0005 +W\u0011 \u0014\u0015 95' 9LEXUQXP UDILQHVTXLDQXP 'RZQ\\ $UURZZRRG \u0015\u0017\u0005 +W\u0011 \u0016 G52U1' C29E56 $CE $OOLXP FHUQXXP 1RGGLQJ 2QLRQ \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u001b\u0017 $4C $TXLOHJLD FDQDGHQVLV EDVWHUQ CROXPELQH \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0016\u0019 $C' $VDUXP FDQDGHQVH WLOG GLQJHU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0019 $,1 $VFOHSLDV LQFDUQDWD 6ZDPS 0LONZHHG \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u001b $7U $VFOHSLDV WXEHURVD %XWWHUIO\\ 0LONZHHG \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018 %CU %RXWHORXD FXUWLSHQGXOD 6LGH 2DWV GUDPD \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018\u001a C3E CDUH[ SHQV\\OYDQLFD 3HQQV\\OYDQLD 6HGJH \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0017\u0014 C31 CDUH[ SODQWDJLQHD 3ODQWDLQ\u0010OHDYHG 6HGJH \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018\u0019 '20 'RGHFDWKHRQ PHDGLD 6KRRWLQJ 6WDU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0019 EC3 EFKLQDFHD SDOOLGD 3DOH 3XUSOH CRQHIORZHU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0014 E3U EFKLQDFHD SXUSXUHD CRQHIORZHU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018\u0016 E+< EO\\PXV K\\VWUL[ %RWWOHEUXVK GUDVV \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018\u0016 E5$ EU\\WKURQLXP DOELGXP WKLWH )DZQ LLO\\ \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0017 EU0 EXU\\ELD PDFURSK\\OOD %LJOHDI $VWHU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0016\u001a E0$ EXWURFKLXP PDFXODWXP 6SRWWHG -RH 3\\H WHHG \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u0013 G0$ GHUDQLXP PDFXODWXP WLOG CUDQHVELOO GHUDQLXP \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0019\u001b GE7 GHXP WULIORUXP 3UDLULH 6PRNH \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0014 +$C +HSDWLFD DFXWLORED 6KDUSOREHG +HSDWLFD \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0017 +E5 +HXFKHUD ULFKDUGVRQLL 3UDLULH $OXPURRW \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u001a L$6 LLDWULV DVSHUD 5RXJK %OD]LQJ 6WDU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018 L3< LLDWULV S\\FQRVWDFK\\D 3UDLULH %OD]LQJVWDU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0016 0CE 0DLDQWKHPXP UDFHPRVXP )DOVH 6RORPRQ V 6HDO \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0017 09, 0HUWHQVLD YLUJLQLFD 9LUJLQLD %OXHEHOOV \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0016\u0014 0%5 0RQDUGD EUDGEXULDQD EDVWHUQ %HH %DOP \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u0018 02) 0RQDUGD ILVWXORVD WLOG %HUJDPRW \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u001b 3$, 3DUWKHQLXP LQWHJULIROLXP WLOG 4XLQLQH \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u0017 3E' 3HQVWHPRQ GLJLWDOLV %HDUGWRQJXH \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018\u0014 3%, 3KOR[ ELILGD 6DQG 3KOR[ \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018 3+' 3KOR[ GLYDULFDWD WRRGODQG 3KOR[ \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0019 3+9 3K\\VRVWHJLD YLUJLQLDQD 2EHGLHQW 3ODQW \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u0017 325 3ROHPRQLXP UHSWDQV GUHHN 9DOHULDQ \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0019 3%6 3RO\\JRQDWXP ELIORUXP 6RORPRQ V 6HDO \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0014 53, 5DWLELGD SLQQDWD <HOORZ CRQHIORZHU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u0017 569 5XGEHFNLD IXOJLGD YDU\u0011 VSHFLRVD 9LHWWH V LLWWOH 6X]\\ 9LHWWH V LLWWOH 6X]\\ %ODFN\u0010H\\HG 6XVDQ \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u001b 5UL 5XGEHFNLD ODFLQLDWD CXWOHDI CRQHIORZHU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018 575 5XGEHFNLD WULORED %URZQ E\\HG 6XVDQ \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u001b 5+U 5XHOOLD KXPLOLV WLOG 3HWXQLD \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u001b 6C6 6FKL]DFK\\ULXP VFRSDULXP LLWWOH %OXHVWHP \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0014 6E7 6HGXP WHUQDWXP WLOG 6WRQHFURS \u0014 GDO\u0011 \u0014\u0015\u0005 R\u0011F\u0011 \u0014\u001b\u0018 6,5 6LOSKLXP WHUHELQWKLQDFHXP 3UDLULH 'RFN \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u001c 6)L 6ROLGDJR IOH[LFDXOLV =LJ]DJ GROGHQURG \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u001a 6+E 6SRUREROXV KHWHUROHSLV 3UDLULH 'URSVHHG \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u001b\u0019 6E$ 6\\PSK\\RWULFKXP HULFRLGHV 6QRZ )OXUU\\ 6QRZ )OXUU\\ +HDWK $VWHU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u001b\u0014 62% 6\\PSK\\RWULFKXP REORQJLIROLXP )DOO $VWHU \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0016\u001c 752 7UDGHVFDQWLD RKLHQVLV 2KLR 6SLGHUZRUW \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0017 UG5 UYXODULD JUDQGLIORUD LDUJHIORZHU %HOOZRUW \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0015\u0017 9E) 9HUQRQLD IDVFLFXODWD ,URQZHHG \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0014\u0017 93E 9LROD SHGDWD %LUG V\u0010IRRW 9LROHW \u0014 GDO\u0011 \u0014\u001b\u0005 R\u0011F\u0011 \u0018 3L$17 6C+E'ULE \u0010 $LL 3L$17,1G6 %,' $L7E51$7E 12\u0011\u0015 BE Project No. Expiration Date of Seal: 11-30-2026 Drawn By: Drawing No. Drawing Title t 217.363.3375 f 312.440.2303 www.baileyedward.com 1103 South Mattis Ave Champaign, IL 61821-4829 ©2025 Bailey Edward Design Design Firm License No. 184-001962 Landscape Architect RVi Planning + Landscape Architecture 22 E Chicago Ave, Ste 200A Naperville, IL 60540 Civil/Structural Engineer Bacon Farmer Workman 907 Arrow Road, Suite 2 Champaign, IL 61821 MEP Engineer Bailey Edward Design 104 Northwest Highway Fox River Grove, IL 60021 847-516-0992 Owner Champaign County Forest Preserve District P.O. Box 1040 Mahomet, IL 61853 CCFP NATURE CENTER 2573 S HOMER LAKE RD. HOMER, IL 24133 SF REVISION SCHEDULE DATE DRAWING SET TITLE 01.19.2026 ISSUED FOR BID 02.11.2026 ADDENDUM #1 L1.0 PLANTING PLAN 3L$17,1G 127E6 \u0014\u0011 FOR BASE BID 3529,'E 72362,L\u000f 7U5) 6EE'\u000f $1' %L$1.E7 ,1 $LL 7U5) $1' L$1'6C$3E $5E$6\u000f $1' %E'6 6+2W1 21 7+E 3L$16\u0011 \u0015\u0011 ALTERNATE BID 2\u001d 3529,'E $1' ,167$LL L$1'6C$3,1G ,1CLU',1G 62'\u000f 6EE',1G\u000f 3L$176 $1' $662C,$7E' ,7E06 $6 6+2W1 21 6+EE76 L\u0014\u0011\u0013\u000f L\u0015\u0011\u0013\u000f $1' $6 63EC,),E' ,1 7+E 352-EC7 0$1U$L\u0011 \u0016\u0011 6EE' L,0,7 L,1E ,6 $3352;,0$7E\u0011 6EE' 72 L,0,76 2) G5$',1G $1' ',67U5%$1CE\u0011 C2175$C725 5E63216,%LE )25 5E6725$7,21 2) $1< U1$U7+25,=E' ',65U37,21 2U76,'E 2) 'E6,G1$7E' C21675UC7,21 $5E$ $7 12 $'',7,21$L C267 72 2W1E5\u0011 \u0017\u0011 C2175$C725 5E63216,%LE )25 E526,21 C21752L ,1 $LL 6EE'E' $5E$6\u0011 \u0018\u0011 75EE 0ULC+ 5,1G6 ,1 7U5) $5E$6 $5E \u0018 )227 ',$0E7E5\u000f 7<3,C$L\u0011 C2175$C725 6+$LL 3529,'E $ 0ULC+ 5,1G $52U1' $LL E;,67,1G 75EE6 W,7+,1 7+E L,0,7 2) W25.\u0011 5E029E $LL E;,67,1G G5$66 )520 $5E$ 72 %E 0ULC+E' $1' 3529,'E $ 7<3,C$L 9\u001075E1C+ E'GE\u0011 \u0019\u0011 %E'L,1E6 $5E 72 %E 63$'E CU7 72 $ 0,1,0U0 'E37+ 2) \u0016 ,1C+E6 U1LE66 27+E5W,6E 6+2W1 21 7+E 3L$16\u0011 CU59E' %E'L,1E6 $5E 72 %E 60227+ $1' 127 6EG0E17E'\u0011 \u001a\u0011 '2 127 L2C$7E 3L$176 W,7+,1 \u0014\u0013 )EE7 2) U7,L,7< 675UC7U5E6\u000f 25 W,7+,1 \u0018 )EE7 +25,=217$LL< 2) U1'E5G52U1' U7,L,7< L,1E6 U1LE66 27+E5W,6E 6+2W1 21 7+E 3L$16\u0011 C216UL7 W,7+ 2W1E5 ,) 7+E6E C21',7,216 E;,67\u0011 \u001b\u0011 )25 LU03 6U0 C2175$C76\u000f 3L$176 $1' 27+E5 0$7E5,$L6 $5E 4U$17,),E' $1' 6U00$5,=E' )25 7+E C219E1,E1CE 2) 7+E 2W1E5 $1' -U5,6',C7,21$L $GE1C,E6 21L<\u0011 C21),50 $1' ,167$LL 6U)),C,E17 4U$17,7,E6 72 C203LE7E 7+E W25. $6 '5$W1 $1' 63EC,),E'\u0011 12 $'',7,21$L 3$<0E176 W,LL %E 0$'E )25 0$7E5,$L6 5E4U,5E' 72 C203LE7E 7+E W25. $6 '5$W1 $1' 63EC,),E'\u0011 \u001c\u0011 5E)E5 72 63EC,),C$7,216 )25 $'',7,21$L C21',7,216\u000f 67$1'$5'6 $1' 127E6\u0011 3L$17,1G LEGE1' 6+$'E 75EE\u000f 7<3,C$L\u0011 6EE 'E7$,L )25 ,167$LL$7,21\u0011 251$0E17$L 75EE\u000f 7<3,C$L\u0011 6EE 'E7$,L )25 ,167$LL$7,21\u0011 E9E5G5EE1 75EE\u000f 7<3,C$L\u0011 6EE 'E7$,L )25 ,167$LL$7,21\u0011 6+5U%\u000f 7<3,C$L\u0011 6EE 'E7$,L )25 ,167$LL$7,21\u0011 3E5E11,$L\u000f G52U1'C29E5 $1' $11U$L\u000f 7<3,C$L\u0011 6EE 'E7$,L )25 ,167$LL$7,21\u0011 7U5) 6EE' %,26W$LE 0,; L2W 352),LE 35$,5,E 6EE' 0,; \u0017\u0005 G5$1,7E C2%%LE 6721E 6C$LE ,1 )EE7 \u0013 \u0017\u0013 \u0015\u0013 \u0014\u0013 \u0014\u0005 \u0015\u0013 NORTH \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014 \u0014"
+    }
+  },
+  {
+    "tool": "find_schedule",
+    "arguments": {
+      "kind": "planting"
+    },
+    "isError": true,
+    "result": {
+      "error": "No \"planting\" schedule found in the set. Found: no schedules at all."
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 200,
+        "y0": 35,
+        "x1": 1740,
+        "y1": 430
+      },
+      "px": 1600
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        200,
+        35,
+        1740,
+        430
+      ],
+      "img_px": [
+        1600,
+        410
+      ],
+      "zoom": 1.039,
+      "overlay": false,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 240,
+        "y0": 1680,
+        "x1": 1710,
+        "y1": 1790
+      },
+      "px": 1600
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        240,
+        1680,
+        1710,
+        1790
+      ],
+      "img_px": [
+        1600,
+        120
+      ],
+      "zoom": 1.0884,
+      "overlay": false,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 400,
+        "y0": 2160,
+        "x1": 1420,
+        "y1": 3030
+      },
+      "px": 1600
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        400,
+        2160,
+        1420,
+        3030
+      ],
+      "img_px": [
+        1600,
+        1365
+      ],
+      "zoom": 1.5686,
+      "overlay": false,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 2450,
+        "y0": 710,
+        "x1": 2860,
+        "y1": 960
+      },
+      "px": 1600
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        2450,
+        710,
+        2860,
+        960
+      ],
+      "img_px": [
+        1600,
+        976
+      ],
+      "zoom": 3.9024,
+      "overlay": false,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 3540,
+        "y0": 1190,
+        "x1": 3970,
+        "y1": 1450
+      },
+      "px": 1600
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        3540,
+        1190,
+        3970,
+        1450
+      ],
+      "img_px": [
+        1600,
+        967
+      ],
+      "zoom": 3.7209,
+      "overlay": false,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 4190,
+        "y0": 3160,
+        "x1": 4590,
+        "y1": 3350
+      },
+      "px": 1600
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        4190,
+        3160,
+        4590,
+        3350
+      ],
+      "img_px": [
+        1600,
+        760
+      ],
+      "zoom": 4,
+      "overlay": false,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "set_scale",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "upp": 0.1388888888888889
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "upp": 0.1388888888888889,
+      "source": "upp",
+      "confirmed": false
+    }
+  },
+  {
+    "tool": "propose_takeoff",
+    "arguments": {
+      "label": "GDI - Bid Alternate 2",
+      "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA."
+    },
+    "isError": false,
+    "result": {
+      "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+      "label": "GDI - Bid Alternate 2",
+      "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+      "note": "Open. Every shape you commit from now on (measure_*, sweeps, derives, cut_out) attaches to this proposal until you open another or withdraw it; the estimator sees the batch as one Accept. revise_proposal replaces its pending shapes as one step, withdraw_proposal removes them."
+    }
+  },
+  {
+    "tool": "place_count",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "GDI",
+      "points": [
+        [
+          573,
+          2453
+        ]
+      ]
+    },
+    "isError": false,
+    "result": {
+      "committed": 1,
+      "shape_ids": [
+        "shp-f7d8f092-c466-4319-abf4-6343b11eb262"
+      ],
+      "condition": "GDI",
+      "ea_total": 1
+    }
+  },
+  {
+    "tool": "annotate",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "GDI",
+      "type": "text",
+      "at": [
+        1550,
+        2460
+      ],
+      "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2."
+    },
+    "isError": false,
+    "result": {
+      "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+      "sheet": "ccfp-L1.0.pdf",
+      "type": "text",
+      "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+      "condition": "GDI",
+      "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+      "note": "Attached to GDI — it wears that condition's colour on the canvas and in the marked set."
+    }
+  },
+  {
+    "tool": "propose_takeoff",
+    "arguments": {
+      "label": "TAM - Bid Alternate 2",
+      "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA."
+    },
+    "isError": false,
+    "result": {
+      "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+      "label": "TAM - Bid Alternate 2",
+      "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+      "note": "Open. Every shape you commit from now on (measure_*, sweeps, derives, cut_out) attaches to this proposal until you open another or withdraw it; the estimator sees the batch as one Accept. revise_proposal replaces its pending shapes as one step, withdraw_proposal removes them."
+    }
+  },
+  {
+    "tool": "place_count",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "TAM",
+      "points": [
+        [
+          1076,
+          2763
+        ],
+        [
+          1303,
+          2911
+        ]
+      ]
+    },
+    "isError": false,
+    "result": {
+      "committed": 2,
+      "shape_ids": [
+        "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+        "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340"
+      ],
+      "condition": "TAM",
+      "ea_total": 2
+    }
+  },
+  {
+    "tool": "annotate",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "TAM",
+      "type": "text",
+      "at": [
+        1550,
+        2590
+      ],
+      "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2."
+    },
+    "isError": false,
+    "result": {
+      "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+      "sheet": "ccfp-L1.0.pdf",
+      "type": "text",
+      "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+      "condition": "TAM",
+      "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+      "note": "Attached to TAM — it wears that condition's colour on the canvas and in the marked set."
+    }
+  },
+  {
+    "tool": "annotate",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "SET",
+      "type": "callout",
+      "at": [
+        1810,
+        390
+      ],
+      "target": [
+        2555,
+        775
+      ],
+      "text": "C1: 127 SET. Printed callout only; excluded from measured EA."
+    },
+    "isError": false,
+    "result": {
+      "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+      "sheet": "ccfp-L1.0.pdf",
+      "type": "callout",
+      "text": "C1: 127 SET. Printed callout only; excluded from measured EA.",
+      "condition": "SET",
+      "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+      "note": "Attached to SET — it wears that condition's colour on the canvas and in the marked set."
+    }
+  },
+  {
+    "tool": "annotate",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "SET",
+      "type": "callout",
+      "at": [
+        3900,
+        1480
+      ],
+      "target": [
+        3820,
+        1398
+      ],
+      "text": "C2: 58 SET. Printed callout only; excluded from measured EA."
+    },
+    "isError": false,
+    "result": {
+      "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+      "sheet": "ccfp-L1.0.pdf",
+      "type": "callout",
+      "text": "C2: 58 SET. Printed callout only; excluded from measured EA.",
+      "condition": "SET",
+      "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+      "note": "Attached to SET — it wears that condition's colour on the canvas and in the marked set."
+    }
+  },
+  {
+    "tool": "annotate",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "SET",
+      "type": "text",
+      "at": [
+        1810,
+        470
+      ],
+      "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2."
+    },
+    "isError": false,
+    "result": {
+      "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+      "sheet": "ccfp-L1.0.pdf",
+      "type": "text",
+      "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+      "condition": "SET",
+      "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+      "note": "Attached to SET — it wears that condition's colour on the canvas and in the marked set."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {
+      "path": "<OUTPUT_DIR>\\takeoff.json"
+    },
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "takeoff_summary",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "finish_tag": "GDI",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 1,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 1,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "finish_tag": "TAM",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 2,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 2,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "finish_tag": "SET",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 0,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 0,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        }
+      ],
+      "totals": {
+        "total_sf": 0,
+        "total_sf_net": 0,
+        "lf": 0,
+        "lf_net": 0,
+        "ea": 3,
+        "sy_net": 0
+      },
+      "shared_floor_sf": 0,
+      "scale_unconfirmed": [
+        "ccfp-L1.0.pdf"
+      ],
+      "proposals": [
+        {
+          "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "pending": 1,
+          "accepted": 0
+        },
+        {
+          "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "pending": 2,
+          "accepted": 0,
+          "current": true
+        }
+      ]
+    }
+  },
+  {
+    "tool": "export_report",
+    "arguments": {
+      "path": "<OUTPUT_DIR>\\report.json",
+      "project_name": "Public planting sample - GDI, TAM, SET only"
+    },
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.report.v1",
+      "project_name": "Public planting sample - GDI, TAM, SET only",
+      "generated_with": "OpenTakeoff",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 1,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 1,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0,
+          "materials": [],
+          "columns": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 2,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 2,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0,
+          "materials": [],
+          "columns": []
+        }
+      ],
+      "by_sheet": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "rows": [
+            {
+              "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+              "finish_tag": "GDI",
+              "color": "#c96442",
+              "multiplier": 1,
+              "shape_count": 1,
+              "floor_sf": 0,
+              "wall_sf": 0,
+              "border_sf": 0,
+              "lf": 0,
+              "ea": 1
+            },
+            {
+              "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+              "finish_tag": "TAM",
+              "color": "#2f7d54",
+              "multiplier": 1,
+              "shape_count": 2,
+              "floor_sf": 0,
+              "wall_sf": 0,
+              "border_sf": 0,
+              "lf": 0,
+              "ea": 2
+            }
+          ]
+        }
+      ],
+      "totals": {
+        "total_sf": 0,
+        "total_sf_net": 0,
+        "lf": 0,
+        "lf_net": 0,
+        "ea": 3,
+        "sy_net": 0
+      },
+      "materials": [],
+      "markups": [
+        {
+          "type": "text",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "rfi_id": "",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "condition": "GDI"
+        },
+        {
+          "type": "text",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "rfi_id": "",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "condition": "TAM"
+        },
+        {
+          "type": "callout",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "C1: 127 SET. Printed callout only; excluded from measured EA.",
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "rfi_id": "",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "condition": ""
+        },
+        {
+          "type": "callout",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "C2: 58 SET. Printed callout only; excluded from measured EA.",
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "rfi_id": "",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "condition": ""
+        },
+        {
+          "type": "text",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "rfi_id": "",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "condition": ""
+        }
+      ],
+      "rfis": [],
+      "condition_columns": [],
+      "shape_labels": [],
+      "by_label": [],
+      "units": "imperial (SF/LF — raw internal values)",
+      "display_units": "imperial",
+      "roll_goods": []
+    }
+  },
+  {
+    "tool": "open_suite",
+    "arguments": {
+      "suite": "planting"
+    },
+    "isError": false,
+    "result": {
+      "opened": [
+        "planting"
+      ],
+      "tools_enabled": [],
+      "open_suites": [
+        "planting"
+      ],
+      "suites": [
+        {
+          "id": "planting",
+          "label": "Landscape planting",
+          "divisions": [
+            "32"
+          ],
+          "tools": [],
+          "method": "Planting plans, schedules, details and addenda: load_plan, sheet_info, read_sheet_text and view_sheet. Establish the revision, bid alternate and sampled extent before counting; set_scale from the relevant printed scale before measuring areas or lengths.\nRead the planting schedule visually with view_sheet; read_sheet_text helps when text is available. find_schedule has no dedicated planting reader: do not assume it resolves plant rows. Preserve the exact code and capitalization, botanical/common names, size, container, caliper/height, spacing and schedule sheet/row. Missing or ambiguous document requirements: create_rfi; never expand a code from memory.\npropose_takeoff per code and scope: put the schedule identity, specified size, sheet/row and quantity basis in its rationale. annotate with condition set to the exact code to retain a concise source note. The MCP edit_condition tool does not set spec or trade; opening this suite does not retag existing conditions. In the canvas, choose Landscape planting in the condition's Trade properties without renaming its code.\nIndividually identifiable plants: inspect each symbol and its leader, then place_count at the actual plant center under its exact code. One point is one EA. symbol_sweep can find candidates on vector plans, but inspect identities, withheld matches and legend symbols before committing. Keep each installed plant once across overall and enlarged plans. list_shapes before continuing an existing takeoff; do not repeat an already committed count pass.\nPrinted bed quantities without individual locations: annotate each source callout under its exact code with its printed quantity, sheet/location and 'Printed callout only; excluded from measured EA'. Keep a separate source-callout ledger in the handoff. This method does not add callout quantities to measured totals or make them measurement-review entries. count_marks counts tag occurrences, not the adjacent plant quantity, and normalizes codes: do not use it for this pass. Do not invent points or use a condition multiplier to represent a bed. A callout describing plants already located is supporting evidence, never additional EA.\nCompare individually located EA, separately recorded callout EA and schedule quantities only over the same scope. Name partial samples, unresolved callouts and differences; never force a match. Measure only explicitly specified material coverage with measure_polygon and linear work with measure_line, under separate material tags. Keep SF and LF separate from plant EA. CY or tons need stated depth/density and the ton unit; this suite derives neither. Coordinate sod, seed and paving with the sitework scope.\nFinish with view_sheet overlay:true at a readable crop, takeoff_summary, export_report, export_takeoff and export_marked_pdf. Reopen the editable export against the same source and verify IDs, locations, quantities and pending review. Disclose source-callout and condition-metadata limitations; leave human review and scale confirmation to the estimator.",
+          "presets": [
+            {
+              "tag": "<exact plant code>",
+              "measure": "count",
+              "what": "one EA per individually located plant; preserve printed capitalization and schedule identity"
+            }
+          ]
+        }
+      ],
+      "next": "This trade uses core tools only; follow the method."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 400,
+        "y0": 2160,
+        "x1": 1420,
+        "y1": 3030
+      },
+      "px": 1600,
+      "overlay": true
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        400,
+        2160,
+        1420,
+        3030
+      ],
+      "img_px": [
+        1600,
+        1365
+      ],
+      "zoom": 1.5686,
+      "overlay": true,
+      "shapes_drawn": 3,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "px": 2000,
+      "overlay": true
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        0,
+        0,
+        5184,
+        3456
+      ],
+      "img_px": [
+        2000,
+        1333
+      ],
+      "zoom": 0.3858,
+      "overlay": true,
+      "shapes_drawn": 3,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "export_marked_pdf",
+    "arguments": {
+      "path": "<OUTPUT_DIR>\\marked.pdf",
+      "project_name": "Public planting workflow sample - partial scope, pending review"
+    },
+    "isError": false,
+    "result": {
+      "path": "<OUTPUT_DIR>\\marked.pdf",
+      "pages": 2,
+      "sheets_marked": 1,
+      "shapes_drawn": 3,
+      "annotations_drawn": 5,
+      "approvals_drawn": 0,
+      "rfis_printed": 0,
+      "note": "The takeoff burned into the plan sheets, with a legend cover — hand this to the user to review. To revise in the app, import the export_takeoff payload; agent shapes arrive as pencil proposals there until accepted."
+    }
+  },
+  {
+    "tool": "load_plan",
+    "arguments": {
+      "path": "<SOURCE_PDF>"
+    },
+    "isError": false,
+    "result": {
+      "file": "ccfp-L1.0.pdf",
+      "files": [
+        "ccfp-L1.0.pdf"
+      ],
+      "page_count": 1,
+      "sheets": [
+        {
+          "sheet": "ccfp-L1.0.pdf",
+          "page": 1,
+          "width_pt": 2592,
+          "height_pt": 1728,
+          "width_px": 5184,
+          "height_px": 3456,
+          "sheet_number": "L1.0"
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "import_takeoff",
+    "arguments": {
+      "path": "<OUTPUT_DIR>\\takeoff.json"
+    },
+    "isError": false,
+    "result": {
+      "file": "takeoff.json",
+      "replaced": true,
+      "shapes_added": 3,
+      "shapes_pending": 3,
+      "conditions_merged": 0,
+      "conditions_added": 3,
+      "scales_adopted": 1,
+      "unknown_files": [],
+      "rules_imported": 0,
+      "shapes_total": 3,
+      "note": "Empty session — the import IS the takeoff now. Unreviewed machine shapes stay pencil; verify with view_sheet overlay:true."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "takeoff_summary",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "finish_tag": "GDI",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 1,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 1,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "finish_tag": "TAM",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 2,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 2,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "finish_tag": "SET",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 0,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 0,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        }
+      ],
+      "totals": {
+        "total_sf": 0,
+        "total_sf_net": 0,
+        "lf": 0,
+        "lf_net": 0,
+        "ea": 3,
+        "sy_net": 0
+      },
+      "shared_floor_sf": 0,
+      "scale_unconfirmed": [
+        "ccfp-L1.0.pdf"
+      ],
+      "proposals": [
+        {
+          "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "pending": 1,
+          "accepted": 0
+        },
+        {
+          "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "pending": 2,
+          "accepted": 0
+        }
+      ]
+    }
+  }
+]

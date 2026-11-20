@@ -24,6 +24,7 @@ that. A client that reads its tool list only once can pre-open suites with
 
 | Suite | Divisions | Tool | What it figures |
 |---|---|---|---|
+| planting | 32 | none | Individually located plant EA by exact schedule code; printed bed quantities retained as source notes, excluded from measured totals. |
 | finishes | 09 | none | Rooms with `measure_polygon`, base with `derive_base`, transitions with `derive_transitions`, wall finishes with `measure_surface`. |
 | acoustical_ceilings | 09 | `ceiling_takeoff` | Lay-in tiles from the module, main runners, long and short cross tees, hanger wires, wall angle LF from the areas' perimeters. |
 | roofing | 07 | `roof_takeoff` | Sloped SF and squares, true rake, hip and valley LF, drip edge, starter, ridge cap, underlayment, ice and water. |
@@ -45,6 +46,33 @@ prefix (`RF-`, `SD-`, `SF-`, `ACT-`, `GL-`, `DR-`/`HW-`, `P-`, `E-`/`FA-`/`LV-`)
 Finishes, so the suite tools' default tags land in the right trade. Set it by
 hand in the condition's properties. The picker is per user and saved in the
 browser, not in the project.
+
+Planting codes come from each drawing and have no reserved prefix. Choose
+**Landscape planting** in a condition's **Trade** properties to group them;
+opening the MCP suite does not assign or change a condition's trade. Keep the
+printed code and its capitalization.
+
+### Planting scope and current limits
+
+`open_suite {suite: "planting"}` or `{division: "32"}` returns a method using
+the core tools. Read the schedule with `read_sheet_text` and `view_sheet`, then
+use `place_count` for actual plant locations. A plant code's name, specified
+size, schedule reference and quantity basis belong in the proposal rationale
+and condition-linked source note. MCP does not currently edit condition `spec`
+or `trade`; the browser provides those editors.
+
+Keep printed bed quantities separate. `count_marks` counts tag occurrences,
+not the printed quantity beside a tag, and normalizes codes. Record each bed
+callout with `annotate`, its sheet/location, quantity and an explicit exclusion
+from measured EA. Notes survive export but are not measurement-review entries.
+Do not invent plant locations or use a multiplier to simulate callout counts.
+The planting suite therefore does not complete a callout-only planting takeoff.
+
+Compare schedule quantities only against the same sampled extent and bid
+alternate. Material coverage and linear work use separate conditions and
+units; this suite adds no CY/ton conversion, catalog matching or pricing.
+Sod, seed and paving overlap the proposed sitework suite. The public example
+and remaining gaps are in the [planting evidence](../evidence/planting-suite/README.md).
 
 ## What the suite tools do and do not do
 

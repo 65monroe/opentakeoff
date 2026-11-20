@@ -1,0 +1,20 @@
+{
+  "pass": true,
+  "exact_measurements": 3,
+  "fields": [
+    "calibration",
+    "code",
+    "role",
+    "normalized vertices",
+    "computed quantities",
+    "origin method/actor/review/assignment",
+    "condition multiplier/waste"
+  ],
+  "excluded": [
+    "random IDs across independent sessions",
+    "proposal prose",
+    "annotation presentation"
+  ],
+  "before_commit": "8a31fb49d5a2c286c665017219073b0abe61695b",
+  "result": "No measurement difference. No speed or accuracy improvement claimed."
+}

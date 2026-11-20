@@ -1,0 +1,20 @@
+{
+  "tested_date": "2026-11-20",
+  "base_commit": "8a31fb49d5a2c286c665017219073b0abe61695b",
+  "branch": "codex/planting-suite",
+  "mcp_version": "0.9.117",
+  "registry_sha256_lf": "59e0fba690a2231c5ef872d2e3dc4d926984b0ec270f06e4afabe21a8262b71a",
+  "browser": "ChatGPT in-app browser",
+  "viewport": {
+    "width": 1280,
+    "height": 720
+  },
+  "browser_build": "Vite development server on 127.0.0.1:5198; repository source on this branch",
+  "production_updated": false,
+  "built_bundle": "web/dist/assets/index-CDuTnr9g.js",
+  "built_bundle_sha256": "1972da97d58b2875aba0ece7a2e500bffe33e8a16922e4039d16d14fbce63387",
+  "browser_bundled_controls_verified": true,
+  "public_plan_browser_import_verified": false,
+  "node_full_checks": "v24.22.1",
+  "node_final_replay": "v24.22.3"
+}

@@ -35,6 +35,9 @@ server/.venv/
 /*.png
 .claude/
 
+# Downloaded public planting fixture and local MCP replay outputs
+/tmp/planting-suite/
+
 # node_modules symlinks too — the dir patterns above match only real directories,
 # which is how a worktree convenience symlink once got committed
 **/node_modules

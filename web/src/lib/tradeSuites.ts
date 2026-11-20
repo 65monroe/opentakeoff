@@ -47,9 +47,32 @@ export const DIVISIONS: Record<string, string> = {
   "26": "Electrical",
   "27": "Communications",
   "28": "Electronic safety & security",
+  "32": "Exterior improvements",
 };
 
 export const TRADE_SUITES: readonly TradeSuite[] = Object.freeze([
+  {
+    id: "planting",
+    label: "Landscape planting",
+    // Plant codes are document-defined, including case. Do not claim a prefix
+    // that could reclassify an existing finish or another trade's condition.
+    prefixes: [],
+    divisions: ["32"],
+    summary: "plant schedules, individually located plants and separately disclosed bed callouts: core tools",
+    tools: [],
+    method: [
+      "Planting plans, schedules, details and addenda: load_plan, sheet_info, read_sheet_text and view_sheet. Establish the revision, bid alternate and sampled extent before counting; set_scale from the relevant printed scale before measuring areas or lengths.",
+      "Read the planting schedule visually with view_sheet; read_sheet_text helps when text is available. find_schedule has no dedicated planting reader: do not assume it resolves plant rows. Preserve the exact code and capitalization, botanical/common names, size, container, caliper/height, spacing and schedule sheet/row. Missing or ambiguous document requirements: create_rfi; never expand a code from memory.",
+      "propose_takeoff per code and scope: put the schedule identity, specified size, sheet/row and quantity basis in its rationale. annotate with condition set to the exact code to retain a concise source note. The MCP edit_condition tool does not set spec or trade; opening this suite does not retag existing conditions. In the canvas, choose Landscape planting in the condition's Trade properties without renaming its code.",
+      "Individually identifiable plants: inspect each symbol and its leader, then place_count at the actual plant center under its exact code. One point is one EA. symbol_sweep can find candidates on vector plans, but inspect identities, withheld matches and legend symbols before committing. Keep each installed plant once across overall and enlarged plans. list_shapes before continuing an existing takeoff; do not repeat an already committed count pass.",
+      "Printed bed quantities without individual locations: annotate each source callout under its exact code with its printed quantity, sheet/location and 'Printed callout only; excluded from measured EA'. Keep a separate source-callout ledger in the handoff. This method does not add callout quantities to measured totals or make them measurement-review entries. count_marks counts tag occurrences, not the adjacent plant quantity, and normalizes codes: do not use it for this pass. Do not invent points or use a condition multiplier to represent a bed. A callout describing plants already located is supporting evidence, never additional EA.",
+      "Compare individually located EA, separately recorded callout EA and schedule quantities only over the same scope. Name partial samples, unresolved callouts and differences; never force a match. Measure only explicitly specified material coverage with measure_polygon and linear work with measure_line, under separate material tags. Keep SF and LF separate from plant EA. CY or tons need stated depth/density and the ton unit; this suite derives neither. Coordinate sod, seed and paving with the sitework scope.",
+      "Finish with view_sheet overlay:true at a readable crop, takeoff_summary, export_report, export_takeoff and export_marked_pdf. Reopen the editable export against the same source and verify IDs, locations, quantities and pending review. Disclose source-callout and condition-metadata limitations; leave human review and scale confirmation to the estimator.",
+    ].join("\n"),
+    presets: [
+      { tag: "<exact plant code>", measure: "count", what: "one EA per individually located plant; preserve printed capitalization and schedule identity" },
+    ],
+  },
   {
     id: "finishes",
     label: "Finishes",

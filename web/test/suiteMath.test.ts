@@ -307,6 +307,7 @@ test("registry: ids unique, every suite has a method, divisions route, tools are
   assert.deepEqual(suitesForDivision("09", ["CPT-1", "act-2"]).map((s) => s.id), ["finishes", "acoustical_ceilings"]);
   assert.deepEqual(suitesForDivision("07", ["ACT-1"]).map((s) => s.id), ["roofing", "siding", "soffit_fascia"]);
   assert.equal(suiteCatalogLines().length, TRADE_SUITES.length);
+  assert.deepEqual(suitesForDivision("32").map((s) => s.id), ["planting"]);
 });
 
 test("registry: no prices or product names in any suite text", () => {
@@ -323,6 +324,9 @@ test("trade view: explicit trade wins, then tag prefix, then Finishes; the view 
   assert.equal(conditionTrade({ finish_tag: "P-WC1" }), "plumbing");
   assert.equal(conditionTrade({ finish_tag: "FA-HORN" }), "electrical");
   assert.equal(conditionTrade({ finish_tag: "PT-1" }), "finishes");           // paint is not plumbing
+  assert.equal(conditionTrade({ finish_tag: "pa" }), "finishes", "document codes do not claim a global prefix");
+  assert.equal(conditionTrade({ finish_tag: "pa", trade: "planting" }), "planting");
+  assert.equal(conditionTrade({ finish_tag: "P-WC1" }), "plumbing", "planting does not steal a plumbing prefix");
   assert.equal(conditionTrade({ finish_tag: "ACT-2" }), "acoustical_ceilings");
   assert.equal(conditionTrade({ finish_tag: "LVT-1" }), "finishes");          // pre-suite takeoffs read as finishes
   assert.equal(conditionTrade({ finish_tag: "LVT-1", trade: "glazing" }), "glazing");

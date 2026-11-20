@@ -1,0 +1,16 @@
+{
+  "title": "CCFP Nature Center - Addendum 1",
+  "url": "https://www.champaignforests.org/Portals/0/adam/Content/6doWEpGR10S4Upy-igoSYw/Link/_26_0216_CCFP%20Nature%20Center%20Addendum%20No%201.pdf",
+  "sha256": "6982e496eda26d026c5fbae1dc067c5f40fefa67e88fe106485d0218927d83d8",
+  "pdf_page": 58,
+  "sheet": "L1.0",
+  "revision": "02.11.2026 Addendum 1",
+  "scope": "Bid Alternate 2; selected codes GDI, TAM and SET only",
+  "coordinate_frame": "Full-sheet image pixels at render scale 2.0, 5184 by 3456, top-left origin, y down",
+  "scale": {"label": "1 inch = 20 feet", "upp": 0.1388888888888889, "human_confirmed": false},
+  "rows": [
+    {"code":"GDI","botanical":"Gymnocladus dioicus (male)","common":"Kentucky Coffeetree","size":"2.5-inch Cal.","remarks":"Male","schedule_qty":1,"located_points":[[573,2453]]},
+    {"code":"TAM","botanical":"Tilia americana","common":"American Linden","size":"2.5-inch Cal.","remarks":"","schedule_qty":2,"located_points":[[1076,2763],[1303,2911]]},
+    {"code":"SET","botanical":"Sedum ternatum","common":"Wild Stonecrop","size":"1 Gal.","remarks":"12-inch o.c.","schedule_qty":185,"located_points":[],"printed_callouts":[{"id":"C1","qty":127,"at":[2555,775]},{"id":"C2","qty":58,"at":[3820,1398]}]}
+  ]
+}
