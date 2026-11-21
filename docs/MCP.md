@@ -18,8 +18,18 @@ retries preserve the ID and review state; conflicts refuse without mutation.
 For editable planting scope, trace a separate bed with `measure_polygon`, then
 use `edit_shape {shape_id: "<area-id>", source_callout_ids: ["<callout-id>"]}`.
 The same-sheet links belong to the area, leaving source records untouched.
-Pass `null` to remove the links. SF and printed EA remain separate; no grid
-count is inferred. The browser offers bed navigation and source-text navigation.
+Pass `null` to remove the links. SF and printed EA remain separate; no EA is inferred from SF alone. The browser offers bed navigation and source-text navigation.
+
+Planting grid comparison: after linking a verified single-species bed, use
+`edit_shape planting_grid` in its own call. Supply positive `spacing_ft`,
+`pattern` (square/triangular), `angle_deg`, `inset_ft`, `offset_x_ft`,
+`offset_y_ft`, fixed `origin_norm`, `source_callout_id`, `single_species: true`,
+and a `reference` citing spacing and all assumed layout settings. The returned
+`grid_count` is a comparison; it never adds to existing EA or changes approval.
+`null` removes the layout. View the overlay and export the editable project.
+Do not turn generated positions into individually observed plants or fill a
+mixed bed with one species. Browser review starts at the bed; source text is
+available on demand. Static marked PDF/report exports omit the grid comparison.
 
 This page walks the surface in depth, in the order an agent reaches for it. Two
 shorter reads sit either side of it: [`AGENT_GUIDE.md`](AGENT_GUIDE.md) is the

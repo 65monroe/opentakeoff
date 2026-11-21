@@ -15,6 +15,7 @@ import { classifyLayerName, layerRoleCodes, segRoles, type LayerInfo } from "../
 import { buildSheetGraph, resolveTag, classifySheetRole, rowKeyAnswersFor, type SheetGraph, type SheetSpans, type Bbox } from "../../web/src/lib/sheetgraph.ts";
 import { UserError, round1, round2 } from "./format.ts";
 import { calloutQuantityError, calloutAreaError } from "../../web/src/lib/calloutQuantity.js";
+import { plantingGrid, plantingGridError } from "../../web/src/lib/plantingGrid.js";
 // Condition twins — the inheritance rule, shared with the canvas so a headless session and
 // the app can never disagree about what a twin holds (web/test/variants.test.ts).
 import {
@@ -382,6 +383,7 @@ export interface Shape {
   /** The single vertex locates printed source text, not an installed item. */
   quantity_source?: { kind: "printed_callout"; unit: "EA"; id: string; text: string; reference: string };
   source_callout_ids?: string[];
+  planting_grid?: {source_callout_id:string;single_species:true;spacing_ft:number;pattern:'square'|'triangular';angle_deg:number;inset_ft:number;offset_x_ft:number;offset_y_ft:number;origin_norm:[number,number];reference:string};
   /** surface_area only: the height this shape was quantified at (canvas
    * commitSurface snapshots the condition's H onto the shape). */
   height_ft?: number;
@@ -1473,14 +1475,14 @@ export class Session {
 
       const toCanvas: ToCanvas = (x, y) => [(x - r.x0) * zoom, (y - r.y0) * zoom];
       if (ppf) drawGrid(ctx as unknown as Ctx2D, toCanvas, r, ppf);
-      if (opts.overlay) drawShapes(ctx as unknown as Ctx2D, toCanvas, sheetShapes, s.widthPx, s.heightPx, px);
+      if (opts.overlay) drawShapes(ctx as unknown as Ctx2D, toCanvas, sheetShapes, s.widthPx, s.heightPx, px, s.upp);
       if (opts.marks) marksDrawn = drawMarks(ctx as unknown as Ctx2D, toCanvas, opts.marks, px);
       png = new Uint8Array(target.canvas.toBuffer("image/png"));
     } else {
       if (!s.page) throw new UserError(`Sheet "${s.key}" has no rendered page data.`);
       const res = await s.page.renderRegionPng(r, px, (ctx, toCanvas) => {
         if (ppf) drawGrid(ctx as Ctx2D, toCanvas as ToCanvas, r, ppf);
-        if (opts.overlay) drawShapes(ctx as Ctx2D, toCanvas as ToCanvas, sheetShapes, s.widthPx, s.heightPx, px);
+        if (opts.overlay) drawShapes(ctx as Ctx2D, toCanvas as ToCanvas, sheetShapes, s.widthPx, s.heightPx, px, s.upp);
         if (opts.marks) marksDrawn = drawMarks(ctx as Ctx2D, toCanvas as ToCanvas, opts.marks, px);
       });
       png = res.png;
@@ -4810,12 +4812,26 @@ export class Session {
    * layer exists to collect. Freezing proposed_verts_norm stays correct on the
    * human's first edit, because the geometry a reviewer saw IS the agent's
    * final revision, not its first draft. */
-  editShape(id: string, patch: { verts?: Point[]; condition?: string; role?: MeasureRole; label?: string; rise_ft?: number | null; drop_ft?: number | null; source_callout_ids?: string[] | null }) {
+  editShape(id: string, patch: { verts?: Point[]; condition?: string; role?: MeasureRole; label?: string; rise_ft?: number | null; drop_ft?: number | null; source_callout_ids?: string[] | null; planting_grid?:Shape['planting_grid'] | null }) {
     const i = this.shapes.findIndex((x) => x.id === id);
     if (i < 0) throw new UserError(`No shape with id ${JSON.stringify(id)}.`);
     const cur = this.shapes[i];
     if (cur.origin?.reviewed === true) {
       throw new UserError(`Shape ${JSON.stringify(id)} was affirmed by a human — reviewed work is ink, not pencil, and cannot be edited by an agent.`);
+    }
+    if (patch.planting_grid !== undefined) {
+      if (Object.entries(patch).some(([k,v])=>k!=='planting_grid' && v!==undefined)) throw new UserError('Configure the planting grid separately from geometry or other edits.');
+      const next={...cur};
+      if (patch.planting_grid===null) delete next.planting_grid; else next.planting_grid=structuredClone(patch.planting_grid);
+      const error=plantingGridError(next,this.shapes);
+      if (error) throw new UserError(error);
+      const sheet=this.sheet(cur.sheet_id);
+      const grid=plantingGrid(next,{widthPx:sheet.widthPx,heightPx:sheet.heightPx,upp:sheet.upp});
+      if (grid.error) throw new UserError(grid.error);
+      const before=structuredClone(cur);
+      this.shapes[i]=next;
+      this.record({op:'edit',tool:'edit_shape',before});
+      return {shape_id:id,changed:['planting_grid'],measure_role:cur.measure_role,nverts:cur.verts_norm.length,...cur.computed,...(cur.label?{label:cur.label}:{}),agent_edits:cur.origin?.agent_edits ?? 0,...(grid.count!==null?{grid_count:grid.count}:{})};
     }
     if (patch.verts === undefined && patch.condition === undefined && patch.role === undefined && patch.label === undefined && patch.rise_ft === undefined && patch.drop_ft === undefined && patch.source_callout_ids === undefined) {
       throw new UserError("Nothing to change — pass at least one of verts, condition, role, label, rise_ft, drop_ft, source_callout_ids.");
@@ -4825,6 +4841,8 @@ export class Session {
     const sourceIds = patch.source_callout_ids === null ? undefined : patch.source_callout_ids ?? cur.source_callout_ids;
     const areaError = calloutAreaError({ ...cur, measure_role: roleAfter, source_callout_ids: sourceIds }, this.shapes);
     if (areaError) throw new UserError(areaError);
+    const gridError=plantingGridError({...cur,measure_role:roleAfter,source_callout_ids:sourceIds},this.shapes);
+    if (gridError) throw new UserError(gridError);
     if ((patch.rise_ft !== undefined || patch.drop_ft !== undefined) && roleAfter !== "linear") {
       throw new UserError(`rise_ft / drop_ft are a linear run's vertical legs — ${JSON.stringify(id)} ${patch.role !== undefined ? `would be ${roleAfter}` : `is ${roleAfter}`}. A wall's vertical is its height_ft.`);
     }

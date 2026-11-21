@@ -43,6 +43,13 @@
 .workspace-inspector-actions { display: flex; gap: var(--sp-2); }
 .workspace-area-actions { flex-wrap: wrap; margin-bottom: var(--sp-2); }
 .workspace-area-actions button { max-width: 100%; white-space: normal; text-align: left; }
+.workspace-grid { border-top: var(--rule-soft); margin-top: var(--sp-3); padding-top: var(--sp-3); }
+.workspace-grid label { display: grid; gap: var(--sp-1); margin-block: var(--sp-2); }
+.workspace-grid input, .workspace-grid select { min-width: 0; width: 100%; }
+.workspace-grid .workspace-grid-confirm { display: flex; align-items: start; }
+.workspace-grid-confirm input { width: auto; }
+.workspace-grid p { font-size: var(--fs-xs); color: var(--ink-secondary); }
+.workspace-grid .workspace-grid-result { color: var(--cobalt); font-weight: 600; }
 .workspace-panel .workspace-primary { background: var(--cobalt); color: var(--accent-contrast); border-color: var(--cobalt); }
 .workspace-footer { border-top: var(--rule-soft); padding: var(--sp-2) var(--sp-4); font-size: var(--fs-xs); }
 .workspace-footer span { color: var(--ink-secondary); }

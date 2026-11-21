@@ -1,0 +1,15 @@
+{
+  "printed_ea": 127,
+  "square_grid": 110,
+  "square_difference": -17,
+  "triangular_grid": 129,
+  "triangular_difference": 2,
+  "final_pattern": "square",
+  "records": 7,
+  "all_existing_record_fields_exact_except_added_grid": true,
+  "all_existing_review_decisions_preserved": true,
+  "bed_id": "shp-7cca5e9f-60ef-4215-a544-54d3c5e5055a",
+  "source_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+  "source_spacing": "L1.0 / SET / 12 in o.c.",
+  "assumptions": "Patterns, angle, shifts and clearance are trial assumptions. No tuning or quantity adoption."
+}

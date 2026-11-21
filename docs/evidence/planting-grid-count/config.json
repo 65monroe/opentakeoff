@@ -1,0 +1,15 @@
+{
+  "source_callout_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+  "single_species": true,
+  "spacing_ft": 1,
+  "pattern": "square",
+  "angle_deg": 0,
+  "inset_ft": 0,
+  "offset_x_ft": 0.5,
+  "offset_y_ft": 0.5,
+  "origin_norm": [
+    0.5434027777777778,
+    0.2799479166666667
+  ],
+  "reference": "L1.0 SET: 12 in o.c.; square pattern, 0 deg, 6 in shifts, no edge clearance assumed."
+}

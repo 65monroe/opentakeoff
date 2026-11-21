@@ -32,6 +32,7 @@ import { store, isStaleTabError, STALE_TAB_MESSAGE, friendlyStoreError, projectI
 import { forgetThumbs, releaseThumbs } from "../lib/thumbs.js";
 import { Z } from "../lib/ui.js";
 import { isCalloutQuantity, linkedCalloutAreas } from "../lib/calloutQuantity.js";
+import { plantingGrid, plantingReviewTargets } from "../lib/plantingGrid.js";
 import { getFocusMode, toggleFocusMode, onFocusModeChange } from "../lib/focusMode.js";
 import { seedStampLibrary, instantiateStamp, markupToStampElement } from "../lib/stamps.js";
 import { extractSvgPrimitives, svgToStamp } from "../lib/svgImport.js";
@@ -851,6 +852,7 @@ export default function TakeoffCanvas() {
 
   const [workLocateId, setWorkLocateId] = useState(null);
   const workSourceOnlyRef = useRef(false);
+  const [workSourceOnlyId, setWorkSourceOnlyId] = useState(null);
   const workButtonRef = useRef(null);
   // ── roll goods (#136) — view state; the figured layouts are a memo below ──
   const [rollShow, setRollShow] = useState(true);         // draw the figured cuts over the plan (on: opting a condition in shows its cuts immediately)
@@ -8499,6 +8501,7 @@ export default function TakeoffCanvas() {
     setHiddenConds((h) => targets.reduce((next, target) => revealed(next, target.condition_id), h));
     if (targets.some((target) => tradeHidden.has(target.condition_id))) setViewTrade(ALL_TRADES);
     workSourceOnlyRef.current = sourceOnly;
+    setWorkSourceOnlyId(sourceOnly ? shape.id : null);
     setWorkLocateId(shape.id);
     if (!panelKeySet.has(shape.sheet_id)) openSheets([shape.sheet_id], false);
     setTool("select");
@@ -8513,7 +8516,7 @@ export default function TakeoffCanvas() {
     const el = containerRef.current;
     if (!shape) { setWorkLocateId(null); return; }
     if (!sp?.img?.w || !el) return;
-    const targets = workSourceOnlyRef.current ? [shape] : [shape, ...linkedCalloutAreas(shape, shapes)];
+    const targets = plantingReviewTargets(shape, shapes, workSourceOnlyRef.current);
     const pts = targets.flatMap((target) => target.verts_norm || []).filter((v) => v.length === 2 && v.every(Number.isFinite));
     if (pts.length) {
       const xs = pts.map(([x]) => x * sp.img.w + sp.xOffset), ys = pts.map(([, y]) => y * sp.img.h);
@@ -11085,10 +11088,17 @@ export default function TakeoffCanvas() {
                         mirror (ReferencePane.jsx) — see that module for the full
                         measure_role switch. `sel`/`DS.selection` only matter when
                         `sel` is true, which never happens on the reference side. */}
-                    {uiText(pShapes.map((s) => renderShapeGlyph(s, {
+                    {uiText(pShapes.map((s) => isCalloutQuantity(s) && linkedCalloutAreas(s, shapes).length && !(s.id === workSourceOnlyId && s.id === selectedId) ? null : renderShapeGlyph(s, {
                     dn, cond: condById[s.condition_id], sel: s.id === selectedId || linkedWorkAreaIds.has(s.id),
                     z: tf.scale, darkMode, selection: DS.selection, patId,
                     })))}
+                  {pShapes.filter(s=>s.planting_grid).map(s=>{
+                    const grid=plantingGrid(s,{widthPx:p.img.w,heightPx:p.img.h,upp:uppFor(p.key)});
+                    const r=s.planting_grid.spacing_ft/uppFor(p.key)*0.16;
+                    return <g key={`grid-${s.id}`} pointerEvents="none" aria-label={`${grid.count ?? 0} generated grid positions`}>
+                      {grid.points_norm.map(([x,y],i)=><circle key={i} cx={x*p.img.w} cy={y*p.img.h} r={r} fill="none" stroke={condById[s.condition_id]?.color || DS.selection.color} strokeWidth={1.25/tf.scale} />)}
+                    </g>;
+                  })}
                   {/* vertex handles for the selected shape (drag to reshape) */}
                   {selectedId && (() => {
                     const sel = pShapes.find((s) => s.id === selectedId);
@@ -13086,6 +13096,8 @@ export default function TakeoffCanvas() {
           sheetLabel={tabLabel} fmtArea={(sf) => fa(sf, 2)} fmtLength={(lf) => fl(lf, 2)}
           scales={scales} scaleUnconfirmed={scaleUnconfirmed} running={agentRunning}
           proposalCount={agentProposals.length} onLocate={locateWork}
+          gridFrames={new Map(panels.map(p=>[p.key,{widthPx:p.img.w,heightPx:p.img.h,upp:uppFor(p.key)}]))}
+          onGrid={(area, grid) => dispatchShape({ type: "plantingGrid", id: area.id, grid })}
           onReview={(id) => dispatchShape({ type: "review", ids: [id] })}
           onClose={() => { setAgentOpen(false); workButtonRef.current?.focus(); }} onReport={() => setShowReport(true)}>
           <AgentChat

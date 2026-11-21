@@ -1,0 +1,48 @@
+import {test} from 'node:test';
+import assert from 'node:assert/strict';
+import {plantingGrid,plantingGridError,plantingReviewTargets} from '../src/lib/plantingGrid.js';
+import {applyShapeCommand} from '../src/lib/shapeCommands.js';
+import {conditionTotals} from '../src/lib/totals.js';
+import {mergeTakeoffImport} from '../src/lib/importTakeoff.js';
+const source={id:'c1',sheet_id:'plan',condition_id:'SET',measure_role:'count',verts_norm:[[.9,.9]],computed:{count:127},quantity_source:{kind:'printed_callout',unit:'EA',id:'C1',text:'127 SET',reference:'Synthetic source'},origin:{actor:'agent',reviewed:true}};
+const config={source_callout_id:source.id,single_species:true,spacing_ft:1,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:0,offset_y_ft:0,origin_norm:[0,0],reference:'Synthetic 1-ft grid'};
+const area={id:'bed',sheet_id:'plan',condition_id:'BED',measure_role:'floor_area',verts_norm:[[0,0],[1,0],[1,1],[0,1]],computed:{area_sf:4,perimeter_lf:8},source_callout_ids:['c1'],planting_grid:config,origin:{actor:'agent',reviewed:false}};
+const frame={widthPx:2,heightPx:2,upp:1};
+test('square, triangular, rotation, offsets, clearances and holes count actual clipped lattice positions',()=>{
+  assert.equal(plantingGrid(area,frame).count,9);
+  const tri=plantingGrid({...area,planting_grid:{...config,pattern:'triangular'}},frame);
+  assert.equal(tri.count,8);
+  assert.ok(tri.points_norm.every(p=>p.every(v=>v>=-1e-8 && v<=1+1e-8)));
+  assert.equal(plantingGrid({...area,planting_grid:{...config,angle_deg:90}},frame).count,9);
+  assert.equal(plantingGrid({...area,planting_grid:{...config,inset_ft:.5}},frame).count,1);
+  assert.equal(plantingGrid({...area,planting_grid:{...config,offset_x_ft:.5,offset_y_ft:.5}},frame).count,4);
+  const holed={...area,verts_norm_holes:[[[.25,.25],[.75,.25],[.75,.75],[.25,.75]]]};
+  assert.equal(plantingGrid(holed,{widthPx:4,heightPx:4,upp:1}).count,16);
+  const concave={...area,verts_norm:[[0,0],[1,0],[1,.25],[.25,.25],[.25,1],[0,1]]};
+  assert.equal(plantingGrid(concave,{widthPx:4,heightPx:4,upp:1}).count,16);
+  assert.equal(plantingGrid(area,{...frame,widthPx:4}).count,15,'non-square image frame');
+  assert.equal(plantingGrid(area,{...frame,upp:.5}).count,4,'current scale controls spacing');
+});
+test('grid refuses invalid settings and bounded-work overflow without returning a partial count',()=>{
+  for(const patch of [{spacing_ft:0},{spacing_ft:NaN},{pattern:'unknown'},{single_species:false},{origin_norm:[2,0]},{reference:''},{inset_ft:-1},{source_callout_id:'absent'}]) assert.ok(plantingGridError({...area,planting_grid:{...config,...patch}}));
+  assert.ok(plantingGridError({...area,measure_role:'count'}));
+  assert.ok(plantingGridError(area,[{...source,sheet_id:'other'}]));
+  assert.equal(plantingGrid(area,{...frame,upp:0}).count,null);
+  assert.equal(plantingGrid({...area,planting_grid:{...config,spacing_ft:1e-9}},frame).count,null);
+});
+test('layout configuration, edit/undo and import preserve original EA and review; bed-first navigation does not move source',()=>{
+  const {planting_grid:_grid,...original}=area;
+  const shapes=[source,original], snapshot=structuredClone(shapes);
+  const changed=applyShapeCommand(shapes,{type:'plantingGrid',id:area.id,grid:config});
+  assert.deepEqual(changed.shapes[0],source);
+  const stripped={...changed.shapes[1]}; delete stripped.planting_grid;
+  assert.deepEqual(stripped,original);
+  assert.deepEqual(applyShapeCommand(changed.shapes,changed.inverse).shapes,shapes);
+  const imported=mergeTakeoffImport({},{schema:'opentakeoff.takeoff_canvas.v1',conditions:[],shapes:changed.shapes}).payload;
+  assert.deepEqual(imported.shapes,changed.shapes);
+  assert.deepEqual(conditionTotals([{id:'SET',multiplier:1},{id:'BED',multiplier:1}],shapes),conditionTotals([{id:'SET',multiplier:1},{id:'BED',multiplier:1}],changed.shapes));
+  assert.deepEqual(plantingReviewTargets(source,shapes),[original]);
+  assert.deepEqual(plantingReviewTargets(source,shapes,true),[source]);
+  assert.deepEqual(plantingReviewTargets(source,[source]),[source]);
+  assert.deepEqual(shapes,snapshot);
+});

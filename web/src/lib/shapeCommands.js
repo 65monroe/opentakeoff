@@ -66,6 +66,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { mintUuid, nowIso, stampEdit, authorName } from "./provenance.js";
 import { assignShapeLabel } from "./shapeLabels.js";
+import { plantingGridError } from "./plantingGrid.js";
 
 // The mint-time author field (#314): `author` = who committed the shape,
 // self-declared via provenance.authorName(). Spread AFTER the caller's fields
@@ -77,6 +78,7 @@ const mintAuthor = (given) => {
 };
 
 export const PROVENANCE_POLICY = {
+  plantingGrid: "layout comparison metadata only; no geometry, quantity or review stamps; inverse restores exact prior configuration",
   add: "created_at (+ id mint) per shape; restore:true stamps nothing",
   geom: "stampEdit(editKind) once, frozen from prev; restampFrom stamps nothing",
   reassign: "stampEdit('reassign') per shape; restore stamps nothing",
@@ -374,6 +376,15 @@ export function applyShapeCommand(shapes, cmd) {
         ...(minted ? { deductId: minted.id, parentId: cmd.parentId, parentPrev } : {}),
         ...(runsBack ? { runs: runsBack } : {}),
       } };
+    }
+    case "plantingGrid": {
+      const prev=shapes.find(s=>s.id===cmd.id);
+      if (!prev) return {shapes,inverse:null};
+      const next={...prev};
+      if (cmd.grid == null) delete next.planting_grid; else next.planting_grid=cmd.grid;
+      const error=plantingGridError(next,shapes);
+      if (error) throw new Error(error);
+      return {shapes:shapes.map(s=>s.id===cmd.id?next:s),inverse:{type:'plantingGrid',id:cmd.id,grid:prev.planting_grid ?? null}};
     }
     case "rollcut": {
       // #136 — patch shape.roll_layout across one or more shapes as ONE undo

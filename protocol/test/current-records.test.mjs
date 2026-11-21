@@ -69,6 +69,7 @@ test("linked planting areas preserve callouts through import and project archive
   const original=structuredClone(session.shapes[0]);
   const area=session.measurePolygon(sheet,[[200,200],[400,200],[400,400]],{condition:"BED",role:"floor_area"});
   session.editShape(area.shape_id,{source_callout_ids:[source.shape_id]});
+  session.editShape(area.shape_id,{planting_grid:{source_callout_id:source.shape_id,single_species:true,spacing_ft:1,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:0,offset_y_ft:0,origin_norm:[.1,.1],reference:'Synthetic layout; no observed plants'}});
   const payload=session.exportPayload(); checkBoth(payload);
   const imported=mergeTakeoffImport(emptyAnnotations(),payload).payload;
   assert.deepEqual(imported.shapes[0],original);

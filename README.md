@@ -111,10 +111,12 @@ The full tool reference is [`mcp/README.md`](mcp/README.md).
 ## How a takeoff runs
 
 Planting quantities can retain their printed source and link to an editable bed.
-**Show on plan** frames both; **Edit planting area** adjusts coverage while
+**Show on plan** frames the bed; **Source** keeps the printed evidence accessible.
+**Edit planting area** adjusts coverage while
 printed EA and its review decision stay unchanged. See the
 [planting workflow](docs/USER_GUIDE.md#landscape-planting). Area SF does not imply
-a grid-derived plant count.
+a plant count. An optional square or triangular **Grid count** compares generated
+spacing positions with printed EA without adding them to the takeoff.
 
 <img src="docs/img/brand/how-it-works.svg" alt="Open the plan, set the scale, trace rooms on the wall faces, derive base and transitions, deliver a marked-up planset PDF" width="100%">
 

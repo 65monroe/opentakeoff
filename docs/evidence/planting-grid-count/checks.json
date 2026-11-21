@@ -1,0 +1,28 @@
+{
+  "scope": "Local fork branch; no GitHub CI or PR-readiness claim",
+  "client_test_date": "2026-11-20",
+  "branch": "codex/planting-grid-count",
+  "base_commit": "456c688915295930f571a94b188b72db1d69119e",
+  "node": "24.22.3",
+  "browser_entry": "assets/index-rYdPxi0O.js",
+  "browser_entry_sha256": "1aab625a9e236468d06c687797ea43eacf158ae9c0cde186a3ffcfebb6d84b03",
+  "web_check": {"passed": 3841, "skipped": 4, "failed": 0, "typecheck_lint_bench_build_ocr": "pass", "final_workspace_panel_lint": "pass"},
+  "mcp": {"typecheck": "pass", "passed": 332, "skipped": 1, "failed": 0, "build": "pass", "distribution_smoke": "pass"},
+  "protocol": {"passed": 63, "failed": 0, "schemas": 11, "transport_cases": 16},
+  "references": {"tool_inventory": "pass; 71 default / 73 gated / 22 setup", "wiki": "pass; 11 pages", "protocol_resources": "pass; 11 schemas", "doc_links": "pass; 49 primary documents", "export_preservation": "pass"},
+  "browser": {
+    "environment": "Codex in-app browser, existing http://127.0.0.1:5200/ tab, Vite preview",
+    "square": 110,
+    "triangular": 129,
+    "printed_c1": 127,
+    "temporary_boundary_edit": {"area_sf": 124.06, "grid": 123, "undo_restored_original": true},
+    "c1_and_c2_show_on_plan_and_source_after_archive_reopen": "pass",
+    "complete_export_before_after_reopen": "equal",
+    "baseline_difference": "Only C1 planting_grid added",
+    "records": 7,
+    "pending_review": 7,
+    "accepted": 0
+  },
+  "known_warnings": ["Existing web hook and bundle-size warnings", "Windows sandbox cannot create the MCP test dependency junction; MCP suite and distribution smoke passed with the required filesystem permission"],
+  "not_completed": ["Continuous UI recording", "Changed-surface bundled-demo exercise", "Human preference and review-speed study"]
+}

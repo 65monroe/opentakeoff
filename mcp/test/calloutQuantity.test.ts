@@ -14,6 +14,7 @@ test("editable planting areas link over MCP without touching accepted source rec
   const call = async (name:string,args:Record<string,unknown>,error=false) => {
     const reply:any=await client.callTool({name,arguments:args});
     assert.equal(!!reply.isError,error,JSON.stringify(reply));
+    if(error) return reply;
     return reply.structuredContent ?? JSON.parse(reply.content[0].text);
   };
   try {
@@ -28,6 +29,18 @@ test("editable planting areas link over MCP without touching accepted source rec
     assert.deepEqual(session.shapes[0],original);
     assert.deepEqual(session.shapes[1].source_callout_ids,[source.shape_id]);
     const linked=structuredClone(session.exportPayload());
+    const grid={source_callout_id:source.shape_id,single_species:true,spacing_ft:1,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:0,offset_y_ft:0,origin_norm:[.1,.1],reference:'Synthetic grid; no quantity adoption'};
+    const gridReply=await call('edit_shape',{shape_id:area.shape_id,planting_grid:grid});
+    assert.ok(gridReply.grid_count>0);
+    assert.deepEqual(session.shapes[0],original);
+    const gridArea={...session.shapes[1]}; delete gridArea.planting_grid;
+    assert.deepEqual(gridArea,linked.shapes[1]);
+    const gridSaved=structuredClone(session.exportPayload());
+    for(const patch of [{planting_grid:{...grid,spacing_ft:0}},{planting_grid:{...grid,source_callout_id:'missing'}},{planting_grid:grid,label:'mixed edit'}]) {
+      await call('edit_shape',{shape_id:area.shape_id,...patch},true);
+      assert.deepEqual(session.exportPayload(),gridSaved);
+    }
+    await call('undo_last',{}); assert.deepEqual(session.exportPayload(),linked);
     for(const patch of [{source_callout_ids:["missing"]},{source_callout_ids:[source.shape_id,source.shape_id]},{role:"count"}]) {
       await call("edit_shape",{shape_id:area.shape_id,...patch},true);
       assert.deepEqual(session.exportPayload(),linked);

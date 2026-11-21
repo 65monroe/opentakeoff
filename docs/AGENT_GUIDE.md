@@ -26,6 +26,12 @@ can share an area. Only the area gains a relationship: source IDs, quantities,
 geometry and review decisions stay unchanged. Flag approximate edges and keep
 the new area pending. SF is coverage, not a new or derived EA count.
 
+For a spacing check on a verified single-species bed, configure
+`edit_shape planting_grid` separately and cite all layout assumptions. Its
+`grid_count` compares with printed EA; it never adds EA or verifies individual
+positions. Keep mixed beds unallocated until a species subarea is verified.
+See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).
+
 > **One-Click is temporarily gated.** On a default build `one_click` and `detect_rooms` do not
 > exist — they are not registered, `tools/list` never names them, and calling them is an
 > unknown-tool error. The initialize instructions say so and name the move: a room's polygon is

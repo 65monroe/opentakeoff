@@ -74,10 +74,18 @@ converted automatically. Never add a callout for plants already counted by symbo
 Link the bed after following its leader and hatch: `measure_polygon` under a
 separate bed condition, then `edit_shape source_callout_ids` on that area with
 the printed measurement IDs. Several species may share a bed. **Show on plan**
-frames the area and source; **Show source callout** and **Edit planting area**
+frames the bed; expand **Source** to reach **Show source callout**. **Edit planting area**
 separate source inspection from boundary editing. Source records remain intact,
 SF stays separate from EA, and obscured boundaries stay flagged for review.
-This does not implement a spacing or grid-derived count.
+For a verified single-species bed, configure `edit_shape planting_grid` as a
+separate call. Supply source callout ID, `single_species: true`, positive
+`spacing_ft`, square/triangular `pattern`, `angle_deg`, nonnegative `inset_ft`,
+`offset_x_ft`, `offset_y_ft`, fixed normalized `origin_norm`, and `reference`
+naming the spacing source and layout assumptions. `grid_count` is the clipped
+spacing count, not additional EA or evidence of individually located plants.
+Do not tune settings to force the printed total. Mixed beds require verified
+species subareas. JSON preserves settings; static PDF/report exports keep their
+existing quantities and do not yet include the grid comparison.
 
 The report splits located EA from printed EA; CSV, Excel and JSON also carry
 the source ledger. The marked PDF labels printed quantities. DXF skips these

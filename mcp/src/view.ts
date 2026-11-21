@@ -5,6 +5,7 @@
 import { RENDER_SCALE } from "../../web/src/lib/sheets.ts";
 import { UserError } from "./format.ts";
 import type { Shape } from "./session.ts";
+import { plantingGrid } from '../../web/src/lib/plantingGrid.js';
 
 /** The slice of CanvasRenderingContext2D the drawing uses — structural, so
  * @napi-rs/canvas's context satisfies it without a type dependency. */
@@ -110,7 +111,7 @@ export function drawGrid(ctx: Ctx2D, toCanvas: ToCanvas, region: Region, ppf: nu
  * genuinely open — the canvas holds the same rule), an X marker for count —
  * solid ink when a human affirmed the shape, dashed pencil while
  * origin.reviewed === false. */
-export function drawShapes(ctx: Ctx2D, toCanvas: ToCanvas, shapes: Shape[], sheetW: number, sheetH: number, longEdge: number): void {
+export function drawShapes(ctx: Ctx2D, toCanvas: ToCanvas, shapes: Shape[], sheetW: number, sheetH: number, longEdge: number, upp?:number|null): void {
   const w = Math.max(1.4, longEdge / 700);
   for (const s of shapes) {
     const pts = s.verts_norm.map(([nx, ny]) => toCanvas(nx * sheetW, ny * sheetH));
@@ -142,6 +143,14 @@ export function drawShapes(ctx: Ctx2D, toCanvas: ToCanvas, shapes: Shape[], shee
     for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
     if (s.measure_role !== "linear" && s.measure_role !== "surface_area") ctx.closePath();
     ctx.stroke();
+    if(s.planting_grid) {
+      const grid=plantingGrid(s,{widthPx:sheetW,heightPx:sheetH,upp});
+      ctx.setLineDash([]);
+      for(const [nx,ny] of grid.points_norm) {
+        const [x,y]=toCanvas(nx*sheetW,ny*sheetH),r=Math.max(1,longEdge/700);
+        ctx.beginPath(); ctx.moveTo(x-r,y-r); ctx.lineTo(x+r,y+r); ctx.moveTo(x-r,y+r); ctx.lineTo(x+r,y-r); ctx.stroke();
+      }
+    }
   }
   ctx.setLineDash([]);
 }

@@ -24,6 +24,20 @@ fields modeled by this draft, including nested definitions.
 
 ## Measurement, calibration, and authorship
 
+Optional `planting_grid` on a linked `floor_area` stores a comparison layout:
+source callout ID, declared single-species extent, spacing in feet, square or
+triangular pattern, angle, edge clearance, X/Y shifts, fixed normalized origin
+and source/assumption reference. It is recalculated from current normalized
+boundary/holes, sheet dimensions and calibration. It adds no count shape or EA.
+Browser `plantingGrid` commands and MCP configuration-only `edit_shape` writes
+change only this metadata; Undo restores its prior presence/value exactly.
+MCP refuses edits to accepted areas. Source decisions and machine originals stay
+untouched. Unknown/imported missing source IDs remain recoverable; import gates
+structural validity. No schema identifier change or migration. JSON/native
+archives preserve it; static PDF/report exports do not render the comparison.
+Tests: `web/test/plantingGrid.test.ts`, MCP callout and protocol current-record tests.
+
+
 An optional `source_callout_ids` array on a `floor_area` stores unique printed
 callout measurement IDs describing that planting area. The area owns the links;
 source counts and review decisions do not change. Several species can share a

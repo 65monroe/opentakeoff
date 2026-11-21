@@ -284,13 +284,30 @@ Click **Show on plan** to locate the source callout, marked with an open diamond
 The anchor is not a plant location. **Mark reviewed** records your decision; an
 agent cannot create it. Finding a hidden condition reveals it for inspection.
 
-When a planting area is linked, **Show on plan** frames the bed and its source
-callout together and highlights the boundary. **Show source callout** returns
-to the printed text. **Edit planting area** selects the existing area and its
+When a planting area is linked, **Show on plan** frames and highlights the bed.
+Its source diamond stays hidden until you expand **Source** and click
+**Show source callout** to inspect the printed text. **Edit planting area** selects the existing area and its
 normal vertex grips. Drag a grip to adjust the bed; undo restores the boundary.
 The area receipt links back to its printed sources and reports missing ones.
 Shared beds may cite several species. Area edits change SF, never the linked
-printed EA or its review decision. Grid-derived counts are not implemented.
+printed EA or its review decision.
+
+For a single-species bed, open **Grid count** in the receipt. Enter **Spacing
+(in)** from the schedule and choose **Pattern**. **Orientation and edges** holds
+the angle, edge clearance and grid shifts. Cite **Spacing source and layout
+assumptions**, confirm that the whole outline applies to this species, then
+click **Save grid**. Hollow circles show generated positions inside the outline,
+excluding holes and the stated edge clearance. They are a spacing calculation,
+not individually observed plants. The receipt compares the grid count with the
+printed quantity. It does not add another EA quantity to the takeoff or force a
+match. Geometry edits recalculate the grid; Undo and editable export/reopen
+preserve its settings. **Remove grid** removes only the comparison layout.
+
+Keep one shared outline for a mixed bed and use its source links to inspect each
+recorded species. Do not fill the whole mixed bed with one species' grid. A
+verified species subarea is needed first. Grid settings persist in JSON and
+project archives; static marked PDFs and quantity-report exports do not yet
+include the comparison layout. Their existing printed-EA totals stay unchanged.
 
 The report separates located EA from printed EA. CSV, Excel and JSON retain the
 source ledger, and the marked PDF labels printed quantities. Existing notes are

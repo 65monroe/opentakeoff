@@ -13,7 +13,7 @@ import {
   loadPlanOutput, sheetInfoOutput, setScaleOutput, oneClickOutput, detectRoomsOutput,
   measurePolygonOutput, measureLineOutput, measureSurfaceOutput, placeCountOutput, recordCalloutQuantityOutput, symbolSweepOutput, takeoffSummaryOutput,
   exportTakeoffOutput, deleteShapeOutput, readSheetTextOutput,
-  editShapeOutput, undoLastOutput, sheetContextOutput,
+  editShapeOutput, plantingGridSchema, undoLastOutput, sheetContextOutput,
   findTextOutput, editMaterialsOutput, editConditionOutput, exportReportOutput,
   duplicateConditionOutput, splitConditionOutput,
   exportMarkedPdfOutput, listShapesOutput, deriveBaseOutput, deriveTransitionsOutput, importTakeoffOutput, applyRulesOutput, cutOutOutput,
@@ -630,6 +630,7 @@ export function registerTools(realServer: McpServer, session: Session, opts: { o
     inputSchema: {
       shape_id: z.string().describe("Id returned when the shape was committed"),
       source_callout_ids: z.array(z.string().min(1)).min(1).nullable().optional().describe("floor_area only: link this editable planting area to existing printed-callout measurement IDs on the same sheet. Several species may share a bed. Source records, EA and their review decisions are untouched; SF remains separate. null removes the links."),
+      planting_grid: plantingGridSchema.nullable().optional().describe('Separate configuration-only edit on a linked floor_area: deterministic spacing check, not located plants or additional EA. Declare a verified single-species extent; never fill a mixed bed with one species. State spacing source and assumed pattern/orientation/offset/clearance. Fixed normalized origin; square or equilateral triangular rows. null removes the layout. Cannot combine with other edits. Existing geometry, quantities and review remain unchanged; reply grid_count is comparison only. Do not tune to force printed quantity.'),
       verts: z.array(pointSchema).optional().describe("Replacement geometry (image px): ≥3 vertices for an area shape, ≥2 points for a linear/surface run, ≥1 for a count marker"),
       condition: z.string().optional().describe("Reassign to this finish tag (minted on first use)"),
       role: z.enum(["floor_area", "deduct", "linear", "surface_area", "count"]).optional().describe("Switch what the shape measures — flipping INTO surface_area needs a height on the shape or its condition"),
@@ -638,7 +639,7 @@ export function registerTools(realServer: McpServer, session: Session, opts: { o
       drop_ft: z.number().min(0).nullable().optional().describe("Linear runs only (#441): this run's vertical leg DOWN in feet, overriding the condition's drop_ft default (0 = none). null clears the override so the condition's default applies again"),
     },
     outputSchema: editShapeOutput,
-  }, run("edit_shape", (a) => session.editShape(a.shape_id, { verts: a.verts, condition: a.condition, role: a.role, label: a.label, rise_ft: a.rise_ft, drop_ft: a.drop_ft, source_callout_ids: a.source_callout_ids })));
+  }, run("edit_shape", (a) => session.editShape(a.shape_id, { verts: a.verts, condition: a.condition, role: a.role, label: a.label, rise_ft: a.rise_ft, drop_ft: a.drop_ft, source_callout_ids: a.source_callout_ids, planting_grid:a.planting_grid })));
 
   server.registerTool("edit_materials", {
     description: `Add, remove, or patch supporting-materials rows on a condition — the coverage-rate lines that turn a measured area/length/count into an order quantity (adhesive at N sf/gal, grout at N lf/bag, …), matching the canvas's per-condition Supporting Materials panel. Each row is {name, per, basis, unit, round, note}: quantity = the condition's basis total (area/linear/count/seam_lf) ÷ per, rounded up to whole purchase units unless round:false. basis "seam_lf" is the one basis that is FIGURED rather than measured: it is the length where two cuts meet on the floor, read off the condition's roll layout (set roll_setup with edit_condition), which is what a heat-weld rod or a carpet seam tape is bought by. A 20-ft-wide room off a 12-ft roll seams once down its length; the same square footage as two 10-ft rooms seams not at all, and no percentage of the area or the perimeter can tell those two jobs apart. Without a roll_setup — or with no committed floor shapes to lay out — a seam_lf row reads 0, which is the honest state rather than a guess. condition names an existing OR NEW finish tag (minted on first touch, same as ${oneClick ? "one_click/" : ""}measure_polygon) — add alone is enough to seed materials on a condition before you've traced anything. remove/patch target existing row ids from this reply or export_takeoff (takeoff_summary strips materials for a compact quantities-only reply); a bad id 404s the WHOLE call before anything is written, and referencing an id on a tag with no condition yet errors rather than silently minting an empty one. No review gate here — materials rows are quantity config, not traced geometry, so this edits directly; undo_last reverses a call in one step (the condition's whole materials array, snapshotted before the write, restored verbatim).`,

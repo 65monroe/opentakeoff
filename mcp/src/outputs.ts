@@ -629,9 +629,18 @@ export const deleteShapeOutput = {
 /** edit_shape: the revised shape's re-measured quantities. Quantities are
  * always recomputed from the resulting geometry and role, so a role flip alone
  * re-measures (closed area vs open length). */
+export const plantingGridSchema = z.object({
+  source_callout_id:z.string().min(1), single_species:z.literal(true),
+  spacing_ft:z.number().positive(), pattern:z.enum(['square','triangular']),
+  angle_deg:z.number().min(-360).max(360), inset_ft:z.number().min(0),
+  offset_x_ft:z.number().min(0), offset_y_ft:z.number().min(0),
+  origin_norm:z.tuple([z.number().min(0).max(1),z.number().min(0).max(1)]),
+  reference:z.string().min(1),
+});
 export const editShapeOutput = {
   shape_id: z.string(),
-  changed: z.array(z.enum(["verts", "condition", "role", "label", "rise_ft", "drop_ft", "source_callout_ids"])).describe("Which fields this call actually changed"),
+  changed: z.array(z.enum(["verts", "condition", "role", "label", "rise_ft", "drop_ft", "source_callout_ids", "planting_grid"])).describe("Which fields this call actually changed"),
+  grid_count:z.number().int().nonnegative().optional().describe('Calculated positions inside the bed; comparison only, never added to printed EA'),
   measure_role: z.enum(["floor_area", "deduct", "linear", "surface_area", "count"]),
   nverts: z.number().int(),
   area_sf: z.number().optional().describe("0 for linear shapes; LF × height for surface_area; absent for count"),
