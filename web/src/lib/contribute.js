@@ -1,3 +1,4 @@
+import { isCalloutQuantity } from "./calloutQuantity.js";
 // Contribute to the open flooring model — strictly opt-in.
 //
 // The pitch: grow a shared, flooring-tuned open dataset/model the community is
@@ -115,6 +116,9 @@ const hasCounts = (c) => !!c && Object.values(c).some((v) =>
  * }} takeoff — scaleInfo's units_per_px is accepted (it's what the canvas has) and NEVER read
  */
 export function buildContribution({ conditions, shapes, scaleInfo = [], counters = null }) {
+  const excludedCallouts = shapes.filter(isCalloutQuantity).length;
+  // This export trains geometry. A source anchor is not a counted instance.
+  shapes = shapes.filter((s) => !isCalloutQuantity(s));
   const sheetIds = [...new Set(shapes.map((s) => s.sheet_id))];
   const sheetIndex = new Map(sheetIds.map((k, i) => [k, `sheet_${i + 1}`])); // strip file names
   const tagOf = Object.fromEntries((conditions || []).map((c) => [c.id, c.finish_tag]));
@@ -162,6 +166,7 @@ export function buildContribution({ conditions, shapes, scaleInfo = [], counters
   return {
     schema: "opentakeoff.contribution.v2",
     generator: "opentakeoff",
+    ...(excludedCallouts ? { excluded_printed_callouts: excludedCallouts } : {}),
     ...(APP_VERSION ? { generator_version: APP_VERSION } : {}),
     sheets,
     conditions: anonConditions,

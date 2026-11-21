@@ -1,0 +1,2220 @@
+[
+  {
+    "tool": "load_plan",
+    "arguments": {
+      "path": "<SOURCE_PDF>"
+    },
+    "isError": false,
+    "result": {
+      "file": "ccfp-L1.0.pdf",
+      "files": [
+        "ccfp-L1.0.pdf"
+      ],
+      "page_count": 1,
+      "sheets": [
+        {
+          "sheet": "ccfp-L1.0.pdf",
+          "page": 1,
+          "width_pt": 2592,
+          "height_pt": 1728,
+          "width_px": 5184,
+          "height_px": 3456,
+          "sheet_number": "L1.0"
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "import_takeoff",
+    "arguments": {
+      "path": "<BASELINE_JSON>"
+    },
+    "isError": false,
+    "result": {
+      "file": "takeoff.json",
+      "replaced": true,
+      "shapes_added": 3,
+      "shapes_pending": 3,
+      "conditions_merged": 0,
+      "conditions_added": 3,
+      "scales_adopted": 1,
+      "unknown_files": [],
+      "rules_imported": 0,
+      "shapes_total": 3,
+      "note": "Empty session — the import IS the takeoff now. Unreviewed machine shapes stay pencil; verify with view_sheet overlay:true."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "open_suite",
+    "arguments": {
+      "suite": "planting"
+    },
+    "isError": false,
+    "result": {
+      "opened": [
+        "planting"
+      ],
+      "tools_enabled": [],
+      "open_suites": [
+        "planting"
+      ],
+      "suites": [
+        {
+          "id": "planting",
+          "label": "Landscape planting",
+          "divisions": [
+            "32"
+          ],
+          "tools": [],
+          "method": "Planting plans, schedules, details and addenda: load_plan, sheet_info, read_sheet_text and view_sheet. Establish the revision, bid alternate and sampled extent before counting; set_scale from the relevant printed scale before measuring areas or lengths.\nRead the planting schedule visually with view_sheet; read_sheet_text helps when text is available. find_schedule has no dedicated planting reader: do not assume it resolves plant rows. Preserve the exact code and capitalization, botanical/common names, size, container, caliper/height, spacing and schedule sheet/row. Missing or ambiguous document requirements: create_rfi; never expand a code from memory.\npropose_takeoff per code and scope: put the schedule identity, specified size, sheet/row and quantity basis in its rationale. annotate with condition set to the exact code to retain a concise source note. The MCP edit_condition tool does not set spec or trade; opening this suite does not retag existing conditions. In the canvas, choose Landscape planting in the condition's Trade properties without renaming its code.\nIndividually identifiable plants: inspect each symbol and its leader, then place_count at the actual plant center under its exact code. One point is one EA. symbol_sweep can find candidates on vector plans, but inspect identities, withheld matches and legend symbols before committing. Keep each installed plant once across overall and enlarged plans. list_shapes before continuing an existing takeoff; do not repeat an already committed count pass.\nPrinted bed quantities without individual locations: visually verify each quantity and exact code, then record_callout_quantity with unit EA, the printed text, source reference, stable source_id and a point on that source callout. This creates one pending review record per source; its vertex is a source anchor, not a plant location. Same-source retries are idempotent; conflicting retries refuse. Show on plan opens that source and the report separates located EA from printed EA. count_marks counts tag occurrences, not adjacent plant quantities, and normalizes codes: do not use it for this pass. Do not invent plant points or use a condition multiplier to represent a bed. A callout describing plants already located is supporting evidence, never additional EA.\nCompare individually located EA, separately recorded callout EA and schedule quantities only over the same scope. Name partial samples, unresolved callouts and differences; never force a match. Measure only explicitly specified material coverage with measure_polygon and linear work with measure_line, under separate material tags. Keep SF and LF separate from plant EA. CY or tons need stated depth/density and the ton unit; this suite derives neither. Coordinate sod, seed and paving with the sitework scope.\nFinish with view_sheet overlay:true at readable count and callout crops, takeoff_summary, export_report, export_takeoff and export_marked_pdf. Reopen the editable export against the same source and verify IDs, anchors, quantities and pending review. Disclose manual source reading and condition-metadata limitations; leave human review and scale confirmation to the estimator.",
+          "presets": [
+            {
+              "tag": "<exact plant code>",
+              "measure": "count",
+              "what": "one EA per individually located plant; preserve printed capitalization and schedule identity"
+            }
+          ]
+        }
+      ],
+      "next": "This trade uses core tools only; follow the method."
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 240,
+        "y0": 1680,
+        "x1": 1710,
+        "y1": 1790
+      },
+      "px": 1600
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        240,
+        1680,
+        1710,
+        1790
+      ],
+      "img_px": [
+        1600,
+        120
+      ],
+      "zoom": 1.0884,
+      "overlay": false,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "propose_takeoff",
+    "arguments": {
+      "label": "SET printed bed quantities - Bid Alternate 2",
+      "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged."
+    },
+    "isError": false,
+    "result": {
+      "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+      "label": "SET printed bed quantities - Bid Alternate 2",
+      "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+      "note": "Open. Every shape you commit from now on (measure_*, sweeps, derives, cut_out) attaches to this proposal until you open another or withdraw it; the estimator sees the batch as one Accept. revise_proposal replaces its pending shapes as one step, withdraw_proposal removes them."
+    }
+  },
+  {
+    "tool": "record_callout_quantity",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "SET",
+      "quantity": 127,
+      "unit": "EA",
+      "at": [
+        2555,
+        775
+      ],
+      "source_id": "C1",
+      "text": "127 - SET",
+      "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+    },
+    "isError": false,
+    "result": {
+      "shape_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+      "condition": "SET",
+      "quantity": 127,
+      "created": true,
+      "note": "Printed EA quantity recorded pending human review. Its anchor locates the source text, not individual items. Do not also count the same items by symbol."
+    }
+  },
+  {
+    "tool": "record_callout_quantity",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "SET",
+      "quantity": 58,
+      "unit": "EA",
+      "at": [
+        3820,
+        1398
+      ],
+      "source_id": "C2",
+      "text": "58 - SET",
+      "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+    },
+    "isError": false,
+    "result": {
+      "shape_id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+      "condition": "SET",
+      "quantity": 58,
+      "created": true,
+      "note": "Printed EA quantity recorded pending human review. Its anchor locates the source text, not individual items. Do not also count the same items by symbol."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.49286265432098764,
+              0.22424768518518517
+            ]
+          ],
+          "computed": {
+            "count": 127
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C1",
+            "text": "127 - SET",
+            "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.7368827160493827,
+              0.4045138888888889
+            ]
+          ],
+          "computed": {
+            "count": 58
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C2",
+            "text": "58 - SET",
+            "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        },
+        {
+          "id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+          "label": "SET printed bed quantities - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+          "created_at": "2026-11-21T00:43:49.400Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "record_callout_quantity",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "SET",
+      "quantity": 127,
+      "unit": "EA",
+      "at": [
+        2555,
+        775
+      ],
+      "source_id": "C1",
+      "text": "127 - SET",
+      "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+    },
+    "isError": false,
+    "result": {
+      "shape_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+      "condition": "SET",
+      "quantity": 127,
+      "created": false,
+      "note": "Existing source quantity returned unchanged; no duplicate or review change."
+    }
+  },
+  {
+    "tool": "record_callout_quantity",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "condition": "SET",
+      "quantity": 58,
+      "unit": "EA",
+      "at": [
+        3820,
+        1398
+      ],
+      "source_id": "C2",
+      "text": "58 - SET",
+      "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+    },
+    "isError": false,
+    "result": {
+      "shape_id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+      "condition": "SET",
+      "quantity": 58,
+      "created": false,
+      "note": "Existing source quantity returned unchanged; no duplicate or review change."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.49286265432098764,
+              0.22424768518518517
+            ]
+          ],
+          "computed": {
+            "count": 127
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C1",
+            "text": "127 - SET",
+            "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.7368827160493827,
+              0.4045138888888889
+            ]
+          ],
+          "computed": {
+            "count": 58
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C2",
+            "text": "58 - SET",
+            "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed callout only; excluded from measured EA.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        },
+        {
+          "id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+          "label": "SET printed bed quantities - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+          "created_at": "2026-11-21T00:43:49.400Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "edit_annotation",
+    "arguments": {
+      "annotation_id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+      "text": "C1: 127 SET. Printed quantity recorded for review; source anchor only, individual plants not located."
+    },
+    "isError": false,
+    "result": {
+      "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+      "text": "C1: 127 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+      "note": "Text updated; geometry, dimensions, links and review records are unchanged. undo_last restores the previous text."
+    }
+  },
+  {
+    "tool": "edit_annotation",
+    "arguments": {
+      "annotation_id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+      "text": "C2: 58 SET. Printed quantity recorded for review; source anchor only, individual plants not located."
+    },
+    "isError": false,
+    "result": {
+      "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+      "text": "C2: 58 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+      "note": "Text updated; geometry, dimensions, links and review records are unchanged. undo_last restores the previous text."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {
+      "path": "<OUTPUT_DIR>\\takeoff.json"
+    },
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.49286265432098764,
+              0.22424768518518517
+            ]
+          ],
+          "computed": {
+            "count": 127
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C1",
+            "text": "127 - SET",
+            "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.7368827160493827,
+              0.4045138888888889
+            ]
+          ],
+          "computed": {
+            "count": 58
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C2",
+            "text": "58 - SET",
+            "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        },
+        {
+          "id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+          "label": "SET printed bed quantities - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+          "created_at": "2026-11-21T00:43:49.400Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "takeoff_summary",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "finish_tag": "GDI",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 1,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 1,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "finish_tag": "TAM",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 2,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 2,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "finish_tag": "SET",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 2,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 185,
+          "count_basis": {
+            "located_ea": 0,
+            "printed_ea": 185
+          },
+          "printed_callouts": [
+            {
+              "measurement_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+              "sheet_id": "ccfp-L1.0.pdf",
+              "source_id": "C1",
+              "text": "127 - SET",
+              "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026",
+              "quantity": 127,
+              "unit": "EA",
+              "anchor_norm": [
+                0.49286265432098764,
+                0.22424768518518517
+              ],
+              "reviewed": false
+            },
+            {
+              "measurement_id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+              "sheet_id": "ccfp-L1.0.pdf",
+              "source_id": "C2",
+              "text": "58 - SET",
+              "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026",
+              "quantity": 58,
+              "unit": "EA",
+              "anchor_norm": [
+                0.7368827160493827,
+                0.4045138888888889
+              ],
+              "reviewed": false
+            }
+          ],
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0
+        }
+      ],
+      "totals": {
+        "total_sf": 0,
+        "total_sf_net": 0,
+        "lf": 0,
+        "lf_net": 0,
+        "ea": 188,
+        "sy_net": 0
+      },
+      "shared_floor_sf": 0,
+      "scale_unconfirmed": [
+        "ccfp-L1.0.pdf"
+      ],
+      "proposals": [
+        {
+          "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "pending": 1,
+          "accepted": 0
+        },
+        {
+          "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "pending": 2,
+          "accepted": 0
+        },
+        {
+          "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+          "label": "SET printed bed quantities - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+          "pending": 2,
+          "accepted": 0,
+          "current": true
+        }
+      ]
+    }
+  },
+  {
+    "tool": "list_shapes",
+    "arguments": {
+      "condition": "SET"
+    },
+    "isError": false,
+    "result": {
+      "shapes": [
+        {
+          "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+          "sheet": "ccfp-L1.0.pdf",
+          "condition": "SET",
+          "measure_role": "count",
+          "count": 127,
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C1",
+            "text": "127 - SET",
+            "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          },
+          "nverts": 1,
+          "reviewed": false,
+          "assignment": "asserted",
+          "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c"
+        },
+        {
+          "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+          "sheet": "ccfp-L1.0.pdf",
+          "condition": "SET",
+          "measure_role": "count",
+          "count": 58,
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C2",
+            "text": "58 - SET",
+            "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          },
+          "nverts": 1,
+          "reviewed": false,
+          "assignment": "asserted",
+          "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c"
+        }
+      ],
+      "count": 2
+    }
+  },
+  {
+    "tool": "export_report",
+    "arguments": {
+      "path": "<OUTPUT_DIR>\\report.json",
+      "project_name": "Public planting sample - 3 located trees and 185 printed SET"
+    },
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.report.v1",
+      "project_name": "Public planting sample - 3 located trees and 185 printed SET",
+      "generated_with": "OpenTakeoff",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 1,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 1,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0,
+          "materials": [],
+          "columns": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 2,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 2,
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0,
+          "materials": [],
+          "columns": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 2,
+          "floor_sf": 0,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 185,
+          "count_basis": {
+            "located_ea": 0,
+            "printed_ea": 185
+          },
+          "printed_callouts": [
+            {
+              "measurement_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+              "sheet_id": "ccfp-L1.0.pdf",
+              "source_id": "C1",
+              "text": "127 - SET",
+              "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026",
+              "quantity": 127,
+              "unit": "EA",
+              "anchor_norm": [
+                0.49286265432098764,
+                0.22424768518518517
+              ],
+              "reviewed": false
+            },
+            {
+              "measurement_id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+              "sheet_id": "ccfp-L1.0.pdf",
+              "source_id": "C2",
+              "text": "58 - SET",
+              "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026",
+              "quantity": 58,
+              "unit": "EA",
+              "anchor_norm": [
+                0.7368827160493827,
+                0.4045138888888889
+              ],
+              "reviewed": false
+            }
+          ],
+          "total_sf": 0,
+          "floor_sf_net": 0,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 0,
+          "sy_net": 0,
+          "materials": [],
+          "columns": []
+        }
+      ],
+      "by_sheet": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "rows": [
+            {
+              "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+              "finish_tag": "GDI",
+              "color": "#c96442",
+              "multiplier": 1,
+              "shape_count": 1,
+              "floor_sf": 0,
+              "wall_sf": 0,
+              "border_sf": 0,
+              "lf": 0,
+              "ea": 1
+            },
+            {
+              "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+              "finish_tag": "TAM",
+              "color": "#2f7d54",
+              "multiplier": 1,
+              "shape_count": 2,
+              "floor_sf": 0,
+              "wall_sf": 0,
+              "border_sf": 0,
+              "lf": 0,
+              "ea": 2
+            },
+            {
+              "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+              "finish_tag": "SET",
+              "color": "#2563eb",
+              "multiplier": 1,
+              "shape_count": 2,
+              "floor_sf": 0,
+              "wall_sf": 0,
+              "border_sf": 0,
+              "lf": 0,
+              "ea": 185,
+              "count_basis": {
+                "located_ea": 0,
+                "printed_ea": 185
+              },
+              "printed_callouts": [
+                {
+                  "measurement_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+                  "sheet_id": "ccfp-L1.0.pdf",
+                  "source_id": "C1",
+                  "text": "127 - SET",
+                  "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026",
+                  "quantity": 127,
+                  "unit": "EA",
+                  "anchor_norm": [
+                    0.49286265432098764,
+                    0.22424768518518517
+                  ],
+                  "reviewed": false
+                },
+                {
+                  "measurement_id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+                  "sheet_id": "ccfp-L1.0.pdf",
+                  "source_id": "C2",
+                  "text": "58 - SET",
+                  "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026",
+                  "quantity": 58,
+                  "unit": "EA",
+                  "anchor_norm": [
+                    0.7368827160493827,
+                    0.4045138888888889
+                  ],
+                  "reviewed": false
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "totals": {
+        "total_sf": 0,
+        "total_sf_net": 0,
+        "lf": 0,
+        "lf_net": 0,
+        "ea": 188,
+        "sy_net": 0
+      },
+      "materials": [],
+      "markups": [
+        {
+          "type": "text",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "rfi_id": "",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "condition": "GDI"
+        },
+        {
+          "type": "text",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "rfi_id": "",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "condition": "TAM"
+        },
+        {
+          "type": "callout",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "C1: 127 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "rfi_id": "",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "condition": "SET"
+        },
+        {
+          "type": "callout",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "C2: 58 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "rfi_id": "",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "condition": "SET"
+        },
+        {
+          "type": "text",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "sheet": "ccfp-L1.0.pdf",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "rfi_id": "",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "condition": "SET"
+        }
+      ],
+      "rfis": [],
+      "condition_columns": [],
+      "shape_labels": [],
+      "by_label": [],
+      "units": "imperial (SF/LF — raw internal values)",
+      "display_units": "imperial",
+      "roll_goods": []
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 2350,
+        "y0": 620,
+        "x1": 2970,
+        "y1": 1060
+      },
+      "px": 1600,
+      "overlay": true
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        2350,
+        620,
+        2970,
+        1060
+      ],
+      "img_px": [
+        1600,
+        1135
+      ],
+      "zoom": 2.5806,
+      "overlay": true,
+      "shapes_drawn": 5,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "arguments": {
+      "sheet": "ccfp-L1.0.pdf",
+      "region": {
+        "x0": 3440,
+        "y0": 1090,
+        "x1": 4090,
+        "y1": 1550
+      },
+      "px": 1600,
+      "overlay": true
+    },
+    "isError": false,
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        3440,
+        1090,
+        4090,
+        1550
+      ],
+      "img_px": [
+        1600,
+        1132
+      ],
+      "zoom": 2.4615,
+      "overlay": true,
+      "shapes_drawn": 5,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "export_marked_pdf",
+    "arguments": {
+      "path": "<OUTPUT_DIR>\\marked.pdf",
+      "project_name": "Public planting sample - partial scope, pending review"
+    },
+    "isError": false,
+    "result": {
+      "path": "<OUTPUT_DIR>\\marked.pdf",
+      "pages": 2,
+      "sheets_marked": 1,
+      "shapes_drawn": 5,
+      "annotations_drawn": 5,
+      "approvals_drawn": 0,
+      "rfis_printed": 0,
+      "note": "The takeoff burned into the plan sheets, with a legend cover — hand this to the user to review. To revise in the app, import the export_takeoff payload; agent shapes arrive as pencil proposals there until accepted."
+    }
+  },
+  {
+    "tool": "load_plan",
+    "arguments": {
+      "path": "<SOURCE_PDF>"
+    },
+    "isError": false,
+    "result": {
+      "file": "ccfp-L1.0.pdf",
+      "files": [
+        "ccfp-L1.0.pdf"
+      ],
+      "page_count": 1,
+      "sheets": [
+        {
+          "sheet": "ccfp-L1.0.pdf",
+          "page": 1,
+          "width_pt": 2592,
+          "height_pt": 1728,
+          "width_px": 5184,
+          "height_px": 3456,
+          "sheet_number": "L1.0"
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "import_takeoff",
+    "arguments": {
+      "path": "<OUTPUT_DIR>\\takeoff.json"
+    },
+    "isError": false,
+    "result": {
+      "file": "takeoff.json",
+      "replaced": true,
+      "shapes_added": 5,
+      "shapes_pending": 5,
+      "conditions_merged": 0,
+      "conditions_added": 3,
+      "scales_adopted": 1,
+      "unknown_files": [],
+      "rules_imported": 0,
+      "shapes_total": 5,
+      "note": "Empty session — the import IS the takeoff now. Unreviewed machine shapes stay pencil; verify with view_sheet overlay:true."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "arguments": {},
+    "isError": false,
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.49286265432098764,
+              0.22424768518518517
+            ]
+          ],
+          "computed": {
+            "count": 127
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C1",
+            "text": "127 - SET",
+            "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.7368827160493827,
+              0.4045138888888889
+            ]
+          ],
+          "computed": {
+            "count": 58
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C2",
+            "text": "58 - SET",
+            "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        },
+        {
+          "id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+          "label": "SET printed bed quantities - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+          "created_at": "2026-11-21T00:43:49.400Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  }
+]

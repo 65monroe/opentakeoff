@@ -12,6 +12,7 @@
 import { flattenCurve } from "../lib/curve.js";
 import { dashArrayFor } from "../lib/lineStyles.js";
 import { NO_FILL } from "./hatches.jsx";
+import { isCalloutQuantity } from "../lib/calloutQuantity.js";
 
 // Fill for a committed shape. Hatch tiles are 10 stage-units — once the zoom
 // puts a tile under ~4 screen px the pattern aliases into subpixel mush
@@ -45,6 +46,13 @@ export function renderShapeGlyph(s, { dn, cond, sel, z, darkMode, selection = {}
 
   if (s.measure_role === "count") {
     const [cx, cy] = pts[0], r = 7 / z;
+    if (isCalloutQuantity(s)) {
+      const size = 11 / z;
+      return <path key={s.id} d={`M${cx} ${cy - size}L${cx + size} ${cy}L${cx} ${cy + size}L${cx - size} ${cy}Z`}
+        fill="none" stroke={sel ? selection.color : col} strokeWidth={(sel ? 3 : 2) / z} strokeDasharray={pending ? pDash : undefined}>
+        <title>{`${s.computed.count} EA · Printed callout · ${s.quantity_source.text}`}</title>
+      </path>;
+    }
     return <rect key={s.id} x={cx - r} y={cy - r} width={r * 2} height={r * 2} rx={2 / z} fill={col + (pending ? "55" : "cc")} stroke={sel ? selection.color : "#fff"} strokeWidth={(sel ? 3 : 1.5) / z} strokeDasharray={pending ? `${3 / z} ${2.5 / z}` : undefined} />;
   }
   if (s.measure_role === "surface_area") {

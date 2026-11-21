@@ -44,6 +44,19 @@
     "computed": {
       "$ref": "common.schema.json#/$defs/computed"
     },
+    "quantity_source": {
+      "type": "object",
+      "description": "A printed EA quantity whose single vertex locates source text, not an installed item. No automatic OCR or approval is implied.",
+      "properties": {
+        "kind": { "const": "printed_callout" },
+        "unit": { "const": "EA" },
+        "id": { "type": "string", "minLength": 1 },
+        "text": { "type": "string", "minLength": 1 },
+        "reference": { "type": "string", "minLength": 1 }
+      },
+      "required": ["kind", "unit", "id", "text", "reference"],
+      "additionalProperties": true
+    },
     "height_ft": {
       "type": "number"
     },
@@ -92,5 +105,13 @@
     "computed"
   ],
   "additionalProperties": true,
+  "allOf": [{
+    "if": { "required": ["quantity_source"] },
+    "then": { "properties": {
+      "measure_role": { "const": "count" },
+      "verts_norm": { "type": "array", "minItems": 1, "maxItems": 1 },
+      "computed": { "type": "object", "required": ["count"], "properties": { "count": { "type": "integer", "minimum": 1 } } }
+    } }
+  }],
   "description": "One existing shape record. Legacy curved=true means spline control points; new baked arcs use ordinary vertices and origin.curved. Do not conflate or regenerate them."
 }

@@ -211,6 +211,12 @@ export function reportWorkbook({ rows = [], bySheet = [], shapeRows = [], cols =
     const v = (c.key === "waste_sf" || c.key === "waste_lf") ? GETTERS[c.key](g) : (g[c.key] !== undefined ? g[c.key] : "");
     return c.conv && v !== "" ? c.conv(v) : v;
   }));
+  if (rows.some((r) => r.count_basis)) {
+    conditions.push([], heading(["Condition", "Located EA", "Printed callout EA"]));
+    for (const r of rows.filter((r) => r.count_basis)) conditions.push([p.finish(r.finish_tag), r.count_basis.located_ea, r.count_basis.printed_ea]);
+    conditions.push([], heading(["Condition", "Measurement ID", "Sheet ID", "Source ID", "Printed text", "Source reference", "Printed EA (base)"]));
+    for (const r of rows) for (const c of r.printed_callouts || []) conditions.push([p.finish(r.finish_tag), c.measurement_id, c.sheet_id, c.source_id, c.text, c.reference, c.quantity]);
+  }
 
   // By sheet — base (unmultiplied) quantities, rounded at serialization only
   const bySheetRows = [heading(["Sheet", "Sheet ID", "Finish", `Floor ${AU}`, `Wall ${AU}`, `Border ${AU}`, LU, "EA"])];

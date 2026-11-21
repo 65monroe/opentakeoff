@@ -12,6 +12,7 @@
 // record (surface height / linear thickness defaults).
 import { closedMetrics, openLen, polyWithHolesMetrics } from "./geometry.js";
 import { flattenCurve } from "./curve.js";
+import { isCalloutQuantity } from "./calloutQuantity.js";
 
 /** The vertical legs a linear run carries (#441): rise and drop in feet.
  *  The condition's rise_ft / drop_ft are the DEFAULTS for its runs and
@@ -36,7 +37,7 @@ export function linearVerticalFt(s, cond) {
 export function computeShapeMetrics(s, dims, upp, cond) {
   const pts = (s.verts_norm || []).map(([nx, ny]) => [nx * dims.w, ny * dims.h]);
   const u = upp || 0;
-  if (s.measure_role === "count") return { count: 1 };
+  if (s.measure_role === "count") return { count: isCalloutQuantity(s) ? s.computed.count : 1 };
   if (s.measure_role === "surface_area") {
     // the wall keeps the height it was DRAWN at; the condition H is only the
     // default for new traces (and the fallback for legacy shapes without one).

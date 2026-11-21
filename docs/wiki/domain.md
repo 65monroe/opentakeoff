@@ -7,6 +7,7 @@
 | Wall SF | Measured run LF × that shape's height | Applying one elevation width to every wall or treating floor deducts as wall openings |
 | Base/transition LF | Installed run length or a disclosed derived allowance | Treating a numeric opening allowance as a located gap |
 | Count | Located instances with count semantics | Counting a note's bare mention as a drawn device |
+| Printed EA quantity | A visually read quantity with one source-callout anchor, text and reference | Treating the anchor as an installed item, or also counting the same items individually |
 | Order quantity | Net quantity with the condition's stated multiplier/waste rules | Increasing the traced geometry to carry waste |
 | Material coverage | A material row derived from measured finish quantities | Drawing duplicate finish polygons for membrane/protection coverage |
 | Confidence | A signal for prioritizing inspection | Treating it as human approval or an accuracy guarantee |

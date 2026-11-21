@@ -1,0 +1,135 @@
+{
+  "tested_date": "2026-11-20",
+  "timezone": "America/New_York",
+  "node": "v24.22.3",
+  "branch": "codex/planting-suite",
+  "upstream_base": "8a31fb49d5a2c286c665017219073b0abe61695b",
+  "fork_baseline": "99f83814d18852adb389182f179377f939e40164",
+  "mcp_version": "0.9.117 (local, unpublished)",
+  "checks": [
+    {
+      "command": "npm run check --prefix web",
+      "status": "pass",
+      "passed": 3837,
+      "skipped": 4,
+      "failed": 0,
+      "includes": [
+        "typecheck",
+        "lint",
+        "runtime assets",
+        "tests",
+        "benchmark",
+        "build",
+        "OCR distribution"
+      ]
+    },
+    {
+      "command": "npm run typecheck --prefix mcp",
+      "status": "pass"
+    },
+    {
+      "command": "npm test --prefix mcp",
+      "status": "pass",
+      "passed": 331,
+      "skipped": 1,
+      "failed": 0
+    },
+    {
+      "command": "npm run check --prefix protocol",
+      "status": "pass",
+      "passed": 62,
+      "skipped": 0,
+      "failed": 0,
+      "schemas": 11,
+      "transport_cases": 16
+    },
+    {
+      "command": "npm run check:tool-count --prefix mcp",
+      "status": "pass",
+      "default_tools": 71,
+      "gated_tools": 73,
+      "setup_tools": 22,
+      "stale_markers": 0
+    },
+    {
+      "command": "npm run check:wiki --prefix mcp",
+      "status": "pass",
+      "pages": 11
+    },
+    {
+      "command": "npm run check:protocol-resources --prefix mcp",
+      "status": "pass",
+      "schemas": 11
+    },
+    {
+      "command": "node scripts/check-doc-links.mjs",
+      "status": "pass",
+      "primary_documents": 49
+    },
+    {
+      "command": "npm run build --prefix mcp",
+      "status": "pass"
+    },
+    {
+      "command": "npm run smoke:dist --prefix mcp",
+      "status": "pass",
+      "flat_tools": 71,
+      "staged_initial_tools": 23,
+      "schemas": 11,
+      "wiki_pages": 11
+    },
+    {
+      "command": "node --import tsx --test test/calloutQuantity.test.ts (mcp)",
+      "status": "pass",
+      "note": "Rechecked after the final report aggregation change; the web gate also reran on the final source."
+    }
+  ],
+  "public_replay": {
+    "status": "pass",
+    "results": "results.json",
+    "trace": "transcript.json",
+    "baseline_records_preserved": 3,
+    "new_source_records": 2,
+    "source_arithmetic": "127 + 58 = 185 EA",
+    "all_records_pending": true,
+    "archive": "Native .otk writer/parser: exact takeoff and PDF-byte round trip; PDF and archive excluded from Git"
+  },
+  "browser": {
+    "status": "unverified",
+    "attempted_browser": "Native Google Chrome on Windows",
+    "local_origin": "http://127.0.0.1:5199/",
+    "reason": "Computer Use stopped because it could not verify the current browser URL. No alternative UI-control method used after the stop.",
+    "remaining": [
+      "Import public archive",
+      "Inspect both source receipts and Show on plan",
+      "Verify report and reload persistence",
+      "Bundled-sample changed-surface screenshots",
+      "Actual-browser review-flow recording"
+    ]
+  },
+  "provenance": {
+    "company_skills_or_memory_used": false,
+    "private_plans_or_catalogs_used": false,
+    "input_method": "Visual inspection of public source; explicit coordinates supplied to OpenTakeoff MCP",
+    "not_claimed": [
+      "Blind AI benchmark",
+      "Automatic source reading",
+      "Human approval",
+      "Full landscape estimate",
+      "GitHub CI result",
+      "Production release"
+    ]
+  },
+  "sha256": {
+    "web/src/lib/tradeSuites.ts": "eb26191bf1b652c930604d8fcc7e43aca4f114e1028b81c09e8a115ff29e177b",
+    "web/src/lib/calloutQuantity.js": "5339032ce591513c50f81b64481704ced9c0379e809a0b573a99b58cde63a315",
+    "web/src/lib/shapeMetrics.js": "5f96df2d8a0785b8c81d4974de9e3890435fd05eabac206c637dda5834b849e5",
+    "web/src/lib/totals.js": "ad06d2ee5f35e0e65d6b97fd213cc9e8d8c6bb7683a13dd5eb88b2ba92f723a2",
+    "mcp/src/session.ts": "bed3f66e72db5390fba20b674e68dfb83e8326a3c3458c939552fa03974185e0",
+    "mcp/src/tools.ts": "5bdb8ca47ccfe4df82954ae9156c7059194e133e22de0933ef3ae1c1e67e136d",
+    "mcp/dist/server-core.js": "66f64a1dcd431fe8a13328ac762172532cb3babbd6afac07e74923eb67aedaee",
+    "web/dist/assets/index-DnTr0fqi.js": "eae9b6e75dcc8f0e92dc7f4a4b2f18a5d9c79d727ce6dff9126436cbab168486",
+    "docs/evidence/planting-suite/reviewable/takeoff.json": "4886f982fb268d5c3a14715ae1b48492c73af2376de9acc852956b894a04e0f2",
+    "docs/evidence/planting-suite/reviewable/report.json": "e4f9954c502820bed8e508bf25819322448c4c4607915079e00f752e9f72aeef"
+  }
+}

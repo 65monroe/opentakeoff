@@ -3,6 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { filterWork, workActor, workMethod, workQuantity, workReviewState } from "../lib/workReview.js";
 import { Z } from "../lib/ui.js";
 import { ScanStar } from "../brand/marks.jsx";
+import { isCalloutQuantity } from "../lib/calloutQuantity.js";
 import "./workspacePanel.css";
 
 export default function WorkspacePanel({ open, shapes, conditions, selectedId, sheetLabel, fmtArea, fmtLength,
@@ -57,7 +58,7 @@ export default function WorkspacePanel({ open, shapes, conditions, selectedId, s
           {!rows.length && <div className="workspace-empty"><h3>{uiText(shapes.length ? "No matching work" : "Your measurements appear here")}</h3><p>{uiText(shapes.length ? "Change the filter or search to see more measurements." : "Measure on the plan or import an agent’s takeoff. Inspect either actor’s work here, then open its boundary on the drawing.")}</p></div>}
           {rows.slice(0, limit).map((shape) => <button type="button" className="workspace-row" key={shape.id} aria-pressed={selectedId === shape.id} onClick={() => onLocate(shape)}>
             <span className="workspace-row-top"><strong>{conditions[shape.condition_id] ? finishLabel(conditions[shape.condition_id].finish_tag) : uiText("Unassigned")}{shape.label ? ` · ${shape.label}` : ""}</strong><span className="workspace-quantity">{uiText(quantity(shape))}</span></span>
-            <span className="workspace-sheet">{sheetLabel(shape.sheet_id)}</span>
+            <span className="workspace-sheet">{sheetLabel(shape.sheet_id)}{isCalloutQuantity(shape) && <> · {uiText("Printed callout")}</>}</span>
             <span className="workspace-row-bottom"><span>{workActor(shape) === "Agent" && <ScanStar size={10} style={{ marginRight: 5, color: "var(--cobalt)" }} />}{uiText(shape.author || workActor(shape))}</span><span className={workReviewState(shape) === "Needs review" ? "workspace-pending" : ""}>{uiText(workReviewState(shape))}</span></span>
           </button>)}
           {rows.length > limit && <button type="button" className="workspace-more" onClick={() => setLimit((n) => n + 50)}>{uiText("Show more · ")}{uiText(rows.length - limit)} {uiText("remaining")}</button>}
@@ -69,7 +70,12 @@ export default function WorkspacePanel({ open, shapes, conditions, selectedId, s
             <div><dt>{uiText("Method")}</dt><dd>{uiText(workMethod(selected))}</dd></div>
             <div><dt>{uiText("Review")}</dt><dd>{uiText(workReviewState(selected))}</dd></div>
             <div><dt>{uiText("Scale")}</dt><dd>{uiText(scales[selected.sheet_id] ? scaleUnconfirmed[selected.sheet_id] === false ? "Set · needs confirmation" : "Set" : "Not set")}</dd></div>
-            <div><dt>{uiText("Geometry")}</dt><dd>{uiText(selected.verts_norm?.length || 0)} {uiText("vertices · ")}{uiText(selected.verts_norm_holes?.length || 0)} {uiText("holes")}</dd></div>
+            {isCalloutQuantity(selected) ? <>
+              <div><dt>{uiText("Quantity basis")}</dt><dd>{uiText("Printed quantity; individual locations not measured")}</dd></div>
+              <div><dt>{uiText("Drawing text")}</dt><dd>{selected.quantity_source.text}</dd></div>
+              <div><dt>{uiText("Source reference")}</dt><dd>{selected.quantity_source.reference}</dd></div>
+              <div><dt>{uiText("Source ID")}</dt><dd>{selected.quantity_source.id}</dd></div>
+            </> : <div><dt>{uiText("Geometry")}</dt><dd>{uiText(selected.verts_norm?.length || 0)} {uiText("vertices · ")}{uiText(selected.verts_norm_holes?.length || 0)} {uiText("holes")}</dd></div>}
             {evidence.matched_text && <div><dt>{uiText("Drawing text")}</dt><dd>{uiText(String(evidence.matched_text))}</dd></div>}
             {evidence.schedule_row_tag && <div><dt>{uiText("Schedule tag")}</dt><dd>{uiText(String(evidence.schedule_row_tag))}</dd></div>}
           </dl>

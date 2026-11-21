@@ -14,6 +14,7 @@ import { expandForScaleNotes, mixedScaleWarning } from "./scalewarn.ts";
 import { classifyLayerName, layerRoleCodes, segRoles, type LayerInfo } from "../../web/src/lib/layers.ts";
 import { buildSheetGraph, resolveTag, classifySheetRole, rowKeyAnswersFor, type SheetGraph, type SheetSpans, type Bbox } from "../../web/src/lib/sheetgraph.ts";
 import { UserError, round1, round2 } from "./format.ts";
+import { calloutQuantityError } from "../../web/src/lib/calloutQuantity.js";
 // Condition twins — the inheritance rule, shared with the canvas so a headless session and
 // the app can never disagree about what a twin holds (web/test/variants.test.ts).
 import {
@@ -243,7 +244,7 @@ export interface EstimateRecords { estimate_settings: Record<string, unknown> | 
  * after a human affirmed the shape at an explicit review gate — this server
  * has no such gate, so everything it commits is reviewed: false. */
 export interface ShapeOrigin {
-  method: "manual" | "one_click_v1" | "agent_v1" | "symbol_sweep" | "rule_v1" | "cutout_v1";
+  method: "manual" | "one_click_v1" | "agent_v1" | "symbol_sweep" | "rule_v1" | "cutout_v1" | "printed_callout";
   /** Omitted = human. "agent" = the shape was produced by MCP/automation.
    * "rule" = minted by a correction rule's deterministic re-run (#88/#207) —
    * the canvas's own third actor, kept distinct so capture and the marked-set
@@ -378,6 +379,8 @@ export interface Shape {
   /** count shapes carry {count} alone (canvas commitCount) — recompute skips
    * them, so they never grow area fields; every other role carries both. */
   computed: { area_sf?: number; perimeter_lf?: number; count?: number; plan_lf?: number; vertical_lf?: number };
+  /** The single vertex locates printed source text, not an installed item. */
+  quantity_source?: { kind: "printed_callout"; unit: "EA"; id: string; text: string; reference: string };
   /** surface_area only: the height this shape was quantified at (canvas
    * commitSurface snapshots the condition's H onto the shape). */
   height_ft?: number;
@@ -3906,6 +3909,27 @@ export class Session {
     return { committed: ids.length, shape_ids: ids, condition: c.finish_tag, ea_total };
   }
 
+  recordCalloutQuantity(a: { sheet: string; condition: string; quantity: number; at: Point; source_id: string; text: string; reference: string }) {
+    const sheet = this.sheet(a.sheet);
+    if (!a.condition.trim()) throw new UserError("A printed callout needs an exact condition code.");
+    const source: NonNullable<Shape["quantity_source"]> = { kind: "printed_callout", unit: "EA", id: a.source_id.trim(), text: a.text.trim(), reference: a.reference.trim() };
+    const vertices: Point[] = [[a.at[0] / sheet.widthPx, a.at[1] / sheet.heightPx]];
+    const invalid = calloutQuantityError({ measure_role: "count", verts_norm: vertices, computed: { count: a.quantity }, quantity_source: source });
+    if (invalid) throw new UserError(invalid);
+    const condition = this.conditions.find((c) => c.finish_tag === a.condition);
+    const existing = this.shapes.find((s) => s.sheet_id === sheet.key && s.condition_id === condition?.id && s.quantity_source?.id === source.id);
+    if (existing) {
+      if (!(Object.keys(source) as (keyof typeof source)[]).every((key) => existing.quantity_source?.[key] === source[key]) || existing.computed.count !== a.quantity || JSON.stringify(existing.verts_norm) !== JSON.stringify(vertices)) {
+        throw new UserError(`Source ${source.id} already has quantity record ${existing.id}. Conflicting retries cannot replace existing work or its review decision.`);
+      }
+      return { shape_id: existing.id, condition: a.condition, quantity: a.quantity, created: false, note: "Existing source quantity returned unchanged; no duplicate or review change." };
+    }
+    const shape = this.commit(sheet, a.condition, "count", [a.at], { count: a.quantity }, { method: "printed_callout", actor: "agent" });
+    shape.quantity_source = source;
+    this.flushCommits("record_callout_quantity");
+    return { shape_id: shape.id, condition: a.condition, quantity: a.quantity, created: true, note: "Printed EA quantity recorded pending human review. Its anchor locates the source text, not individual items. Do not also count the same items by symbol." };
+  }
+
   /** The seed→target size ratio for a cross-sheet sweep (#186): seed-sheet
    * image px per target-sheet image px, which is exactly `upp_seed /
    * upp_target` — both sheets' own committed scales, no search and no guess.
@@ -4673,6 +4697,7 @@ export class Session {
         ...(x.computed.area_sf !== undefined ? { area_sf: x.computed.area_sf } : {}),
         ...(x.computed.perimeter_lf !== undefined ? { perimeter_lf: x.computed.perimeter_lf } : {}),
         ...(x.computed.count !== undefined ? { count: x.computed.count } : {}),
+        ...(x.quantity_source ? { quantity_source: x.quantity_source } : {}),
         ...(x.height_ft !== undefined ? { height_ft: x.height_ft } : {}),
         ...(x.label ? { label: x.label } : {}),
         nverts: x.verts_norm.length,
@@ -4823,6 +4848,12 @@ export class Session {
     // Geometry: either the supplied verts or the shape's own, back in image px.
     const vertsPx: Point[] = patch.verts
       ?? cur.verts_norm.map(([x, y]) => [x * s.widthPx, y * s.heightPx] as Point);
+    if (cur.quantity_source) {
+      const invalid = calloutQuantityError({ ...cur, measure_role: role, verts_norm: vertsPx.map(([x, y]) => [x / s.widthPx, y / s.heightPx]) });
+      if (invalid) throw new UserError(invalid);
+      const target = patch.condition !== undefined ? this.conditions.find((c) => c.finish_tag === patch.condition) : undefined;
+      if (patch.condition !== undefined && target?.id !== cur.condition_id) throw new UserError("A printed callout's condition belongs to its source text. Record a corrected source quantity instead of reassigning it.");
+    }
     const minPts = role === "count" ? 1 : role === "linear" || role === "surface_area" ? 2 : 3;
     if (vertsPx.length < minPts) {
       throw new UserError(`A ${role === "count" ? "count marker needs at least 1 point" : role === "linear" || role === "surface_area" ? `${role} shape needs at least 2 points` : "closed shape needs at least 3 vertices"} — got ${vertsPx.length}.`);

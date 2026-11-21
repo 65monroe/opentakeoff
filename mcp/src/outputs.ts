@@ -171,6 +171,11 @@ export const placeCountOutput = {
   ea_total: z.number().describe("The condition's total EA after this call"),
 };
 
+const quantitySource = z.object({ kind: z.literal("printed_callout"), unit: z.literal("EA"), id: z.string(), text: z.string(), reference: z.string() });
+export const recordCalloutQuantityOutput = {
+  shape_id: z.string(), condition: z.string(), quantity: z.number().int().positive(), created: z.boolean(), note: z.string(),
+};
+
 /** symbol_sweep — one row per found placement; withheld rows carry the reason. */
 const sweepPlacement = {
   at: z.tuple([z.number(), z.number()]).describe("The placed symbol's centroid (image px) — the point a commit places its count marker at"),
@@ -602,6 +607,7 @@ export const listShapesOutput = {
     area_sf: z.number().optional(),
     perimeter_lf: z.number().optional(),
     count: z.number().optional(),
+    quantity_source: quantitySource.optional().describe("Printed EA basis; the vertex locates source text rather than an individual item"),
     height_ft: z.number().optional().describe("surface_area shapes — the height they were quantified at"),
     label: z.string().optional().describe("The room (or phase/area) this shape belongs to — detect_rooms stamps the room number it traced from; edit_shape sets or clears it. Absent when unlabeled"),
     nverts: z.number().int(),

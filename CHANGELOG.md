@@ -2,7 +2,7 @@
 
 ## Unreleased
 
-- **Landscape planting method (Division 32, #659).** `open_suite {suite: "planting"}` returns a source-backed workflow for exact-code plant counts and schedule comparison using core tools. Printed bed quantities remain separately disclosed source notes, excluded from measured EA; this does not add a callout quantity model. The canvas Trade menus include **Landscape planting**, with explicit assignment so existing plant and finish codes remain unchanged.
+- **Landscape planting and printed quantities (Division 32, #659).** `open_suite {suite: "planting"}` guides exact-code counts and source checks. `record_callout_quantity` adds a pending EA record at a printed callout, with source text/reference and idempotent source IDs. Work and review locates its source; reports distinguish located EA from printed EA. Existing annotations are not converted automatically. The Trade menus include **Landscape planting**, assigned explicitly without renaming codes.
 
 ## 2026-11-20 — Public test sheets
 

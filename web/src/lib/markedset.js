@@ -1,4 +1,5 @@
 import { wrapPdfText } from "./pdfText.js";
+import { isCalloutQuantity, countBasisText } from "./calloutQuantity.js";
 import { stampWatermark } from "./pdfWatermark.js";
 import { getLanguage, localizeText, rfiStatusLabel } from "./i18n/core.js";
 import { annotationScene, pathString } from './annotationTools.js';
@@ -443,7 +444,7 @@ export async function buildMarkedSetPdf({ projectName, dark, sheets, shapes, mar
       const allowance = orderQty ? `${russian ? "Запас" : "waste"} ${r.waste_pct}% -> ${orderQty}` : "";
       const columns = [
         { text: r.finish_tag + (r.multiplier > 1 ? ' ×' + r.multiplier : ''), x: 72, width: 110, size: 10.5, font: bold, color: ink },
-        { text: qty || '-', x: 190, width: 222, size: 10, font, color: ink },
+        { text: [qty || '-', countBasisText(r)].filter(Boolean).join(' · '), x: 190, width: 222, size: 10, font, color: ink },
         { text: [c.hatch && c.hatch !== 'solid' ? t(c.hatch) : '', allowance].filter(Boolean).join(' · '), x: 420, width: 140, size: 8.5, font, color: muted },
       ].map(col => ({ ...col, lines: wrapPdfText(col.text, col.font, col.size, col.width, encode) }));
       const lineCount = Math.max(...columns.map(col => col.lines.length));
@@ -754,6 +755,12 @@ export async function buildMarkedSetPdf({ projectName, dark, sheets, shapes, mar
         const mid = pts[Math.floor((pts.length - 1) / 2)];
         chip(shapeChip(s, cond, M, russian), mid[0], mid[1] - 14, col);
       } else if (s.measure_role === "count") {
+        if (isCalloutQuantity(s)) {
+          const [cx, cy] = pts[0], r = 10;
+          const diamond = [[cx, cy-r], [cx+r, cy], [cx, cy+r], [cx-r, cy], [cx, cy-r]];
+          for (let i = 1; i < diamond.length; i++) line(...diamond[i-1], ...diamond[i], col, 1.2, 0.95);
+          continue;
+        }
         const [px, py] = toPage(pts[0][0], pts[0][1]);
         pg.drawEllipse({ x: px, y: py, xScale: 4.5, yScale: 4.5, borderColor: col, borderWidth: 1.2, color: col, opacity: 0.35 });
       }

@@ -37,6 +37,7 @@ export interface DxfShape {
   curved?: boolean;
   cuts_shape_id?: string;
   label?: string;
+  quantity_source?: { kind: string };
 }
 
 export interface DxfCondition {
@@ -176,6 +177,7 @@ export function buildSheetDxf(sheet: DxfSheetInput, opts: DxfOptions = {}): DxfB
     const before = ents.length;
 
     if (role === "count") {
+      if (s.quantity_source?.kind === "printed_callout") { skipped.push({ id: s.id, reason: "printed quantity source anchor; not installed-item geometry — use the editable takeoff or marked PDF" }); continue; }
       const c = verts[0];
       if (!c) { skipped.push({ id: s.id, reason: "count mark without a position" }); continue; }
       const at = toXY(c);

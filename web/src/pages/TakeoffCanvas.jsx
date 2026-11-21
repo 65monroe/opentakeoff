@@ -31,6 +31,7 @@ import { isPdfSource, rangeParams } from "../lib/pdfSource";
 import { store, isStaleTabError, STALE_TAB_MESSAGE, friendlyStoreError, projectIdFromUrl, emptyAnnotations, metaGet, metaPut, metaDelete, sha256Hex } from "../lib/store.js";
 import { forgetThumbs, releaseThumbs } from "../lib/thumbs.js";
 import { Z } from "../lib/ui.js";
+import { isCalloutQuantity } from "../lib/calloutQuantity.js";
 import { getFocusMode, toggleFocusMode, onFocusModeChange } from "../lib/focusMode.js";
 import { seedStampLibrary, instantiateStamp, markupToStampElement } from "../lib/stamps.js";
 import { extractSvgPrimitives, svgToStamp } from "../lib/svgImport.js";
@@ -7252,6 +7253,7 @@ export default function TakeoffCanvas() {
   function copySelected() {
     const sel = shapes.find((s) => s.id === selectedId);
     if (!sel) { setCommitMsg(uiText("Select a takeoff to copy.")); return; }
+    if (isCalloutQuantity(sel)) { clipRef.current = []; setCommitMsg(uiText("A printed quantity needs its own source. Record the new callout instead of copying this anchor.")); return; }
     clipRef.current = [clipEntry(sel)];
     setCommitMsg(uiText("Copied — ⌘V pastes onto the sheet under your cursor."));
   }
@@ -7280,6 +7282,7 @@ export default function TakeoffCanvas() {
   function duplicateSelected() {
     const sel = shapes.find((s) => s.id === selectedId);
     if (!sel) { setCommitMsg(uiText("Select a takeoff to duplicate.")); return; }
+    if (isCalloutQuantity(sel)) { clipRef.current = []; setCommitMsg(uiText("A printed quantity needs its own source. Record the new callout instead of copying this anchor.")); return; }
     clipRef.current = [clipEntry(sel)];
     pasteClipboard();
   }
@@ -8490,6 +8493,8 @@ export default function TakeoffCanvas() {
   }
 
   function locateWork(shape) {
+    setHiddenConds((h) => revealed(h, shape.condition_id));
+    if (tradeHidden.has(shape.condition_id)) setViewTrade(ALL_TRADES);
     setWorkLocateId(shape.id);
     if (!panelKeySet.has(shape.sheet_id)) openSheets([shape.sheet_id], false);
     setTool("select");

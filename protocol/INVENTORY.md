@@ -24,6 +24,24 @@ fields modeled by this draft, including nested definitions.
 
 ## Measurement, calibration, and authorship
 
+Printed quantities extend existing count records with `quantity_source`
+(`kind: "printed_callout"`, `unit: "EA"`, stable source `id`, exact printed
+`text`, and `reference`). `computed.count` is the positive whole quantity; the
+single `verts_norm` point locates source text, not an installed item. The writer
+identifier remains unchanged. MCP creation stays pending; browser review uses
+the existing review command and undo. Import validates the extension, preserves
+IDs and respects existing decisions. No note parsing or automatic migration.
+
+Reports add `count_basis` (located and printed EA) and a `printed_callouts`
+ledger only when a row contains such records. Condition quantities apply its
+multiplier; ledger quantities and by-sheet quantities are base values. Marked
+PDFs label the printed basis. DXF explicitly skips source anchors. The optional
+geometry contribution excludes them and reports `excluded_printed_callouts`,
+without transmitting their text or references. Older clients can retain the
+opaque extension while showing it as a generic count; full visual compatibility
+is not claimed. Tests: `web/test/calloutQuantity.test.ts`,
+`mcp/test/calloutQuantity.test.ts`, `protocol/test/current-records.test.mjs`.
+
 | Fields | Existing semantics and authority | Schema and checks |
 |---|---|---|
 | `id`, `sheet_id`, `condition_id`, `measure_role` | Browser [shape commands](../web/src/lib/shapeCommands.js) and MCP `commit`. Roles: `floor_area`, `deduct`, `linear`, `surface_area`, `count`. IDs are references, not authenticated identity. | [Measurement](v1/measurement.schema.json). [Current-record tests](test/current-records.test.mjs) exercise all five MCP manual roles. [Preflight](PREFLIGHT.md) checks selected active references for the bounded adapter profile. |

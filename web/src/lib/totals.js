@@ -1,4 +1,5 @@
 import { coverageText } from './coveragePresentation.js';
+import { countBasis } from './calloutQuantity.js';
 // Role-aware takeoff totaling — the same rules the original commit endpoint used
 // (see the reference test in the project history), reimplemented client-side:
 //
@@ -139,6 +140,7 @@ export function conditionTotals(conditions, shapes, ctx = null) {
       multiplier: mult, waste_pct: waste, shape_count: cs.length,
       floor_sf: round2(floor), wall_sf: round2(wall), border_sf: round2(border),
       lf: round2(lf), ea,
+      ...countBasis(cs, mult),
       total_sf: round2(total),
       // waste-adjusted (order quantities)
       floor_sf_net: round2(floor * w), wall_sf_net: round2(wall * w),
@@ -181,9 +183,10 @@ export function sheetTotals(conditions, shapes) {
     let conds = bySheet.get(s.sheet_id);
     if (!conds) { conds = new Map(); bySheet.set(s.sheet_id, conds); }
     let a = conds.get(s.condition_id);
-    if (!a) { a = { n: 0, floor: 0, wall: 0, border: 0, lf: 0, ea: 0 }; conds.set(s.condition_id, a); }
+    if (!a) { a = { n: 0, floor: 0, wall: 0, border: 0, lf: 0, ea: 0, counts: [] }; conds.set(s.condition_id, a); }
     a.n += 1;
     accumulateRole(a, s);
+    if (s.measure_role === "count") a.counts.push(s);
   }
   // canonical sheet order — shared comparator, same as exportMarkedSet
   const order = [...bySheet.keys()].sort((ka, kb) => compareSheetKeys(String(ka), String(kb)));
@@ -195,6 +198,7 @@ export function sheetTotals(conditions, shapes) {
         id: c.id, finish_tag: c.finish_tag, color: c.color,
         multiplier: c.multiplier || 1, shape_count: a.n,
         floor_sf: a.floor, wall_sf: a.wall, border_sf: a.border, lf: a.lf, ea: a.ea,
+        ...countBasis(a.counts),
       };
     });
     return { sheet_id, rows };
@@ -463,6 +467,12 @@ export function totalsToCsv(rows, projectName = "", bySheet = null, sheetLabel =
     return c.conv && v !== "" ? c.conv(v) : v;
   };
   lines.push(p.row(columns.map(foot)));
+  if (rows.some((r) => r.count_basis)) {
+    lines.push("", p.header(["Condition", "Located EA", "Printed callout EA"]));
+    for (const r of rows.filter((r) => r.count_basis)) lines.push(p.row([p.finish(r.finish_tag), r.count_basis.located_ea, r.count_basis.printed_ea]));
+    lines.push("", p.header(["Condition", "Measurement ID", "Sheet ID", "Source ID", "Printed text", "Source reference", "Printed EA (base)"]));
+    for (const r of rows) for (const c of r.printed_callouts || []) lines.push(p.row([p.finish(r.finish_tag), c.measurement_id, c.sheet_id, c.source_id, c.text, c.reference, c.quantity]));
+  }
 
   // supporting materials — per condition, then a combined buy list. Coverage
   // rates deliberately stay as entered (SF/LF-based) in metric mode — the

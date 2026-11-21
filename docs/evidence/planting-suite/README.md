@@ -1,129 +1,148 @@
-# Landscape planting suite: public-plan evidence
+# Landscape planting: reviewable source quantities
 
-This branch adds **Landscape planting** to `open_suite` and the existing Trade
-menus. It gives the agent a source-backed planting method using core tools.
-On a public landscape sheet, the example commits three located trees and
-separately records two bed callouts totaling 185 plants without inventing
-185 locations or adding those quantities to measured EA.
+Printed bed quantities now have review records with **Show on plan**, using the
+existing count, review and undo machinery. Each record stores the printed text,
+source reference and one source anchor. That anchor is not a plant location.
+The report distinguishes individually located EA from printed EA.
 
-First increment of [#659](https://github.com/Kentucky-ai/opentakeoff/issues/659),
-kept on the contributor's fork. No PR is opened, and the full issue is not
-complete. See [results and checks](RESULTS.md) for the evidence and remaining
-browser verification.
+This work stays on the contributor's `codex/planting-suite` fork branch for
+[#659](https://github.com/Kentucky-ai/opentakeoff/issues/659). No new PR is opened.
+**Browser verification is unfinished:** Computer Use stopped when it could not
+verify the current browser URL. The MCP replay, export checks and automated
+checks below do not stand in for the requested browser test or recording.
 
-## Scope
+## Clean baseline
 
-The agent receives a planting method through `open_suite`, using existing core
-tools. The suite preserves exact plant codes, separates individually located
-plants from printed bed quantities, and exposes current source-callout and
-metadata limits. It adds no tool, geometry algorithm or persisted field.
+| Version | Native capability in this example | Recorded result |
+|---|---|---|
+| Upstream `8a31fb49` | Core counts and annotations; no planting suite or printed-quantity tool | 3 located tree EA; printed SET quantities in notes |
+| First suite increment `99f83814` | Planting method plus existing Trade options | Same 3 tree records; SET measured EA remains 0 |
+| This increment | `record_callout_quantity`, source receipts, source anchors and quantity-basis disclosure | Same 3 tree records plus 2 printed records: 127 + 58 = 185 SET EA |
 
-The source is the public CCFP Nature Center Addendum 1, PDF page 58, sheet L1.0,
-revision 02.11.2026. Planting is Bid Alternate 2. The selected example checks
-GDI, TAM and SET only; it is not a complete landscape takeoff.
+Upstream already reviews count measurements and supports imported count values
+greater than one. This example does not establish that upstream cannot store
+185 EA. The added capability is an explicit MCP operation and source semantics:
+the printed text, source ID and anchor remain distinguishable from an individually
+located item in the receipt, report and exports. Ordinary count review is reused.
 
-The [source manifest](source.json) links the public PDF and pins its SHA-256,
-page, revision, scale and selected schedule rows. The source PDF is downloaded
-locally and is not committed. This example was derived afresh from the source;
-the replay coordinates are intentionally explicit so someone else can audit
-them. It does not claim automatic schedule recognition or symbol detection.
+The [original baseline](BASELINE.md), [original checks](BASELINE-RESULTS.md) and
+[baseline editable file](results/takeoff.json) remain available. The new replay
+imports that exact file. It does not rerun the tree takeoff or regenerate its IDs.
+Only two generated annotation texts change to describe the newly recorded
+quantities; their IDs, positions, leaders and other fields remain unchanged.
 
-## What an agent receives
+No CLG skill, company memory file, private plan, private catalog or company
+script is used. A custom skill can inform future requirements, but it is not a
+hidden dependency or evidence of native OpenTakeoff capability here. Prior
+conversation context is not used as quantity or geometry evidence. General PDF
+inspection and Computer Use skills are the only external skills used.
 
-`open_suite {}` includes the planting catalog entry. Both
-`open_suite {suite: "planting"}` and `{division: "32"}` return its method and
-one count preset, with `tools_enabled: []`. The default tool list stays at 70.
-The method is in [the registry](../../../web/src/lib/tradeSuites.ts).
+The source was read visually and coordinates were supplied explicitly to MCP.
+This is a reproducible, source-assisted workflow test, not a blind AI benchmark,
+OCR accuracy result, automatic symbol-detection claim or speed comparison.
 
-## Reproduce the public example
+## Public source and observed result
 
-Use Node 24, as pinned in the repository. From the repository root:
+The [source manifest](source.json) pins the public CCFP Nature Center Addendum 1,
+PDF page 58, sheet L1.0, revision 02.11.2026, **Bid Alternate 2**. It includes the
+source URL, checksum, scale, schedule rows and exact input coordinates.
+Only GDI, TAM and SET are sampled; this is not a complete landscape estimate.
+
+| Code | Individually located EA | Printed EA | Schedule EA | Review records |
+|---|---:|---:|---:|---:|
+| GDI | 1 | 0 | 1 | 1 |
+| TAM | 2 | 0 | 2 | 2 |
+| SET | 0 | 127 + 58 = 185 | 185 | 2 |
+
+All five records remain pending. The quantity is 188 EA across these codes;
+there are five review records, not 188 individually located plants. The schedule
+comparison is disclosed separately and does not change the observed quantities.
+
+- [Editable result](reviewable/takeoff.json), [report with source ledger](reviewable/report.json)
+- [Assertions and preserved IDs](reviewable/results.json), [ordered MCP trace](reviewable/transcript.json)
+- [Marked-PDF cover](reviewable/marked-cover.png), [marked plan](reviewable/marked-plan.png)
+- [West source in marked PDF](reviewable/pdf-west-detail.png), [east source](reviewable/pdf-east-detail.png)
+- [West MCP overlay](reviewable/west-callout.png), [east MCP overlay](reviewable/east-callout.png)
+- [Checks and remaining work](RESULTS.md)
+
+The plan images are actual MCP renders and Poppler renders of the marked PDF.
+They are not browser screenshots. The older bundled-plan Trade screenshots in
+[the baseline](BASELINE.md) verify only that earlier increment's Trade controls.
+No real plan PDF or `.otk` containing one is committed to Git.
+
+## Reproduce
+
+Use the repository's Node 24 environment, then run from the repository root:
 
 ```sh
 npm ci --prefix web
 npm ci --prefix mcp
 npm ci --prefix protocol
 node docs/evidence/planting-suite/prepare-source.mjs tmp/planting-suite/source
-node docs/evidence/planting-suite/run-public.mjs tmp/planting-suite/source/ccfp-L1.0.pdf tmp/planting-suite/run
-node docs/evidence/planting-suite/compare-core.mjs docs/evidence/planting-suite/results/before.takeoff.json tmp/planting-suite/run/takeoff.json tmp/planting-suite/run/comparison.json
+node docs/evidence/planting-suite/review-callouts.mjs tmp/planting-suite/source/ccfp-L1.0.pdf tmp/planting-suite/reviewable
+node docs/evidence/planting-suite/package-review.mjs tmp/planting-suite/source/ccfp-L1.0.pdf tmp/planting-suite/reviewable/takeoff.json tmp/planting-suite/public-planting-review.otk
 ```
 
-The download refuses a changed source checksum. The replay starts a real MCP
-server over stdio, reads `takeoff://wiki`, opens the suite, checks its nonmutating
-behavior, reads and renders source evidence, commits counts with `place_count`,
-writes annotations with `annotate`, exports and reloads the editable takeoff.
-It asserts the expected totals and exact IDs/geometry/review on the reload.
+The first command refuses a changed source checksum. The MCP replay reads
+`takeoff://wiki`, loads the plan, imports the preserved baseline, opens the suite,
+records and retries both callouts, updates the two generated notes, inspects
+source overlays and exports the report, editable takeoff and marked PDF. A fresh
+MCP reload must preserve all records exactly. The archive packer uses the existing
+OpenTakeoff writer and checks exact takeoff and PDF-byte equality on unpacking;
+it creates no geometry or quantities.
 
-Outputs include `takeoff.json`, `report.json`, `marked.pdf`, source and overlay
-images, `results.json`, and an ordered tool [transcript](results/transcript.json).
-The transcript is a reproducible tool trace, not a continuous screen recording.
-The PDF is the standard marked export; it is not a newly designed export.
+## Remaining browser test
 
-To inspect the saved example in OpenTakeoff:
+Run `npm run dev --prefix web -- --host 127.0.0.1 --port 5199 --strictPort`.
+Use a genuinely empty workspace at that origin. An `.otk` load replaces the
+workspace, so do not load it into a customer project. Another tab at the same
+origin can share its saved workspace.
 
-1. Use a separate empty local workspace. Another tab at the same origin can
-   share saved data; do not merge into a working customer project.
-2. Open the downloaded `ccfp-L1.0.pdf`, keeping that filename for sheet matching.
-3. Choose **Everything else → Import takeoff…** and select the generated
-   `takeoff.json`, or [the saved editable result](results/takeoff.json).
-4. Inspect the three tree measurements and the condition-linked SET notes.
-   The measured total is 3 EA; the notes disclose 185 printed SET plants.
-5. To group a condition, expand **More: trade, heights, line style, columns**,
-   choose **Landscape planting** in **Trade**, then use the status-bar
-   **Trade** filter. Review and scale confirmation remain the estimator's acts.
+1. Open `http://127.0.0.1:5199/` and drag the generated
+   `tmp/planting-suite/public-planting-review.otk` into the empty app.
+2. Open **Work and review**, search `SET`, and confirm two entries: **127 EA** and
+   **58 EA**, both **Needs review**. Inspect their **Printed callout** receipts.
+3. Select each entry and click **Show on plan**. Confirm the open diamond points
+   to the matching printed source, with sufficient surrounding context. Repeat
+   after hiding the condition or filtering to another trade; locating it should
+   reveal it. No extra record should be created.
+4. Open **Report**. Confirm GDI 1, TAM 2, SET 185 EA, with SET shown as **0 EA
+   located; 185 EA from printed callouts**. Check CSV/Excel source rows too.
+5. Reload the browser and repeat the receipt and quantity checks. Export the
+   takeoff and compare IDs, source fields and review states with the loaded file.
+   Keep the delivered sample pending; test approval and undo only in a separate
+   disposable copy, without presenting automation as human approval.
+6. Repeat the new receipt/navigation surface on the bundled sample with clearly
+   labeled synthetic source quantities. Capture each changed surface and a short
+   recording before calling the contribution ready for maintainer review.
 
-The MCP reload above is tested. The public-plan browser import in step 3 was
-interrupted by a desktop update and remains unverified in this pass; it is not
-claimed as completed browser evidence.
+These steps are a test plan, not a claim that they have been executed.
 
-## Source and export exhibits
+## Design and limits
 
-| Exhibit | What to check |
-|---|---|
-| [Tree schedule](screenshots/schedule-trees.png) | GDI 1 and TAM 2; names, size and bid-alternate heading |
-| [SET schedule](screenshots/schedule-set.png) | Sedum ternatum, 1 Gal., 12-inch o.c., 185 |
-| [West callout](screenshots/source-callout-west.png), [east callout](screenshots/source-callout-east.png) | 127 SET + 58 SET = 185; these are source quantities, not individual locations |
-| [Measured tree overlay](screenshots/measured-trees.png) | Three count points centered on three printed tree symbols; their quantity callout is not counted again |
-| [Printed scale](screenshots/scale.png) | 1 inch = 20 feet; agent-set and unconfirmed |
-| [Rendered marked PDF](screenshots/marked-pdf.png) | Counts, original callouts and exported source notes remain visible |
-| [Bundled-plan condition property](screenshots/bundled-condition-trade.png), [trade filter](screenshots/bundled-trade-filter.png) | The two existing controls expose Landscape planting. CPT-1 is temporarily reassigned only to exercise the controls; no plant measurement is claimed on the finish plan. The assignment was restored afterward. |
+This uses an explicit source extension on the existing count record so review,
+selection, persistence and undo have one owner. A separate quantity ledger would
+need parallel selection/review transport. Multipliers or repeated fake points
+would lose the source/instance distinction. The chosen approach keeps the source
+point explicit, adds no automatic labels over printed text, and leaves existing
+measurement records unchanged.
 
-The browser captures are actual app screens, not mockups. The plan crops and
-count overlay are actual `view_sheet` outputs. The marked-PDF image is a Poppler
-render of the exported PDF. No source plan PDF or private project is committed.
-
-## Independence
-
-Work starts from upstream `8a31fb49d5a2c286c665017219073b0abe61695b`.
-No custom landscape skill, private project, catalog, previous takeoff geometry,
-previous quantity result or company memory file is used. The method is based
-on issue #659, repository guidance and fresh inspection of the public drawing.
-This is a source-assisted workflow example, not a blind detector benchmark.
-General PDF inspection and computer-use skills were used; no company takeoff
-skill or company memory was loaded. Existing conversation context was not used
-as a quantity or geometry source.
-
-## Design choice
-
-The first choice is a method-only suite, following the repository's
-[suite guide](../../wiki/adding-a-suite.md). It exposes the domain procedure
-without duplicating measurement tools or changing the canvas layout.
-
-A new planting derive tool would be appropriate only when the core cannot
-represent the required quantity. The public example establishes that gap for
-printed bed quantities. A third option, several plant-category suites, would
-split one schedule workflow across several entries and still leave that gap.
-This increment uses one suite, preserves document codes, and documents the
-missing quantity representation instead of introducing an unreviewed schema.
-
-## Deliberate limits
-
-- Printed bed quantities are source notes, excluded from measured EA. They are
-  not measurement-review entries. A future source-callout model remains needed.
-- MCP has no dedicated planting schedule reader and no `spec`/`trade` setter.
-  Schedule identity is retained in proposal rationales and linked notes.
-- Opening a suite does not assign trades to conditions. The browser's existing
-  Trade property supports explicit Landscape planting assignment.
-- Sod, seed, paving, CY/ton calculations, catalog lookup and prices are outside
-  this increment. Coordinate with [sitework #617](https://github.com/Kentucky-ai/opentakeoff/issues/617).
-- Human approval, a production release and a complete bid are not claimed.
+- `record_callout_quantity` supports positive whole **EA** only. It does not read
+  the source or infer identities. The operator supplies visually verified values.
+- Stable source IDs prevent identical MCP retries from duplicating work. This is
+  not a general spatial or semantic duplicate detector; never record both a bed
+  quantity and individual counts for the same plants.
+- Normal annotations remain annotations. There is no automatic note migration.
+- Copy and duplicate refuse source anchors: a new printed quantity needs its own
+  source. Moving an anchor preserves its quantity. MCP refuses role changes and
+  reassignment of a source record to a different condition.
+- Existing clients can retain the extension but may display it as a generic count.
+  Use this branch for the new review labels and report disclosure.
+- The existing normal import merges condition tags without case sensitivity;
+  use an empty workspace when validating case-distinct document codes.
+- MCP still has no planting schedule reader or condition `spec`/`trade` setter.
+  Schedule identity remains in source notes and proposal rationales.
+- DXF omits source anchors with an explicit reason. Geometry contribution omits
+  them with an excluded-record count, rather than treating them as plant symbols.
+- Material volumes, pricing/catalog integration, production deployment and the
+  rest of #659 remain outside this increment.

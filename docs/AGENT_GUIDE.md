@@ -9,6 +9,15 @@ as the canvas. The server and browser share geometry, calibration and quantity m
 Their current room-detection paths differ; audit the returned boundary on each surface
 rather than assuming the same seed always produces the same room.
 
+For a printed EA callout without individual item locations, read the source
+visually before `record_callout_quantity`. Supply the exact code, quantity,
+printed text, source reference, stable source ID and an anchor on the callout.
+It creates one pending review record, not individual installed-item points.
+Repeated identical sources return the same ID; conflicting retries refuse.
+Never add a callout for items already counted by symbol. Check the report's
+located/printed EA split and reopen the editable export. Ordinary annotations
+remain notes; the tool does not parse them or authenticate human review.
+
 > **One-Click is temporarily gated.** On a default build `one_click` and `detect_rooms` do not
 > exist — they are not registered, `tools/list` never names them, and calling them is an
 > unknown-tool error. The initialize instructions say so and name the move: a room's polygon is
@@ -180,7 +189,7 @@ rooms share 34 LF of wall would be a wrong number with a machine's confidence be
 
 ## 6. Staged tool exposure
 
-By default every client gets all <!--tool-count-->70<!--/tool-count--> tool schemas on `tools/list`—the flat contract every
+By default every client gets all <!--tool-count-->71<!--/tool-count--> tool schemas on `tools/list`—the flat contract every
 published client already expects.
 
 Fifty-two descriptions is real token weight for a session that may never touch half of them, so the
@@ -307,7 +316,7 @@ Follow [Geometry from source to review](GEOMETRY_WORKFLOW.md) when tracing a rea
 ## Geometry review cleanup
 
 Use the [generated tool index](MCP_TOOL_INDEX.md) for the
-<!--tool-count-->70<!--/tool-count--> default tools, their stages and required arguments.
+<!--tool-count-->71<!--/tool-count--> default tools, their stages and required arguments.
 The [geometry workflow](GEOMETRY_WORKFLOW.md) is the source-to-handoff route.
 
 - Shorten a note with `list_annotations` then `edit_annotation`; empty text clears

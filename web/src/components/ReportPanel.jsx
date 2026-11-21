@@ -1,3 +1,4 @@
+import { countBasisText } from "../lib/calloutQuantity.js";
 import { createExportPresentation } from "../lib/exportPresentation.js";
 import { localizeText as uiText, getLanguage } from "../lib/i18n/core.js";
 // ReportPanel — the takeoff deliverable. A STACK-style breakdown by condition
@@ -404,6 +405,7 @@ export default function ReportPanel({ projectName, onProjectName, conditions, sh
               <strong style={{ fontFamily: "var(--f-mono)", fontWeight: 600, minWidth: 0, overflowWrap: "anywhere" }}>{display.finish(r.finish_tag)}</strong>
               {r.multiplier > 1 && <span style={{ color: "var(--ink-muted)", fontSize: 11 }}>×{uiText(r.multiplier)}</span>}
             </span>
+            {r.count_basis && <div className="workspace-receipt-note">{uiText(countBasisText(r))}</div>}
             {/* proposals (#365): the pending diff beside the current values —
                 the numbers in this row are what the takeoff stands on today */}
             {editProposalByCond.get(r.id) && (

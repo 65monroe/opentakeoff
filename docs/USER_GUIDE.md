@@ -277,10 +277,16 @@ plant conditions, then choose that trade in the status bar's **Trade** picker.
 Keep the exact plant code and capitalization from the drawing. A plant code
 has no automatic trade prefix; existing conditions keep their current grouping.
 
-An MCP planting takeoff can include individual plant counts and linked source
-notes. A note that quotes a printed bed quantity is not a measured count and
-does not appear as a measurement-review entry. Keep those quantities separate
-when checking the report. See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).
+An MCP planting takeoff can include individual counts and **Printed callout**
+quantity records. In **Work and review**, search the plant code and select its
+record. The receipt shows the printed quantity, drawing text and source reference.
+Click **Show on plan** to locate the source callout, marked with an open diamond.
+The anchor is not a plant location. **Mark reviewed** records your decision; an
+agent cannot create it. Finding a hidden condition reveals it for inspection.
+
+The report separates located EA from printed EA. CSV, Excel and JSON retain the
+source ledger, and the marked PDF labels printed quantities. Existing notes are
+not automatically converted to quantity records. See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).
 
 A **condition** is one finish—`LVT-1`, `CPT-2`, `RB-1`—and it's what every measurement commits into. A fresh workspace seeds a flooring starter set (CPT-1, BRD-1, LVT-1, WD-1, VCT-1, SV-1, CT-1, RB-1, TR-1), several with real supporting materials already attached—CT-1 arrives with thinset and a grout line whose coverage derives from tile geometry.
 
@@ -1117,7 +1123,7 @@ What's sent, and only while an agent run you started is going: your message, up 
 
 The same engine speaks [MCP](https://modelcontextprotocol.io), one command away:
 `npx -y opentakeoff-mcp` (or the one-click `opentakeoff-mcp.mcpb` bundle for Claude Desktop). **Help → Connect your AI** in the app (also on the opening screen and in the **⋯** menu) has the setup for Claude Desktop, Claude Code, Codex and Cursor with copy buttons, and a first question to ask about the sample plan; [CONNECT.md](CONNECT.md) is the same walk-through. An
-MCP client gets **<!--tool-count-->70<!--/tool-count--> tools** plus browsable sheet resources, over the very same measuring engine,
+MCP client gets **<!--tool-count-->71<!--/tool-count--> tools** plus browsable sheet resources, over the very same measuring engine,
 with the same scale gate and the same provenance receipts:
 
 | Group | Tools |

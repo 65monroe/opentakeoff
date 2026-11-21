@@ -24,7 +24,7 @@ that. A client that reads its tool list only once can pre-open suites with
 
 | Suite | Divisions | Tool | What it figures |
 |---|---|---|---|
-| planting | 32 | none | Individually located plant EA by exact schedule code; printed bed quantities retained as source notes, excluded from measured totals. |
+| planting | 32 | none | Individually located plant EA and reviewable printed bed quantities through core tools, with their quantity bases kept separate. |
 | finishes | 09 | none | Rooms with `measure_polygon`, base with `derive_base`, transitions with `derive_transitions`, wall finishes with `measure_surface`. |
 | acoustical_ceilings | 09 | `ceiling_takeoff` | Lay-in tiles from the module, main runners, long and short cross tees, hanger wires, wall angle LF from the areas' perimeters. |
 | roofing | 07 | `roof_takeoff` | Sloped SF and squares, true rake, hip and valley LF, drip edge, starter, ridge cap, underlayment, ice and water. |
@@ -62,11 +62,19 @@ and condition-linked source note. MCP does not currently edit condition `spec`
 or `trade`; the browser provides those editors.
 
 Keep printed bed quantities separate. `count_marks` counts tag occurrences,
-not the printed quantity beside a tag, and normalizes codes. Record each bed
-callout with `annotate`, its sheet/location, quantity and an explicit exclusion
-from measured EA. Notes survive export but are not measurement-review entries.
-Do not invent plant locations or use a multiplier to simulate callout counts.
-The planting suite therefore does not complete a callout-only planting takeoff.
+not the printed quantity beside a tag, and normalizes codes. After visually
+reading each source, use `record_callout_quantity` with `unit: "EA"`, the exact
+code and quantity, printed text, source reference and a stable source ID. Its
+point locates the printed callout; it does not claim an individual plant location.
+The record appears in **Work and review** with **Show on plan** and stays pending
+until the estimator reviews it. Repeating the same source returns its existing
+ID; conflicting retries refuse. Ordinary annotations remain notes and are not
+converted automatically. Never add a callout for plants already counted by symbol.
+
+The report splits located EA from printed EA; CSV, Excel and JSON also carry
+the source ledger. The marked PDF labels printed quantities. DXF skips these
+anchors with a reason, and the geometry contribution omits them with a count.
+There is no automatic planting schedule or callout reader in this increment.
 
 Compare schedule quantities only against the same sampled extent and bid
 alternate. Material coverage and linear work use separate conditions and

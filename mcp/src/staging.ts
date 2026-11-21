@@ -28,7 +28,7 @@ export const TOOL_STAGES: Record<string, readonly string[]> = {
   measure: [
     "propose_takeoff",
     "one_click", "detect_rooms", "measure_polygon", "cut_out", "measure_line",
-    "measure_surface", "place_count", "count_marks", "symbol_sweep", "sweep_schedule_row",
+    "measure_surface", "place_count", "record_callout_quantity", "count_marks", "symbol_sweep", "sweep_schedule_row",
     "derive_base", "derive_transitions",
   ],
   revise: [

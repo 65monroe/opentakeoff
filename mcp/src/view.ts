@@ -124,6 +124,12 @@ export function drawShapes(ctx: Ctx2D, toCanvas: ToCanvas, shapes: Shape[], shee
       const [x, y] = pts[0];
       ctx.setLineDash([]);
       ctx.beginPath();
+      if (s.quantity_source?.kind === "printed_callout") {
+        ctx.setLineDash(pending ? [w * 4, w * 3] : []);
+        ctx.moveTo(x, y - m); ctx.lineTo(x + m, y); ctx.lineTo(x, y + m); ctx.lineTo(x - m, y); ctx.closePath();
+        ctx.stroke();
+        continue;
+      }
       ctx.moveTo(x - m, y - m); ctx.lineTo(x + m, y + m);
       ctx.moveTo(x - m, y + m); ctx.lineTo(x + m, y - m);
       ctx.stroke();

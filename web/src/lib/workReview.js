@@ -1,5 +1,6 @@
 // Read-only presentation of stored measurement receipts. These labels are not
 // verification or authentication; missing attribution stays unknown.
+import { isCalloutQuantity } from './calloutQuantity.js';
 export function workActor(shape) {
   const origin = shape.origin || {};
   if (origin.actor === "agent" || origin.method === "agent_v1") return "Agent";
@@ -15,6 +16,7 @@ export function workReviewState(shape) {
 }
 
 export function workMethod(shape) {
+  if (isCalloutQuantity(shape)) return "Printed callout";
   const names = { manual: "Explicit geometry", agent_v1: "Agent proposal", rule_v1: "Correction rule", one_click_v1: "Room detection", net_v1: "Room detection", derived: "Derived measurement" };
   return names[shape.origin?.method] || shape.origin?.method || "Not recorded";
 }
@@ -31,7 +33,7 @@ export function filterWork(shapes, { filter = "all", query = "", conditionLabel 
   return shapes.filter((shape) => {
     if (filter === "pending" && workReviewState(shape) !== "Needs review") return false;
     if (filter === "agent" && workActor(shape) !== "Agent") return false;
-    return !term || [shape.id, shape.label, shape.author, conditionLabel(shape.condition_id), sheetLabel(shape.sheet_id)]
+    return !term || [shape.id, shape.label, shape.author, shape.quantity_source?.text, shape.quantity_source?.reference, conditionLabel(shape.condition_id), sheetLabel(shape.sheet_id)]
       .some((value) => String(value || "").toLocaleLowerCase().includes(term));
   });
 }

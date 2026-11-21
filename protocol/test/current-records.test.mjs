@@ -47,6 +47,21 @@ test("empty browser persistence and a real browser add command conform without c
   checkBoth(browserDocument());
 });
 
+test("printed quantity records preserve their source, IDs, quantities and review on browser import", async () => {
+  const session = new Session();
+  await session.loadPlan(plan);
+  session.recordCalloutQuantity({ sheet, condition: "pa", quantity: 12, at: [200,150], source_id: "C1", text: "(12) pa", reference: "Synthetic bundled source" });
+  const payload = session.exportPayload();
+  checkBoth(payload);
+  const imported = mergeTakeoffImport(emptyAnnotations(), payload).payload;
+  assert.deepEqual(imported.shapes, payload.shapes);
+  assert.equal(imported.shapes[0].origin.reviewed, false);
+  assert.deepEqual(conditionTotals(imported.conditions, imported.shapes)[0].count_basis, { located_ea: 0, printed_ea: 12 });
+  const bad = structuredClone(payload);
+  bad.shapes[0].computed.count = 0;
+  assert.equal(ajv.getSchema("https://opentakeoff.kentucky-ai.com/protocol/legacy/takeoff-canvas.v1.schema.json")(bad), false);
+});
+
 test("MCP commits every manual measurement role with agent provenance and unconfirmed scale", async () => {
   const session = new Session();
   await session.loadPlan(plan);

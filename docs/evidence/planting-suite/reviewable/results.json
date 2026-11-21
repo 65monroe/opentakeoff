@@ -1,0 +1,34 @@
+{
+  "base_commit": "99f83814d18852adb389182f179377f939e40164",
+  "baseline_shape_ids": [
+    "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+    "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+    "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340"
+  ],
+  "preserved_existing_records": true,
+  "new_callout_ids": [
+    "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+    "shp-ae34713e-4ea6-47a6-913f-ee3191267952"
+  ],
+  "located_ea": {
+    "GDI": 1,
+    "TAM": 2,
+    "SET": 0
+  },
+  "printed_ea": {
+    "SET": 185
+  },
+  "source_arithmetic": "127 + 58 = 185",
+  "schedule_SET_ea": 185,
+  "shape_records": 5,
+  "pending_review": 5,
+  "idempotent_retry": true,
+  "reopen_exact": [
+    "shapes",
+    "conditions",
+    "sheets",
+    "markups",
+    "proposals"
+  ],
+  "browser_test": "unverified: Computer Use stopped at URL verification"
+}

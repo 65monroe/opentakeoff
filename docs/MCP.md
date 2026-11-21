@@ -7,6 +7,14 @@ round-trip into the app as normal saved takeoff records. Room-detection paths
 currently differ between MCP and the browser; shared quantity math does not
 guarantee that the two detectors choose identical boundaries.
 
+Use `place_count` for individually located items. Use `record_callout_quantity`
+for an explicit printed EA quantity whose individual locations are not drawn:
+provide `sheet`, `condition`, `quantity`, `unit: "EA"`, `at` in full-sheet image
+pixels, `source_id`, `text` and `reference`. The tool records the stated source;
+it does not read or infer the quantity. Its single anchor opens the callout in
+**Work and review**, with a separate printed basis in the report. Same-source
+retries preserve the ID and review state; conflicts refuse without mutation.
+
 This page walks the surface in depth, in the order an agent reaches for it. Two
 shorter reads sit either side of it: [`AGENT_GUIDE.md`](AGENT_GUIDE.md) is the
 operating manual—how a takeoff is run, what withholds, what refuses—and
@@ -395,7 +403,7 @@ New agent measurements, including `measure_polygon` and `measure_line`, explicit
 
 The [generated tool index](MCP_TOOL_INDEX.md) gives each tool's stage and required
 arguments directly from the running server's schemas. The default surface has
-<!--tool-count-->70<!--/tool-count--> tools; gated tools and the staged opener are listed separately.
+<!--tool-count-->71<!--/tool-count--> tools; gated tools and the staged opener are listed separately.
 
 Use `list_annotations` → `edit_annotation {annotation_id, text}` to shorten or clear
 a note. One `undo_last` restores the text. Geometry, dimension length, links and
