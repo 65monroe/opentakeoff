@@ -115,8 +115,10 @@ Planting quantities can retain their printed source and link to an editable bed.
 **Edit planting area** adjusts coverage while
 printed EA and its review decision stay unchanged. See the
 [planting workflow](docs/USER_GUIDE.md#landscape-planting). Area SF does not imply
-a plant count. An optional square or triangular **Grid count** compares generated
-spacing positions with printed EA without adding them to the takeoff.
+a plant count. **Area grid count** generates square or triangular spacing
+positions inside any floor-area outline, with an optional printed-quantity
+comparison. Use it for one repeating item type, such as plants or support
+positions. It adds no EA to the takeoff. See the [area grid workflow](docs/USER_GUIDE.md#area-grid-count).
 
 <img src="docs/img/brand/how-it-works.svg" alt="Open the plan, set the scale, trace rooms on the wall faces, derive base and transitions, deliver a marked-up planset PDF" width="100%">
 

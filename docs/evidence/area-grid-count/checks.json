@@ -1,0 +1,54 @@
+{
+  "date": "2026-11-20",
+  "scope": "Local checks on the fork; no new PR, upstream merge, production deployment or GitHub CI claim",
+  "branch": "codex/area-grid-count",
+  "base_commit": "1a0420c7aea7d64aca09db7c16bb72804a7d6d06",
+  "node": "24.22.3",
+  "checks": [
+    {"command": "npm run check --prefix web", "result": "pass", "tests": 3848, "passed": 3844, "skipped": 4, "failed": 0, "includes": ["typecheck", "lint", "tests", "benchmark", "build", "OCR distribution"]},
+    {"command": "npm run typecheck --prefix mcp", "result": "pass"},
+    {"command": "npm test --prefix mcp", "result": "pass", "tests": 334, "passed": 333, "skipped": 1, "failed": 0},
+    {"command": "npm run check --prefix protocol", "result": "pass", "tests": 64, "passed": 64, "skipped": 0, "failed": 0, "schemas": 11, "transport_cases": 16},
+    {"command": "npm run build --prefix mcp", "result": "pass", "note": "Repeated after the final packaged wiki updates"},
+    {"command": "npm run smoke:dist --prefix mcp", "result": "pass", "note": "Windows sandbox initially refused its temporary dependency junction; reran with permission. Flat 71 tools, staged 23 tools, 11 schemas and 11 wiki pages verified over stdio."},
+    {"command": "npm run check:tool-count --prefix mcp", "result": "pass", "default_tools": 71, "gated_tools": 73, "setup_tools": 22},
+    {"command": "npm run check:wiki --prefix mcp", "result": "pass", "pages": 11},
+    {"command": "node protocol/scripts/check-docs.mjs", "result": "pass"},
+    {"command": "npm run check:protocol-resources --prefix mcp", "result": "pass"},
+    {"command": "node scripts/check-doc-links.mjs", "result": "pass", "primary_documents": 49},
+    {"command": "node docs/evidence/area-grid-count/verify.mjs", "result": "pass"},
+    {"command": "node docs/evidence/planting-grid-count/verify-exports.mjs", "result": "pass"}
+  ],
+  "builds": {
+    "flow_and_recording": {
+      "entry": "assets/index-VQdkmIHT.js",
+      "sha256": "1c95e2c6dd85a469544f5a683d89e1d8ef1ef88fd2094d2900f5ed9efffde616"
+    },
+    "final": {
+      "entry": "assets/index-DNITrOaO.js",
+      "sha256": "6722d1a1391b0d2e10602cdd2f1b7bb64de6b365aa0d74808f0d7030f12d5870",
+      "difference": "Save grid is disabled if a linked source is unavailable",
+      "verification": "Production rebuild, targeted component lint, web typecheck and final browser smoke pass; no geometry arithmetic change after the full gate"
+    }
+  },
+  "browser": {
+    "browser": "Codex in-app browser",
+    "url": "http://127.0.0.1:5200/",
+    "public_example": "CCFP L1.0, SET 127 and SET 58",
+    "public_records": 7,
+    "public_reviewed_records": 0,
+    "public_final_export": "browser-final.json",
+    "public_baseline_comparison": "Complete JSON deeply equal to baseline.json, including IDs, geometry, quantities, calibration, sources and review state",
+    "explicit_conversion": "Only planting_grid metadata is replaced with area_grid; Undo restores the original field exactly",
+    "bundled_example": "AF101 room 134; assumed 16 by 8 ft test zone, not specified work",
+    "bundled_results": "8 positions at 4 ft spacing and 2 ft shifts; 2 positions at 8 ft; Undo, remove/Undo and archive reopen preserve original 128 SF, ID and review state",
+    "restoration": "Original public project restored after bundled test",
+    "public_hosted_app_changed": false
+  },
+  "unverified": [
+    "Ceiling tile and paver workflows, cuts and order quantities",
+    "Human preference and review-speed improvement",
+    "Grid comparison in static marked-PDF and quantity-report exports; these still omit it",
+    "C2 approximate north edge and other species not yet transcribed"
+  ]
+}

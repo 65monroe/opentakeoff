@@ -2,7 +2,9 @@
 
 ## Unreleased
 
-- **Planting grid comparison and bed-first review.** A linked single-species bed can carry a square or triangular spacing layout, with angle, shifts and edge clearance. Generated positions are compared with printed EA, never added to it. Show on plan opens the bed; the source diamond appears only when requested. Settings survive editable export and Undo; static PDF/report comparison exports remain future work.
+- Generalize the fork prototype as **Area grid count** for a repeating item type within an area, with an optional printed-quantity comparison. Preserve legacy planting-grid records unchanged on read; explicit edits use `area_grid`, with exact Undo. Planting remains the first public example.
+
+
 
 - **Editable planting areas linked to printed quantities.** `edit_shape source_callout_ids` associates a normal area with same-sheet printed source records. Work and review frames and highlights the linked bed and source, offers **Show source callout** and **Edit planting area**, and keeps SF separate from unchanged printed EA. Shared beds can cite several species. Existing source IDs, geometry and review decisions are untouched.
 

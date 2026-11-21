@@ -66,7 +66,7 @@
 // ─────────────────────────────────────────────────────────────────────────────
 import { mintUuid, nowIso, stampEdit, authorName } from "./provenance.js";
 import { assignShapeLabel } from "./shapeLabels.js";
-import { plantingGridError } from "./plantingGrid.js";
+import { areaGridError, withAreaGrid } from "./areaGrid.js";
 
 // The mint-time author field (#314): `author` = who committed the shape,
 // self-declared via provenance.authorName(). Spread AFTER the caller's fields
@@ -78,6 +78,7 @@ const mintAuthor = (given) => {
 };
 
 export const PROVENANCE_POLICY = {
+  areaGrid: "layout comparison metadata only; explicit save replaces legacy settings; undo restores exact fields",
   plantingGrid: "layout comparison metadata only; no geometry, quantity or review stamps; inverse restores exact prior configuration",
   add: "created_at (+ id mint) per shape; restore:true stamps nothing",
   geom: "stampEdit(editKind) once, frozen from prev; restampFrom stamps nothing",
@@ -377,12 +378,22 @@ export function applyShapeCommand(shapes, cmd) {
         ...(runsBack ? { runs: runsBack } : {}),
       } };
     }
+    case "areaGrid": {
+      const prev=shapes.find(s=>s.id===cmd.id);
+      if (!prev) return {shapes,inverse:null};
+      const fields={};
+      for (const k of ['area_grid','planting_grid']) if (Object.hasOwn(prev,k)) fields[k]=prev[k];
+      const next=cmd.restore ? {...withAreaGrid(prev,null),...cmd.restore} : withAreaGrid(prev,cmd.grid);
+      const error=areaGridError(next,shapes);
+      if (error) throw new Error(error);
+      return {shapes:shapes.map(s=>s.id===cmd.id?next:s),inverse:{type:'areaGrid',id:cmd.id,restore:fields}};
+    }
     case "plantingGrid": {
       const prev=shapes.find(s=>s.id===cmd.id);
       if (!prev) return {shapes,inverse:null};
       const next={...prev};
       if (cmd.grid == null) delete next.planting_grid; else next.planting_grid=cmd.grid;
-      const error=plantingGridError(next,shapes);
+      const error=areaGridError(next,shapes);
       if (error) throw new Error(error);
       return {shapes:shapes.map(s=>s.id===cmd.id?next:s),inverse:{type:'plantingGrid',id:cmd.id,grid:prev.planting_grid ?? null}};
     }

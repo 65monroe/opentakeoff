@@ -250,3 +250,19 @@ test("wall bands and physically clipped base runs conform without floor deductio
   session.undoLast(1);
   assert.deepEqual(session.exportPayload(), before);
 });
+
+test('generic area grids and legacy planting grids preserve exact metadata through archive and import',async()=>{
+  const session=new Session();await session.loadPlan(plan);session.setScale(sheet,{use_detected:true});
+  const area=session.measurePolygon(sheet,[[200,200],[400,200],[400,400],[200,400]],{condition:'SUPPORT-LAYOUT',role:'floor_area'});
+  const before=structuredClone(session.exportPayload());
+  session.editShape(area.shape_id,{area_grid:{single_item:true,spacing_ft:1,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:.5,offset_y_ft:.5,origin_norm:[.1,.1],reference:'Synthetic support layout; no printed source'}});
+  const payload=session.exportPayload();checkBoth(payload);
+  assert.deepEqual(mergeTakeoffImport(emptyAnnotations(),payload).payload.shapes,payload.shapes);
+  const archive=await buildProjectArchive({takeoff:payload,sheets:[{name:sheet}],loadPdfData:async()=>new Uint8Array(await readFile(plan))});
+  assert.deepEqual((await parseProjectArchive(archive)).takeoff,payload);
+  const old={...payload.shapes[0]};delete old.area_grid;assert.deepEqual(old,before.shapes[0]);
+  for(const patch of [{measure_role:'count'},{planting_grid:{}}]) {
+    const bad=structuredClone(payload);Object.assign(bad.shapes[0],patch);
+    assert.equal(ajv.getSchema('https://opentakeoff.kentucky-ai.com/protocol/legacy/takeoff-canvas.v1.schema.json')(bad),false);
+  }
+});

@@ -626,9 +626,7 @@ export const deleteShapeOutput = {
   note: z.string().optional().describe("Cutout interplay (#206), when it applies: the parent's cut was reverted, could not be rebuilt, or reconciled deducts were orphaned by a parent delete"),
 };
 
-/** edit_shape: the revised shape's re-measured quantities. Quantities are
- * always recomputed from the resulting geometry and role, so a role flip alone
- * re-measures (closed area vs open length). */
+/** edit_shape: geometry/role edits remeasure; grid-only edits preserve quantities. */
 export const plantingGridSchema = z.object({
   source_callout_id:z.string().min(1), single_species:z.literal(true),
   spacing_ft:z.number().positive(), pattern:z.enum(['square','triangular']),
@@ -637,10 +635,11 @@ export const plantingGridSchema = z.object({
   origin_norm:z.tuple([z.number().min(0).max(1),z.number().min(0).max(1)]),
   reference:z.string().min(1),
 });
+export const areaGridSchema = plantingGridSchema.omit({single_species:true,source_callout_id:true}).extend({single_item:z.literal(true),source_callout_id:z.string().min(1).optional()});
 export const editShapeOutput = {
   shape_id: z.string(),
-  changed: z.array(z.enum(["verts", "condition", "role", "label", "rise_ft", "drop_ft", "source_callout_ids", "planting_grid"])).describe("Which fields this call actually changed"),
-  grid_count:z.number().int().nonnegative().optional().describe('Calculated positions inside the bed; comparison only, never added to printed EA'),
+  changed: z.array(z.enum(["verts", "condition", "role", "label", "rise_ft", "drop_ft", "source_callout_ids", "planting_grid", "area_grid"])).describe("Which fields this call actually changed"),
+  grid_count:z.number().int().nonnegative().optional().describe('Calculated positions inside the area; layout comparison only, never added to takeoff quantities'),
   measure_role: z.enum(["floor_area", "deduct", "linear", "surface_area", "count"]),
   nverts: z.number().int(),
   area_sf: z.number().optional().describe("0 for linear shapes; LF × height for surface_area; absent for count"),

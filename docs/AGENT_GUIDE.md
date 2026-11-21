@@ -26,10 +26,13 @@ can share an area. Only the area gains a relationship: source IDs, quantities,
 geometry and review decisions stay unchanged. Flag approximate edges and keep
 the new area pending. SF is coverage, not a new or derived EA count.
 
-For a spacing check on a verified single-species bed, configure
-`edit_shape planting_grid` separately and cite all layout assumptions. Its
-`grid_count` compares with printed EA; it never adds EA or verifies individual
-positions. Keep mixed beds unallocated until a species subarea is verified.
+For an area spacing check, configure `edit_shape area_grid` separately. Declare
+one item type and spacing throughout with `single_item: true`, and cite every
+layout assumption. A printed source is optional. `grid_count` reports generated
+positions; it never adds EA or verifies individual locations. Planting is one
+application: keep mixed beds unallocated until a species subarea is verified.
+Existing planting-grid data is read without migration; explicit generic edits
+replace only its layout metadata, and Undo restores the original.
 See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).
 
 > **One-Click is temporarily gated.** On a default build `one_click` and `detect_rooms` do not

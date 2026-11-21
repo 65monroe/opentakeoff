@@ -24,19 +24,31 @@ fields modeled by this draft, including nested definitions.
 
 ## Measurement, calibration, and authorship
 
-Optional `planting_grid` on a linked `floor_area` stores a comparison layout:
-source callout ID, declared single-species extent, spacing in feet, square or
+Optional `area_grid` on a `floor_area` stores generated layout positions for
+one repeating item type: `single_item: true`, spacing in feet, square or
 triangular pattern, angle, edge clearance, X/Y shifts, fixed normalized origin
-and source/assumption reference. It is recalculated from current normalized
-boundary/holes, sheet dimensions and calibration. It adds no count shape or EA.
-Browser `plantingGrid` commands and MCP configuration-only `edit_shape` writes
-change only this metadata; Undo restores its prior presence/value exactly.
-MCP refuses edits to accepted areas. Source decisions and machine originals stay
-untouched. Unknown/imported missing source IDs remain recoverable; import gates
-structural validity. No schema identifier change or migration. JSON/native
-archives preserve it; static PDF/report exports do not render the comparison.
-Tests: `web/test/plantingGrid.test.ts`, MCP callout and protocol current-record tests.
+and spacing/assumption reference. A `source_callout_id` is optional; if supplied,
+it must be among the area's `source_callout_ids` and resolve to a printed source
+on the same sheet for edits. No plant identity or source record is required.
+The shared `areaGrid.js` recalculates positions from the current boundary,
+holes, image dimensions and calibration. It adds no count shapes or EA.
 
+Legacy `planting_grid` retains its required `single_species` declaration and
+source ID. Reading, import and export preserve it unchanged. New browser
+`areaGrid` commands and MCP `edit_shape area_grid` explicitly replace only
+layout metadata, removing the legacy field if present. Undo restores exact field
+presence and values. Both fields together refuse. The legacy MCP input and
+shared-module compatibility exports remain for reproducible earlier evidence;
+the legacy input cannot overwrite a generic grid. MCP refuses accepted-area
+edits. IDs, geometry, quantities, source decisions and machine originals stay
+untouched. Declarations are not authenticated review. No writer identifier
+change or default migration is introduced.
+
+Import checks structure and preserves unresolved citations for recovery;
+comparison is withheld if the source is unavailable. Editable JSON and native
+archives preserve settings. Static PDF/report exports omit the grid comparison.
+Tests: `web/test/areaGrid.test.ts`, the legacy grid tests, MCP callout and
+protocol current-record tests.
 
 An optional `source_callout_ids` array on a `floor_area` stores unique printed
 callout measurement IDs describing that planting area. The area owns the links;

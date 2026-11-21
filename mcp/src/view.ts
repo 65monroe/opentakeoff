@@ -5,7 +5,7 @@
 import { RENDER_SCALE } from "../../web/src/lib/sheets.ts";
 import { UserError } from "./format.ts";
 import type { Shape } from "./session.ts";
-import { plantingGrid } from '../../web/src/lib/plantingGrid.js';
+import { areaGrid, getAreaGrid } from '../../web/src/lib/areaGrid.js';
 
 /** The slice of CanvasRenderingContext2D the drawing uses — structural, so
  * @napi-rs/canvas's context satisfies it without a type dependency. */
@@ -143,8 +143,8 @@ export function drawShapes(ctx: Ctx2D, toCanvas: ToCanvas, shapes: Shape[], shee
     for (let i = 1; i < pts.length; i++) ctx.lineTo(pts[i][0], pts[i][1]);
     if (s.measure_role !== "linear" && s.measure_role !== "surface_area") ctx.closePath();
     ctx.stroke();
-    if(s.planting_grid) {
-      const grid=plantingGrid(s,{widthPx:sheetW,heightPx:sheetH,upp});
+    if(getAreaGrid(s)) {
+      const grid=areaGrid(s,{widthPx:sheetW,heightPx:sheetH,upp});
       ctx.setLineDash([]);
       for(const [nx,ny] of grid.points_norm) {
         const [x,y]=toCanvas(nx*sheetW,ny*sheetH),r=Math.max(1,longEdge/700);

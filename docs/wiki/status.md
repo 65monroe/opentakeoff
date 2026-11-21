@@ -6,6 +6,7 @@ be measured automatically. Follow its source links before changing behavior.
 | Capability | Current boundary | Evidence |
 |---|---|---|
 | Human and agent measurements | Shared geometry/quantity modules; source interpretation still requires inspection | [Geometry workflow](../GEOMETRY_WORKFLOW.md) |
+| Area grid count (fork prototype) | One item type at equal square/triangular spacing inside a floor-area outline; optional printed comparison; no added EA, cut-piece calculation or design compliance claim | [Workflow](../USER_GUIDE.md#area-grid-count), [public and bundled-plan evidence](../evidence/area-grid-count/README.md) |
 | Original machine geometry after human correction | Outer vertices preserved, including manual agent traces; missing historical originals cannot be recovered | [Compatibility](../../protocol/COMPATIBILITY.md) |
 | Human stitching | Browser gallery and alignment; editable browser archive preserves composites | [Workflow](workflows.md) |
 | MCP stitched documents | Supported via stitch_sheets and list_stitches; import/export preserves composite stitch records | [MCP tools](mcp.md) |

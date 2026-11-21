@@ -110,3 +110,32 @@ test("printed EA: source receipts, idempotency, refusal, review preservation and
     assert.deepEqual(session.exportPayload(), reviewed, "retry cannot undo a human decision");
   } finally { await client.close(); await server.close(); }
 });
+
+test('generic area_grid is available over MCP without a printed callout and preserves accepted work',async()=>{
+  const session=new Session();
+  const [ct,st]=InMemoryTransport.createLinkedPair(); const server=buildServer(session); await server.connect(st);
+  const client=new Client({name:'generic-grid-test',version:'1'}); await client.connect(ct);
+  const call=async(args:Record<string,unknown>,error=false)=>{
+    const r:any=await client.callTool({name:'edit_shape',arguments:args}); assert.equal(!!r.isError,error,JSON.stringify(r));
+    return error?r:r.structuredContent??JSON.parse(r.content[0].text);
+  };
+  try {
+    await session.loadPlan(fileURLToPath(new URL('../../demo/sample-plan.pdf',import.meta.url)));
+    const sheet='sample-plan.pdf'; session.setScale(sheet,{use_detected:true});
+    const area=session.measurePolygon(sheet,[[200,200],[400,200],[400,400],[200,400]],{condition:'SUPPORT-LAYOUT',role:'floor_area'});
+    const original=structuredClone(session.exportPayload());
+    const grid={single_item:true,spacing_ft:1,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:.5,offset_y_ft:.5,origin_norm:[.1,.1],reference:'Synthetic support grid on bundled plan; spacing assumed'};
+    const result=await call({shape_id:area.shape_id,area_grid:grid}); assert.ok(result.grid_count>0);
+    const changed=structuredClone(session.shapes[0]); delete changed.area_grid;
+    assert.deepEqual(changed,original.shapes[0]);
+    const saved=structuredClone(session.exportPayload());
+    for(const patch of [{area_grid:{...grid,single_item:false}},{area_grid:{...grid,source_callout_id:'missing'}},{area_grid:grid,label:'combined'},{area_grid:grid,planting_grid:null},{planting_grid:null}]) {
+      await call({shape_id:area.shape_id,...patch},true); assert.deepEqual(session.exportPayload(),saved);
+    }
+    await client.callTool({name:'undo_last',arguments:{}}); assert.deepEqual(session.exportPayload(),original);
+    await call({shape_id:area.shape_id,area_grid:grid});
+    session.shapes[0].origin!.reviewed=true; // Test fixture only.
+    const accepted=structuredClone(session.exportPayload());
+    await call({shape_id:area.shape_id,area_grid:null},true); assert.deepEqual(session.exportPayload(),accepted);
+  } finally {await client.close();await server.close();}
+});

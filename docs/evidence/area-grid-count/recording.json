@@ -1,0 +1,107 @@
+{
+  "source": "Consecutive actual in-app-browser screenshots captured concurrently with UI actions",
+  "frames": 23,
+  "captured_elapsed_ms": 2295,
+  "playback": "3 times slower, minimum 100 ms/frame; final frame held; no performance claim",
+  "actions": [
+    "Zoom in twice",
+    "Expand Source",
+    "Show source callout",
+    "Collapse Source",
+    "Show on plan"
+  ],
+  "frames_timing": [
+    {
+      "file": "000.jpg",
+      "ms": 78
+    },
+    {
+      "file": "001.jpg",
+      "ms": 162
+    },
+    {
+      "file": "002.jpg",
+      "ms": 238
+    },
+    {
+      "file": "003.jpg",
+      "ms": 309
+    },
+    {
+      "file": "004.jpg",
+      "ms": 390
+    },
+    {
+      "file": "005.jpg",
+      "ms": 487
+    },
+    {
+      "file": "006.jpg",
+      "ms": 785
+    },
+    {
+      "file": "007.jpg",
+      "ms": 863
+    },
+    {
+      "file": "008.jpg",
+      "ms": 929
+    },
+    {
+      "file": "009.jpg",
+      "ms": 978
+    },
+    {
+      "file": "010.jpg",
+      "ms": 1122
+    },
+    {
+      "file": "011.jpg",
+      "ms": 1203
+    },
+    {
+      "file": "012.jpg",
+      "ms": 1283
+    },
+    {
+      "file": "013.jpg",
+      "ms": 1358
+    },
+    {
+      "file": "014.jpg",
+      "ms": 1549
+    },
+    {
+      "file": "015.jpg",
+      "ms": 1623
+    },
+    {
+      "file": "016.jpg",
+      "ms": 1681
+    },
+    {
+      "file": "017.jpg",
+      "ms": 1753
+    },
+    {
+      "file": "018.jpg",
+      "ms": 1817
+    },
+    {
+      "file": "019.jpg",
+      "ms": 1902
+    },
+    {
+      "file": "020.jpg",
+      "ms": 1971
+    },
+    {
+      "file": "021.jpg",
+      "ms": 2058
+    },
+    {
+      "file": "022.jpg",
+      "ms": 2295
+    }
+  ]
+}

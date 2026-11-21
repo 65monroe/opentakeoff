@@ -1,0 +1,53 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {dirname,resolve} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {buildProjectArchive} from '../../../web/src/lib/projectArchive.js';
+const repo=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
+const require=createRequire(resolve(repo,'mcp/package.json'));
+const {Client}=await import(pathToFileURL(require.resolve('@modelcontextprotocol/sdk/client/index.js')));
+const {StdioClientTransport}=await import(pathToFileURL(require.resolve('@modelcontextprotocol/sdk/client/stdio.js')));
+const [publicPlanArg,outArg]=process.argv.slice(2);assert.ok(publicPlanArg&&outArg,'replay.mjs PUBLIC_L1.0.pdf OUTPUT_DIR');
+const plan=resolve(publicPlanArg),out=resolve(outArg);await mkdir(out,{recursive:true});
+const baselinePath=resolve(repo,'docs/evidence/area-grid-count/baseline.json');
+const baseline=JSON.parse(await readFile(baselinePath,'utf8'));
+const client=new Client({name:'area-grid-public-example',version:'1'});
+const transcript=[];
+await client.connect(new StdioClientTransport({command:process.execPath,args:['--import','tsx','server.ts'],cwd:resolve(repo,'mcp'),stderr:'pipe'}));
+const scrub=v=>JSON.parse(JSON.stringify(v).replaceAll(plan.replaceAll('\\','\\\\'),'<PUBLIC_PLAN>').replaceAll(out.replaceAll('\\','\\\\'),'<OUTPUT>').replaceAll(repo.replaceAll('\\','\\\\'),'<REPO>'));
+async function call(name,args={},png) {
+ const r=await client.callTool({name,arguments:args});assert.ok(!r.isError,JSON.stringify(r));
+ const result=r.structuredContent??JSON.parse(r.content.find(c=>c.type==='text').text);
+ transcript.push({tool:name,args:scrub(args),result:scrub(result)});
+ if(png)await writeFile(resolve(out,png),Buffer.from(r.content.find(c=>c.type==='image').data,'base64'));
+ return result;
+}
+try {
+ await client.readResource({uri:'takeoff://wiki'});
+ await call('load_plan',{path:plan});await call('import_takeoff',{path:baselinePath});
+ const bed=baseline.shapes.find(s=>s.planting_grid);assert.ok(bed);
+ const {single_species,...legacy}=bed.planting_grid;const generic={...legacy,single_item:single_species};
+ assert.equal((await call('edit_shape',{shape_id:bed.id,area_grid:generic})).grid_count,110);
+ await call('export_takeoff',{path:resolve(out,'public-generic.json')});
+ assert.equal((await call('edit_shape',{shape_id:bed.id,area_grid:{...generic,pattern:'triangular',reference:generic.reference.replace('square','triangular')}})).grid_count,129);
+ await call('undo_last',{});await call('undo_last',{});
+ await call('export_takeoff',{path:resolve(out,'public-restored.json')});
+ const restored=JSON.parse(await readFile(resolve(out,'public-restored.json'),'utf8'));assert.deepEqual(restored.shapes,baseline.shapes);
+ await call('view_sheet',{sheet:bed.sheet_id,overlay:true,region:{x0:2770,y0:925,x1:3020,y1:1090},px:1200},'public-grid.png');
+ const demo=resolve(repo,'demo/sample-finish-plan.pdf'),sheet='sample-finish-plan.pdf';
+ await call('load_plan',{path:demo});await call('set_scale',{sheet,use_detected:true});
+ const a=await call('measure_polygon',{sheet,verts:[[2160,744],[2448,744],[2448,888],[2160,888]],condition:'DEMO-SUPPORT-LAYOUT',role:'floor_area'});
+ await call('edit_shape',{shape_id:a.shape_id,label:'Assumed layout zone; not specified work'});
+ await call('export_takeoff',{path:resolve(out,'demo-before.json')});
+ const config={single_item:true,spacing_ft:4,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:2,offset_y_ft:2,origin_norm:[2160/6048,744/4320],reference:'Bundled AF101 demonstration only: assumed 4 ft support grid, 2 ft shifts, 0 deg, no edge clearance; no such support work specified by this finish plan.'};
+ assert.equal((await call('edit_shape',{shape_id:a.shape_id,area_grid:config})).grid_count,8);
+ await call('view_sheet',{sheet,overlay:true,region:{x0:2080,y0:680,x1:2540,y1:960},px:1200},'demo-grid.png');
+ await call('export_takeoff',{path:resolve(out,'demo-takeoff.json')});await call('export_report',{path:resolve(out,'demo-report.json')});
+ const takeoff=JSON.parse(await readFile(resolve(out,'demo-takeoff.json'),'utf8'));
+ const before=JSON.parse(await readFile(resolve(out,'demo-before.json'),'utf8'));
+ const changed=structuredClone(takeoff.shapes);delete changed[0].area_grid;assert.deepEqual(changed,before.shapes);
+ await writeFile(resolve(out,'demo.otk'),await buildProjectArchive({takeoff,sheets:[{name:sheet}],loadPdfData:async()=>new Uint8Array(await readFile(demo))}));
+ await writeFile(resolve(out,'transcript.json'),JSON.stringify(transcript,null,2)+'\n');
+ console.log('PASS: public grid 110/129, Undo restores all original records; bundled AF101 assumed 16 x 8 ft zone / 4 ft spacing / 2 ft shifts = 8 generated positions, no printed source or extra EA.');
+}finally{await client.close();}

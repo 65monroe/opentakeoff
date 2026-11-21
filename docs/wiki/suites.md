@@ -77,8 +77,8 @@ the printed measurement IDs. Several species may share a bed. **Show on plan**
 frames the bed; expand **Source** to reach **Show source callout**. **Edit planting area**
 separate source inspection from boundary editing. Source records remain intact,
 SF stays separate from EA, and obscured boundaries stay flagged for review.
-For a verified single-species bed, configure `edit_shape planting_grid` as a
-separate call. Supply source callout ID, `single_species: true`, positive
+For a verified single-species bed, use the generic Area grid count through `edit_shape area_grid` as a
+separate call. For this comparison, supply the linked source callout ID, `single_item: true`, positive
 `spacing_ft`, square/triangular `pattern`, `angle_deg`, nonnegative `inset_ft`,
 `offset_x_ft`, `offset_y_ft`, fixed normalized `origin_norm`, and `reference`
 naming the spacing source and layout assumptions. `grid_count` is the clipped

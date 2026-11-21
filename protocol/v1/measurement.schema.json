@@ -57,6 +57,72 @@
       "required": ["kind", "unit", "id", "text", "reference"],
       "additionalProperties": true
     },
+    "area_grid": {
+      "type": "object",
+      "properties": {
+        "source_callout_id": {
+          "type": "string",
+          "minLength": 1
+        },
+        "spacing_ft": {
+          "type": "number",
+          "exclusiveMinimum": 0
+        },
+        "pattern": {
+          "enum": [
+            "square",
+            "triangular"
+          ]
+        },
+        "angle_deg": {
+          "type": "number",
+          "minimum": -360,
+          "maximum": 360
+        },
+        "inset_ft": {
+          "type": "number",
+          "minimum": 0
+        },
+        "offset_x_ft": {
+          "type": "number",
+          "minimum": 0
+        },
+        "offset_y_ft": {
+          "type": "number",
+          "minimum": 0
+        },
+        "origin_norm": {
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "number",
+            "minimum": 0,
+            "maximum": 1
+          }
+        },
+        "reference": {
+          "type": "string",
+          "minLength": 1
+        },
+        "single_item": {
+          "const": true
+        }
+      },
+      "required": [
+        "spacing_ft",
+        "pattern",
+        "angle_deg",
+        "inset_ft",
+        "offset_x_ft",
+        "offset_y_ft",
+        "origin_norm",
+        "reference",
+        "single_item"
+      ],
+      "additionalProperties": true,
+      "description": "Area grid count: generated layout positions within a floor_area, optionally compared with a linked printed quantity. One item type and spacing throughout is a declaration, not approval. No added EA; no automatic quantity adoption."
+    },
     "planting_grid": {
       "type":"object",
       "properties": {
@@ -130,7 +196,10 @@
     "computed"
   ],
   "additionalProperties": true,
-  "allOf": [{
+  "allOf": [{"not":{"required":["area_grid","planting_grid"]}}, {
+    "if":{"required":["area_grid"]},
+    "then":{"properties":{"measure_role":{"const":"floor_area"}}}
+  }, {
     "if":{"required":["planting_grid"]},
     "then":{"required":["source_callout_ids"],"properties":{"measure_role":{"const":"floor_area"}}}
   }, {

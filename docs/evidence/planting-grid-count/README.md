@@ -1,5 +1,10 @@
 # Planting grid comparison and bed-first review
 
+This is the historical planting-only evidence. The branch is now named
+`codex/area-grid-count`; see the [generic continuation](../area-grid-count/README.md)
+for current behavior, compatibility checks and new browser evidence. The
+screenshots and exports below remain unchanged.
+
 Fork-only follow-up on `codex/planting-grid-count`, based on planting-suite commit
 `456c688915295930f571a94b188b72db1d69119e`. No new PR, deployment or merge.
 This is separate from the planting-suite increment because it adds spacing math,

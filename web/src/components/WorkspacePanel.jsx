@@ -5,7 +5,8 @@ import { Z } from "../lib/ui.js";
 import { ScanStar } from "../brand/marks.jsx";
 import { isCalloutQuantity, linkedCalloutAreas } from "../lib/calloutQuantity.js";
 import "./workspacePanel.css";
-import PlantingGridPanel from './PlantingGridPanel.jsx';
+import AreaGridPanel from './AreaGridPanel.jsx';
+import { getAreaGrid } from '../lib/areaGrid.js';
 
 export default function WorkspacePanel({ open, shapes, conditions, selectedId, sheetLabel, fmtArea, fmtLength,
   scales, scaleUnconfirmed, running, proposalCount, onLocate, onReview, onClose, onReport, onGrid, gridFrames, children, dockSide, width, dockHandle }) {
@@ -19,7 +20,9 @@ export default function WorkspacePanel({ open, shapes, conditions, selectedId, s
   const selected = shapes.find((s) => s.id === selectedId);
   const plantingAreas = linkedCalloutAreas(selected, shapes);
   const gridArea=plantingAreas.length===1 ? plantingAreas[0] : selected?.measure_role==='floor_area' ? selected : null;
-  const gridSource=gridArea && shapes.find(s=>s.id===(gridArea.planting_grid?.source_callout_id || gridArea.source_callout_ids?.[0]) && s.sheet_id===gridArea.sheet_id && isCalloutQuantity(s));
+  const savedGrid=getAreaGrid(gridArea);
+  const gridSourceId=savedGrid ? savedGrid.source_callout_id : isCalloutQuantity(selected) ? selected.id : gridArea?.source_callout_ids?.length===1 ? gridArea.source_callout_ids[0] : undefined;
+  const gridSource=gridArea && shapes.find(s=>s.id===gridSourceId && s.sheet_id===gridArea.sheet_id && isCalloutQuantity(s));
   useEffect(() => { setLimit(50); }, [filter, query]);
   const quantity = (shape) => {
     const q = workQuantity(shape);
@@ -97,7 +100,7 @@ export default function WorkspacePanel({ open, shapes, conditions, selectedId, s
             {plantingAreas.map((area) => <button key={area.id} type="button" onClick={() => onLocate(area)}>{uiText("Edit planting area")}{plantingAreas.length > 1 ? ` · ${area.label || conditions[area.condition_id]?.finish_tag}` : ""}</button>)}
           </div>}
           <div className="workspace-inspector-actions"><button type="button" onClick={() => onLocate(selected)}>{uiText("Show on plan")}</button>{selected.origin?.reviewed === false && <button type="button" className="workspace-primary" onClick={() => onReview(selected.id)}>{uiText("Mark reviewed")}</button>}</div>
-          {gridArea && gridSource && onGrid && <PlantingGridPanel key={`${gridArea.id}:${JSON.stringify(gridArea.planting_grid)}`} area={gridArea} source={gridSource} frame={gridFrames?.get(gridArea.sheet_id)} onSave={onGrid} />}
+          {gridArea && onGrid && <AreaGridPanel key={`${gridArea.id}:${JSON.stringify(getAreaGrid(gridArea))}`} area={gridArea} source={gridSource} frame={gridFrames?.get(gridArea.sheet_id)} onSave={onGrid} />}
         </section>}
         <footer className="workspace-footer"><span>{uiText(rows.length)} {uiText("of ")}{uiText(shapes.length)} {uiText("measurements")}</span><button type="button" onClick={onReport}>{uiText("Open report →")}</button></footer>
       </div>

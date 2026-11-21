@@ -20,16 +20,25 @@ use `edit_shape {shape_id: "<area-id>", source_callout_ids: ["<callout-id>"]}`.
 The same-sheet links belong to the area, leaving source records untouched.
 Pass `null` to remove the links. SF and printed EA remain separate; no EA is inferred from SF alone. The browser offers bed navigation and source-text navigation.
 
-Planting grid comparison: after linking a verified single-species bed, use
-`edit_shape planting_grid` in its own call. Supply positive `spacing_ft`,
-`pattern` (square/triangular), `angle_deg`, `inset_ft`, `offset_x_ft`,
-`offset_y_ft`, fixed `origin_norm`, `source_callout_id`, `single_species: true`,
-and a `reference` citing spacing and all assumed layout settings. The returned
-`grid_count` is a comparison; it never adds to existing EA or changes approval.
-`null` removes the layout. View the overlay and export the editable project.
-Do not turn generated positions into individually observed plants or fill a
-mixed bed with one species. Browser review starts at the bed; source text is
-available on demand. Static marked PDF/report exports omit the grid comparison.
+Area grid count: use `edit_shape area_grid` in its own call on a `floor_area`.
+No plant code or printed callout is required. Supply `single_item: true`, positive
+`spacing_ft`, `pattern` (square/triangular), `angle_deg`, `inset_ft`,
+`offset_x_ft`, `offset_y_ft`, fixed `origin_norm`, and a `reference` citing
+spacing and all layout assumptions. Optional `source_callout_id` must resolve
+to an existing same-sheet printed source already in the area's
+`source_callout_ids`. Without it, report only the generated count.
+
+The returned `grid_count` is calculated layout positions, not observed items
+or an additional takeoff quantity. Existing geometry, quantities and review
+stay unchanged. `null` removes the grid. Explicit `area_grid` edits replace
+legacy `planting_grid` settings; reading/import/export does not migrate them,
+and Undo restores the exact earlier record. The older MCP input remains for
+compatibility and cannot overwrite a generic grid. Both fields together refuse.
+
+View the overlay and reopen the editable export. Do not claim component sizing,
+cut-piece quantities or code compliance. Mixed planting beds require verified
+species subareas. Static marked-PDF and report exports omit the grid comparison.
+See the [public example and reproduction](evidence/area-grid-count/README.md).
 
 This page walks the surface in depth, in the order an agent reaches for it. Two
 shorter reads sit either side of it: [`AGENT_GUIDE.md`](AGENT_GUIDE.md) is the

@@ -15,6 +15,7 @@ comes from the runtime, including stage ownership and required inputs.
 | Floor, base/trim, wall face | `measure_polygon`, `measure_line`, `measure_surface` respectively | Overlay inspection and per-role quantities |
 | Device/count census | `count_marks` | Inspect withheld entries; use more specific sweeps where needed |
 | Printed EA quantity | `record_callout_quantity` | Visually verify text, exact code, quantity, scope and source anchor; exclude items already counted individually |
+| Area spacing layout | `edit_shape area_grid` | One item type throughout; source and assumptions stated; optional printed comparison; generated positions add no EA |
 | Located opening | `cut_out` | Surviving geometry; numeric derived-base allowances cannot be clipped |
 | Pending shape or crowded note | `edit_shape` or `edit_annotation` | Reinspect; `undo_last` restores the edit |
 | Check and hand off | `takeoff_summary`, `export_report`, `export_takeoff`, `export_marked_pdf` | Reopen and inspect; leave human review pending |
