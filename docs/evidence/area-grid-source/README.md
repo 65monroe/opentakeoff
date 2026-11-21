@@ -6,6 +6,11 @@ pitch and 1-foot X/Y center offsets from the existing origin**. The suggestion
 stays in [suggestion.json](suggestion.json); it is not applied to the takeoff.
 The previous 2-by-4 alternatives remain unchanged.
 
+The later [applied-alignment browser test](../area-grid-aligned/README.md) applies
+this suggestion in a separate editable example at the user's request and
+verifies **Show on plan**, save, reload and archive reopen. This source-reading
+trial's original before/after files remain unchanged.
+
 This is an **agent interpretation of actual MCP vector output**, with a small
 reproducible evidence script for the arithmetic. It is not a new MCP tool or a
 shipped automatic ceiling-grid detector. No app, schema, suite or runtime
