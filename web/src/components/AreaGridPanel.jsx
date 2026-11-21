@@ -7,6 +7,7 @@ export default function AreaGridPanel({ area, source, frame, onSave }) {
   const saved=getAreaGrid(area);
   const printed=source?.computed?.count;
   const [spacing,setSpacing]=useState(saved ? String(saved.spacing_ft*12) : '');
+  const [spacingY,setSpacingY]=useState(saved?.spacing_y_ft ? String(saved.spacing_y_ft*12) : '');
   const [pattern,setPattern]=useState(saved?.pattern || 'square');
   const [angle,setAngle]=useState(String(saved?.angle_deg || 0));
   const [inset,setInset]=useState(String((saved?.inset_ft || 0)*12));
@@ -22,7 +23,7 @@ export default function AreaGridPanel({ area, source, frame, onSave }) {
   const [footprintReference,setFootprintReference]=useState(saved?.footprint?.reference || '');
   const [cutPieces,setCutPieces]=useState(saved?.cut_pieces || false);
   const footprint=footprintKind==='none' ? undefined : {kind:footprintKind,basis:footprintBasis,reference:footprintReference,...(footprintKind==='circle' ? {diameter_ft:Number(diameter)/12} : {width_ft:Number(width)/12,depth_ft:Number(depth)/12})};
-  const draft={...(saved?.source_callout_id || source?.id ? {source_callout_id:saved?.source_callout_id || source.id} : {}),spacing_ft:Number(spacing)/12,pattern,angle_deg:Number(angle),inset_ft:Number(inset)/12,offset_x_ft:Number(x)/12,offset_y_ft:Number(y)/12,origin_norm:saved?.origin_norm || [...area.verts_norm[0]],reference,single_item:true,...(footprint ? {footprint} : {}),...(cutPieces?{cut_pieces:true}:{})};
+  const draft={...(saved?.source_callout_id || source?.id ? {source_callout_id:saved?.source_callout_id || source.id} : {}),spacing_ft:Number(spacing)/12,...(pattern==='rectangular'?{spacing_y_ft:Number(spacingY)/12}:{}),pattern,angle_deg:Number(angle),inset_ft:Number(inset)/12,offset_x_ft:Number(x)/12,offset_y_ft:Number(y)/12,origin_norm:saved?.origin_norm || [...area.verts_norm[0]],reference,single_item:true,...(footprint ? {footprint} : {}),...(cutPieces?{cut_pieces:true}:{})};
   const result=areaGrid(withAreaGrid(area,draft),frame);
   const stored=areaGrid(area,frame);
   const savedCuts=useMemo(()=>areaGridCuts(area,frame),[area,frame]);
@@ -43,8 +44,9 @@ export default function AreaGridPanel({ area, source, frame, onSave }) {
         </tbody></table></details>
       </>}
     </section>}
-    <label>{uiText('Spacing (in)')}<input type="number" min="0.01" step="any" value={spacing} onChange={e=>setSpacing(e.target.value)} /></label>
-    <label>{uiText('Pattern')}<select value={pattern} onChange={e=>setPattern(e.target.value)}><option value="square">{uiText('Square')}</option><option value="triangular">{uiText('Triangular')}</option></select></label>
+    <label>{uiText(pattern==='rectangular'?'Spacing X (in)':'Spacing (in)')}<input type="number" min="0.01" step="any" value={spacing} onChange={e=>setSpacing(e.target.value)} /></label>
+    <label>{uiText('Pattern')}<select value={pattern} onChange={e=>setPattern(e.target.value)}><option value="square">{uiText('Square')}</option><option value="triangular">{uiText('Triangular')}</option><option value="rectangular">{uiText('Rectangular')}</option></select></label>
+    {pattern==='rectangular' && <label>{uiText('Spacing Y (in)')}<input type="number" min="0.01" step="any" value={spacingY} onChange={e=>setSpacingY(e.target.value)} /></label>}
     <details><summary>{uiText('Orientation and edges')}</summary>
       <label>{uiText('Angle (degrees)')}<input type="number" min="-360" max="360" value={angle} onChange={e=>setAngle(e.target.value)} /></label>
       <label>{uiText('Edge clearance (in)')}<input type="number" min="0" step="any" value={inset} onChange={e=>setInset(e.target.value)} /></label>
@@ -52,13 +54,13 @@ export default function AreaGridPanel({ area, source, frame, onSave }) {
       <label>{uiText('Grid shift Y (in)')}<input type="number" min="0" step="any" value={y} onChange={e=>setY(e.target.value)} /></label>
     </details>
     <details open={footprintKind!=='none'}><summary>{uiText('Item footprint')}</summary>
-      <p>{uiText('Drawn to scale. Dimensions do not set spacing or change takeoff quantities. Enable cut calculation for clipped square modules.')}</p>
+      <p>{uiText('Drawn to scale. Dimensions do not set spacing or change takeoff quantities. Enable cut calculation for clipped square or rectangular modules.')}</p>
       <label>{uiText('Footprint shape')}<select value={footprintKind} onChange={e=>setFootprintKind(e.target.value)}><option value="none">{uiText('Position markers only')}</option><option value="circle">{uiText('Circle')}</option><option value="rectangle">{uiText('Rectangle')}</option></select></label>
       {footprintKind==='circle' && <label>{uiText('Diameter (in)')}<input type="number" min="0.01" step="any" value={diameter} onChange={e=>setDiameter(e.target.value)} /></label>}
       {footprintKind==='rectangle' && <><label>{uiText('Width along grid X (in)')}<input type="number" min="0.01" step="any" value={width} onChange={e=>setWidth(e.target.value)} /></label><label>{uiText('Depth along grid Y (in)')}<input type="number" min="0.01" step="any" value={depth} onChange={e=>setDepth(e.target.value)} /></label></>}
       {footprintKind!=='none' && <><label>{uiText('Dimension basis')}<select value={footprintBasis} onChange={e=>setFootprintBasis(e.target.value)}><option value="assumed">{uiText('Assumed')}</option><option value="specified">{uiText('Specified in source')}</option></select></label><label>{uiText('Dimension source or assumption')}<input value={footprintReference} onChange={e=>setFootprintReference(e.target.value)} /></label><p>{uiText('A specified basis records a citation; it is not a review approval. Plant container size is separate from canopy spread and planting spacing.')}</p></>}
       <label className="workspace-grid-confirm"><input type="checkbox" checked={cutPieces} onChange={e=>setCutPieces(e.target.checked)}/>{uiText('Calculate full tiles and edge cuts')}</label>
-      {cutPieces && <p>{uiText('Uses square modules equal to spacing, square pattern and zero edge clearance. Includes boundary-crossing modules whose centers lie outside. Nominal modules only; separate joints are not modeled.')}</p>}
+      {cutPieces && <p>{uiText('Uses footprint dimensions matching X and Y spacing, a square or rectangular pattern and zero edge clearance. For 2-by-4 tiles, use Rectangular, X 24 in, Y 48 in, width 24 in and depth 48 in. Includes boundary-crossing modules whose centers lie outside. Nominal modules only; separate joints are not modeled.')}</p>}
     </details>
     <label>{uiText('Spacing source and layout assumptions')}<input value={reference} onChange={e=>setReference(e.target.value)} /></label>
     <label className="workspace-grid-confirm"><input type="checkbox" checked={single} onChange={e=>setSingle(e.target.checked)} />{uiText('This outline applies to one item type and spacing throughout.')}</label>

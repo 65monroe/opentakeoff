@@ -1,0 +1,86 @@
+{
+  "source": "Consecutive actual browser screenshots concurrent with Save grid, Show on plan and two zoom steps; not a timing study.",
+  "frames": [
+    {
+      "file": "000.jpg",
+      "ms": 63
+    },
+    {
+      "file": "001.jpg",
+      "ms": 112
+    },
+    {
+      "file": "002.jpg",
+      "ms": 210
+    },
+    {
+      "file": "003.jpg",
+      "ms": 272
+    },
+    {
+      "file": "004.jpg",
+      "ms": 329
+    },
+    {
+      "file": "005.jpg",
+      "ms": 374
+    },
+    {
+      "file": "006.jpg",
+      "ms": 410
+    },
+    {
+      "file": "007.jpg",
+      "ms": 478
+    },
+    {
+      "file": "008.jpg",
+      "ms": 538
+    },
+    {
+      "file": "009.jpg",
+      "ms": 570
+    },
+    {
+      "file": "010.jpg",
+      "ms": 607
+    },
+    {
+      "file": "011.jpg",
+      "ms": 693
+    },
+    {
+      "file": "012.jpg",
+      "ms": 739
+    },
+    {
+      "file": "013.jpg",
+      "ms": 780
+    },
+    {
+      "file": "014.jpg",
+      "ms": 854
+    },
+    {
+      "file": "015.jpg",
+      "ms": 945
+    },
+    {
+      "file": "016.jpg",
+      "ms": 1009
+    },
+    {
+      "file": "017.jpg",
+      "ms": 1095
+    },
+    {
+      "file": "018.jpg",
+      "ms": 1142
+    },
+    {
+      "file": "019.jpg",
+      "ms": 1234
+    }
+  ],
+  "playback": "3 times slower, minimum 100 ms/frame; final frame held. No timing or preference claim."
+}

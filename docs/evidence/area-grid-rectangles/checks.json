@@ -1,0 +1,151 @@
+{
+  "date": "2026-11-21",
+  "timezone": "America/New_York",
+  "branch": "codex/area-grid-count",
+  "base_commit": "471712411960883c6c42377bef19ab5ed488b1af",
+  "scope": "Fork-only continuation, no upstream PR, comment, issue, merge or public deployment. Local checks do not assert GitHub CI or human approval.",
+  "node": "24.22.3",
+  "browser": {
+    "surface": "Codex in-app browser, existing tab 6",
+    "url": "http://127.0.0.1:5200/",
+    "build": "Vite production preview, reloaded after the completed web gate",
+    "entry": "web/dist/assets/index-CUr_kt_-.js",
+    "entry_sha256": "0c52e054bbf3aed93a380df1f0d70fe344b768342ce97f5642fe4da1a398d903",
+    "checks": [
+      "Back up the complete current browser JSON and project archive before any test load",
+      "Load existing public A111 square layout; 31 full tiles and 32 cuts remain unchanged",
+      "Choose Rectangular, X pitch 24 in, Y pitch 48 in, width 24 in, depth 48 in; record assumption references",
+      "Save grid, Show on plan and zoom: 8 full tiles, 24 cuts, 23 centers at 0 degrees",
+      "Undo restores complete original browser JSON exactly",
+      "Archive reopen at 0 degrees preserves complete saved JSON and correct source sheet",
+      "Change angle to 90 degrees, save, Show on plan: 15 full tiles, 24 cuts, 22 centers",
+      "Archive reopen at 90 degrees preserves complete saved JSON; inspect the cut schedule",
+      "Bundled AF101: explicitly assumed 2-by-4 grid, save, Show on plan, archive reopen; 14 full tiles and 4 cuts, unchanged 128 SF",
+      "Y pitch 36 in with depth 48 in disables Save grid and explains the mismatch; restore draft without saving",
+      "Restore complete original public SET browser project and verify exact JSON equality"
+    ],
+    "screenshots": [
+      "ceiling-square-before.jpg",
+      "rectangular-controls.jpg",
+      "ceiling-0-reopened.jpg",
+      "ceiling-90-reopened.jpg",
+      "cut-schedule.jpg",
+      "mismatched-pitch.jpg",
+      "demo-reopened.jpg"
+    ],
+    "recording": "public-rectangular-flow.gif",
+    "recording_metadata": "recording.json"
+  },
+  "checks": [
+    {
+      "command": "npm run check --prefix web",
+      "result": "pass",
+      "tests": 3858,
+      "passed": 3854,
+      "skipped": 4,
+      "failed": 0,
+      "notes": "Typecheck, lint, tests, benchmark, build and OCR distribution check passed. Existing lint and large-chunk warnings remain. Dependency locks unchanged; existing npm-ci installation reused."
+    },
+    {
+      "command": "npm run typecheck --prefix mcp",
+      "result": "pass"
+    },
+    {
+      "command": "npm test --prefix mcp",
+      "result": "pass",
+      "tests": 336,
+      "passed": 335,
+      "skipped": 1,
+      "failed": 0
+    },
+    {
+      "command": "npm run check --prefix protocol",
+      "result": "pass",
+      "tests": 64,
+      "passed": 64,
+      "failed": 0,
+      "schemas": 11,
+      "transport_cases": 16
+    },
+    {
+      "command": "npm run check:tool-count --prefix mcp -- --write",
+      "result": "pass",
+      "rewritten_markers": 0,
+      "default_tools": 71,
+      "gated_tools": 73,
+      "setup_tools": 22
+    },
+    {
+      "command": "npm run build --prefix mcp",
+      "result": "pass",
+      "notes": "Includes protocol-resource and wiki freshness checks."
+    },
+    {
+      "command": "npm run smoke:dist --prefix mcp",
+      "result": "pass",
+      "notes": "Packaged stdio: flat 71 tools, staged 23 tools, 11 schemas and 11 wiki pages."
+    },
+    {
+      "command": "python docs/evidence/area-grid-rectangles/oracle.py",
+      "result": "pass",
+      "notes": "Independent rational clipping; both orientations partition the exact 329488/1875 SF public boundary."
+    },
+    {
+      "command": "node docs/evidence/area-grid-rectangles/replay.mjs /absolute/path/output",
+      "result": "pass",
+      "notes": "Actual MCP tools; both public configurations, cell-by-cell oracle comparison, unchanged reports and exact Undo; bundled example."
+    },
+    {
+      "command": "node docs/evidence/area-grid-rectangles/verify.mjs",
+      "result": "pass",
+      "notes": "Preserved records, both ceiling browser archive reopens, exact browser Undo and bundled sample reopen."
+    },
+    {
+      "command": "node docs/evidence/area-grid-cuts/verify.mjs",
+      "result": "pass",
+      "notes": "Previous square-module evidence remains exact, including full derived geometry."
+    },
+    {
+      "command": "node scripts/check-doc-links.mjs",
+      "result": "pass"
+    }
+  ],
+  "public_ceiling": [
+    {
+      "angle_deg": 0,
+      "full_tiles": 8,
+      "cut_cells": 24,
+      "edge_cut_pieces": 24,
+      "centers": 23,
+      "covered_sf": 175.72693333333333,
+      "stored_sf": 175.73
+    },
+    {
+      "angle_deg": 90,
+      "full_tiles": 15,
+      "cut_cells": 24,
+      "edge_cut_pieces": 24,
+      "centers": 22,
+      "covered_sf": 175.72693333333333,
+      "stored_sf": 175.73
+    }
+  ],
+  "bundled_sample": {
+    "full_tiles": 14,
+    "edge_cut_pieces": 4,
+    "centers": 18,
+    "covered_sf": 128,
+    "basis": "Assumed nominal 2-by-4 demonstration, not specified work"
+  },
+  "preservation": "Only explicit area_grid settings change in the examples. Derived centers change with pitch/orientation; saved measured quantities do not. All other record fields remain identical. No new measurements or approvals.",
+  "independence": "No CLG skills or memory. Existing public traces and results deliberately reused and disclosed. Arithmetic is implemented in the shared application engine; a separate Python rational oracle checks this bay.",
+  "limitations": "Assumed 2-by-4 alternatives on a bay previously inferred as 2-by-2. Scale remains unconfirmed. Nominal contiguous modules only; no joints, waste, stock cutting, offcut reuse or purchasing totals. Static marked-PDF/report exports omit derived grids and cuts.",
+  "original_workspace": {
+    "restore": "Exact parsed-JSON equality",
+    "shapes": 7,
+    "conditions": 5,
+    "baseline_json_stringify_sha256": "d04624b4ae50d71779a35a3f95ee3dfcf2419f0bc955d46536fb9d42b76e700b",
+    "restored_json_stringify_sha256": "d04624b4ae50d71779a35a3f95ee3dfcf2419f0bc955d46536fb9d42b76e700b",
+    "backups": "JSON and complete 3-PDF .otk saved under tmp/area-grid-rectangles, not committed."
+  }
+}

@@ -640,12 +640,12 @@ export const areaGridFootprintSchema = z.discriminatedUnion('kind',[
   z.object({kind:z.literal('circle'),diameter_ft:z.number().positive(),...footprintSource}),
   z.object({kind:z.literal('rectangle'),width_ft:z.number().positive(),depth_ft:z.number().positive(),...footprintSource}),
 ]);
-export const areaGridSchema = plantingGridSchema.omit({single_species:true,source_callout_id:true}).extend({single_item:z.literal(true),source_callout_id:z.string().min(1).optional(),footprint:areaGridFootprintSchema.optional(),cut_pieces:z.boolean().optional()});
+export const areaGridSchema = plantingGridSchema.omit({single_species:true,source_callout_id:true}).extend({pattern:z.enum(['square','triangular','rectangular']),spacing_y_ft:z.number().positive().optional().describe('Required only for rectangular grids; spacing_ft is the X pitch, spacing_y_ft is the Y pitch in grid-local feet.'),single_item:z.literal(true),source_callout_id:z.string().min(1).optional(),footprint:areaGridFootprintSchema.optional(),cut_pieces:z.boolean().optional()});
 export const editShapeOutput = {
   shape_id: z.string(),
   changed: z.array(z.enum(["verts", "condition", "role", "label", "rise_ft", "drop_ft", "source_callout_ids", "planting_grid", "area_grid"])).describe("Which fields this call actually changed"),
   grid_count:z.number().int().nonnegative().optional().describe('Calculated positions inside the area; layout comparison only, never added to takeoff quantities'),
-  grid_cuts:z.object({full_tiles:z.number().int().nonnegative(),cut_cells:z.number().int().nonnegative(),edge_cut_pieces:z.number().int().nonnegative(),covered_sf:z.number().nonnegative(),full_sf:z.number().nonnegative(),cut_sf:z.number().nonnegative()}).optional().describe('Derived square-module clipping, including cells with centers outside. Cut pieces count disconnected polygons; cut cells count modules. Not a purchase quantity; no waste or offcut reuse.'),
+  grid_cuts:z.object({full_tiles:z.number().int().nonnegative(),cut_cells:z.number().int().nonnegative(),edge_cut_pieces:z.number().int().nonnegative(),covered_sf:z.number().nonnegative(),full_sf:z.number().nonnegative(),cut_sf:z.number().nonnegative()}).optional().describe('Derived square or rectangular module clipping, including cells with centers outside. Cut pieces count disconnected polygons; cut cells count modules. Not a purchase quantity; no waste or offcut reuse.'),
   measure_role: z.enum(["floor_area", "deduct", "linear", "surface_area", "count"]),
   nverts: z.number().int(),
   area_sf: z.number().optional().describe("0 for linear shapes; LF × height for surface_area; absent for count"),

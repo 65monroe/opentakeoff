@@ -261,6 +261,16 @@ test('generic area grids and legacy planting grids preserve exact metadata throu
   const archive=await buildProjectArchive({takeoff:payload,sheets:[{name:sheet}],loadPdfData:async()=>new Uint8Array(await readFile(plan))});
   assert.deepEqual((await parseProjectArchive(archive)).takeoff,payload);
   const old={...payload.shapes[0]};delete old.area_grid;assert.deepEqual(old,before.shapes[0]);
+  const rectangular=structuredClone(payload);
+  Object.assign(rectangular.shapes[0].area_grid,{pattern:'rectangular',spacing_ft:2,spacing_y_ft:4,footprint:{kind:'rectangle',width_ft:2,depth_ft:4,basis:'assumed',reference:'Synthetic 2 by 4 nominal module'}});
+  checkBoth(rectangular);
+  assert.deepEqual(mergeTakeoffImport(emptyAnnotations(),rectangular).payload.shapes,rectangular.shapes);
+  const rectArchive=await buildProjectArchive({takeoff:rectangular,sheets:[{name:sheet}],loadPdfData:async()=>new Uint8Array(await readFile(plan))});
+  assert.deepEqual((await parseProjectArchive(rectArchive)).takeoff,rectangular);
+  for(const patch of [{spacing_y_ft:undefined},{spacing_y_ft:0},{pattern:'square'}]){
+    const bad=structuredClone(rectangular);Object.assign(bad.shapes[0].area_grid,patch);
+    assert.equal(ajv.getSchema('https://opentakeoff.kentucky-ai.com/protocol/legacy/takeoff-canvas.v1.schema.json')(bad),false);
+  }
   for (const footprint of [{kind:'circle',diameter_ft:.625,basis:'specified',reference:'Synthetic source'}, {kind:'rectangle',width_ft:2,depth_ft:4,basis:'assumed',reference:'Synthetic source'}]) {
     const copy=structuredClone(payload);copy.shapes[0].area_grid.footprint=footprint;delete copy.shapes[0].area_grid.cut_pieces;checkBoth(copy);
   }

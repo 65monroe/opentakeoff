@@ -1,4 +1,4 @@
-// Derived square-module clipping. No shape IDs, totals or review fields are written.
+// Derived rectangular-module clipping. No shape IDs, totals or review fields are written.
 import GeometryFactory from 'jsts/org/locationtech/jts/geom/GeometryFactory.js';
 import Coordinate from 'jsts/org/locationtech/jts/geom/Coordinate.js';
 import OverlayOp from 'jsts/org/locationtech/jts/operation/overlay/OverlayOp.js';
@@ -38,16 +38,17 @@ export function areaGridCuts(area,frame) {
     const pts=rings.map(r=>r.map(toGrid));
     const boundary=gf.createPolygon(closed(pts[0]),pts.slice(1).map(closed));
     if (!IsValidOp.isValid(boundary)||!(boundary.getArea()>0)) return empty('Cuts need a valid, non-self-intersecting boundary and holes; geometry was not repaired.');
-    const env=boundary.getEnvelopeInternal(),step=g.spacing_ft,half=step/2;
-    const i0=Math.floor((env.getMinX()-g.offset_x_ft-half)/step),i1=Math.ceil((env.getMaxX()-g.offset_x_ft+half)/step);
-    const j0=Math.floor((env.getMinY()-g.offset_y_ft-half)/step),j1=Math.ceil((env.getMaxY()-g.offset_y_ft+half)/step);
+    const env=boundary.getEnvelopeInternal(),stepX=g.spacing_ft,stepY=g.pattern==='rectangular'?g.spacing_y_ft:stepX;
+    const halfX=stepX/2,halfY=stepY/2;
+    const i0=Math.floor((env.getMinX()-g.offset_x_ft-halfX)/stepX),i1=Math.ceil((env.getMaxX()-g.offset_x_ft+halfX)/stepX);
+    const j0=Math.floor((env.getMinY()-g.offset_y_ft-halfY)/stepY),j1=Math.ceil((env.getMaxY()-g.offset_y_ft+halfY)/stepY);
     if (![i0,i1,j0,j1].every(Number.isSafeInteger)||(i1-i0+1)*(j1-j0+1)>2500) return empty('Cut calculation exceeds 2,500 candidate modules. Use a smaller area or larger module.');
-    const result=empty(null),moduleArea=step*step;
+    const result=empty(null),moduleArea=stepX*stepY;
     // Numerical noise only; never round dimensions to decide whether a piece exists.
     const epsilon=Math.max(moduleArea*1e-10,64*Number.EPSILON*boundary.getArea());
     for(let row=j0;row<=j1;row++)for(let column=i0;column<=i1;column++) {
-      const x=g.offset_x_ft+column*step,y=g.offset_y_ft+row*step;
-      const tile=gf.createPolygon(closed([[x-half,y-half],[x+half,y-half],[x+half,y+half],[x-half,y+half]]));
+      const x=g.offset_x_ft+column*stepX,y=g.offset_y_ft+row*stepY;
+      const tile=gf.createPolygon(closed([[x-halfX,y-halfY],[x+halfX,y-halfY],[x+halfX,y+halfY],[x-halfX,y+halfY]]));
       const clipped=OverlayOp.overlayOp(boundary,tile,OverlayOp.INTERSECTION);
       const parts=polygons(clipped).filter(p=>p.getArea()>epsilon);
       const area_sf=parts.reduce((n,p)=>n+p.getArea(),0);

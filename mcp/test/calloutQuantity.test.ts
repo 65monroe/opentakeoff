@@ -138,6 +138,15 @@ test('generic area_grid is available over MCP without a printed callout and pres
     for(const patch of [{pattern:'triangular'},{inset_ft:.5},{footprint:{...cutConfig.footprint,width_ft:2}}]){
       await call({shape_id:area.shape_id,area_grid:{...cutConfig,...patch}},true);assert.deepEqual(session.exportPayload(),saved);
     }
+    const rectangular={...cutConfig,pattern:'rectangular',spacing_ft:2,spacing_y_ft:4,footprint:{...cutConfig.footprint,width_ft:2,depth_ft:4}};
+    const rectCuts=await call({shape_id:area.shape_id,area_grid:rectangular});
+    assert.ok(rectCuts.grid_cuts.full_tiles>0);assert.ok(rectCuts.grid_cuts.edge_cut_pieces>0);
+    assert.equal(Math.round(rectCuts.grid_cuts.covered_sf*100)/100,original.shapes[0].computed.area_sf);
+    const rectCopy=structuredClone(session.shapes[0]);delete rectCopy.area_grid;assert.deepEqual(rectCopy,original.shapes[0]);
+    await client.callTool({name:'undo_last',arguments:{}});assert.deepEqual(session.exportPayload(),saved);
+    for(const patch of [{spacing_y_ft:undefined},{spacing_y_ft:0},{spacing_y_ft:3},{pattern:'square'}]){
+      await call({shape_id:area.shape_id,area_grid:{...rectangular,...patch}},true);assert.deepEqual(session.exportPayload(),saved);
+    }
     for (const footprint of [{kind:'circle',diameter_ft:.625,basis:'assumed',reference:'Test container'}, {kind:'rectangle',width_ft:2,depth_ft:2,basis:'specified',reference:'Test module'}]) {
       const footprintResult=await call({shape_id:area.shape_id,area_grid:{...grid,footprint}});
       assert.equal(footprintResult.grid_count,result.grid_count);

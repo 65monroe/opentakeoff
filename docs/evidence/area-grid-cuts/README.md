@@ -1,5 +1,9 @@
 # Full tiles and edge cuts on public A111
 
+This is the square-module evidence snapshot. The subsequent
+[2-by-4 comparison](../area-grid-rectangles/README.md) adds rectangular pitches
+without rewriting these recorded inputs and results.
+
 The existing public ceiling bay now has an opt-in calculation that separates
 **31 full tiles** and **32 edge cut pieces**. Clipped coverage is **175.73 SF**.
 The previous 45-center count, measurement ID, source polygon, stored area and

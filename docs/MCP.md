@@ -22,7 +22,7 @@ Pass `null` to remove the links. SF and printed EA remain separate; no EA is inf
 
 Area grid count: use `edit_shape area_grid` in its own call on a `floor_area`.
 No plant code or printed callout is required. Supply `single_item: true`, positive
-`spacing_ft`, `pattern` (square/triangular), `angle_deg`, `inset_ft`,
+`spacing_ft`, `pattern` (square/triangular/rectangular), `angle_deg`, `inset_ft`,
 `offset_x_ft`, `offset_y_ft`, fixed `origin_norm`, and a `reference` citing
 spacing and all layout assumptions. Optional `source_callout_id` must resolve
 to an existing same-sheet printed source already in the area's
@@ -45,9 +45,14 @@ The source basis is not approval. Compare alternative patterns only as stated
 assumptions when the drawing does not specify one; numerical closeness alone
 does not select a pattern.
 
-Set optional `area_grid.cut_pieces: true` to clip contiguous square modules to
-the outline and holes. Use square pattern, zero clearance and rectangle width
-and depth equal to spacing. The returned `grid_cuts` separates `full_tiles`,
+For a rectangular lattice use `pattern: "rectangular"`, `spacing_ft` for X pitch
+and required `spacing_y_ft` for Y pitch. Both pitches are in grid-local feet;
+`angle_deg` rotates both. Omit `spacing_y_ft` for other patterns. Existing square
+and triangular records keep their exact behavior without migration.
+Set optional `area_grid.cut_pieces: true` to clip contiguous square or rectangular
+modules to the outline and holes. Use square or rectangular pattern, zero
+clearance and footprint width/depth matching X/Y pitch. For 2-by-4 tiles use
+X pitch and width 2 ft, Y pitch and depth 4 ft. The returned `grid_cuts` separates `full_tiles`,
 `cut_cells`, `edge_cut_pieces`, `full_sf`, `cut_sf` and `covered_sf`. A cut cell
 can yield multiple disconnected pieces; a hole within one connected piece does
 not make it two pieces. All intersecting cells are considered, including those

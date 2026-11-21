@@ -26,10 +26,13 @@ export function areaGridError(area, shapes) {
   if (legacy && (!area.planting_grid || area.planting_grid.single_species !== true || !area.planting_grid.source_callout_id)) return 'Legacy planting grid needs its single-species declaration and source.';
   if (g === undefined) return null;
   const f = g?.footprint;
+  if (g?.pattern === 'rectangular' && (!Number.isFinite(g.spacing_y_ft) || g.spacing_y_ft <= 0)) return 'A rectangular grid needs positive Y spacing.';
+  if (g?.spacing_y_ft !== undefined && g.pattern !== 'rectangular') return 'Y spacing applies only to a rectangular grid.';
   if (g?.cut_pieces !== undefined && typeof g.cut_pieces !== 'boolean') return 'Cut-piece calculation must be on or off.';
-  if (g?.cut_pieces && (g.pattern!=='square' || g.inset_ft!==0 || f?.kind!=='rectangle' ||
-      ![f.width_ft,f.depth_ft].every(v=>Number.isFinite(v)&&Math.abs(v-g.spacing_ft)<=1e-9))) {
-    return 'Cuts require a square pattern, zero edge clearance, and rectangle width and depth equal to spacing. Use nominal module dimensions; separate joints are not modeled.';
+  if (g?.cut_pieces && (!['square','rectangular'].includes(g.pattern) || g.inset_ft!==0 || f?.kind!=='rectangle' ||
+      !Number.isFinite(f.width_ft) || !Number.isFinite(f.depth_ft) ||
+      Math.abs(f.width_ft-g.spacing_ft)>1e-9 || Math.abs(f.depth_ft-(g.pattern==='rectangular'?g.spacing_y_ft:g.spacing_ft))>1e-9)) {
+    return 'Cuts require a square or rectangular pattern, zero edge clearance, and footprint dimensions matching X and Y spacing. Use nominal module dimensions; separate joints are not modeled.';
   }
   if (f !== undefined && (!f || !['circle', 'rectangle'].includes(f.kind) ||
       !['assumed', 'specified'].includes(f.basis) || typeof f.reference !== 'string' || !f.reference.trim() ||
@@ -38,14 +41,14 @@ export function areaGridError(area, shapes) {
     return 'A footprint needs positive dimensions, a circle or rectangle, a stated or assumed basis and a source reference.';
   }
   if (!g || g.single_item !== true || area.measure_role !== 'floor_area' || area.curved ||
-      !['square', 'triangular'].includes(g.pattern) ||
+      !['square', 'triangular', 'rectangular'].includes(g.pattern) ||
       !Number.isFinite(g.spacing_ft) || g.spacing_ft <= 0 ||
       !Number.isFinite(g.angle_deg) || Math.abs(g.angle_deg) > 360 ||
       !['offset_x_ft', 'offset_y_ft', 'inset_ft'].every(k => Number.isFinite(g[k]) && g[k] >= 0) ||
       !Array.isArray(g.origin_norm) || g.origin_norm.length !== 2 || !g.origin_norm.every(v => Number.isFinite(v) && v >= 0 && v <= 1) ||
       typeof g.reference !== 'string' || !g.reference.trim() ||
       (g.source_callout_id !== undefined && (typeof g.source_callout_id !== 'string' || !g.source_callout_id.trim() || !area.source_callout_ids?.includes(g.source_callout_id)))) {
-    return 'An area grid needs a floor area, a single-item extent, positive spacing, square or triangular pattern, origin, finite layout settings and a source reference.';
+    return 'An area grid needs a floor area, a single-item extent, positive spacing, square, triangular or rectangular pattern, origin, finite layout settings and a source reference.';
   }
   if (g.source_callout_id !== undefined && shapes && !shapes.some(s => s.id === g.source_callout_id && s.sheet_id === area.sheet_id && isCalloutQuantity(s))) return 'The grid source must be a printed callout on this sheet.';
   return null;
@@ -78,7 +81,7 @@ export function areaGrid(area, frame) {
   if (sourceRings.some(r=>!Array.isArray(r) || r.some(p=>!Array.isArray(p) || p.length!==2))) return {error:'Grid needs valid polygon rings.',points_norm:[],count:null};
   const rings=sourceRings.map(r=>r.map(toGrid));
   if (rings.some(r=>r.length<3 || r.some(p=>!p.every(Number.isFinite)))) return {error:'Grid needs valid polygon rings.',points_norm:[],count:null};
-  const ring=rings[0], step=g.spacing_ft, row=step*(g.pattern==='triangular'?Math.sqrt(3)/2:1);
+  const ring=rings[0], step=g.spacing_ft, row=g.pattern==='rectangular'?g.spacing_y_ft:step*(g.pattern==='triangular'?Math.sqrt(3)/2:1);
   const xmin=Math.min(...ring.map(p=>p[0])), xmax=Math.max(...ring.map(p=>p[0]));
   const ymin=Math.min(...ring.map(p=>p[1])), ymax=Math.max(...ring.map(p=>p[1]));
   const j0=Math.floor((ymin-g.offset_y_ft)/row)-1,j1=Math.ceil((ymax-g.offset_y_ft)/row)+1;

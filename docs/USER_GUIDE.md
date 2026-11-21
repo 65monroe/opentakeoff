@@ -305,7 +305,8 @@ Select a floor-area measurement in **Work and review** and open **Area grid
 count**. No plant code or printed callout is required. Use one repeating item
 type and spacing throughout the outline, such as plants, posts or support
 positions on a specified layout. The calculation does not locate drawn items,
-infer component dimensions, calculate cut pieces or establish a compliant design.
+infer component dimensions or establish a compliant design. Cut pieces require
+the separate option described below.
 
 Enter **Spacing (in)** and choose **Pattern**. **Orientation and edges** contains
 **Angle (degrees)**, **Edge clearance (in)**, **Grid shift X (in)** and **Grid
@@ -313,6 +314,9 @@ shift Y (in)**. Enter **Spacing source and layout assumptions**, select **This
 outline applies to one item type and spacing throughout.**, and click **Save
 grid**. Hollow circles show generated positions clipped to the outline and holes.
 They are a layout calculation; they do not add EA or change the measured SF.
+Choose **Rectangular** for unequal pitches. Enter **Spacing X (in)** and
+**Spacing Y (in)**; both axes rotate with **Angle (degrees)**. Existing square
+and triangular grids retain their original single-spacing behavior.
 
 Open **Item footprint** to replace position markers with physical outlines.
 Choose **Circle** and enter **Diameter (in)**, or choose **Rectangle** and enter
@@ -323,7 +327,7 @@ outlines scale with the drawing. Choose **Position markers only** to remove
 the footprint while keeping the grid (turn off cut calculation first). Dimensions never set spacing or change
 counts. A source basis is a citation, not review approval. Container diameter,
 plant spread and on-center spacing are separate values. Full outlines can cross
-the area edge by default; enable cut calculation below to clip square modules.
+the area edge by default; enable cut calculation below to clip modules.
 
 When the area has a linked printed source, the receipt also compares its EA
 with the generated count. Otherwise it shows **no printed comparison**. Inspect
@@ -337,18 +341,25 @@ format. JSON and project archives preserve it. Static marked PDFs and quantity
 report exports currently omit the grid comparison; existing EA and SF remain
 unchanged. The first [public-plan example](evidence/area-grid-count/README.md)
 is the SET planting bed.
-For a square ceiling module, select **Calculate full tiles and edge cuts** and
-click **Save grid**. Use **Square**, zero **Edge clearance (in)**, and rectangle
-width and depth equal to spacing. Nominal modules include their grid pitch;
+For ceiling modules, select **Calculate full tiles and edge cuts** and
+click **Save grid**. Use **Square** or **Rectangular**, zero **Edge clearance
+(in)**, and rectangle width and depth matching the X and Y spacing. For a
+nominal 2-by-4 tile, choose **Rectangular**, enter X spacing and width of 24 in,
+and Y spacing and depth of 48 in. Keep orientation and shifts tied to the source
+or label them as assumptions. Nominal modules include their grid pitch;
 separate joints are not modeled. The result separates **full tiles** from
 **edge cut pieces** and shows covered SF. Full modules have solid outlines;
 cuts have red dashed outlines. **Edge cut schedule** lists the retained area
 and piece count for each cut cell. One cell can leave multiple disconnected
 pieces. Modules crossing the boundary count even when their centers lie outside.
-The existing center count and takeoff quantities stay unchanged. Invalid geometry
+Enabling cuts alone does not change the center count. Changing spacing or
+orientation recalculates layout centers and cuts, while saved takeoff quantities
+remain unchanged. Invalid geometry
 or more than 2,500 candidate modules withholds the calculation. This is a layout
 check, not a purchasing quantity: waste and offcut reuse remain uncalculated.
 See the [public ceiling cut example](evidence/area-grid-cuts/README.md).
+The [2-by-4 comparison](evidence/area-grid-rectangles/README.md) uses the same
+public boundary and separately records both orientations and their assumptions.
 
 See the [footprint evidence](evidence/area-grid-footprints/README.md) for the
 SET bed and a public reflected ceiling plan.

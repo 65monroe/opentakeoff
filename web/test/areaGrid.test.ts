@@ -73,3 +73,17 @@ test('ambiguous grids and unsupported roles refuse; optional references must be 
   assert.equal(areaGrid({...area,area_grid:grid,verts_norm:undefined},frame).count,null);
   assert.equal(areaGridError({...area,area_grid:grid},[]),null);
 });
+
+test('rectangular spacing is explicit, rotates with the grid and preserves saved records',()=>{
+  const config={...grid,pattern:'rectangular',spacing_y_ft:2,offset_y_ft:1};
+  const changed=applyShapeCommand([area],{type:'areaGrid',id:area.id,grid:config});
+  assert.deepEqual(areaGrid(changed.shapes[0],frame).points_norm,[[.25,.5],[.75,.5]]);
+  const rotated=areaGrid({...area,area_grid:{...config,angle_deg:90}},frame);
+  assert.equal(rotated.count,2);
+  rotated.points_norm.forEach(p=>assert.ok(Math.abs(p[0]-.5)<1e-10));
+  const stripped=structuredClone(changed.shapes[0]);delete stripped.area_grid;assert.deepEqual(stripped,area);
+  assert.deepEqual(mergeTakeoffImport({},{schema:'opentakeoff.takeoff_canvas.v1',conditions:[],shapes:changed.shapes}).payload.shapes,changed.shapes);
+  assert.deepEqual(applyShapeCommand(changed.shapes,changed.inverse).shapes,[area]);
+  for(const spacing_y_ft of [undefined,0,-1,NaN,Infinity])assert.ok(areaGridError({...area,area_grid:{...config,spacing_y_ft}}));
+  assert.ok(areaGridError({...area,area_grid:{...config,pattern:'triangular'}}));
+});

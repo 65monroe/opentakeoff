@@ -1,0 +1,378 @@
+{
+  "method": "Independent exact rational answers for the existing simple public A111 bay.\n\nSutherland-Hodgman clips against rectangles, without the application's JTS.\nThis oracle covers this bay at 0/90 degrees, not general holes or split pieces.",
+  "cases": [
+    {
+      "angle_deg": 0,
+      "full_tiles": 8,
+      "cut_cells": 24,
+      "covered_sf": 175.72693333333333,
+      "covered_sf_exact": "329488/1875",
+      "cells": [
+        {
+          "key": "0:-1",
+          "kind": "cut",
+          "area_sf": 3.7184
+        },
+        {
+          "key": "0:0",
+          "kind": "cut",
+          "area_sf": 6.64
+        },
+        {
+          "key": "0:1",
+          "kind": "cut",
+          "area_sf": 6.64
+        },
+        {
+          "key": "0:2",
+          "kind": "cut",
+          "area_sf": 6.64
+        },
+        {
+          "key": "0:3",
+          "kind": "cut",
+          "area_sf": 6.64
+        },
+        {
+          "key": "0:4",
+          "kind": "cut",
+          "area_sf": 6.64
+        },
+        {
+          "key": "0:5",
+          "kind": "cut",
+          "area_sf": 6.64
+        },
+        {
+          "key": "0:6",
+          "kind": "cut",
+          "area_sf": 6.64
+        },
+        {
+          "key": "0:7",
+          "kind": "cut",
+          "area_sf": 6.64
+        },
+        {
+          "key": "0:8",
+          "kind": "cut",
+          "area_sf": 5.0464
+        },
+        {
+          "key": "1:-1",
+          "kind": "cut",
+          "area_sf": 0.8512
+        },
+        {
+          "key": "1:0",
+          "kind": "cut",
+          "area_sf": 1.52
+        },
+        {
+          "key": "1:1",
+          "kind": "cut",
+          "area_sf": 2.0334222222222222
+        },
+        {
+          "key": "1:2",
+          "kind": "cut",
+          "area_sf": 5.546666666666667
+        },
+        {
+          "key": "1:3",
+          "kind": "cut",
+          "area_sf": 7.974311111111111
+        },
+        {
+          "key": "1:4",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "1:5",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "1:6",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "1:7",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "1:8",
+          "kind": "cut",
+          "area_sf": 6.08
+        },
+        {
+          "key": "2:3",
+          "kind": "cut",
+          "area_sf": 5.430133333333333
+        },
+        {
+          "key": "2:4",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "2:5",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "2:6",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "2:7",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "2:8",
+          "kind": "cut",
+          "area_sf": 6.08
+        },
+        {
+          "key": "3:3",
+          "kind": "cut",
+          "area_sf": 1.76
+        },
+        {
+          "key": "3:4",
+          "kind": "cut",
+          "area_sf": 2.64
+        },
+        {
+          "key": "3:5",
+          "kind": "cut",
+          "area_sf": 2.64
+        },
+        {
+          "key": "3:6",
+          "kind": "cut",
+          "area_sf": 2.64
+        },
+        {
+          "key": "3:7",
+          "kind": "cut",
+          "area_sf": 2.64
+        },
+        {
+          "key": "3:8",
+          "kind": "cut",
+          "area_sf": 2.0064
+        }
+      ]
+    },
+    {
+      "angle_deg": 90,
+      "full_tiles": 15,
+      "cut_cells": 24,
+      "covered_sf": 175.72693333333333,
+      "covered_sf_exact": "329488/1875",
+      "cells": [
+        {
+          "key": "-5:-1",
+          "kind": "cut",
+          "area_sf": 0.1664
+        },
+        {
+          "key": "-5:0",
+          "kind": "cut",
+          "area_sf": 1.04
+        },
+        {
+          "key": "-5:1",
+          "kind": "cut",
+          "area_sf": 1.04
+        },
+        {
+          "key": "-5:2",
+          "kind": "cut",
+          "area_sf": 1.04
+        },
+        {
+          "key": "-5:3",
+          "kind": "cut",
+          "area_sf": 1.04
+        },
+        {
+          "key": "-5:4",
+          "kind": "cut",
+          "area_sf": 1.04
+        },
+        {
+          "key": "-5:5",
+          "kind": "cut",
+          "area_sf": 1.04
+        },
+        {
+          "key": "-5:6",
+          "kind": "cut",
+          "area_sf": 0.1664
+        },
+        {
+          "key": "-4:-1",
+          "kind": "cut",
+          "area_sf": 1.28
+        },
+        {
+          "key": "-4:0",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-4:1",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-4:2",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-4:3",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-4:4",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-4:5",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-4:6",
+          "kind": "cut",
+          "area_sf": 1.28
+        },
+        {
+          "key": "-3:-1",
+          "kind": "cut",
+          "area_sf": 1.28
+        },
+        {
+          "key": "-3:0",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-3:1",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-3:2",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-3:3",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-3:4",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-3:5",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-3:6",
+          "kind": "cut",
+          "area_sf": 1.28
+        },
+        {
+          "key": "-2:-1",
+          "kind": "cut",
+          "area_sf": 1.28
+        },
+        {
+          "key": "-2:0",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-2:1",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-2:2",
+          "kind": "cut",
+          "area_sf": 7.974311111111111
+        },
+        {
+          "key": "-2:3",
+          "kind": "cut",
+          "area_sf": 5.7034666666666665
+        },
+        {
+          "key": "-2:4",
+          "kind": "cut",
+          "area_sf": 4.666666666666667
+        },
+        {
+          "key": "-2:5",
+          "kind": "cut",
+          "area_sf": 4.666666666666667
+        },
+        {
+          "key": "-2:6",
+          "kind": "cut",
+          "area_sf": 0.7466666666666667
+        },
+        {
+          "key": "-1:-1",
+          "kind": "cut",
+          "area_sf": 1.28
+        },
+        {
+          "key": "-1:0",
+          "kind": "full",
+          "area_sf": 8.0
+        },
+        {
+          "key": "-1:1",
+          "kind": "cut",
+          "area_sf": 7.4944
+        },
+        {
+          "key": "-1:2",
+          "kind": "cut",
+          "area_sf": 1.5723555555555555
+        },
+        {
+          "key": "0:-1",
+          "kind": "cut",
+          "area_sf": 0.6784
+        },
+        {
+          "key": "0:0",
+          "kind": "cut",
+          "area_sf": 4.24
+        },
+        {
+          "key": "0:1",
+          "kind": "cut",
+          "area_sf": 3.7312
+        }
+      ]
+    }
+  ]
+}

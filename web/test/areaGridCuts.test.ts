@@ -7,7 +7,7 @@ import {applyShapeCommand} from '../src/lib/shapeCommands.js';
 const frame={widthPx:10,heightPx:10,upp:1};
 const grid={single_item:true,spacing_ft:2,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:1,offset_y_ft:1,origin_norm:[0,0],reference:'Test module layout',footprint:{kind:'rectangle',width_ft:2,depth_ft:2,basis:'assumed',reference:'Test nominal module'},cut_pieces:true};
 const rect=(x:number,y:number,w:number,h:number)=>[[x,y],[x+w,y],[x+w,y+h],[x,y+h]].map(p=>p.map(v=>v/10));
-const shape=(verts=rect(0,0,4,4),extra={})=>({id:'same',sheet_id:'plan',condition_id:'ACT',measure_role:'floor_area',verts_norm:verts,computed:{area_sf:16},origin:{actor:'agent',reviewed:true},area_grid:grid,...extra});
+const shape=(verts=rect(0,0,4,4),extra={})=>({id:'same',sheet_id:'plan',condition_id:'ACT',measure_role:'floor_area',verts_norm:verts,computed:{area_sf:16},origin:{actor:'agent',reviewed:true},area_grid:structuredClone(grid),...extra});
 const near=(a:number,b:number)=>assert.ok(Math.abs(a-b)<1e-8,`${a} != ${b}`);
 
 test('cuts partition the boundary and include modules whose centers are outside',()=>{
@@ -64,4 +64,36 @@ test('public A111 unchanged trace conserves coverage with clipped modules',()=>{
   assert.equal(r.full_tiles,31);assert.equal(r.cut_cells,32);assert.equal(r.edge_cut_pieces,32);
   assert.deepEqual(r.cells.map(c=>[c.key,c.kind]),expected.cells.map((c:any)=>[c.key,c.kind]));
   r.cells.forEach((c,i)=>near(c.area_sf,expected.cells[i].area_sf));
+});
+
+test('2 by 4 modules cover full, cut, rotated and holed boundaries without overlaps',()=>{
+  const config={...grid,pattern:'rectangular',spacing_y_ft:4,offset_y_ft:2,footprint:{...grid.footprint,depth_ft:4}};
+  const a=shape(rect(0,0,4,8),{area_grid:config});
+  const exact=areaGridCuts(a,frame)!;
+  assert.equal(exact.full_tiles,4);assert.equal(exact.edge_cut_pieces,0);near(exact.covered_sf,32);
+  assert.equal(areaGrid(a,frame).count,4);
+  const odd=areaGridCuts(shape(rect(0,0,3,5),{area_grid:config}),frame)!;
+  assert.equal(odd.full_tiles,1);assert.equal(odd.edge_cut_pieces,3);near(odd.cut_sf,7);near(odd.covered_sf,15);
+  const rotated=areaGridCuts(shape(rect(0,0,8,4),{area_grid:{...config,angle_deg:90}}),frame)!;
+  assert.equal(rotated.full_tiles,4);assert.equal(rotated.edge_cut_pieces,0);near(rotated.covered_sf,32);
+  const hole=areaGridCuts({...a,verts_norm_holes:[rect(.5,.5,1,1)]},frame)!;
+  assert.equal(hole.full_tiles,3);assert.equal(hole.edge_cut_pieces,1);near(hole.covered_sf,31);
+  for(const spacing_y_ft of [undefined,0,-1,NaN,Infinity])assert.ok(areaGridCuts({...a,area_grid:{...config,spacing_y_ft}},frame)?.error);
+  assert.ok(areaGridCuts({...a,area_grid:{...config,pattern:'square'}},frame)?.error);
+  assert.ok(areaGridCuts({...a,area_grid:{...config,spacing_y_ft:3}},frame)?.error,'gap/overlap cannot masquerade as contiguous modules');
+});
+
+test('public A111 2 by 4 alternatives match independent cells and areas at both orientations',()=>{
+  const p=JSON.parse(readFileSync(new URL('../../docs/evidence/area-grid-cuts/ceiling-cuts.json',import.meta.url),'utf8'));
+  const expected=JSON.parse(readFileSync(new URL('../../docs/evidence/area-grid-rectangles/expected.json',import.meta.url),'utf8'));
+  for(const exp of expected.cases){
+    const a=structuredClone(p.shapes[0]);
+    Object.assign(a.area_grid,{pattern:'rectangular',spacing_y_ft:4,angle_deg:exp.angle_deg});a.area_grid.footprint.depth_ft=4;
+    const f={widthPx:5184,heightPx:3456,upp:p.sheets[0].units_per_px};
+    const r=areaGridCuts(a,f)!;assert.equal(r.error,null);
+    assert.equal(r.full_tiles,exp.full_tiles);assert.equal(r.cut_cells,exp.cut_cells);assert.equal(r.edge_cut_pieces,exp.cut_cells);
+    assert.deepEqual(r.cells.map(c=>[c.key,c.kind]),exp.cells.map((c:any)=>[c.key,c.kind]));
+    r.cells.forEach((c,i)=>near(c.area_sf,exp.cells[i].area_sf));near(r.covered_sf,exp.covered_sf);
+    assert.equal(areaGrid(a,f).count,exp.angle_deg===0?23:22);
+  }
 });

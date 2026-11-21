@@ -68,10 +68,16 @@
           "type": "number",
           "exclusiveMinimum": 0
         },
+        "spacing_y_ft": {
+          "type": "number",
+          "exclusiveMinimum": 0,
+          "description": "Required only for a rectangular pattern; Y pitch in grid-local feet. spacing_ft remains the X pitch."
+        },
         "pattern": {
           "enum": [
             "square",
-            "triangular"
+            "triangular",
+            "rectangular"
           ]
         },
         "angle_deg": {
@@ -110,7 +116,7 @@
         },
         "cut_pieces": {
           "type": "boolean",
-          "description": "Optional clipped square-module analysis. Requires square pattern, zero clearance and rectangle width/depth equal to spacing at runtime. Derived full tiles and edge cut pieces are not saved quantities or purchasing totals."
+          "description": "Optional clipped square or rectangular module analysis. Requires square or rectangular pattern, zero clearance and footprint dimensions matching X/Y spacing at runtime. Derived full tiles and edge cut pieces are not saved quantities or purchasing totals."
         },
         "footprint": {
           "type": "object",
@@ -129,7 +135,7 @@
             "else": {"required": ["width_ft", "depth_ft"]}
           }],
           "additionalProperties": true,
-          "description": "Optional physical outline at each existing grid center. Feet, independent of spacing; rectangles follow the grid angle. Source basis is a declaration, not approval. Full outlines are shown across edges; no cell clipping, cut-piece count or added EA."
+          "description": "Optional physical outline in feet; rectangles follow the grid angle. Source basis is a declaration, not approval. Default outlines are independent of spacing; cut_pieces requires matching module pitches and clips them at the boundary. No added EA."
         }
       },
       "required": [
@@ -143,6 +149,11 @@
         "reference",
         "single_item"
       ],
+      "allOf": [{
+        "if": {"properties": {"pattern": {"const": "rectangular"}}, "required": ["pattern"]},
+        "then": {"required": ["spacing_y_ft"]},
+        "else": {"not": {"required": ["spacing_y_ft"]}}
+      }],
       "additionalProperties": true,
       "description": "Area grid count: generated layout positions within a floor_area, optionally compared with a linked printed quantity. One item type and spacing throughout is a declaration, not approval. No added EA; no automatic quantity adoption."
     },

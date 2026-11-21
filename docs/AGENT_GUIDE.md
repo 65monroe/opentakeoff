@@ -39,10 +39,14 @@ a layout. If unstated, compare labeled alternatives with fixed spacing, boundary
 origin, shifts and clearance; a smaller quantity difference is not evidence that
 one pattern is correct. Never silently adopt a generated total or tune offsets
 to force a printed count.
-For contiguous square modules, optional `cut_pieces: true` clips every intersecting
+For rectangular layouts, set `pattern: "rectangular"`, X pitch in `spacing_ft`
+and Y pitch in `spacing_y_ft`. Both axes follow `angle_deg`. Omit Y pitch for
+square or triangular patterns. Do not infer pitches from a container or tile name.
+For contiguous square or rectangular modules, optional `cut_pieces: true` clips every intersecting
 cell to the boundary and holes, including cells whose centers fall outside.
-It requires a square pattern, zero clearance and a rectangle footprint whose
-width and depth equal spacing. Report `grid_cuts.full_tiles` and
+It requires a square or rectangular pattern, zero clearance and a rectangle
+footprint whose width and depth match X and Y pitch. A nominal 2-by-4 example
+uses pitches 2 and 4 feet and footprint width 2 and depth 4 feet. Report `grid_cuts.full_tiles` and
 `edge_cut_pieces` separately; one cut cell can produce disconnected pieces.
 Check that `covered_sf` reconciles with the traced area. Do not promote those
 results to purchased EA: joint dimensions, waste and offcut reuse are not modeled.

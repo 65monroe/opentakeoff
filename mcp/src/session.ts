@@ -384,7 +384,7 @@ export interface Shape {
   /** The single vertex locates printed source text, not an installed item. */
   quantity_source?: { kind: "printed_callout"; unit: "EA"; id: string; text: string; reference: string };
   source_callout_ids?: string[];
-  area_grid?: {source_callout_id?:string;single_item:true;spacing_ft:number;pattern:'square'|'triangular';angle_deg:number;inset_ft:number;offset_x_ft:number;offset_y_ft:number;origin_norm:[number,number];reference:string;cut_pieces?:boolean;footprint?:({kind:'circle';diameter_ft:number}|{kind:'rectangle';width_ft:number;depth_ft:number}) & {basis:'assumed'|'specified';reference:string}};
+  area_grid?: {source_callout_id?:string;single_item:true;spacing_ft:number;spacing_y_ft?:number;pattern:'square'|'triangular'|'rectangular';angle_deg:number;inset_ft:number;offset_x_ft:number;offset_y_ft:number;origin_norm:[number,number];reference:string;cut_pieces?:boolean;footprint?:({kind:'circle';diameter_ft:number}|{kind:'rectangle';width_ft:number;depth_ft:number}) & {basis:'assumed'|'specified';reference:string}};
   planting_grid?: {source_callout_id:string;single_species:true;spacing_ft:number;pattern:'square'|'triangular';angle_deg:number;inset_ft:number;offset_x_ft:number;offset_y_ft:number;origin_norm:[number,number];reference:string};
   /** surface_area only: the height this shape was quantified at (canvas
    * commitSurface snapshots the condition's H onto the shape). */

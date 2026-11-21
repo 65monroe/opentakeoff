@@ -25,8 +25,8 @@ fields modeled by this draft, including nested definitions.
 ## Measurement, calibration, and authorship
 
 Optional `area_grid` on a `floor_area` stores generated layout positions for
-one repeating item type: `single_item: true`, spacing in feet, square or
-triangular pattern, angle, edge clearance, X/Y shifts, fixed normalized origin
+one repeating item type: `single_item: true`, spacing in feet, square,
+triangular or rectangular pattern, angle, edge clearance, X/Y shifts, fixed normalized origin
 and spacing/assumption reference. A `source_callout_id` is optional; if supplied,
 it must be among the area's `source_callout_ids` and resolve to a printed source
 on the same sheet for edits. No plant identity or source record is required.
@@ -55,10 +55,16 @@ change or default migration is introduced.
 Import checks structure and preserves unresolved citations for recovery;
 comparison is withheld if the source is unavailable. Editable JSON and native
 archives preserve settings. Static PDF/report exports omit the grid comparison.
-Optional `area_grid.cut_pieces` opts into derived square-module clipping. It
+Optional `area_grid.spacing_y_ft` is required and positive only with the new
+`pattern: "rectangular"`; `spacing_ft` remains X pitch and the new field is Y
+pitch, both in grid-local feet. Square and triangular patterns omit it. No
+existing record migrates; older clients may retain the fields but refuse the
+new pattern rather than render it. Full older-client visual compatibility is
+not claimed. Import, archive and Undo preserve the explicit configuration.
+Optional `area_grid.cut_pieces` opts into derived square or rectangular module clipping. It
 stores only a boolean, not derived cell geometry or quantities. The runtime
-requires a square pattern, zero clearance and rectangle dimensions equal to
-spacing. Full tiles, cut cells, connected edge cut pieces and clipped areas
+requires a square or rectangular pattern, zero clearance and footprint width
+and depth matching X and Y pitch. Full tiles, cut cells, connected edge cut pieces and clipped areas
 are recomputed from the unchanged source geometry, including its holes and
 boundary-crossing cells with outside centers. Invalid topology refuses without
 repair. Existing IDs, calibration, quantities, reviews and machine originals
