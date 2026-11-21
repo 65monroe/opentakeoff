@@ -46,8 +46,10 @@ or species allocation is needed just to retain printed quantities.
 For the public east C2 bed, the
 [source crop](../planting-suite/screenshots/source-callout-east.png) shows **eight**
 codes: ACD, CPE, CPN, ERA, HAC, PHD, POR and SET. The saved example currently
-links only the existing **58 SET** record. The other seven have not been
-recorded, and this depth change does not add them. C2 also has no saved soil
+links only the existing **58 SET** record at the time of this depth test. The
+[mixed-bed follow-up](../mixed-bed-callouts/README.md) records and links the
+other seven separately, with browser navigation and persistence evidence.
+This depth change itself does not add them. C2 also has no saved soil
 rows or derived edging run yet; its north boundary remains approximate.
 [The actual C2 panel](05-mixed-bed-existing-source.jpg) shows that current state.
 This is not presented as a complete mixed-bed takeoff.

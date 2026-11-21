@@ -4,6 +4,9 @@ The [depth-field follow-up](../area-assembly-depth/README.md) adds direct inch
 entry to these existing material rows. The captures below document the panel
 before that follow-up.
 
+The [mixed-bed example](../mixed-bed-callouts/README.md) subsequently exercises
+this same panel with all eight printed plant codes linked to one public bed.
+
 Open one bed to review its topsoil, compost, printed plant EA and edging LF.
 Edit the existing material rows with preview, Save and Cancel. Locating the
 plant source or edging keeps the bed panel open. No extra measurements or

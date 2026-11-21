@@ -1,0 +1,23 @@
+{
+  "source_manifest": "../planting-suite/source.json",
+  "sheet": "ccfp-L1.0.pdf",
+  "printed_sheet": "L1.0",
+  "scope": "C2 east shared bed, Bid Alternate 2, Addendum 1 dated 02.11.2026",
+  "coordinate_frame": "Full-sheet image pixels at render scale 2.0; 5184 by 3456; top-left origin, y down",
+  "reading_method": "Visually read MCP view_sheet output. read_sheet_text provided row coordinates, but its encoded glyph text was not used to infer codes or quantities.",
+  "bed_id": "shp-cc68c306-e582-4662-be19-f0a2617a0737",
+  "existing_SET_id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+  "rows": [
+    {"code":"ACD","quantity":26,"text":"26 - ACD","at":[3820,1228.8]},
+    {"code":"CPE","quantity":24,"text":"24 - CPE","at":[3820,1253]},
+    {"code":"CPN","quantity":24,"text":"24 - CPN","at":[3820,1277.3]},
+    {"code":"ERA","quantity":24,"text":"24 - ERA","at":[3820,1301.3]},
+    {"code":"HAC","quantity":24,"text":"24 - HAC","at":[3820,1325.5]},
+    {"code":"PHD","quantity":26,"text":"26 - PHD","at":[3820,1349.6]},
+    {"code":"POR","quantity":26,"text":"26 - POR","at":[3820,1373.9]}
+  ],
+  "existing_SET":58,
+  "new_printed_EA":174,
+  "bed_printed_EA":232,
+  "limits":"Existing provisional bed boundary is unchanged. No species allocation, individual locations, grid, schedule reconciliation, soil rows or edging is inferred. Adjacent callout groups are excluded."
+}

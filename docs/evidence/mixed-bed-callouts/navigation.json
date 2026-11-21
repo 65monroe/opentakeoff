@@ -1,0 +1,66 @@
+[
+  {
+    "code": "ACD",
+    "quantity": 26,
+    "id": "shp-6c625d00-f2f6-49aa-a0a3-601e45ff589a",
+    "panelRetained": true,
+    "sheet": "L1.0",
+    "sourceDetail": "ACD\n26 EA\n\nPrinted quantity · Needs review\n\nSource · 26 - ACD\n\nL1.0 / C2 east shared bed / ACD row in group ending 58 SET / Bid Alternate 2 / Addendum 1, 02.11.2026\n\nshp-6c625d00-f2f6-49aa-a0a3-601e45ff589a\n\nShow source callout\nEdit label"
+  },
+  {
+    "code": "CPE",
+    "quantity": 24,
+    "id": "shp-b1cbc204-c047-4fa4-859f-97e8abe4f9c2",
+    "panelRetained": true,
+    "sheet": "L1.0",
+    "sourceDetail": "CPE\n24 EA\n\nPrinted quantity · Needs review\n\nSource · 24 - CPE\n\nL1.0 / C2 east shared bed / CPE row in group ending 58 SET / Bid Alternate 2 / Addendum 1, 02.11.2026\n\nshp-b1cbc204-c047-4fa4-859f-97e8abe4f9c2\n\nShow source callout\nEdit label"
+  },
+  {
+    "code": "CPN",
+    "quantity": 24,
+    "id": "shp-4053914d-96db-4e6c-aad3-d47c16990a3d",
+    "panelRetained": true,
+    "sheet": "L1.0",
+    "sourceDetail": "CPN\n24 EA\n\nPrinted quantity · Needs review\n\nSource · 24 - CPN\n\nL1.0 / C2 east shared bed / CPN row in group ending 58 SET / Bid Alternate 2 / Addendum 1, 02.11.2026\n\nshp-4053914d-96db-4e6c-aad3-d47c16990a3d\n\nShow source callout\nEdit label"
+  },
+  {
+    "code": "ERA",
+    "quantity": 24,
+    "id": "shp-db27b849-2279-4910-91f0-51e0ecbfcb82",
+    "panelRetained": true,
+    "sheet": "L1.0",
+    "sourceDetail": "ERA\n24 EA\n\nPrinted quantity · Needs review\n\nSource · 24 - ERA\n\nL1.0 / C2 east shared bed / ERA row in group ending 58 SET / Bid Alternate 2 / Addendum 1, 02.11.2026\n\nshp-db27b849-2279-4910-91f0-51e0ecbfcb82\n\nShow source callout\nEdit label"
+  },
+  {
+    "code": "HAC",
+    "quantity": 24,
+    "id": "shp-627dd8ed-75e7-4857-8007-842aeb378aef",
+    "panelRetained": true,
+    "sheet": "L1.0",
+    "sourceDetail": "HAC\n24 EA\n\nPrinted quantity · Needs review\n\nSource · 24 - HAC\n\nL1.0 / C2 east shared bed / HAC row in group ending 58 SET / Bid Alternate 2 / Addendum 1, 02.11.2026\n\nshp-627dd8ed-75e7-4857-8007-842aeb378aef\n\nShow source callout\nEdit label"
+  },
+  {
+    "code": "PHD",
+    "quantity": 26,
+    "id": "shp-953de97b-bdea-4446-b0f8-1fe159b58649",
+    "panelRetained": true,
+    "sheet": "L1.0",
+    "sourceDetail": "PHD\n26 EA\n\nPrinted quantity · Needs review\n\nSource · 26 - PHD\n\nL1.0 / C2 east shared bed / PHD row in group ending 58 SET / Bid Alternate 2 / Addendum 1, 02.11.2026\n\nshp-953de97b-bdea-4446-b0f8-1fe159b58649\n\nShow source callout\nEdit label"
+  },
+  {
+    "code": "POR",
+    "quantity": 26,
+    "id": "shp-88a8de20-c812-4eca-b44b-ed80d870bc5e",
+    "panelRetained": true,
+    "sheet": "L1.0",
+    "sourceDetail": "POR\n26 EA\n\nPrinted quantity · Needs review\n\nSource · 26 - POR\n\nL1.0 / C2 east shared bed / POR row in group ending 58 SET / Bid Alternate 2 / Addendum 1, 02.11.2026\n\nshp-88a8de20-c812-4eca-b44b-ed80d870bc5e\n\nShow source callout\nEdit label"
+  },
+  {
+    "code": "SET",
+    "quantity": 58,
+    "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+    "panelRetained": true,
+    "sheet": "L1.0",
+    "sourceDetail": "SET\n58 EA\n\nPrinted quantity · Needs review\n\nSource · 58 - SET\n\nL1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026\n\nshp-ae34713e-4ea6-47a6-913f-ee3191267952\n\nShow source callout\nEdit label"
+  }
+]

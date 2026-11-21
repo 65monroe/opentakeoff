@@ -1,0 +1,50 @@
+{
+  "existing_records": 7,
+  "new_records": 7,
+  "total_records": 14,
+  "new_printed_ea": 174,
+  "C2_printed_ea": 232,
+  "SET_total_ea": 185,
+  "existing_conditions_exact": true,
+  "existing_measurements_exact_except_bed_links_and_agent_edit_counter": true,
+  "existing_geometry_quantities_reviews_exact": true,
+  "idempotent_retry": true,
+  "mcp_reopen_exact": true,
+  "created": [
+    {
+      "code": "ACD",
+      "quantity": 26,
+      "shape_id": "shp-6c625d00-f2f6-49aa-a0a3-601e45ff589a"
+    },
+    {
+      "code": "CPE",
+      "quantity": 24,
+      "shape_id": "shp-b1cbc204-c047-4fa4-859f-97e8abe4f9c2"
+    },
+    {
+      "code": "CPN",
+      "quantity": 24,
+      "shape_id": "shp-4053914d-96db-4e6c-aad3-d47c16990a3d"
+    },
+    {
+      "code": "ERA",
+      "quantity": 24,
+      "shape_id": "shp-db27b849-2279-4910-91f0-51e0ecbfcb82"
+    },
+    {
+      "code": "HAC",
+      "quantity": 24,
+      "shape_id": "shp-627dd8ed-75e7-4857-8007-842aeb378aef"
+    },
+    {
+      "code": "PHD",
+      "quantity": 26,
+      "shape_id": "shp-953de97b-bdea-4446-b0f8-1fe159b58649"
+    },
+    {
+      "code": "POR",
+      "quantity": 26,
+      "shape_id": "shp-88a8de20-c812-4eca-b44b-ed80d870bc5e"
+    }
+  ]
+}

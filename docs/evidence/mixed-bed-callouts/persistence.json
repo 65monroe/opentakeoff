@@ -1,0 +1,23 @@
+{
+  "complete_json_exact": [
+    "browser-saved",
+    "browser-reloaded",
+    "browser-reopened",
+    "browser-final"
+  ],
+  "profile_exact_except_export_timestamp": true,
+  "stored_pdf_bytes_preserved": [
+    "ccfp-L1.0.pdf",
+    "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+    "sample-finish-plan.pdf"
+  ],
+  "public_portable_archive_sheets": [
+    "ccfp-L1.0.pdf"
+  ],
+  "takeoff_sha256": "f9acab2d3c04a130a6c760a6ce77504662ccd23552fddf5e8a0fe3380172554f",
+  "existing_records": 7,
+  "new_records": 7,
+  "linked_sources": 8,
+  "existing_geometry_quantities_reviews_exact": true,
+  "negative_controls": 4
+}

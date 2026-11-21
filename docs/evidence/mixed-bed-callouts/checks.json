@@ -1,0 +1,30 @@
+{
+  "date": "2026-11-21",
+  "branch": "codex/area-assembly-prototype",
+  "application_commit": "4503f97b622bc9782299f45c9b89bd3d0436ef7a",
+  "change_scope": "Public example data, MCP replay and verification scripts, browser evidence and documentation only; no application code change",
+  "node": "24.22.3",
+  "commands": [
+    {"command":"node docs/evidence/mixed-bed-callouts/record.mjs SOURCE_L1.0.pdf BASELINE.json OUTPUT_DIR","result":"pass; seven actual MCP records, eight links, idempotent retries and MCP reload exact"},
+    {"command":"node docs/evidence/mixed-bed-callouts/verify.mjs --browser","result":"pass; full JSON, profile, original PDF bytes and four negative controls"},
+    {"command":"npm run check --prefix web","result":"pass; typecheck, lint, tests, benchmark, build and OCR distribution checks"},
+    {"command":"npm run check:tool-count --prefix mcp","result":"pass"},
+    {"command":"npm run check:wiki --prefix mcp","result":"pass"},
+    {"command":"npm run check --prefix protocol","result":"pass; 64 tests"},
+    {"command":"node scripts/check-doc-links.mjs","result":"pass"}
+  ],
+  "browser": {
+    "client":"Codex in-app browser",
+    "tab":"6",
+    "url":"http://127.0.0.1:5200/",
+    "viewport":[1280,720],
+    "build":"Vite production preview",
+    "asset":"assets/index-Dm6reqzM.js",
+    "asset_sha256":"7798b27f8e88f28290a3bd1bc1e2c15462465025438808f17d5d71c92822fbdf",
+    "source_buttons_tested":8,
+    "show_on_plan_buttons_tested":8,
+    "reloaded_and_reopened":true,
+    "marked_reviewed":false
+  },
+  "not_claimed":["Published upstream support","Complete sheet takeoff","New botanical identity mapping","Human preference or review speed","Confirmed scale or bed extent"]
+}
