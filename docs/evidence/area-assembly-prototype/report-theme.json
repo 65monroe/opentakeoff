@@ -1,0 +1,12 @@
+{
+  "name": "Public prototype — light report",
+  "color": {
+    "neutral": {
+      "ink": { "value": "#20252A" },
+      "paper": { "value": "#FFFFFF" },
+      "paper-2": { "value": "#F5F6F7" },
+      "paper-3": { "value": "#E5E8EB" }
+    },
+    "accent": { "blue": { "value": "#155E75" } }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "browser": "Codex in-app browser",
+  "tab": "6",
+  "url": "http://127.0.0.1:5200/",
+  "scripts": [
+    "",
+    "http://127.0.0.1:5200/theme-init.js",
+    "https://static.cloudflareinsights.com/beacon.min.js",
+    "http://127.0.0.1:5200/assets/index-CUr_kt_-.js"
+  ],
+  "tested_at": "2026-11-21T22:00:56.512Z"
+}

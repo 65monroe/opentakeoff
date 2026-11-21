@@ -1,0 +1,24 @@
+{
+  "original_shapes_unchanged": 7,
+  "original_conditions_preserved": 5,
+  "new_pending_edge": "shp-6cdd3340-5636-4533-a5ca-aeca94f7832a",
+  "source_area_sf": 110.5,
+  "source_plant_ea": 127,
+  "each_layer_cy": 1.36,
+  "edging_lf": 48.17,
+  "undo_existing_records_exact": true,
+  "undo_retains_empty_new_condition": true,
+  "invalid_openings_rejected_without_mutation": true,
+  "materials": [
+    {
+      "name": "Topsoil — 4 in (prototype)",
+      "unit": "CY",
+      "qty": 1.36
+    },
+    {
+      "name": "Compost — 4 in (prototype)",
+      "unit": "CY",
+      "qty": 1.36
+    }
+  ]
+}

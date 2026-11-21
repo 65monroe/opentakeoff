@@ -5,6 +5,10 @@ without a plant code or a printed quantity. Planting remains the first public
 example; a bundled finish-plan demonstration exercises a generic layout with no
 printed source. Calculated positions do not add EA or replace observed counts.
 
+A separate fork-only [native assembly prototype](../area-assembly-prototype/README.md)
+reuses the public bed for two soil layers in CY, its existing printed plant EA,
+and derived edging LF. It adds no grid positions or application code.
+
 The current branch also has [editable footprints](../area-grid-footprints/README.md),
 [full/cut tile calculations](../area-grid-cuts/README.md), and a freshly tested
 [actual public 2-by-4 ceiling grid](../area-grid-actual-2x4/README.md): 78 full

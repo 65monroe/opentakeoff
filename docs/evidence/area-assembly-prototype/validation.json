@@ -1,0 +1,23 @@
+{
+  "date": "2026-11-21",
+  "scope": "Fork-only native-capability prototype; no application code change or new PR",
+  "node": "24.22.3 (repository major: 24)",
+  "commands": {
+    "npm run check --prefix web": { "exit_code": 0, "tests": 3858, "passed": 3854, "skipped": 4, "failed": 0, "includes": ["typecheck", "lint", "ORT", "door reader", "tests", "benchmark", "build", "OCR distribution"] },
+    "npm run check:tool-count --prefix mcp": { "exit_code": 0, "default": 71, "gated": 73, "setup": 22, "stale_markers": 0 },
+    "npm run check:wiki --prefix mcp": { "exit_code": 0, "pages": 11 },
+    "npm run check --prefix protocol": { "exit_code": 0, "tests_passed": 64, "schema_files": 11, "transport_cases": 16 },
+    "node scripts/check-doc-links.mjs": { "exit_code": 0, "files": 49 },
+    "extract-sheet.mjs public-addendum.pdf": { "exit_code": 0, "public_source_sha256_verified": true, "pdf_page": 58 },
+    "replay.mjs freshly-extracted/ccfp-L1.0.pdf": { "exit_code": 0, "isolated_stdio_mcp": true, "original_records_preserved": true, "invalid_openings_rejected": true },
+    "verify.mjs": { "exit_code": 0, "mode": "committed browser exports and native quantity functions" },
+    "verify.mjs --browser": { "exit_code": 0, "mode": "fresh local backups, reload/reopen, profile and PDF byte comparisons" }
+  },
+  "browser_entry_sha256": "0c52e054bbf3aed93a380df1f0d70fe344b768342ce97f5642fe4da1a398d903",
+  "limits": [
+    "No human timing study or maintainer acceptance claim",
+    "No upstream CI run or production deployment claimed",
+    "No new application UI, schema or engine was introduced",
+    "Existing report needed the supported light-theme import for readable screenshots"
+  ]
+}

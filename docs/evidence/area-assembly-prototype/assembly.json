@@ -1,0 +1,22 @@
+{
+  "id": "asm-a2551bb3-ca54-414f-848a-43e82b1c437e",
+  "name": "Public bed — topsoil 4 in + compost 4 in",
+  "items": [
+    {
+      "name": "Topsoil — 4 in (prototype)",
+      "unit": "CY",
+      "per": 81,
+      "basis": "area",
+      "round": false,
+      "note": "User-requested prototype assumption, not a requirement verified on L1.0. Separate uniform 4-inch layer over BED-C1. CY = SF × (4/12) / 27 = SF / 81. No waste or compaction allowance."
+    },
+    {
+      "name": "Compost — 4 in (prototype)",
+      "unit": "CY",
+      "per": 81,
+      "basis": "area",
+      "round": false,
+      "note": "User-requested prototype assumption, not a requirement verified on L1.0. Separate uniform 4-inch layer over BED-C1. CY = SF × (4/12) / 27 = SF / 81. No waste or compaction allowance."
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+import assert from 'node:assert/strict';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {createRequire} from 'node:module';
+import {resolve,dirname} from 'node:path';
+const require=createRequire(resolve('web/package.json'));
+const {PDFDocument}=require('pdf-lib');
+const source=JSON.parse(await readFile('docs/evidence/planting-suite/source.json','utf8'));
+assert.ok(process.argv[2],'Usage: node extract-sheet.mjs <downloaded public addendum.pdf> [output.pdf]');
+const bytes=await readFile(process.argv[2]);assert.equal(createHash('sha256').update(bytes).digest('hex'),source.sha256,'Public source differs from the tested revision');
+const src=await PDFDocument.load(bytes),doc=await PDFDocument.create();const [page]=await doc.copyPages(src,[source.pdf_page-1]);doc.addPage(page);
+const output=resolve(process.argv[3]||'tmp/area-assembly/ccfp-L1.0.pdf');await mkdir(dirname(output),{recursive:true});await writeFile(output,await doc.save());console.log(output);

@@ -415,6 +415,16 @@ Order quantity = measured basis ÷ coverage (or × the count per unit), plus the
 
 **Assemblies.** A condition's item list is its assembly. Under the list, **Assembly: save as…** saves it by name (rules, waste and notes, never prices) to your assembly library, and **+ apply assembly…** adds a saved one to the condition you're on; items the condition already has are skipped. The **Library** tab lists your assemblies with **Apply to** the active condition and ✕. The library is yours across projects and travels in your `.otprofile`. Nothing ships in it.
 
+**Separate material layers.** For a stated uniform 4-inch layer, use an area
+coverage row of **1 CY per 81 SF**, with whole-unit rounding off and the depth
+and source recorded in its note. Topsoil and compost need separate rows even
+when they share a footprint. The recipe applies to all area on that condition;
+it does not allocate material among unlike beds. A **linear LF** row does not
+read an area's perimeter, and a plant quantity read from a callout should not
+be duplicated as a coverage row. The fork's
+[public-bed prototype](evidence/area-assembly-prototype/README.md) demonstrates
+these boundaries using existing assemblies and a separate derived edging run.
+
 **The seam LF basis** is the one that isn't measured off the drawing—it's *figured* off the
 condition's roll layout (§4, Roll goods): the length where two cuts actually meet on the floor,
 which is what a heat-weld rod or a carpet seam tape is bought by. That matters because seam

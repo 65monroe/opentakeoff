@@ -1,0 +1,22 @@
+{
+  "original_measurements_unchanged": 7,
+  "original_condition_ids_preserved": 5,
+  "new_measurements": 1,
+  "new_conditions": 1,
+  "source_area_sf": 110.5,
+  "printed_plant_ea": 127,
+  "other_printed_plant_ea_unchanged": 58,
+  "total_set_ea_unchanged": 185,
+  "topsoil_4in_cy": 1.36,
+  "compost_4in_cy": 1.36,
+  "edging_lf": 48.17,
+  "native_repeat_application_added_rows": 0,
+  "clone_compost_5in_cy": 1.71,
+  "clone_topsoil_unchanged_cy": 1.36,
+  "linear_row_on_area_lf": 0,
+  "browser_reload_exact": true,
+  "archive_reopen_exact": true,
+  "original_workspace_restored_exact": true,
+  "original_profile_restored_except_export_timestamp": true,
+  "original_pdf_bytes_restored": true
+}
