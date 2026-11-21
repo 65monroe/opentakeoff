@@ -1,0 +1,61 @@
+{
+  "source": "Consecutive actual browser captures concurrent with actions; slowed playback, not a timing study",
+  "actions": [
+    "Edit diameter to 9 inches",
+    "Save grid: still 110 positions",
+    "Show on plan",
+    "Undo: restore 7.5 inches",
+    "Zoom in"
+  ],
+  "frames": [
+    {
+      "file": "000.jpg",
+      "ms": 160
+    },
+    {
+      "file": "001.jpg",
+      "ms": 245
+    },
+    {
+      "file": "002.jpg",
+      "ms": 321
+    },
+    {
+      "file": "003.jpg",
+      "ms": 382
+    },
+    {
+      "file": "004.jpg",
+      "ms": 450
+    },
+    {
+      "file": "005.jpg",
+      "ms": 605
+    },
+    {
+      "file": "006.jpg",
+      "ms": 692
+    },
+    {
+      "file": "007.jpg",
+      "ms": 774
+    },
+    {
+      "file": "008.jpg",
+      "ms": 1103
+    },
+    {
+      "file": "009.jpg",
+      "ms": 1412
+    },
+    {
+      "file": "010.jpg",
+      "ms": 1491
+    },
+    {
+      "file": "011.jpg",
+      "ms": 1676
+    }
+  ],
+  "playback": "3 times slower, minimum 100 ms/frame; final frame held; no performance claim"
+}

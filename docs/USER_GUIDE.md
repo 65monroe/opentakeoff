@@ -305,7 +305,7 @@ Select a floor-area measurement in **Work and review** and open **Area grid
 count**. No plant code or printed callout is required. Use one repeating item
 type and spacing throughout the outline, such as plants, posts or support
 positions on a specified layout. The calculation does not locate drawn items,
-size components, calculate cut pieces or establish a compliant design.
+infer component dimensions, calculate cut pieces or establish a compliant design.
 
 Enter **Spacing (in)** and choose **Pattern**. **Orientation and edges** contains
 **Angle (degrees)**, **Edge clearance (in)**, **Grid shift X (in)** and **Grid
@@ -313,6 +313,17 @@ shift Y (in)**. Enter **Spacing source and layout assumptions**, select **This
 outline applies to one item type and spacing throughout.**, and click **Save
 grid**. Hollow circles show generated positions clipped to the outline and holes.
 They are a layout calculation; they do not add EA or change the measured SF.
+
+Open **Item footprint** to replace position markers with physical outlines.
+Choose **Circle** and enter **Diameter (in)**, or choose **Rectangle** and enter
+**Width along grid X (in)** and **Depth along grid Y (in)**. Set **Dimension
+basis** to **Assumed** or **Specified in source**, and enter **Dimension source
+or assumption**. Click **Save grid**. Rectangles follow the grid angle; both
+outlines scale with the drawing. Choose **Position markers only** to remove
+the footprint while keeping the grid. Dimensions never set spacing or change
+counts. A source basis is a citation, not review approval. Container diameter,
+plant spread and on-center spacing are separate values. Full outlines can cross
+the area edge; they are not clipped tiles or calculated cut pieces.
 
 When the area has a linked printed source, the receipt also compares its EA
 with the generated count. Otherwise it shows **no printed comparison**. Inspect
@@ -326,6 +337,8 @@ format. JSON and project archives preserve it. Static marked PDFs and quantity
 report exports currently omit the grid comparison; existing EA and SF remain
 unchanged. The first [public-plan example](evidence/area-grid-count/README.md)
 is the SET planting bed.
+See the [footprint evidence](evidence/area-grid-footprints/README.md) for the
+SET bed and a public reflected ceiling plan.
 
 A **condition** is one finish—`LVT-1`, `CPT-2`, `RB-1`—and it's what every measurement commits into. A fresh workspace seeds a flooring starter set (CPT-1, BRD-1, LVT-1, WD-1, VCT-1, SV-1, CT-1, RB-1, TR-1), several with real supporting materials already attached—CT-1 arrives with thinset and a grout line whose coverage derives from tile geometry.
 

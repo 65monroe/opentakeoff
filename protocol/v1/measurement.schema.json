@@ -107,6 +107,25 @@
         },
         "single_item": {
           "const": true
+        },
+        "footprint": {
+          "type": "object",
+          "properties": {
+            "kind": {"enum": ["circle", "rectangle"]},
+            "diameter_ft": {"type": "number", "exclusiveMinimum": 0},
+            "width_ft": {"type": "number", "exclusiveMinimum": 0},
+            "depth_ft": {"type": "number", "exclusiveMinimum": 0},
+            "basis": {"enum": ["assumed", "specified"]},
+            "reference": {"type": "string", "minLength": 1}
+          },
+          "required": ["kind", "basis", "reference"],
+          "allOf": [{
+            "if": {"properties": {"kind": {"const": "circle"}}},
+            "then": {"required": ["diameter_ft"]},
+            "else": {"required": ["width_ft", "depth_ft"]}
+          }],
+          "additionalProperties": true,
+          "description": "Optional physical outline at each existing grid center. Feet, independent of spacing; rectangles follow the grid angle. Source basis is a declaration, not approval. Full outlines are shown across edges; no cell clipping, cut-piece count or added EA."
         }
       },
       "required": [

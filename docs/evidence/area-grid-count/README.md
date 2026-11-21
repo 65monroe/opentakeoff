@@ -187,8 +187,9 @@ Allow editable reference defaults for container or item footprints, with the
 source and assumed status visible until verified. Keep footprint, on-center
 spacing and any canopy/spread requirement as separate values. A container
 footprint can help review the layout without claiming to show mature plant
-coverage. These footprint controls are proposed; the current grid still shows
-position markers.
+coverage. At this evidence snapshot the footprint controls were proposed.
+The follow-up [editable footprint evidence](../area-grid-footprints/README.md)
+records their implementation and tests on the SET bed and a public ceiling plan.
 Intersecting those cells with the area can identify full and cut pieces;
 turning cut pieces into purchased units also needs an explicit offcut-reuse and
 waste policy. A visible footprint alone does not establish an order quantity.

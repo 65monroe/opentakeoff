@@ -25,6 +25,13 @@ export function areaGridError(area, shapes) {
   const legacy = area?.planting_grid !== undefined;
   if (legacy && (!area.planting_grid || area.planting_grid.single_species !== true || !area.planting_grid.source_callout_id)) return 'Legacy planting grid needs its single-species declaration and source.';
   if (g === undefined) return null;
+  const f = g?.footprint;
+  if (f !== undefined && (!f || !['circle', 'rectangle'].includes(f.kind) ||
+      !['assumed', 'specified'].includes(f.basis) || typeof f.reference !== 'string' || !f.reference.trim() ||
+      (f.kind === 'circle' ? !Number.isFinite(f.diameter_ft) || f.diameter_ft <= 0 :
+        ![f.width_ft, f.depth_ft].every(v => Number.isFinite(v) && v > 0)))) {
+    return 'A footprint needs positive dimensions, a circle or rectangle, a stated or assumed basis and a source reference.';
+  }
   if (!g || g.single_item !== true || area.measure_role !== 'floor_area' || area.curved ||
       !['square', 'triangular'].includes(g.pattern) ||
       !Number.isFinite(g.spacing_ft) || g.spacing_ft <= 0 ||
@@ -81,6 +88,23 @@ export function areaGrid(area, frame) {
     if (points_norm.length>10000) return {error:'Grid exceeds 10,000 positions; use a smaller area.',points_norm:[],count:null};
   }
   return {error:null,points_norm,count:points_norm.length};
+}
+
+// Normalized offsets around each existing grid center. Footprints are a display
+// only: show the complete outline at edges, never clip it into a claimed cut piece.
+// Circles use 48 segments, including their exact cardinal extents, in both renderers.
+export function areaGridFootprintOutline(area, frame) {
+  if (areaGridError(area) || ![frame?.widthPx, frame?.heightPx, frame?.upp].every(v => Number.isFinite(v) && v > 0)) return [];
+  const g = getAreaGrid(area), f = g?.footprint;
+  if (!f) return [];
+  const rad = g.angle_deg * Math.PI / 180, c = Math.cos(rad), s = Math.sin(rad);
+  const points = f.kind === 'circle'
+    ? Array.from({length:48}, (_, i) => [Math.cos(i * Math.PI / 24) * f.diameter_ft / 2, Math.sin(i * Math.PI / 24) * f.diameter_ft / 2])
+    : [[-1,-1],[1,-1],[1,1],[-1,1]].map(([x,y]) => {
+      const a = x * f.width_ft / 2, b = y * f.depth_ft / 2;
+      return [c*a-s*b, s*a+c*b];
+    });
+  return points.map(([x,y]) => [x / frame.widthPx / frame.upp, y / frame.heightPx / frame.upp]);
 }
 
 // Bed-first review has an explicit source-only escape hatch; it never moves a record.

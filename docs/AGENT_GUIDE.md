@@ -31,6 +31,14 @@ one item type and spacing throughout with `single_item: true`, and cite every
 layout assumption. A printed source is optional. `grid_count` reports generated
 positions; it never adds EA or verifies individual locations. Planting is one
 application: keep mixed beds unallocated until a species subarea is verified.
+Optional `footprint` records a circle diameter or rectangle width/depth in feet,
+an `assumed` or `specified` basis and its own source reference. It changes only
+the displayed outline at each generated position. Keep container dimensions,
+canopy spread and spacing separate. Verify the source's pattern before choosing
+a layout. If unstated, compare labeled alternatives with fixed spacing, boundary,
+origin, shifts and clearance; a smaller quantity difference is not evidence that
+one pattern is correct. Never silently adopt a generated total or tune offsets
+to force a printed count.
 Existing planting-grid data is read without migration; explicit generic edits
 replace only its layout metadata, and Undo restores the original.
 See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).

@@ -13,7 +13,14 @@ export default function AreaGridPanel({ area, source, frame, onSave }) {
   const [y,setY]=useState(String((saved?.offset_y_ft || 0)*12));
   const [reference,setReference]=useState(saved?.reference || '');
   const [single,setSingle]=useState(!!saved);
-  const draft={...(saved?.source_callout_id || source?.id ? {source_callout_id:saved?.source_callout_id || source.id} : {}),spacing_ft:Number(spacing)/12,pattern,angle_deg:Number(angle),inset_ft:Number(inset)/12,offset_x_ft:Number(x)/12,offset_y_ft:Number(y)/12,origin_norm:saved?.origin_norm || [...area.verts_norm[0]],reference,single_item:true};
+  const [footprintKind,setFootprintKind]=useState(saved?.footprint?.kind || 'none');
+  const [diameter,setDiameter]=useState(saved?.footprint?.diameter_ft ? String(saved.footprint.diameter_ft*12) : '');
+  const [width,setWidth]=useState(saved?.footprint?.width_ft ? String(saved.footprint.width_ft*12) : '');
+  const [depth,setDepth]=useState(saved?.footprint?.depth_ft ? String(saved.footprint.depth_ft*12) : '');
+  const [footprintBasis,setFootprintBasis]=useState(saved?.footprint?.basis || 'assumed');
+  const [footprintReference,setFootprintReference]=useState(saved?.footprint?.reference || '');
+  const footprint=footprintKind==='none' ? undefined : {kind:footprintKind,basis:footprintBasis,reference:footprintReference,...(footprintKind==='circle' ? {diameter_ft:Number(diameter)/12} : {width_ft:Number(width)/12,depth_ft:Number(depth)/12})};
+  const draft={...(saved?.source_callout_id || source?.id ? {source_callout_id:saved?.source_callout_id || source.id} : {}),spacing_ft:Number(spacing)/12,pattern,angle_deg:Number(angle),inset_ft:Number(inset)/12,offset_x_ft:Number(x)/12,offset_y_ft:Number(y)/12,origin_norm:saved?.origin_norm || [...area.verts_norm[0]],reference,single_item:true,...(footprint ? {footprint} : {})};
   const result=areaGrid(withAreaGrid(area,draft),frame);
   const stored=areaGrid(area,frame);
   return <details className="workspace-grid" open={!!saved}>
@@ -29,6 +36,13 @@ export default function AreaGridPanel({ area, source, frame, onSave }) {
       <label>{uiText('Edge clearance (in)')}<input type="number" min="0" step="any" value={inset} onChange={e=>setInset(e.target.value)} /></label>
       <label>{uiText('Grid shift X (in)')}<input type="number" min="0" step="any" value={x} onChange={e=>setX(e.target.value)} /></label>
       <label>{uiText('Grid shift Y (in)')}<input type="number" min="0" step="any" value={y} onChange={e=>setY(e.target.value)} /></label>
+    </details>
+    <details open={footprintKind!=='none'}><summary>{uiText('Item footprint')}</summary>
+      <p>{uiText('Drawn to scale at existing grid positions. Dimensions do not set spacing or change quantities. Outlines crossing the boundary are not calculated cuts.')}</p>
+      <label>{uiText('Footprint shape')}<select value={footprintKind} onChange={e=>setFootprintKind(e.target.value)}><option value="none">{uiText('Position markers only')}</option><option value="circle">{uiText('Circle')}</option><option value="rectangle">{uiText('Rectangle')}</option></select></label>
+      {footprintKind==='circle' && <label>{uiText('Diameter (in)')}<input type="number" min="0.01" step="any" value={diameter} onChange={e=>setDiameter(e.target.value)} /></label>}
+      {footprintKind==='rectangle' && <><label>{uiText('Width along grid X (in)')}<input type="number" min="0.01" step="any" value={width} onChange={e=>setWidth(e.target.value)} /></label><label>{uiText('Depth along grid Y (in)')}<input type="number" min="0.01" step="any" value={depth} onChange={e=>setDepth(e.target.value)} /></label></>}
+      {footprintKind!=='none' && <><label>{uiText('Dimension basis')}<select value={footprintBasis} onChange={e=>setFootprintBasis(e.target.value)}><option value="assumed">{uiText('Assumed')}</option><option value="specified">{uiText('Specified in source')}</option></select></label><label>{uiText('Dimension source or assumption')}<input value={footprintReference} onChange={e=>setFootprintReference(e.target.value)} /></label><p>{uiText('A specified basis records a citation; it is not a review approval. Plant container size is separate from canopy spread and planting spacing.')}</p></>}
     </details>
     <label>{uiText('Spacing source and layout assumptions')}<input value={reference} onChange={e=>setReference(e.target.value)} /></label>
     <label className="workspace-grid-confirm"><input type="checkbox" checked={single} onChange={e=>setSingle(e.target.checked)} />{uiText('This outline applies to one item type and spacing throughout.')}</label>

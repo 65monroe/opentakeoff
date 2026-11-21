@@ -1,0 +1,67 @@
+import assert from 'node:assert/strict';
+import {createRequire} from 'node:module';
+import {readFile,writeFile,mkdir} from 'node:fs/promises';
+import {dirname,resolve} from 'node:path';
+import {fileURLToPath,pathToFileURL} from 'node:url';
+import {buildProjectArchive} from '../../../web/src/lib/projectArchive.js';
+import {getAreaGrid} from '../../../web/src/lib/areaGrid.js';
+const repo=resolve(dirname(fileURLToPath(import.meta.url)),'../../..');
+const require=createRequire(resolve(repo,'mcp/package.json'));
+const {Client}=await import(pathToFileURL(require.resolve('@modelcontextprotocol/sdk/client/index.js')));
+const {StdioClientTransport}=await import(pathToFileURL(require.resolve('@modelcontextprotocol/sdk/client/stdio.js')));
+const [planArg,outArg]=process.argv.slice(2);assert.ok(planArg&&outArg,'replay.mjs PUBLIC_L1.0.pdf OUTPUT_DIR');
+const plan=resolve(planArg),out=resolve(outArg);await mkdir(out,{recursive:true});
+const baselinePath=resolve(repo,'docs/evidence/area-grid-footprints/baseline.json');
+const baseline=JSON.parse(await readFile(baselinePath,'utf8'));
+const client=new Client({name:'area-grid-footprint-example',version:'1'}),transcript=[];
+await client.connect(new StdioClientTransport({command:process.execPath,args:['--import','tsx','server.ts'],cwd:resolve(repo,'mcp'),stderr:'pipe'}));
+const scrub=v=>JSON.parse(JSON.stringify(v).replaceAll(plan.replaceAll('\\','\\\\'),'<PUBLIC_PLAN>').replaceAll(out.replaceAll('\\','\\\\'),'<OUTPUT>').replaceAll(repo.replaceAll('\\','\\\\'),'<REPO>'));
+async function call(name,args={},png){
+ const r=await client.callTool({name,arguments:args});assert.ok(!r.isError,JSON.stringify(r));
+ const result=r.structuredContent??JSON.parse(r.content.find(c=>c.type==='text').text);
+ transcript.push({tool:name,args:scrub(args),result:scrub(result)});
+ if(png)await writeFile(resolve(out,png),Buffer.from(r.content.find(c=>c.type==='image').data,'base64'));
+ return result;
+}
+async function archive(name,pdf,takeoff){await writeFile(resolve(out,name),await buildProjectArchive({takeoff,sheets:[{name:pdf.split(/[\\/]/).pop()}],loadPdfData:async()=>new Uint8Array(await readFile(pdf))}));}
+try {
+ await client.readResource({uri:'takeoff://wiki'});
+ await call('load_plan',{path:plan});await call('import_takeoff',{path:baselinePath});
+ const bed=baseline.shapes.find(s=>getAreaGrid(s));assert.ok(bed);
+ const original=getAreaGrid(bed),footprint={kind:'circle',diameter_ft:.625,basis:'assumed',reference:'Demonstration: 7.5-inch container diameter. L1.0 specifies 1 Gal. and 12-inch o.c.; it does not specify this diameter or canopy spread.'};
+ const config={...original,footprint};
+ assert.equal((await call('edit_shape',{shape_id:bed.id,area_grid:config})).grid_count,110);
+ await call('view_sheet',{sheet:bed.sheet_id,overlay:true,region:{x0:2770,y0:925,x1:3020,y1:1090},px:1200},'set-square.png');
+ await call('export_takeoff',{path:resolve(out,'set-square.json')});
+ assert.equal((await call('edit_shape',{shape_id:bed.id,area_grid:{...config,pattern:'triangular',reference:config.reference.replace('square','triangular')}})).grid_count,129);
+ await call('view_sheet',{sheet:bed.sheet_id,overlay:true,region:{x0:2770,y0:925,x1:3020,y1:1090},px:1200},'set-triangular.png');
+ await call('export_takeoff',{path:resolve(out,'set-triangular.json')});
+ await call('undo_last');await call('undo_last');
+ await call('export_takeoff',{path:resolve(out,'set-restored.json')});
+ assert.deepEqual(JSON.parse(await readFile(resolve(out,'set-restored.json'),'utf8')).shapes,baseline.shapes);
+ const pdf=resolve(repo,'demo/public-sheets/mo-veterans-home-A111-reflected-ceiling-plan.pdf'),sheet=pdf.split(/[\\/]/).pop();
+ await call('load_plan',{path:pdf});await call('set_scale',{sheet,upp:1/9});
+ await call('read_sheet_text',{sheet});
+ const vertices=[[1873.68,194.4],[2041.44,194.4],[2041.44,308.16],[1943.76,308.16],[1943.76,264.24],[1910.64,231.12],[1873.68,231.12]];
+ const a=await call('measure_polygon',{sheet,verts:vertices,condition:'ACT-EXISTING-TEST',role:'floor_area'});
+ await call('edit_shape',{shape_id:a.shape_id,label:'Northwest bay, northern wing; existing ceiling footprint test'});
+ const ceiling={single_item:true,spacing_ft:2,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:1,offset_y_ft:1,origin_norm:[1883.76/5184,197.28/3456],reference:'A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.'};
+ assert.equal((await call('edit_shape',{shape_id:a.shape_id,area_grid:ceiling})).grid_count,45);
+ await call('export_takeoff',{path:resolve(out,'ceiling-before.json')});
+ const tile={kind:'rectangle',width_ft:2,depth_ft:2,basis:'assumed',reference:'Nominal 2-by-2-foot module inferred from this drawn grid; A111 legend allows 2-by-2 or 2-by-4. Physical tile face and joint dimensions unverified.'};
+ assert.equal((await call('edit_shape',{shape_id:a.shape_id,area_grid:{...ceiling,footprint:tile}})).grid_count,45);
+ await call('view_sheet',{sheet,overlay:true,region:{x0:1850,y0:175,x1:2050,y1:330},px:1400},'ceiling-footprints.png');
+ await call('export_takeoff',{path:resolve(out,'ceiling-footprints.json')});
+ const payload=JSON.parse(await readFile(resolve(out,'ceiling-footprints.json'),'utf8'));
+ await archive('ceiling-footprints.otk',pdf,payload);
+ await call('export_marked_pdf',{path:resolve(out,'ceiling-marked.pdf')});
+ const demo=resolve(repo,'demo/sample-finish-plan.pdf'),demoJson=resolve(repo,'docs/evidence/area-grid-count/demo-takeoff.json');
+ await call('load_plan',{path:demo});await call('import_takeoff',{path:demoJson});
+ const demoBase=JSON.parse(await readFile(demoJson,'utf8')),da=demoBase.shapes[0];
+ const dc={...da.area_grid,footprint:{kind:'rectangle',width_ft:2,depth_ft:1,basis:'assumed',reference:'Bundled finish-plan test only; a 2-by-1-foot footprint, not specified work.'}};
+ assert.equal((await call('edit_shape',{shape_id:da.id,area_grid:dc})).grid_count,8);
+ await call('export_takeoff',{path:resolve(out,'demo-footprints.json')});
+ await archive('demo-footprints.otk',demo,JSON.parse(await readFile(resolve(out,'demo-footprints.json'),'utf8')));
+ await writeFile(resolve(out,'transcript.json'),JSON.stringify(transcript,null,2)+'\n');
+ console.log('PASS: SET 110/129 unchanged by footprints; Undo exact. Public A111 bay 45 centers unchanged; nominal 24-inch footprints. Bundled sample eight centers unchanged.');
+}finally{await client.close();}

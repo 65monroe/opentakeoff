@@ -1,0 +1,3606 @@
+[
+  {
+    "tool": "load_plan",
+    "args": {
+      "path": "<PUBLIC_PLAN>"
+    },
+    "result": {
+      "file": "ccfp-L1.0.pdf",
+      "files": [
+        "ccfp-L1.0.pdf"
+      ],
+      "page_count": 1,
+      "sheets": [
+        {
+          "sheet": "ccfp-L1.0.pdf",
+          "page": 1,
+          "width_pt": 2592,
+          "height_pt": 1728,
+          "width_px": 5184,
+          "height_px": 3456,
+          "sheet_number": "L1.0"
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "import_takeoff",
+    "args": {
+      "path": "<REPO>\\docs\\evidence\\area-grid-footprints\\baseline.json"
+    },
+    "result": {
+      "file": "baseline.json",
+      "replaced": true,
+      "shapes_added": 7,
+      "shapes_pending": 7,
+      "conditions_merged": 0,
+      "conditions_added": 5,
+      "scales_adopted": 1,
+      "unknown_files": [],
+      "rules_imported": 0,
+      "shapes_total": 7,
+      "note": "Empty session — the import IS the takeoff now. Unreviewed machine shapes stay pencil; verify with view_sheet overlay:true."
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-7cca5e9f-60ef-4215-a544-54d3c5e5055a",
+      "area_grid": {
+        "source_callout_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+        "spacing_ft": 1,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 0.5,
+        "offset_y_ft": 0.5,
+        "origin_norm": [
+          0.5434027777777778,
+          0.2799479166666667
+        ],
+        "reference": "L1.0 SET: 12 in o.c.; square pattern, 0 deg, 6 in shifts, no edge clearance assumed.",
+        "single_item": true,
+        "footprint": {
+          "kind": "circle",
+          "diameter_ft": 0.625,
+          "basis": "assumed",
+          "reference": "Demonstration: 7.5-inch container diameter. L1.0 specifies 1 Gal. and 12-inch o.c.; it does not specify this diameter or canopy spread."
+        }
+      }
+    },
+    "result": {
+      "shape_id": "shp-7cca5e9f-60ef-4215-a544-54d3c5e5055a",
+      "changed": [
+        "area_grid",
+        "planting_grid"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 40,
+      "area_sf": 110.5,
+      "perimeter_lf": 48.17,
+      "label": "C1 SET hatch",
+      "agent_edits": 1,
+      "grid_count": 110
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "args": {
+      "sheet": "ccfp-L1.0.pdf",
+      "overlay": true,
+      "region": {
+        "x0": 2770,
+        "y0": 925,
+        "x1": 3020,
+        "y1": 1090
+      },
+      "px": 1200
+    },
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        2770,
+        925,
+        3020,
+        1090
+      ],
+      "img_px": [
+        1200,
+        792
+      ],
+      "zoom": 4.8,
+      "overlay": true,
+      "shapes_drawn": 7,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<OUTPUT>\\set-square.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-ca27a088-ca62-45a6-a7fd-97ed516cb6f4",
+          "created_at": "2026-11-21T02:00:18.471Z",
+          "finish_tag": "BED-C1",
+          "color": "#9333ea",
+          "fill": "#9333ea",
+          "hatch": "diagdense",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-cc1c489c-169c-46b9-bb27-2b1853be8b7d",
+          "created_at": "2026-11-21T02:00:19.959Z",
+          "finish_tag": "BED-C2",
+          "color": "#b8860b",
+          "fill": "#b8860b",
+          "hatch": "horiz",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.49286265432098764,
+              0.22424768518518517
+            ]
+          ],
+          "computed": {
+            "count": 127
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C1",
+            "text": "127 - SET",
+            "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.7368827160493827,
+              0.4045138888888889
+            ]
+          ],
+          "computed": {
+            "count": 58
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C2",
+            "text": "58 - SET",
+            "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-7cca5e9f-60ef-4215-a544-54d3c5e5055a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-ca27a088-ca62-45a6-a7fd-97ed516cb6f4",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.5434027777777778,
+              0.2799479166666667
+            ],
+            [
+              0.5693479938271605,
+              0.2913773148148148
+            ],
+            [
+              0.5687209207502777,
+              0.2920332568448023
+            ],
+            [
+              0.5680822527225518,
+              0.29266352542521523
+            ],
+            [
+              0.5674324567816719,
+              0.29326765966061386
+            ],
+            [
+              0.5667720081028179,
+              0.29384521776677675
+            ],
+            [
+              0.566101389651179,
+              0.29439577739376355
+            ],
+            [
+              0.5654210918287772,
+              0.2949189359347662
+            ],
+            [
+              0.5647316121158514,
+              0.2954143108205225
+            ],
+            [
+              0.5640334547070663,
+              0.2958815397990768
+            ],
+            [
+              0.5633271301428103,
+              0.29632028120068354
+            ],
+            [
+              0.5626131549358541,
+              0.2967302141876594
+            ],
+            [
+              0.5618920511936406,
+              0.29711103898900154
+            ],
+            [
+              0.561164346236485,
+              0.2974624771196012
+            ],
+            [
+              0.5604305722119615,
+              0.2977842715838904
+            ],
+            [
+              0.559691265705761,
+              0.2980761870637751
+            ],
+            [
+              0.558946967349303,
+              0.29833801009071553
+            ],
+            [
+              0.5581982214243892,
+              0.2985695492018292
+            ],
+            [
+              0.5574455754651866,
+              0.29877063507990165
+            ],
+            [
+              0.5566895798578338,
+              0.29894112067720263
+            ],
+            [
+              0.5559307874379613,
+              0.29908088132301747
+            ],
+            [
+              0.5551697530864198,
+              0.2991898148148148
+            ],
+            [
+              0.5544037012465945,
+              0.2992681142331087
+            ],
+            [
+              0.5536365143410332,
+              0.29931517869616897
+            ],
+            [
+              0.5528687582971876,
+              0.29933097348615645
+            ],
+            [
+              0.5521009994623435,
+              0.29931548695179655
+            ],
+            [
+              0.5513338041858454,
+              0.2992687305169743
+            ],
+            [
+              0.5505677384013206,
+              0.299190738672307
+            ],
+            [
+              0.5498033672092082,
+              0.29908156894970195
+            ],
+            [
+              0.5490412544599051,
+              0.29894130187991713
+            ],
+            [
+              0.5482819623378326,
+              0.2987700409331561
+            ],
+            [
+              0.5475260509467313,
+              0.2985679124427421
+            ],
+            [
+              0.5467740778964936,
+              0.2983350655119259
+            ],
+            [
+              0.5460265978918324,
+              0.2980716719038974
+            ],
+            [
+              0.5452841623230951,
+              0.29777792591508223
+            ],
+            [
+              0.544547318859522,
+              0.29745404423181554
+            ],
+            [
+              0.5438166110452491,
+              0.29710026577050014
+            ],
+            [
+              0.543092577898355,
+              0.2967168515013661
+            ],
+            [
+              0.5423757535132445,
+              0.2963040842559617
+            ],
+            [
+              0.5416666666666666,
+              0.29586226851851855
+            ]
+          ],
+          "computed": {
+            "area_sf": 110.5,
+            "perimeter_lf": 48.17
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "curved": true,
+            "reviewed": false,
+            "proposal_id": "prop-c316676c-d08d-405e-925e-8739f04ae9f8",
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "C1 SET hatch",
+          "source_callout_ids": [
+            "shp-43598f04-0a43-4076-b83c-b30f565e73f7"
+          ],
+          "area_grid": {
+            "spacing_ft": 1,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 0.5,
+            "offset_y_ft": 0.5,
+            "origin_norm": [
+              0.5434027777777778,
+              0.2799479166666667
+            ],
+            "reference": "L1.0 SET: 12 in o.c.; square pattern, 0 deg, 6 in shifts, no edge clearance assumed.",
+            "single_item": true,
+            "source_callout_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+            "footprint": {
+              "kind": "circle",
+              "diameter_ft": 0.625,
+              "basis": "assumed",
+              "reference": "Demonstration: 7.5-inch container diameter. L1.0 specifies 1 Gal. and 12-inch o.c.; it does not specify this diameter or canopy spread."
+            }
+          }
+        },
+        {
+          "id": "shp-cc68c306-e582-4662-be19-f0a2617a0737",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-cc1c489c-169c-46b9-bb27-2b1853be8b7d",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.6653163580246914,
+              0.3567708333333333
+            ],
+            [
+              0.6813271604938271,
+              0.3567708333333333
+            ],
+            [
+              0.6813271604938271,
+              0.3804976851851852
+            ],
+            [
+              0.6869212962962963,
+              0.3883101851851852
+            ],
+            [
+              0.6862165706435572,
+              0.3887961176583974
+            ],
+            [
+              0.685529244915647,
+              0.38933521778326247
+            ],
+            [
+              0.6848611004369848,
+              0.3899260883878459
+            ],
+            [
+              0.6842138688204394,
+              0.39056719812799207
+            ],
+            [
+              0.6835892274795525,
+              0.39125688545606885
+            ],
+            [
+              0.6829887952812288,
+              0.3919933629271586
+            ],
+            [
+              0.6824141283501611,
+              0.3927747218315327
+            ],
+            [
+              0.681866716035861,
+              0.3935989371414059
+            ],
+            [
+              0.6813479770527506,
+              0.39446387275914846
+            ],
+            [
+              0.6808592558033169,
+              0.3953672870533556
+            ],
+            [
+              0.6804018188938578,
+              0.3963068386684259
+            ],
+            [
+              0.6799768518518519,
+              0.3972800925925926
+            ],
+            [
+              0.6795924314636776,
+              0.39826555297261346
+            ],
+            [
+              0.6792413034568527,
+              0.39927858333511107
+            ],
+            [
+              0.6789243442716557,
+              0.400316655084827
+            ],
+            [
+              0.6786423450605757,
+              0.40137717712143356
+            ],
+            [
+              0.67839600971354,
+              0.4024575023071029
+            ],
+            [
+              0.6781859531009544,
+              0.4035549340739501
+            ],
+            [
+              0.6780126995389447,
+              0.40466673315485663
+            ],
+            [
+              0.6778766814806253,
+              0.4057901244208743
+            ],
+            [
+              0.6777782384366665,
+              0.406922303808143
+            ],
+            [
+              0.6777176161278514,
+              0.40806044531703206
+            ],
+            [
+              0.6776949658717402,
+              0.4092017080660345
+            ],
+            [
+              0.6777103442049701,
+              0.4103432433828079
+            ],
+            [
+              0.6777637127421364,
+              0.4114822019146612
+            ],
+            [
+              0.6778549382716049,
+              0.41261574074074076
+            ],
+            [
+              0.6653163580246914,
+              0.4241898148148148
+            ]
+          ],
+          "computed": {
+            "area_sf": 329.88,
+            "perimeter_lf": 85.76
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "curved": true,
+            "reviewed": false,
+            "proposal_id": "prop-f7e348e1-6dff-4b3f-8af1-52affb8732bd",
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "C2 shared bed; north edge approximate",
+          "source_callout_ids": [
+            "shp-ae34713e-4ea6-47a6-913f-ee3191267952"
+          ]
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        },
+        {
+          "id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+          "label": "SET printed bed quantities - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+          "created_at": "2026-11-21T00:43:49.400Z"
+        },
+        {
+          "id": "prop-c316676c-d08d-405e-925e-8739f04ae9f8",
+          "label": "C1 SET hatch",
+          "rationale": "Public L1.0 / C1 / Bid Alternate 2. SET-only herringbone region at the 127 SET leader. Curved south boundary traced with an arc; no individual plant positions inferred. Existing 127 EA source is unchanged. Area SF is independent; pending review.",
+          "created_at": "2026-11-21T02:00:18.467Z"
+        },
+        {
+          "id": "prop-f7e348e1-6dff-4b3f-8af1-52affb8732bd",
+          "label": "C2 shared bed; north edge approximate",
+          "rationale": "Public L1.0 / C2 / Bid Alternate 2. Shared mixed-species hatch at the leader for the list ending 58 SET. Excludes the separate herringbone pocket to the east. North edge is provisional beneath shrub/furnishing symbols; verify its extent before using SF. The outline does not allocate the bed among species. Existing 58 EA source is unchanged. Area SF is independent; pending review.",
+          "created_at": "2026-11-21T02:00:19.958Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-7cca5e9f-60ef-4215-a544-54d3c5e5055a",
+      "area_grid": {
+        "source_callout_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+        "spacing_ft": 1,
+        "pattern": "triangular",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 0.5,
+        "offset_y_ft": 0.5,
+        "origin_norm": [
+          0.5434027777777778,
+          0.2799479166666667
+        ],
+        "reference": "L1.0 SET: 12 in o.c.; triangular pattern, 0 deg, 6 in shifts, no edge clearance assumed.",
+        "single_item": true,
+        "footprint": {
+          "kind": "circle",
+          "diameter_ft": 0.625,
+          "basis": "assumed",
+          "reference": "Demonstration: 7.5-inch container diameter. L1.0 specifies 1 Gal. and 12-inch o.c.; it does not specify this diameter or canopy spread."
+        }
+      }
+    },
+    "result": {
+      "shape_id": "shp-7cca5e9f-60ef-4215-a544-54d3c5e5055a",
+      "changed": [
+        "area_grid"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 40,
+      "area_sf": 110.5,
+      "perimeter_lf": 48.17,
+      "label": "C1 SET hatch",
+      "agent_edits": 1,
+      "grid_count": 129
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "args": {
+      "sheet": "ccfp-L1.0.pdf",
+      "overlay": true,
+      "region": {
+        "x0": 2770,
+        "y0": 925,
+        "x1": 3020,
+        "y1": 1090
+      },
+      "px": 1200
+    },
+    "result": {
+      "sheet": "ccfp-L1.0.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        2770,
+        925,
+        3020,
+        1090
+      ],
+      "img_px": [
+        1200,
+        792
+      ],
+      "zoom": 4.8,
+      "overlay": true,
+      "shapes_drawn": 7,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<OUTPUT>\\set-triangular.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-ca27a088-ca62-45a6-a7fd-97ed516cb6f4",
+          "created_at": "2026-11-21T02:00:18.471Z",
+          "finish_tag": "BED-C1",
+          "color": "#9333ea",
+          "fill": "#9333ea",
+          "hatch": "diagdense",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-cc1c489c-169c-46b9-bb27-2b1853be8b7d",
+          "created_at": "2026-11-21T02:00:19.959Z",
+          "finish_tag": "BED-C2",
+          "color": "#b8860b",
+          "fill": "#b8860b",
+          "hatch": "horiz",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.49286265432098764,
+              0.22424768518518517
+            ]
+          ],
+          "computed": {
+            "count": 127
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C1",
+            "text": "127 - SET",
+            "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.7368827160493827,
+              0.4045138888888889
+            ]
+          ],
+          "computed": {
+            "count": 58
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C2",
+            "text": "58 - SET",
+            "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-7cca5e9f-60ef-4215-a544-54d3c5e5055a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-ca27a088-ca62-45a6-a7fd-97ed516cb6f4",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.5434027777777778,
+              0.2799479166666667
+            ],
+            [
+              0.5693479938271605,
+              0.2913773148148148
+            ],
+            [
+              0.5687209207502777,
+              0.2920332568448023
+            ],
+            [
+              0.5680822527225518,
+              0.29266352542521523
+            ],
+            [
+              0.5674324567816719,
+              0.29326765966061386
+            ],
+            [
+              0.5667720081028179,
+              0.29384521776677675
+            ],
+            [
+              0.566101389651179,
+              0.29439577739376355
+            ],
+            [
+              0.5654210918287772,
+              0.2949189359347662
+            ],
+            [
+              0.5647316121158514,
+              0.2954143108205225
+            ],
+            [
+              0.5640334547070663,
+              0.2958815397990768
+            ],
+            [
+              0.5633271301428103,
+              0.29632028120068354
+            ],
+            [
+              0.5626131549358541,
+              0.2967302141876594
+            ],
+            [
+              0.5618920511936406,
+              0.29711103898900154
+            ],
+            [
+              0.561164346236485,
+              0.2974624771196012
+            ],
+            [
+              0.5604305722119615,
+              0.2977842715838904
+            ],
+            [
+              0.559691265705761,
+              0.2980761870637751
+            ],
+            [
+              0.558946967349303,
+              0.29833801009071553
+            ],
+            [
+              0.5581982214243892,
+              0.2985695492018292
+            ],
+            [
+              0.5574455754651866,
+              0.29877063507990165
+            ],
+            [
+              0.5566895798578338,
+              0.29894112067720263
+            ],
+            [
+              0.5559307874379613,
+              0.29908088132301747
+            ],
+            [
+              0.5551697530864198,
+              0.2991898148148148
+            ],
+            [
+              0.5544037012465945,
+              0.2992681142331087
+            ],
+            [
+              0.5536365143410332,
+              0.29931517869616897
+            ],
+            [
+              0.5528687582971876,
+              0.29933097348615645
+            ],
+            [
+              0.5521009994623435,
+              0.29931548695179655
+            ],
+            [
+              0.5513338041858454,
+              0.2992687305169743
+            ],
+            [
+              0.5505677384013206,
+              0.299190738672307
+            ],
+            [
+              0.5498033672092082,
+              0.29908156894970195
+            ],
+            [
+              0.5490412544599051,
+              0.29894130187991713
+            ],
+            [
+              0.5482819623378326,
+              0.2987700409331561
+            ],
+            [
+              0.5475260509467313,
+              0.2985679124427421
+            ],
+            [
+              0.5467740778964936,
+              0.2983350655119259
+            ],
+            [
+              0.5460265978918324,
+              0.2980716719038974
+            ],
+            [
+              0.5452841623230951,
+              0.29777792591508223
+            ],
+            [
+              0.544547318859522,
+              0.29745404423181554
+            ],
+            [
+              0.5438166110452491,
+              0.29710026577050014
+            ],
+            [
+              0.543092577898355,
+              0.2967168515013661
+            ],
+            [
+              0.5423757535132445,
+              0.2963040842559617
+            ],
+            [
+              0.5416666666666666,
+              0.29586226851851855
+            ]
+          ],
+          "computed": {
+            "area_sf": 110.5,
+            "perimeter_lf": 48.17
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "curved": true,
+            "reviewed": false,
+            "proposal_id": "prop-c316676c-d08d-405e-925e-8739f04ae9f8",
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "C1 SET hatch",
+          "source_callout_ids": [
+            "shp-43598f04-0a43-4076-b83c-b30f565e73f7"
+          ],
+          "area_grid": {
+            "spacing_ft": 1,
+            "pattern": "triangular",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 0.5,
+            "offset_y_ft": 0.5,
+            "origin_norm": [
+              0.5434027777777778,
+              0.2799479166666667
+            ],
+            "reference": "L1.0 SET: 12 in o.c.; triangular pattern, 0 deg, 6 in shifts, no edge clearance assumed.",
+            "single_item": true,
+            "source_callout_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+            "footprint": {
+              "kind": "circle",
+              "diameter_ft": 0.625,
+              "basis": "assumed",
+              "reference": "Demonstration: 7.5-inch container diameter. L1.0 specifies 1 Gal. and 12-inch o.c.; it does not specify this diameter or canopy spread."
+            }
+          }
+        },
+        {
+          "id": "shp-cc68c306-e582-4662-be19-f0a2617a0737",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-cc1c489c-169c-46b9-bb27-2b1853be8b7d",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.6653163580246914,
+              0.3567708333333333
+            ],
+            [
+              0.6813271604938271,
+              0.3567708333333333
+            ],
+            [
+              0.6813271604938271,
+              0.3804976851851852
+            ],
+            [
+              0.6869212962962963,
+              0.3883101851851852
+            ],
+            [
+              0.6862165706435572,
+              0.3887961176583974
+            ],
+            [
+              0.685529244915647,
+              0.38933521778326247
+            ],
+            [
+              0.6848611004369848,
+              0.3899260883878459
+            ],
+            [
+              0.6842138688204394,
+              0.39056719812799207
+            ],
+            [
+              0.6835892274795525,
+              0.39125688545606885
+            ],
+            [
+              0.6829887952812288,
+              0.3919933629271586
+            ],
+            [
+              0.6824141283501611,
+              0.3927747218315327
+            ],
+            [
+              0.681866716035861,
+              0.3935989371414059
+            ],
+            [
+              0.6813479770527506,
+              0.39446387275914846
+            ],
+            [
+              0.6808592558033169,
+              0.3953672870533556
+            ],
+            [
+              0.6804018188938578,
+              0.3963068386684259
+            ],
+            [
+              0.6799768518518519,
+              0.3972800925925926
+            ],
+            [
+              0.6795924314636776,
+              0.39826555297261346
+            ],
+            [
+              0.6792413034568527,
+              0.39927858333511107
+            ],
+            [
+              0.6789243442716557,
+              0.400316655084827
+            ],
+            [
+              0.6786423450605757,
+              0.40137717712143356
+            ],
+            [
+              0.67839600971354,
+              0.4024575023071029
+            ],
+            [
+              0.6781859531009544,
+              0.4035549340739501
+            ],
+            [
+              0.6780126995389447,
+              0.40466673315485663
+            ],
+            [
+              0.6778766814806253,
+              0.4057901244208743
+            ],
+            [
+              0.6777782384366665,
+              0.406922303808143
+            ],
+            [
+              0.6777176161278514,
+              0.40806044531703206
+            ],
+            [
+              0.6776949658717402,
+              0.4092017080660345
+            ],
+            [
+              0.6777103442049701,
+              0.4103432433828079
+            ],
+            [
+              0.6777637127421364,
+              0.4114822019146612
+            ],
+            [
+              0.6778549382716049,
+              0.41261574074074076
+            ],
+            [
+              0.6653163580246914,
+              0.4241898148148148
+            ]
+          ],
+          "computed": {
+            "area_sf": 329.88,
+            "perimeter_lf": 85.76
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "curved": true,
+            "reviewed": false,
+            "proposal_id": "prop-f7e348e1-6dff-4b3f-8af1-52affb8732bd",
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "C2 shared bed; north edge approximate",
+          "source_callout_ids": [
+            "shp-ae34713e-4ea6-47a6-913f-ee3191267952"
+          ]
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        },
+        {
+          "id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+          "label": "SET printed bed quantities - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+          "created_at": "2026-11-21T00:43:49.400Z"
+        },
+        {
+          "id": "prop-c316676c-d08d-405e-925e-8739f04ae9f8",
+          "label": "C1 SET hatch",
+          "rationale": "Public L1.0 / C1 / Bid Alternate 2. SET-only herringbone region at the 127 SET leader. Curved south boundary traced with an arc; no individual plant positions inferred. Existing 127 EA source is unchanged. Area SF is independent; pending review.",
+          "created_at": "2026-11-21T02:00:18.467Z"
+        },
+        {
+          "id": "prop-f7e348e1-6dff-4b3f-8af1-52affb8732bd",
+          "label": "C2 shared bed; north edge approximate",
+          "rationale": "Public L1.0 / C2 / Bid Alternate 2. Shared mixed-species hatch at the leader for the list ending 58 SET. Excludes the separate herringbone pocket to the east. North edge is provisional beneath shrub/furnishing symbols; verify its extent before using SF. The outline does not allocate the bed among species. Existing 58 EA source is unchanged. Area SF is independent; pending review.",
+          "created_at": "2026-11-21T02:00:19.958Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "undo_last",
+    "args": {},
+    "result": {
+      "undone": 1,
+      "steps": [
+        {
+          "seq": 3,
+          "op": "edit",
+          "tool": "edit_shape",
+          "shapes": 1
+        }
+      ],
+      "shape_count": 7,
+      "remaining": 2
+    }
+  },
+  {
+    "tool": "undo_last",
+    "args": {},
+    "result": {
+      "undone": 1,
+      "steps": [
+        {
+          "seq": 2,
+          "op": "edit",
+          "tool": "edit_shape",
+          "shapes": 1
+        }
+      ],
+      "shape_count": 7,
+      "remaining": 1
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<OUTPUT>\\set-restored.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "ccfp-L1.0.pdf",
+          "units_per_px": 0.1388888888888889,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "created_at": "2026-11-20T23:44:30.336Z",
+          "finish_tag": "GDI",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "finish_tag": "TAM",
+          "color": "#2f7d54",
+          "fill": "#2f7d54",
+          "hatch": "diag2",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "finish_tag": "SET",
+          "color": "#2563eb",
+          "fill": "#2563eb",
+          "hatch": "cross",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-ca27a088-ca62-45a6-a7fd-97ed516cb6f4",
+          "created_at": "2026-11-21T02:00:18.471Z",
+          "finish_tag": "BED-C1",
+          "color": "#9333ea",
+          "fill": "#9333ea",
+          "hatch": "diagdense",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        },
+        {
+          "id": "cnd-cc1c489c-169c-46b9-bb27-2b1853be8b7d",
+          "created_at": "2026-11-21T02:00:19.959Z",
+          "finish_tag": "BED-C2",
+          "color": "#b8860b",
+          "fill": "#b8860b",
+          "hatch": "horiz",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.11053240740740741,
+              0.7097800925925926
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.20756172839506173,
+              0.7994791666666666
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.25135030864197533,
+              0.8423032407407407
+            ]
+          ],
+          "computed": {
+            "count": 1
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+            "assignment": {
+              "source": "asserted"
+            }
+          }
+        },
+        {
+          "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.49286265432098764,
+              0.22424768518518517
+            ]
+          ],
+          "computed": {
+            "count": 127
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C1",
+            "text": "127 - SET",
+            "reference": "L1.0 / C1 / west bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "measure_role": "count",
+          "verts_norm": [
+            [
+              0.7368827160493827,
+              0.4045138888888889
+            ]
+          ],
+          "computed": {
+            "count": 58
+          },
+          "origin": {
+            "method": "printed_callout",
+            "actor": "agent",
+            "reviewed": false,
+            "proposal_id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+            "assignment": {
+              "source": "asserted"
+            }
+          },
+          "quantity_source": {
+            "kind": "printed_callout",
+            "unit": "EA",
+            "id": "C2",
+            "text": "58 - SET",
+            "reference": "L1.0 / C2 / east bed / Bid Alternate 2 / Addendum 1, 02.11.2026"
+          }
+        },
+        {
+          "id": "shp-7cca5e9f-60ef-4215-a544-54d3c5e5055a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-ca27a088-ca62-45a6-a7fd-97ed516cb6f4",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.5434027777777778,
+              0.2799479166666667
+            ],
+            [
+              0.5693479938271605,
+              0.2913773148148148
+            ],
+            [
+              0.5687209207502777,
+              0.2920332568448023
+            ],
+            [
+              0.5680822527225518,
+              0.29266352542521523
+            ],
+            [
+              0.5674324567816719,
+              0.29326765966061386
+            ],
+            [
+              0.5667720081028179,
+              0.29384521776677675
+            ],
+            [
+              0.566101389651179,
+              0.29439577739376355
+            ],
+            [
+              0.5654210918287772,
+              0.2949189359347662
+            ],
+            [
+              0.5647316121158514,
+              0.2954143108205225
+            ],
+            [
+              0.5640334547070663,
+              0.2958815397990768
+            ],
+            [
+              0.5633271301428103,
+              0.29632028120068354
+            ],
+            [
+              0.5626131549358541,
+              0.2967302141876594
+            ],
+            [
+              0.5618920511936406,
+              0.29711103898900154
+            ],
+            [
+              0.561164346236485,
+              0.2974624771196012
+            ],
+            [
+              0.5604305722119615,
+              0.2977842715838904
+            ],
+            [
+              0.559691265705761,
+              0.2980761870637751
+            ],
+            [
+              0.558946967349303,
+              0.29833801009071553
+            ],
+            [
+              0.5581982214243892,
+              0.2985695492018292
+            ],
+            [
+              0.5574455754651866,
+              0.29877063507990165
+            ],
+            [
+              0.5566895798578338,
+              0.29894112067720263
+            ],
+            [
+              0.5559307874379613,
+              0.29908088132301747
+            ],
+            [
+              0.5551697530864198,
+              0.2991898148148148
+            ],
+            [
+              0.5544037012465945,
+              0.2992681142331087
+            ],
+            [
+              0.5536365143410332,
+              0.29931517869616897
+            ],
+            [
+              0.5528687582971876,
+              0.29933097348615645
+            ],
+            [
+              0.5521009994623435,
+              0.29931548695179655
+            ],
+            [
+              0.5513338041858454,
+              0.2992687305169743
+            ],
+            [
+              0.5505677384013206,
+              0.299190738672307
+            ],
+            [
+              0.5498033672092082,
+              0.29908156894970195
+            ],
+            [
+              0.5490412544599051,
+              0.29894130187991713
+            ],
+            [
+              0.5482819623378326,
+              0.2987700409331561
+            ],
+            [
+              0.5475260509467313,
+              0.2985679124427421
+            ],
+            [
+              0.5467740778964936,
+              0.2983350655119259
+            ],
+            [
+              0.5460265978918324,
+              0.2980716719038974
+            ],
+            [
+              0.5452841623230951,
+              0.29777792591508223
+            ],
+            [
+              0.544547318859522,
+              0.29745404423181554
+            ],
+            [
+              0.5438166110452491,
+              0.29710026577050014
+            ],
+            [
+              0.543092577898355,
+              0.2967168515013661
+            ],
+            [
+              0.5423757535132445,
+              0.2963040842559617
+            ],
+            [
+              0.5416666666666666,
+              0.29586226851851855
+            ]
+          ],
+          "computed": {
+            "area_sf": 110.5,
+            "perimeter_lf": 48.17
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "curved": true,
+            "reviewed": false,
+            "proposal_id": "prop-c316676c-d08d-405e-925e-8739f04ae9f8",
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "C1 SET hatch",
+          "source_callout_ids": [
+            "shp-43598f04-0a43-4076-b83c-b30f565e73f7"
+          ],
+          "planting_grid": {
+            "source_callout_id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+            "spacing_ft": 1,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 0.5,
+            "offset_y_ft": 0.5,
+            "origin_norm": [
+              0.5434027777777778,
+              0.2799479166666667
+            ],
+            "reference": "L1.0 SET: 12 in o.c.; square pattern, 0 deg, 6 in shifts, no edge clearance assumed.",
+            "single_species": true
+          }
+        },
+        {
+          "id": "shp-cc68c306-e582-4662-be19-f0a2617a0737",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "condition_id": "cnd-cc1c489c-169c-46b9-bb27-2b1853be8b7d",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.6653163580246914,
+              0.3567708333333333
+            ],
+            [
+              0.6813271604938271,
+              0.3567708333333333
+            ],
+            [
+              0.6813271604938271,
+              0.3804976851851852
+            ],
+            [
+              0.6869212962962963,
+              0.3883101851851852
+            ],
+            [
+              0.6862165706435572,
+              0.3887961176583974
+            ],
+            [
+              0.685529244915647,
+              0.38933521778326247
+            ],
+            [
+              0.6848611004369848,
+              0.3899260883878459
+            ],
+            [
+              0.6842138688204394,
+              0.39056719812799207
+            ],
+            [
+              0.6835892274795525,
+              0.39125688545606885
+            ],
+            [
+              0.6829887952812288,
+              0.3919933629271586
+            ],
+            [
+              0.6824141283501611,
+              0.3927747218315327
+            ],
+            [
+              0.681866716035861,
+              0.3935989371414059
+            ],
+            [
+              0.6813479770527506,
+              0.39446387275914846
+            ],
+            [
+              0.6808592558033169,
+              0.3953672870533556
+            ],
+            [
+              0.6804018188938578,
+              0.3963068386684259
+            ],
+            [
+              0.6799768518518519,
+              0.3972800925925926
+            ],
+            [
+              0.6795924314636776,
+              0.39826555297261346
+            ],
+            [
+              0.6792413034568527,
+              0.39927858333511107
+            ],
+            [
+              0.6789243442716557,
+              0.400316655084827
+            ],
+            [
+              0.6786423450605757,
+              0.40137717712143356
+            ],
+            [
+              0.67839600971354,
+              0.4024575023071029
+            ],
+            [
+              0.6781859531009544,
+              0.4035549340739501
+            ],
+            [
+              0.6780126995389447,
+              0.40466673315485663
+            ],
+            [
+              0.6778766814806253,
+              0.4057901244208743
+            ],
+            [
+              0.6777782384366665,
+              0.406922303808143
+            ],
+            [
+              0.6777176161278514,
+              0.40806044531703206
+            ],
+            [
+              0.6776949658717402,
+              0.4092017080660345
+            ],
+            [
+              0.6777103442049701,
+              0.4103432433828079
+            ],
+            [
+              0.6777637127421364,
+              0.4114822019146612
+            ],
+            [
+              0.6778549382716049,
+              0.41261574074074076
+            ],
+            [
+              0.6653163580246914,
+              0.4241898148148148
+            ]
+          ],
+          "computed": {
+            "area_sf": 329.88,
+            "perimeter_lf": 85.76
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "curved": true,
+            "reviewed": false,
+            "proposal_id": "prop-f7e348e1-6dff-4b3f-8af1-52affb8732bd",
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "C2 shared bed; north edge approximate",
+          "source_callout_ids": [
+            "shp-ae34713e-4ea6-47a6-913f-ee3191267952"
+          ]
+        }
+      ],
+      "markups": [
+        {
+          "id": "mk-facae5dc-3048-4250-885e-f9993b42714a",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "GDI: Kentucky Coffeetree; 2.5-inch Cal.. L1.0 schedule 1 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.337Z",
+          "at": [
+            0.29899691358024694,
+            0.7118055555555556
+          ]
+        },
+        {
+          "id": "mk-555f174b-6887-41dc-b854-3c7c963fb885",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "TAM: American Linden; 2.5-inch Cal.. L1.0 schedule 2 EA. Individually located; Alternate 2.",
+          "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.338Z",
+          "at": [
+            0.29899691358024694,
+            0.7494212962962963
+          ]
+        },
+        {
+          "id": "mk-9731a5e1-3c46-4e17-9f98-6c5654707cd6",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C1: 127 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.34915123456790126,
+            0.11284722222222222
+          ],
+          "target": [
+            0.49286265432098764,
+            0.22424768518518517
+          ]
+        },
+        {
+          "id": "mk-4a5e3327-067d-47d7-b80e-b2cafde21a90",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "callout",
+          "text": "C2: 58 SET. Printed quantity recorded for review; source anchor only, individual plants not located.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.339Z",
+          "at": [
+            0.7523148148148148,
+            0.42824074074074076
+          ],
+          "target": [
+            0.7368827160493827,
+            0.4045138888888889
+          ]
+        },
+        {
+          "id": "mk-c3816a65-a4a3-443b-b8ef-d630843e3333",
+          "sheet_id": "ccfp-L1.0.pdf",
+          "type": "text",
+          "text": "SET: Sedum ternatum / Wild Stonecrop; 1 Gal.; 12-inch o.c. L1.0 Plant Schedule / SET: 185 EA. C1 + C2 = 185 printed EA; no individual locations counted. Bid Alternate 2.",
+          "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+          "rfi_id": "",
+          "created_at": "2026-11-20T23:44:30.340Z",
+          "at": [
+            0.34915123456790126,
+            0.13599537037037038
+          ]
+        }
+      ],
+      "rfis": [],
+      "proposals": [
+        {
+          "id": "prop-2b3f8246-c717-4b27-914f-5d39d4f879a4",
+          "label": "GDI - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / GDI: Gymnocladus dioicus (male) / Kentucky Coffeetree; 2.5-inch Cal.; Male; schedule 1 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.332Z"
+        },
+        {
+          "id": "prop-26469104-48bc-42a4-ada5-0bb98cacab42",
+          "label": "TAM - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026; Plant Schedule / TAM: Tilia americana / American Linden; 2.5-inch Cal.; ; schedule 2 EA. Individually located parking-island symbols. Their quantity callout is corroboration, not additional EA.",
+          "created_at": "2026-11-20T23:44:30.337Z"
+        },
+        {
+          "id": "prop-d7b57daf-ee44-40f9-919c-81c452f72b8c",
+          "label": "SET printed bed quantities - Bid Alternate 2",
+          "rationale": "L1.0 Addendum 1, 02.11.2026. Visually read 127 SET and 58 SET; Sedum ternatum / Wild Stonecrop, 1 Gal., 12-inch o.c. Schedule 185 EA. Source anchors, not individual plant locations. Existing tree counts are unchanged.",
+          "created_at": "2026-11-21T00:43:49.400Z"
+        },
+        {
+          "id": "prop-c316676c-d08d-405e-925e-8739f04ae9f8",
+          "label": "C1 SET hatch",
+          "rationale": "Public L1.0 / C1 / Bid Alternate 2. SET-only herringbone region at the 127 SET leader. Curved south boundary traced with an arc; no individual plant positions inferred. Existing 127 EA source is unchanged. Area SF is independent; pending review.",
+          "created_at": "2026-11-21T02:00:18.467Z"
+        },
+        {
+          "id": "prop-f7e348e1-6dff-4b3f-8af1-52affb8732bd",
+          "label": "C2 shared bed; north edge approximate",
+          "rationale": "Public L1.0 / C2 / Bid Alternate 2. Shared mixed-species hatch at the leader for the list ending 58 SET. Excludes the separate herringbone pocket to the east. North edge is provisional beneath shrub/furnishing symbols; verify its extent before using SF. The outline does not allocate the bed among species. Existing 58 EA source is unchanged. Area SF is independent; pending review.",
+          "created_at": "2026-11-21T02:00:19.958Z"
+        }
+      ],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "load_plan",
+    "args": {
+      "path": "<REPO>\\demo\\public-sheets\\mo-veterans-home-A111-reflected-ceiling-plan.pdf"
+    },
+    "result": {
+      "file": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "files": [
+        "mo-veterans-home-A111-reflected-ceiling-plan.pdf"
+      ],
+      "page_count": 1,
+      "sheets": [
+        {
+          "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "page": 1,
+          "width_pt": 2592,
+          "height_pt": 1728,
+          "width_px": 5184,
+          "height_px": 3456,
+          "sheet_number": "A111",
+          "detected_scale": "1/16\" = 1'-0\""
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "set_scale",
+    "args": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "upp": 0.1111111111111111
+    },
+    "result": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "upp": 0.1111111111111111,
+      "source": "upp",
+      "confirmed": false
+    }
+  },
+  {
+    "tool": "read_sheet_text",
+    "args": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf"
+    },
+    "result": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "items": [
+        {
+          "str": "EXISTING 2'x2' OR 2'X4' SUSPENDED ACOUSTICAL CEILING",
+          "x": 4026.7,
+          "y": 1524
+        },
+        {
+          "str": "GRID AND TILES",
+          "x": 4026.7,
+          "y": 1552.8
+        },
+        {
+          "str": "EXISTING GYPSUM BOARD SUSPENDED CEILING OR",
+          "x": 4026.7,
+          "y": 1637.8
+        },
+        {
+          "str": "SOFFIT",
+          "x": 4026.7,
+          "y": 1666.6
+        },
+        {
+          "str": "NEW GYPSUM BOARD SUSPENDED CEILING OR SOFFIT",
+          "x": 4026.7,
+          "y": 1757.5
+        },
+        {
+          "str": "BASE BID:",
+          "x": 4026.7,
+          "y": 1871.3
+        },
+        {
+          "str": "NEW 2'x2' OR 2'X4' SUSPENDED ACOUSTICAL",
+          "x": 4138.1,
+          "y": 1871.3
+        },
+        {
+          "str": "CEILING GRID AND TILES",
+          "x": 4026.7,
+          "y": 1900.1
+        },
+        {
+          "str": "A1",
+          "x": 1416.9,
+          "y": 2253.6
+        },
+        {
+          "str": "A1",
+          "x": 1406.1,
+          "y": 2099.3
+        },
+        {
+          "str": "A1",
+          "x": 1626.9,
+          "y": 2406.5
+        },
+        {
+          "str": "A2",
+          "x": 1512,
+          "y": 2020.8
+        },
+        {
+          "str": "A1",
+          "x": 1650,
+          "y": 2145.6
+        },
+        {
+          "str": "A1",
+          "x": 2087.3,
+          "y": 1739.5
+        },
+        {
+          "str": "A1",
+          "x": 2221.2,
+          "y": 1637.3
+        },
+        {
+          "str": "A1",
+          "x": 1864.8,
+          "y": 1800
+        },
+        {
+          "str": "A1",
+          "x": 2122.8,
+          "y": 1505.5
+        },
+        {
+          "str": "106",
+          "x": 1351.7,
+          "y": 2273
+        },
+        {
+          "str": "106",
+          "x": 1541.8,
+          "y": 2224.8
+        },
+        {
+          "str": "106",
+          "x": 1640.4,
+          "y": 2322.5
+        },
+        {
+          "str": "106",
+          "x": 1456.8,
+          "y": 2139.6
+        },
+        {
+          "str": "106",
+          "x": 1343.8,
+          "y": 2028.5
+        },
+        {
+          "str": "106",
+          "x": 1643.5,
+          "y": 2027
+        },
+        {
+          "str": "106",
+          "x": 1476.5,
+          "y": 1996.8
+        },
+        {
+          "str": "106",
+          "x": 1690.6,
+          "y": 2184.7
+        },
+        {
+          "str": "106",
+          "x": 1818.5,
+          "y": 1842.5
+        },
+        {
+          "str": "106",
+          "x": 1941.8,
+          "y": 1733.3
+        },
+        {
+          "str": "106",
+          "x": 2028,
+          "y": 1642.3
+        },
+        {
+          "str": "106",
+          "x": 2127.1,
+          "y": 1668.5
+        },
+        {
+          "str": "106",
+          "x": 2278.6,
+          "y": 1552.3
+        },
+        {
+          "str": "106",
+          "x": 2106.2,
+          "y": 1407.4
+        },
+        {
+          "str": "106",
+          "x": 2106.2,
+          "y": 1570.3
+        },
+        {
+          "str": "107",
+          "x": 1701.4,
+          "y": 1799.5
+        },
+        {
+          "str": "1.",
+          "x": 3850.6,
+          "y": 272.2
+        },
+        {
+          "str": "DIMENSIONS ARE TO FINISHED FACE OF WALL OR GRIDLINE, EXCEPT",
+          "x": 3886.6,
+          "y": 272.2
+        },
+        {
+          "str": "AS INDICATED OTHERWISE.",
+          "x": 3886.5,
+          "y": 301
+        },
+        {
+          "str": "2.",
+          "x": 3850.6,
+          "y": 330
+        },
+        {
+          "str": "ANGLES ARE 90 DEGREES UNLESS NOTED OTHERWISE.",
+          "x": 3886.5,
+          "y": 330
+        },
+        {
+          "str": "3.",
+          "x": 3850.6,
+          "y": 358.8
+        },
+        {
+          "str": "PROVIDE FIRE STOPPING AS REQUIRED BY NFPA 101.",
+          "x": 3886.6,
+          "y": 358.8
+        },
+        {
+          "str": "4.",
+          "x": 3850.6,
+          "y": 387.6
+        },
+        {
+          "str": "PROVIDE STEEL OR FIRE RETARDANT TREATED WOOD FOR BLOCKING",
+          "x": 3886.6,
+          "y": 387.6
+        },
+        {
+          "str": "AND ROUGH BUCKS. COORDINATE LOCATIONS WITH INSTALLER.",
+          "x": 3886.5,
+          "y": 416.4
+        },
+        {
+          "str": "INSTALL PRIOR TO CLOSING WALLS.",
+          "x": 3886.6,
+          "y": 445.4
+        },
+        {
+          "str": "5.",
+          "x": 3850.6,
+          "y": 474.2
+        },
+        {
+          "str": "WHEN APPLYING NEW MATERIALS OR FINISHES TO EXISTING",
+          "x": 3886.6,
+          "y": 474.2
+        },
+        {
+          "str": "SUBSTRATE, PREPARE EXISTING SUBSTRATES AS REQUIRED TO MEET",
+          "x": 3886.6,
+          "y": 503
+        },
+        {
+          "str": "NEW MATERIAL MANUFACTURER'S INSTRUCTIONS OR",
+          "x": 3886.6,
+          "y": 531.8
+        },
+        {
+          "str": "RECOMMENDATIONS FOR PROPER APPLICATION OF NEW MATERIALS.",
+          "x": 3886.6,
+          "y": 560.9
+        },
+        {
+          "str": "6.",
+          "x": 3850.6,
+          "y": 589.7
+        },
+        {
+          "str": "NEATLY CUT OPENINGS IN EXISTING CONSTRUCTION USING POWER",
+          "x": 3886.6,
+          "y": 589.7
+        },
+        {
+          "str": "SAWS OR CORE DRILLS. DO NOT USE IMPACT TOOLS. REVIEW",
+          "x": 3886.6,
+          "y": 618.5
+        },
+        {
+          "str": "OPENING LOCATIONS WITH TRADES PRIOR TO STARTING WORK. KEEP",
+          "x": 3886.6,
+          "y": 647.3
+        },
+        {
+          "str": "OPENINGS TO MINIMUM REQUIRED TO ALLOW FOR NEW WORK.",
+          "x": 3886.6,
+          "y": 676.3
+        },
+        {
+          "str": "7.",
+          "x": 3850.6,
+          "y": 705.1
+        },
+        {
+          "str": "REFERENCE SHEET A600 FOR PARTITION TYPES",
+          "x": 3886.6,
+          "y": 705.1
+        },
+        {
+          "str": "SHEET NOTES",
+          "x": 3830.2,
+          "y": 198.2
+        },
+        {
+          "str": "Plan North",
+          "x": 4483.4,
+          "y": 3277
+        },
+        {
+          "str": "ONE SOUTH MEMORIAL DRIVE",
+          "x": 4766.9,
+          "y": 914.9
+        },
+        {
+          "str": "SUITE 1500 ST. LOUIS, MO 63102",
+          "x": 4758,
+          "y": 937
+        },
+        {
+          "str": "(314) 367-6100",
+          "x": 4831,
+          "y": 959
+        },
+        {
+          "str": "ISSUE DATE:",
+          "x": 4676.9,
+          "y": 2692.3
+        },
+        {
+          "str": "SHEET NUMBER:",
+          "x": 4680.2,
+          "y": 3171.6
+        },
+        {
+          "str": "SITE #",
+          "x": 4675.2,
+          "y": 2425.4
+        },
+        {
+          "str": "CHECKED BY:",
+          "x": 4676.4,
+          "y": 2823.1
+        },
+        {
+          "str": "DRAWN BY:",
+          "x": 4677.1,
+          "y": 2786.6
+        },
+        {
+          "str": "DESIGNED BY:",
+          "x": 4676.9,
+          "y": 2862.5
+        },
+        {
+          "str": "DATE:",
+          "x": 4729,
+          "y": 2554.1
+        },
+        {
+          "str": "REVISION:",
+          "x": 4677.1,
+          "y": 2527.7
+        },
+        {
+          "str": "FACILITY #",
+          "x": 4676.9,
+          "y": 2465.3
+        },
+        {
+          "str": "PROJECT #",
+          "x": 4676.9,
+          "y": 2345.8
+        },
+        {
+          "str": "SHEET TITLE:",
+          "x": 4675.7,
+          "y": 2908.1
+        },
+        {
+          "str": "REVISION:",
+          "x": 4677.1,
+          "y": 2578.3
+        },
+        {
+          "str": "DATE:",
+          "x": 4729,
+          "y": 2604.7
+        },
+        {
+          "str": "REVISION:",
+          "x": 4677.1,
+          "y": 2629.7
+        },
+        {
+          "str": "DATE:",
+          "x": 4729,
+          "y": 2656.1
+        },
+        {
+          "str": "CAD DWG FILE:",
+          "x": 4676.4,
+          "y": 2749.7
+        },
+        {
+          "str": "STATE OF MISSOURI",
+          "x": 4675.7,
+          "y": 168.7
+        },
+        {
+          "str": "MIKE KEHOE,",
+          "x": 4675.7,
+          "y": 207.4
+        },
+        {
+          "str": "GOVERNOR",
+          "x": 4675.7,
+          "y": 245.8
+        },
+        {
+          "str": "PROFESSIONAL SEAL",
+          "x": 4748.2,
+          "y": 639.1
+        },
+        {
+          "str": "OF",
+          "x": 4726.1,
+          "y": 3338.4
+        },
+        {
+          "str": "SHEETS",
+          "x": 4814.6,
+          "y": 3338.4
+        },
+        {
+          "str": "OFFICE OF",
+          "x": 4675.7,
+          "y": 1545.6
+        },
+        {
+          "str": "ADMINISTRATION",
+          "x": 4675.7,
+          "y": 1584.2
+        },
+        {
+          "str": "DIVISION OF FACILITIES",
+          "x": 4675.7,
+          "y": 1622.9
+        },
+        {
+          "str": "MANAGEMENT,",
+          "x": 4675.7,
+          "y": 1661.3
+        },
+        {
+          "str": "DESIGN AND",
+          "x": 4675.7,
+          "y": 1699.9
+        },
+        {
+          "str": "CONSTRUCTION",
+          "x": 4675.7,
+          "y": 1738.6
+        },
+        {
+          "str": "6 SOUTH OLD ORCHARD AVE.",
+          "x": 4705.2,
+          "y": 1314.5
+        },
+        {
+          "str": "ST. LOUIS, MO 63119",
+          "x": 4705.2,
+          "y": 1329.4
+        },
+        {
+          "str": "T: 314.918.8383",
+          "x": 4705.2,
+          "y": 1344.5
+        },
+        {
+          "str": "F: 314.918.1766",
+          "x": 4705.2,
+          "y": 1359.4
+        },
+        {
+          "str": "www.introba.com",
+          "x": 4705.2,
+          "y": 1374.5
+        },
+        {
+          "str": "7356",
+          "x": 4883.8,
+          "y": 2425.4
+        },
+        {
+          "str": "6517356071",
+          "x": 4883.8,
+          "y": 2465.3
+        },
+        {
+          "str": "42",
+          "x": 4773.1,
+          "y": 3339.4
+        },
+        {
+          "str": "AREA",
+          "x": 3977.8,
+          "y": 2907.1
+        },
+        {
+          "str": "1C16L",
+          "x": 3975.8,
+          "y": 2929
+        },
+        {
+          "str": "AREA",
+          "x": 4454.9,
+          "y": 2902.6
+        },
+        {
+          "str": "2C16H",
+          "x": 4451.5,
+          "y": 2924.4
+        },
+        {
+          "str": "AREA",
+          "x": 4279.4,
+          "y": 3197.3
+        },
+        {
+          "str": "1C16H",
+          "x": 4275.6,
+          "y": 3219.1
+        },
+        {
+          "str": "AREA",
+          "x": 4297.7,
+          "y": 2736.2
+        },
+        {
+          "str": "2C16L",
+          "x": 4295.8,
+          "y": 2758.1
+        },
+        {
+          "str": "MVH #",
+          "x": 4675.2,
+          "y": 2385.6
+        },
+        {
+          "str": "FAI 29-042",
+          "x": 4883.8,
+          "y": 2385.6
+        },
+        {
+          "str": "OVERALL",
+          "x": 4676.9,
+          "y": 2957.5
+        },
+        {
+          "str": "REFLECTED CEILING",
+          "x": 4676.9,
+          "y": 3011.8
+        },
+        {
+          "str": "PLAN",
+          "x": 4676.9,
+          "y": 3066.2
+        },
+        {
+          "str": "CCF",
+          "x": 4883.5,
+          "y": 2782.3
+        },
+        {
+          "str": "JBS",
+          "x": 4883.5,
+          "y": 2819.3
+        },
+        {
+          "str": "OCULUS",
+          "x": 4883.5,
+          "y": 2859.1
+        },
+        {
+          "str": "06/26/2026",
+          "x": 4883.5,
+          "y": 2691.1
+        },
+        {
+          "str": "162_26 MO01",
+          "x": 4883.8,
+          "y": 2346
+        },
+        {
+          "str": "10600 LEWIS AND",
+          "x": 4675.7,
+          "y": 2189
+        },
+        {
+          "str": "CLARK BLVD",
+          "x": 4675.7,
+          "y": 2227.7
+        },
+        {
+          "str": "ST. LOUIS, MO 63136",
+          "x": 4675.7,
+          "y": 2266.1
+        },
+        {
+          "str": "STATE OF MISSOURI",
+          "x": 4675.7,
+          "y": 1995.1
+        },
+        {
+          "str": "VETERAN'S HOME",
+          "x": 4675.7,
+          "y": 2033.8
+        },
+        {
+          "str": "06/26/2026",
+          "x": 4678.8,
+          "y": 3373.2
+        },
+        {
+          "str": "A111",
+          "x": 4677.6,
+          "y": 3282
+        },
+        {
+          "str": "LEGEND",
+          "x": 3830.2,
+          "y": 1433
+        },
+        {
+          "str": "KEYNOTES",
+          "x": 3829,
+          "y": 1077.6
+        },
+        {
+          "str": "106",
+          "x": 3874.6,
+          "y": 1156.6
+        },
+        {
+          "str": "INSTALL FIRE/SMOKE PLENUM SIGNAGE. SIGNAGE TO BE",
+          "x": 3948.7,
+          "y": 1156.6
+        },
+        {
+          "str": "INSTALLED PER NFPA REQUIREMENTS. REFERENCE A400 FOR",
+          "x": 3948.7,
+          "y": 1185.6
+        },
+        {
+          "str": "ADDITIONAL INFORMATION.",
+          "x": 3948.7,
+          "y": 1214.9
+        },
+        {
+          "str": "107",
+          "x": 3874.6,
+          "y": 1250.4
+        },
+        {
+          "str": "REINSTALL ACOUSTICAL CEILING GRID, TILES, LIGHT FIXTURES,",
+          "x": 3948.7,
+          "y": 1250.4
+        },
+        {
+          "str": "AND ADDITIONAL ITEMS AFTER COMPLETION OF PARTITION",
+          "x": 3948.7,
+          "y": 1279.4
+        },
+        {
+          "str": "REMEDIATION.",
+          "x": 3948.7,
+          "y": 1308.7
+        },
+        {
+          "str": "KEYNOTES",
+          "x": 3829,
+          "y": 1077.6
+        },
+        {
+          "str": "1/16\" = 1'-0\"",
+          "x": 425,
+          "y": 3282
+        },
+        {
+          "str": "1",
+          "x": 380.6,
+          "y": 3282
+        },
+        {
+          "str": "FIRST FLOOR REFLECTED CEILING PLAN",
+          "x": 420.5,
+          "y": 3259.2
+        },
+        {
+          "str": "Plan North",
+          "x": 1579.2,
+          "y": 3220.8
+        },
+        {
+          "str": "KEY PLAN",
+          "x": 3830.2,
+          "y": 2548.3
+        },
+        {
+          "str": "15",
+          "x": 4676.4,
+          "y": 3337.2
+        }
+      ],
+      "text": "EXISTING 2'x2' OR 2'X4' SUSPENDED ACOUSTICAL CEILING GRID AND TILES EXISTING GYPSUM BOARD SUSPENDED CEILING OR SOFFIT NEW GYPSUM BOARD SUSPENDED CEILING OR SOFFIT BASE BID: NEW 2'x2' OR 2'X4' SUSPENDED ACOUSTICAL CEILING GRID AND TILES A1 A1 A1 A2 A1 A1 A1 A1 A1 106 106 106 106 106 106 106 106 106 106 106 106 106 106 106 107 1. DIMENSIONS ARE TO FINISHED FACE OF WALL OR GRIDLINE, EXCEPT AS INDICATED OTHERWISE. 2. ANGLES ARE 90 DEGREES UNLESS NOTED OTHERWISE. 3. PROVIDE FIRE STOPPING AS REQUIRED BY NFPA 101. 4. PROVIDE STEEL OR FIRE RETARDANT TREATED WOOD FOR BLOCKING AND ROUGH BUCKS. COORDINATE LOCATIONS WITH INSTALLER. INSTALL PRIOR TO CLOSING WALLS. 5. WHEN APPLYING NEW MATERIALS OR FINISHES TO EXISTING SUBSTRATE, PREPARE EXISTING SUBSTRATES AS REQUIRED TO MEET NEW MATERIAL MANUFACTURER'S INSTRUCTIONS OR RECOMMENDATIONS FOR PROPER APPLICATION OF NEW MATERIALS. 6. NEATLY CUT OPENINGS IN EXISTING CONSTRUCTION USING POWER SAWS OR CORE DRILLS. DO NOT USE IMPACT TOOLS. REVIEW OPENING LOCATIONS WITH TRADES PRIOR TO STARTING WORK. KEEP OPENINGS TO MINIMUM REQUIRED TO ALLOW FOR NEW WORK. 7. REFERENCE SHEET A600 FOR PARTITION TYPES SHEET NOTES Plan North ONE SOUTH MEMORIAL DRIVE SUITE 1500 ST. LOUIS, MO 63102 (314) 367-6100 ISSUE DATE: SHEET NUMBER: SITE # CHECKED BY: DRAWN BY: DESIGNED BY: DATE: REVISION: FACILITY # PROJECT # SHEET TITLE: REVISION: DATE: REVISION: DATE: CAD DWG FILE: STATE OF MISSOURI MIKE KEHOE, GOVERNOR PROFESSIONAL SEAL OF SHEETS OFFICE OF ADMINISTRATION DIVISION OF FACILITIES MANAGEMENT, DESIGN AND CONSTRUCTION 6 SOUTH OLD ORCHARD AVE. ST. LOUIS, MO 63119 T: 314.918.8383 F: 314.918.1766 www.introba.com 7356 6517356071 42 AREA 1C16L AREA 2C16H AREA 1C16H AREA 2C16L MVH # FAI 29-042 OVERALL REFLECTED CEILING PLAN CCF JBS OCULUS 06/26/2026 162_26 MO01 10600 LEWIS AND CLARK BLVD ST. LOUIS, MO 63136 STATE OF MISSOURI VETERAN'S HOME 06/26/2026 A111 LEGEND KEYNOTES 106 INSTALL FIRE/SMOKE PLENUM SIGNAGE. SIGNAGE TO BE INSTALLED PER NFPA REQUIREMENTS. REFERENCE A400 FOR ADDITIONAL INFORMATION. 107 REINSTALL ACOUSTICAL CEILING GRID, TILES, LIGHT FIXTURES, AND ADDITIONAL ITEMS AFTER COMPLETION OF PARTITION REMEDIATION. KEYNOTES 1/16\" = 1'-0\" 1 FIRST FLOOR REFLECTED CEILING PLAN Plan North KEY PLAN 15"
+    }
+  },
+  {
+    "tool": "measure_polygon",
+    "args": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "verts": [
+        [
+          1873.68,
+          194.4
+        ],
+        [
+          2041.44,
+          194.4
+        ],
+        [
+          2041.44,
+          308.16
+        ],
+        [
+          1943.76,
+          308.16
+        ],
+        [
+          1943.76,
+          264.24
+        ],
+        [
+          1910.64,
+          231.12
+        ],
+        [
+          1873.68,
+          231.12
+        ]
+      ],
+      "condition": "ACT-EXISTING-TEST",
+      "role": "floor_area"
+    },
+    "result": {
+      "area_sf": 175.73,
+      "perimeter_lf": 60.4,
+      "nverts": 7,
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a"
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "label": "Northwest bay, northern wing; existing ceiling footprint test"
+    },
+    "result": {
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "changed": [
+        "label"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 7,
+      "area_sf": 175.73,
+      "perimeter_lf": 60.4,
+      "label": "Northwest bay, northern wing; existing ceiling footprint test",
+      "agent_edits": 1
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "area_grid": {
+        "single_item": true,
+        "spacing_ft": 2,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 1,
+        "offset_y_ft": 1,
+        "origin_norm": [
+          0.3633796296296296,
+          0.05708333333333333
+        ],
+        "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff."
+      }
+    },
+    "result": {
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "changed": [
+        "area_grid"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 7,
+      "area_sf": 175.73,
+      "perimeter_lf": 60.4,
+      "label": "Northwest bay, northern wing; existing ceiling footprint test",
+      "agent_edits": 1,
+      "grid_count": 45
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<OUTPUT>\\ceiling-before.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "units_per_px": 0.1111111111111111,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "created_at": "2026-11-21T03:35:28.421Z",
+          "finish_tag": "ACT-EXISTING-TEST",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "condition_id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.3614351851851852,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.07645833333333334
+            ],
+            [
+              0.36856481481481485,
+              0.066875
+            ],
+            [
+              0.3614351851851852,
+              0.066875
+            ]
+          ],
+          "computed": {
+            "area_sf": 175.73,
+            "perimeter_lf": 60.4
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "Northwest bay, northern wing; existing ceiling footprint test",
+          "area_grid": {
+            "spacing_ft": 2,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 1,
+            "offset_y_ft": 1,
+            "origin_norm": [
+              0.3633796296296296,
+              0.05708333333333333
+            ],
+            "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.",
+            "single_item": true
+          }
+        }
+      ],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "area_grid": {
+        "single_item": true,
+        "spacing_ft": 2,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 1,
+        "offset_y_ft": 1,
+        "origin_norm": [
+          0.3633796296296296,
+          0.05708333333333333
+        ],
+        "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.",
+        "footprint": {
+          "kind": "rectangle",
+          "width_ft": 2,
+          "depth_ft": 2,
+          "basis": "assumed",
+          "reference": "Nominal 2-by-2-foot module inferred from this drawn grid; A111 legend allows 2-by-2 or 2-by-4. Physical tile face and joint dimensions unverified."
+        }
+      }
+    },
+    "result": {
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "changed": [
+        "area_grid"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 7,
+      "area_sf": 175.73,
+      "perimeter_lf": 60.4,
+      "label": "Northwest bay, northern wing; existing ceiling footprint test",
+      "agent_edits": 1,
+      "grid_count": 45
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "args": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "overlay": true,
+      "region": {
+        "x0": 1850,
+        "y0": 175,
+        "x1": 2050,
+        "y1": 330
+      },
+      "px": 1400
+    },
+    "result": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        1850,
+        175,
+        2050,
+        330
+      ],
+      "img_px": [
+        1400,
+        1085
+      ],
+      "zoom": 7,
+      "overlay": true,
+      "shapes_drawn": 1,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<OUTPUT>\\ceiling-footprints.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "units_per_px": 0.1111111111111111,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "created_at": "2026-11-21T03:35:28.421Z",
+          "finish_tag": "ACT-EXISTING-TEST",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "condition_id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.3614351851851852,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.07645833333333334
+            ],
+            [
+              0.36856481481481485,
+              0.066875
+            ],
+            [
+              0.3614351851851852,
+              0.066875
+            ]
+          ],
+          "computed": {
+            "area_sf": 175.73,
+            "perimeter_lf": 60.4
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "Northwest bay, northern wing; existing ceiling footprint test",
+          "area_grid": {
+            "spacing_ft": 2,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 1,
+            "offset_y_ft": 1,
+            "origin_norm": [
+              0.3633796296296296,
+              0.05708333333333333
+            ],
+            "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.",
+            "single_item": true,
+            "footprint": {
+              "kind": "rectangle",
+              "width_ft": 2,
+              "depth_ft": 2,
+              "basis": "assumed",
+              "reference": "Nominal 2-by-2-foot module inferred from this drawn grid; A111 legend allows 2-by-2 or 2-by-4. Physical tile face and joint dimensions unverified."
+            }
+          }
+        }
+      ],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "export_marked_pdf",
+    "args": {
+      "path": "<OUTPUT>\\ceiling-marked.pdf"
+    },
+    "result": {
+      "path": "<OUTPUT>\\ceiling-marked.pdf",
+      "pages": 2,
+      "sheets_marked": 1,
+      "shapes_drawn": 1,
+      "annotations_drawn": 0,
+      "approvals_drawn": 0,
+      "rfis_printed": 0,
+      "note": "The takeoff burned into the plan sheets, with a legend cover — hand this to the user to review. To revise in the app, import the export_takeoff payload; agent shapes arrive as pencil proposals there until accepted."
+    }
+  },
+  {
+    "tool": "load_plan",
+    "args": {
+      "path": "<REPO>\\demo\\sample-finish-plan.pdf"
+    },
+    "result": {
+      "file": "sample-finish-plan.pdf",
+      "files": [
+        "sample-finish-plan.pdf"
+      ],
+      "page_count": 2,
+      "sheets": [
+        {
+          "sheet": "sample-finish-plan.pdf",
+          "page": 1,
+          "width_pt": 3024,
+          "height_pt": 2160,
+          "width_px": 6048,
+          "height_px": 4320,
+          "sheet_number": "AF101",
+          "detected_scale": "1/8\" = 1'-0\""
+        },
+        {
+          "sheet": "sample-finish-plan.pdf#2",
+          "page": 2,
+          "width_pt": 3024,
+          "height_pt": 2160,
+          "width_px": 6048,
+          "height_px": 4320,
+          "sheet_number": "AF600"
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "import_takeoff",
+    "args": {
+      "path": "<REPO>\\docs\\evidence\\area-grid-count\\demo-takeoff.json"
+    },
+    "result": {
+      "file": "demo-takeoff.json",
+      "replaced": true,
+      "shapes_added": 1,
+      "shapes_pending": 1,
+      "conditions_merged": 0,
+      "conditions_added": 1,
+      "scales_adopted": 1,
+      "unknown_files": [],
+      "rules_imported": 0,
+      "shapes_total": 1,
+      "note": "Empty session — the import IS the takeoff now. Unreviewed machine shapes stay pencil; verify with view_sheet overlay:true."
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+      "area_grid": {
+        "spacing_ft": 4,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 2,
+        "offset_y_ft": 2,
+        "origin_norm": [
+          0.35714285714285715,
+          0.17222222222222222
+        ],
+        "reference": "Bundled AF101 demonstration only: assumed 4 ft support grid, 2 ft shifts, 0 deg, no edge clearance; no such support work specified by this finish plan.",
+        "single_item": true,
+        "footprint": {
+          "kind": "rectangle",
+          "width_ft": 2,
+          "depth_ft": 1,
+          "basis": "assumed",
+          "reference": "Bundled finish-plan test only; a 2-by-1-foot footprint, not specified work."
+        }
+      }
+    },
+    "result": {
+      "shape_id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+      "changed": [
+        "area_grid"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 4,
+      "area_sf": 128,
+      "perimeter_lf": 48,
+      "label": "Assumed layout zone; not specified work",
+      "agent_edits": 1,
+      "grid_count": 8
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<OUTPUT>\\demo-footprints.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "sample-finish-plan.pdf",
+          "units_per_px": 0.05555555555555555,
+          "scale_source": "detected",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-da707523-8179-44bb-bc98-f08842c22cda",
+          "created_at": "2026-11-21T03:02:41.738Z",
+          "finish_tag": "DEMO-SUPPORT-LAYOUT",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+          "sheet_id": "sample-finish-plan.pdf",
+          "condition_id": "cnd-da707523-8179-44bb-bc98-f08842c22cda",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.35714285714285715,
+              0.17222222222222222
+            ],
+            [
+              0.40476190476190477,
+              0.17222222222222222
+            ],
+            [
+              0.40476190476190477,
+              0.20555555555555555
+            ],
+            [
+              0.35714285714285715,
+              0.20555555555555555
+            ]
+          ],
+          "computed": {
+            "area_sf": 128,
+            "perimeter_lf": 48
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "Assumed layout zone; not specified work",
+          "area_grid": {
+            "spacing_ft": 4,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 2,
+            "offset_y_ft": 2,
+            "origin_norm": [
+              0.35714285714285715,
+              0.17222222222222222
+            ],
+            "reference": "Bundled AF101 demonstration only: assumed 4 ft support grid, 2 ft shifts, 0 deg, no edge clearance; no such support work specified by this finish plan.",
+            "single_item": true,
+            "footprint": {
+              "kind": "rectangle",
+              "width_ft": 2,
+              "depth_ft": 1,
+              "basis": "assumed",
+              "reference": "Bundled finish-plan test only; a 2-by-1-foot footprint, not specified work."
+            }
+          }
+        }
+      ],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  }
+]

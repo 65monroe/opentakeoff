@@ -635,7 +635,12 @@ export const plantingGridSchema = z.object({
   origin_norm:z.tuple([z.number().min(0).max(1),z.number().min(0).max(1)]),
   reference:z.string().min(1),
 });
-export const areaGridSchema = plantingGridSchema.omit({single_species:true,source_callout_id:true}).extend({single_item:z.literal(true),source_callout_id:z.string().min(1).optional()});
+const footprintSource = {basis:z.enum(['assumed','specified']),reference:z.string().trim().min(1)};
+export const areaGridFootprintSchema = z.discriminatedUnion('kind',[
+  z.object({kind:z.literal('circle'),diameter_ft:z.number().positive(),...footprintSource}),
+  z.object({kind:z.literal('rectangle'),width_ft:z.number().positive(),depth_ft:z.number().positive(),...footprintSource}),
+]);
+export const areaGridSchema = plantingGridSchema.omit({single_species:true,source_callout_id:true}).extend({single_item:z.literal(true),source_callout_id:z.string().min(1).optional(),footprint:areaGridFootprintSchema.optional()});
 export const editShapeOutput = {
   shape_id: z.string(),
   changed: z.array(z.enum(["verts", "condition", "role", "label", "rise_ft", "drop_ft", "source_callout_ids", "planting_grid", "area_grid"])).describe("Which fields this call actually changed"),

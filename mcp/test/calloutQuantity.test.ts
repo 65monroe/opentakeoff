@@ -129,6 +129,15 @@ test('generic area_grid is available over MCP without a printed callout and pres
     const changed=structuredClone(session.shapes[0]); delete changed.area_grid;
     assert.deepEqual(changed,original.shapes[0]);
     const saved=structuredClone(session.exportPayload());
+    for (const footprint of [{kind:'circle',diameter_ft:.625,basis:'assumed',reference:'Test container'}, {kind:'rectangle',width_ft:2,depth_ft:2,basis:'specified',reference:'Test module'}]) {
+      const footprintResult=await call({shape_id:area.shape_id,area_grid:{...grid,footprint}});
+      assert.equal(footprintResult.grid_count,result.grid_count);
+      assert.deepEqual(session.shapes[0].area_grid?.footprint,footprint);
+      await client.callTool({name:'undo_last',arguments:{}});assert.deepEqual(session.exportPayload(),saved);
+    }
+    for (const footprint of [{kind:'circle',diameter_ft:0,basis:'assumed',reference:'Test'}, {kind:'rectangle',width_ft:2,basis:'assumed',reference:'Test'}, {kind:'circle',diameter_ft:1,basis:'approved',reference:'Test'}]) {
+      await call({shape_id:area.shape_id,area_grid:{...grid,footprint}},true);assert.deepEqual(session.exportPayload(),saved);
+    }
     for(const patch of [{area_grid:{...grid,single_item:false}},{area_grid:{...grid,source_callout_id:'missing'}},{area_grid:grid,label:'combined'},{area_grid:grid,planting_grid:null},{planting_grid:null}]) {
       await call({shape_id:area.shape_id,...patch},true); assert.deepEqual(session.exportPayload(),saved);
     }

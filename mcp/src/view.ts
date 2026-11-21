@@ -5,7 +5,7 @@
 import { RENDER_SCALE } from "../../web/src/lib/sheets.ts";
 import { UserError } from "./format.ts";
 import type { Shape } from "./session.ts";
-import { areaGrid, getAreaGrid } from '../../web/src/lib/areaGrid.js';
+import { areaGrid, getAreaGrid, areaGridFootprintOutline } from '../../web/src/lib/areaGrid.js';
 
 /** The slice of CanvasRenderingContext2D the drawing uses — structural, so
  * @napi-rs/canvas's context satisfies it without a type dependency. */
@@ -145,8 +145,17 @@ export function drawShapes(ctx: Ctx2D, toCanvas: ToCanvas, shapes: Shape[], shee
     ctx.stroke();
     if(getAreaGrid(s)) {
       const grid=areaGrid(s,{widthPx:sheetW,heightPx:sheetH,upp});
+      const footprint=areaGridFootprintOutline(s,{widthPx:sheetW,heightPx:sheetH,upp});
       ctx.setLineDash([]);
       for(const [nx,ny] of grid.points_norm) {
+        if (footprint.length) {
+          ctx.beginPath();
+          footprint.forEach(([dx,dy],i)=>{
+            const [fx,fy]=toCanvas((nx+dx)*sheetW,(ny+dy)*sheetH);
+            if (i===0) ctx.moveTo(fx,fy); else ctx.lineTo(fx,fy);
+          });
+          ctx.closePath();ctx.stroke();continue;
+        }
         const [x,y]=toCanvas(nx*sheetW,ny*sheetH),r=Math.max(1,longEdge/700);
         ctx.beginPath(); ctx.moveTo(x-r,y-r); ctx.lineTo(x+r,y+r); ctx.moveTo(x-r,y+r); ctx.lineTo(x+r,y-r); ctx.stroke();
       }

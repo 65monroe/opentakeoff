@@ -35,7 +35,17 @@ legacy `planting_grid` settings; reading/import/export does not migrate them,
 and Undo restores the exact earlier record. The older MCP input remains for
 compatibility and cannot overwrite a generic grid. Both fields together refuse.
 
-View the overlay and reopen the editable export. Do not claim component sizing,
+Optional `footprint` uses `kind: "circle"` with `diameter_ft`, or
+`kind: "rectangle"` with `width_ft` and `depth_ft`, plus `basis` (`assumed` or
+`specified`) and a nonempty `reference`. Dimensions must be positive. This
+displays full physical outlines at existing positions; it does not change
+spacing, count centers, quantities or review. Rectangles follow `angle_deg`.
+Omit the footprint on an explicit grid save to return to position markers.
+The source basis is not approval. Compare alternative patterns only as stated
+assumptions when the drawing does not specify one; numerical closeness alone
+does not select a pattern.
+
+View the overlay and reopen the editable export. Do not claim inferred sizing,
 cut-piece quantities or code compliance. Mixed planting beds require verified
 species subareas. Static marked-PDF and report exports omit the grid comparison.
 See the [public example and reproduction](evidence/area-grid-count/README.md).

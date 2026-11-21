@@ -83,7 +83,7 @@ separate call. For this comparison, supply the linked source callout ID, `single
 `offset_x_ft`, `offset_y_ft`, fixed normalized `origin_norm`, and `reference`
 naming the spacing source and layout assumptions. `grid_count` is the clipped
 spacing count, not additional EA or evidence of individually located plants.
-Do not tune settings to force the printed total. Mixed beds require verified
+Read the planting detail before choosing a pattern. When it is unstated, show square and triangular alternatives without treating a closer total as proof. Optional `footprint` dimensions are independent of spacing and carry their own source/basis. Do not tune settings to force the printed total. Mixed beds require verified
 species subareas. JSON preserves settings; static PDF/report exports keep their
 existing quantities and do not yet include the grid comparison.
 

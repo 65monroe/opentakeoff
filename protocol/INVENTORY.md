@@ -32,6 +32,14 @@ it must be among the area's `source_callout_ids` and resolve to a printed source
 on the same sheet for edits. No plant identity or source record is required.
 The shared `areaGrid.js` recalculates positions from the current boundary,
 holes, image dimensions and calibration. It adds no count shapes or EA.
+Optional `area_grid.footprint` stores `kind` (circle or rectangle), positive
+dimensions in feet (`diameter_ft`, or `width_ft` and `depth_ft`), `basis`
+(`assumed` or `specified`) and `reference`. Browser and MCP render the same
+48-segment circles or rotated rectangles around existing grid centers, without
+clipping their edges. Dimensions are independent of spacing. There is no
+footprint-to-quantity calculation, review change or automatic default. Omitted
+footprints retain the original position-marker display. Grid edit, import,
+archive and Undo preserve these fields; the writer identifier is unchanged.
 
 Legacy `planting_grid` retains its required `single_species` declaration and
 source ID. Reading, import and export preserve it unchanged. New browser

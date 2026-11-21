@@ -1,0 +1,34 @@
+{
+  "date": "2026-11-20",
+  "timezone": "America/New_York",
+  "branch": "codex/area-grid-count",
+  "base_commit": "f5159aba00cb06bcb9f4422e010b171de6f8f939",
+  "environment": "Windows, Node 24.22.3, local checkout; local results, not GitHub CI",
+  "browser": "Codex in-app browser, existing tab at http://127.0.0.1:5200/",
+  "build": {
+    "asset": "index-D0e5fea0.js",
+    "sha256": "ef37c498bd0dbb3fd3c28876a20476e75d95b76c24e56e92251c3eebab1b69b3",
+    "mode": "Vite production build served with preview on loopback; public hosted app unchanged"
+  },
+  "commands": [
+    {"command":"npm ci --prefix web --no-audit --no-fund","result":"pass after releasing the local preview process's Rollup file lock; preview restarted after build"},
+    {"command":"npm run check --prefix web","result":"pass","tests":3850,"passed":3846,"skipped":4,"failed":0,"includes":["typecheck","lint","tests","bench","build","OCR distribution check"]},
+    {"command":"npm run typecheck --prefix mcp","result":"pass"},
+    {"command":"npm test --prefix mcp","result":"pass","tests":335,"passed":334,"skipped":1,"failed":0},
+    {"command":"npm run check --prefix protocol","result":"pass","tests":64,"failed":0,"schemas":11,"transport_cases":16},
+    {"command":"npm run check:tool-count --prefix mcp","result":"pass","default_tools":71,"gated_tools":73,"setup_tools":22},
+    {"command":"npm run check:wiki --prefix mcp","result":"pass","pages":11},
+    {"command":"npm run build --prefix mcp","result":"pass","includes":"protocol resource and wiki source checks"},
+    {"command":"npm run smoke:dist --prefix mcp","result":"pass","flat_tools":71,"staged_tools":23,"protocol_schemas":11,"wiki_pages":11},
+    {"command":"node scripts/check-doc-links.mjs","result":"pass","registered_docs":49},
+    {"command":"node docs/evidence/area-grid-footprints/replay.mjs PUBLIC_L1.0.pdf OUTPUT_DIR","result":"pass","actual_stdio_mcp":true},
+    {"command":"node docs/evidence/area-grid-footprints/verify.mjs","result":"pass","preserved_set_records":7,"preserved_set_conditions":5,"exact_browser_reopen_examples":3}
+  ],
+  "browser_tests": [
+    {"example":"SET C1","actions":["Select printed 127 EA","Show on plan to existing linked bed","Save 7.5-inch circle","Compare triangular 129 with square 110","Undo alternative","Edit diameter to 9 inches and Undo","Save archive","Reopen","Show on plan"],"result":"pass; final square 110 with 7.5-inch circle; printed 127 and all seven original records preserved"},
+    {"example":"Public A111 bay","actions":["Show on plan","Edit 24-by-24 footprint depth to 12 inches","Save","Undo","Save archive","Reopen","Show on plan"],"result":"pass; 45 centers and 175.73 SF unchanged; final 24-by-24 footprint"},
+    {"example":"Bundled AF101","actions":["Show on plan","Edit 24-by-12 footprint width to 18 inches","Save","Undo","Save archive","Reopen","Show on plan"],"result":"pass; eight centers and 128 SF unchanged; final 24-by-12 footprint"}
+  ],
+  "export_limit_check": "Actual MCP export_marked_pdf inspected on sheet page 2 after the cover: area remains, grid and footprints omitted. PNG crop included.",
+  "unverified": ["human preference or review-speed gain","SET planting-detail pattern","actual supplier container diameter","ceiling tile face and joints","ceiling cut pieces and purchase quantities","public hosted build","upstream approval"]
+}

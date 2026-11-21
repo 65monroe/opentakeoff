@@ -1,6 +1,6 @@
 import {test} from 'node:test';
 import assert from 'node:assert/strict';
-import {areaGrid,areaGridError,getAreaGrid} from '../src/lib/areaGrid.js';
+import {areaGrid,areaGridError,getAreaGrid,areaGridFootprintOutline} from '../src/lib/areaGrid.js';
 import {applyShapeCommand} from '../src/lib/shapeCommands.js';
 import {mergeTakeoffImport} from '../src/lib/importTakeoff.js';
 const frame={widthPx:2,heightPx:2,upp:1};
@@ -18,6 +18,34 @@ test('generic area grid needs no plant identity or printed source; quantity and 
   const removed=applyShapeCommand(changed.shapes,{type:'areaGrid',id:area.id,grid:null});
   assert.deepEqual(removed.shapes,[original]);
   assert.deepEqual(applyShapeCommand(removed.shapes,removed.inverse).shapes,changed.shapes);
+});
+
+test('footprints have physical dimensions independent of spacing, frame aspect and count',()=>{
+  const frame={widthPx:1000,heightPx:500,upp:.01}; // 10 by 5 ft, not a square image
+  const plain={...area,area_grid:{...grid,spacing_ft:2,offset_x_ft:1,offset_y_ft:1}};
+  const circle={...plain,area_grid:{...plain.area_grid,footprint:{kind:'circle',diameter_ft:.625,basis:'assumed',reference:'7.5-inch container footprint; test assumption'}}};
+  const ring=areaGridFootprintOutline(circle,frame);
+  const ext=(axis:number)=>Math.max(...ring.map(p=>p[axis]))-Math.min(...ring.map(p=>p[axis]));
+  assert.equal(ext(0)*10,.625); assert.equal(ext(1)*5,.625);
+  assert.deepEqual(areaGrid(circle,frame),areaGrid(plain,frame),'footprint cannot change generated positions');
+  const wide={...plain,area_grid:{...plain.area_grid,angle_deg:90,footprint:{kind:'rectangle',width_ft:2,depth_ft:4,basis:'specified',reference:'Synthetic 2 by 4 unit'}}};
+  const rotated=areaGridFootprintOutline(wide,frame);
+  assert.ok(Math.abs((Math.max(...rotated.map(p=>p[0]))-Math.min(...rotated.map(p=>p[0])))*10-4)<1e-10);
+  assert.ok(Math.abs((Math.max(...rotated.map(p=>p[1]))-Math.min(...rotated.map(p=>p[1])))*5-2)<1e-10);
+  assert.deepEqual(areaGridFootprintOutline(circle,{...frame,upp:.02}),ring.map(p=>p.map(v=>v/2)),'current calibration controls footprint size');
+  assert.deepEqual(areaGridFootprintOutline(plain,frame),[],'old grids keep position markers');
+});
+
+test('footprint edits, import and undo preserve every other field including human review',()=>{
+  const original={...area,area_grid:grid};
+  const changed=applyShapeCommand([original],{type:'areaGrid',id:area.id,grid:{...grid,footprint:{kind:'rectangle',width_ft:2,depth_ft:2,basis:'assumed',reference:'Test module'}}});
+  const stripped=structuredClone(changed.shapes);delete stripped[0].area_grid.footprint;
+  assert.deepEqual(stripped,[original]);
+  assert.deepEqual(applyShapeCommand(changed.shapes,changed.inverse).shapes,[original]);
+  assert.deepEqual(mergeTakeoffImport({},{schema:'opentakeoff.takeoff_canvas.v1',conditions:[],shapes:changed.shapes}).payload.shapes,changed.shapes);
+  for(const footprint of [null,{}, {kind:'circle',diameter_ft:0,basis:'assumed',reference:'Test'}, {kind:'circle',diameter_ft:Infinity,basis:'assumed',reference:'Test'}, {kind:'rectangle',width_ft:2,basis:'specified',reference:'Test'}, {kind:'circle',diameter_ft:1,basis:'approved',reference:'Test'}, {kind:'circle',diameter_ft:1,basis:'assumed',reference:' '}]) {
+    assert.ok(areaGridError({...area,area_grid:{...grid,footprint}}));
+  }
 });
 
 test('legacy planting grid is read unchanged; explicit edit and undo preserve exact legacy fields',()=>{
