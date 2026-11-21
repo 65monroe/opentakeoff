@@ -299,6 +299,39 @@ The report separates located EA from printed EA. CSV, Excel and JSON retain the
 source ledger, and the marked PDF labels printed quantities. Existing notes are
 not automatically converted to quantity records. See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).
 
+### Area assembly
+
+Select a floor-area measurement in **Work and review**, then click **Area
+assembly**. You can also open it from a printed quantity or derived run with
+an existing link to that area. The panel keeps the bed selected as its context
+while **Show source callout** or **Edit run on plan** locates the linked record.
+Click **Back to measurements** to return to the list.
+
+Click **Edit material** to change an existing material's native coverage/count
+rule, rate, unit, rounding, waste or note. **Preview** uses the same calculation
+as the report. Click **Save material** to update that row or **Cancel** to discard
+the draft. For example, 4 inches of a uniform layer is 1 CY per 81 SF; the
+equivalent depth shown beside the total is a conversion of that rate, not a
+specification read from the plan. Update the name and note when changing a rate.
+
+Expand **Saved assemblies** to save or apply the existing material recipe.
+Matching material names are skipped on repeat application. Recipes travel in
+the profile; applied rows travel in the project archive. This view does not
+introduce parameterized or nested assemblies. When a condition covers several
+measurements or belongs to a material family, edit it in the condition panel
+where that wider scope is visible.
+
+**Linked counts** shows each explicitly linked printed EA record, its source and
+review state. A source shared by several areas is identified; its quantity is
+not apportioned. **Derived lengths** shows existing runs linked by their recorded
+source area. **Edit label** changes the existing measurement label. Counts stay
+with the source record and lengths stay with their geometry; there is no free
+quantity override in this panel. **Edit area on plan** exposes the normal area
+grips. Changing the area does not automatically update an independent run; a
+boundary mismatch is flagged for review. None of these actions approves work.
+
+See the [public bed example and checks](evidence/area-assembly-panel/README.md).
+
 ### Area grid count
 
 Select a floor-area measurement in **Work and review** and open **Area grid

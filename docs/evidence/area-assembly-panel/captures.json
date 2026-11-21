@@ -1,0 +1,42 @@
+[
+  {
+    "file": "01-receipt-before-opening.jpg",
+    "time": "2026-11-21T22:39:47.916Z"
+  },
+  {
+    "file": "02-area-assembly.jpg",
+    "time": "2026-11-21T22:39:48.586Z"
+  },
+  {
+    "file": "03-source-keeps-bed-context.jpg",
+    "time": "2026-11-21T22:40:03.425Z"
+  },
+  {
+    "file": "04-edging-keeps-bed-context.jpg",
+    "time": "2026-11-21T22:40:03.796Z"
+  },
+  {
+    "file": "05-edit-preview.jpg",
+    "time": "2026-11-21T22:40:17.823Z"
+  },
+  {
+    "file": "06-edited-after-reopen.jpg",
+    "time": "2026-11-21T22:41:05.326Z"
+  },
+  {
+    "file": "07-existing-assembly-repeat.jpg",
+    "time": "2026-11-21T22:42:12.853Z"
+  },
+  {
+    "file": "08-cancel-preview.jpg",
+    "time": "2026-11-21T22:42:16.876Z"
+  },
+  {
+    "file": "09-bundled-assembly.jpg",
+    "time": "2026-11-21T22:44:35.814Z"
+  },
+  {
+    "file": "10-bundled-edit-preview.jpg",
+    "time": "2026-11-21T22:44:51.989Z"
+  }
+]

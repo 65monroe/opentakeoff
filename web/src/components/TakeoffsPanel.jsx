@@ -293,8 +293,8 @@ export function MaterialsEditor({ materials, onAdd, onUpdate, onRemove, library,
               <button onClick={() => onPromote(m)} title={uiText("Save this material to the library (this line becomes linked)")}
                 style={{ padding: "2px 7px", borderRadius: 0, border: "1px dashed var(--ink-faint)", background: "transparent", color: "var(--ink-muted)", cursor: "pointer", fontSize: 11 }}>{uiText("→ lib")}</button>
             )}
-            <button onClick={() => onRemove(m.id)} title={uiText("Remove this material")}
-              style={{ padding: "2px 7px", borderRadius: 0, border: "1px solid var(--ink-faint)", background: "transparent", color: "var(--c-danger)", cursor: "pointer", fontSize: 12 }}>✕</button>
+            {onRemove && <button onClick={() => onRemove(m.id)} title={uiText("Remove this material")}
+              style={{ padding: "2px 7px", borderRadius: 0, border: "1px solid var(--ink-faint)", background: "transparent", color: "var(--c-danger)", cursor: "pointer", fontSize: 12 }}>✕</button>}
             {/* the calculator renders ONLY when the line HAS geometry; a grout
                 line without it keeps its rate untouched behind an explicit
                 opt-in below — never a calculator backfilled with defaults */}
@@ -382,8 +382,8 @@ export function MaterialsEditor({ materials, onAdd, onUpdate, onRemove, library,
           })}
         </div>
       )}
-      <button onClick={onAdd}
-        style={{ marginTop: 2, padding: "4px 10px", borderRadius: 0, border: "1px dashed var(--ink-faint)", background: "transparent", color: "var(--ink-muted)", cursor: "pointer", fontSize: 12 }}>{uiText("+ add material")}</button>
+      {onAdd && <button onClick={onAdd}
+        style={{ marginTop: 2, padding: "4px 10px", borderRadius: 0, border: "1px dashed var(--ink-faint)", background: "transparent", color: "var(--ink-muted)", cursor: "pointer", fontSize: 12 }}>{uiText("+ add material")}</button>}
       {onAttach && (library || []).length > 0 && (
         <select name="attach-material" value="" onChange={(e) => { if (e.target.value) onAttach(e.target.value); }}
           title={uiText("Attach a material from the library — the line copies the library values and stays linked")}
@@ -876,7 +876,7 @@ export function useAssemblyLibrary() {
 
 // Save the active condition's items as an assembly, or apply a saved one to it.
 // Inline name input, never a window.prompt (prompts freeze scripted sessions).
-function AssemblyBar({ cond, assemblies, onApply }) {
+export function AssemblyBar({ cond, assemblies, onApply }) {
   const [draft, setDraft] = useState(null);   // null = closed; string = the name being typed
   const [msg, setMsg] = useState("");
   const named = (cond?.materials || []).filter((m) => m && m.name).length;

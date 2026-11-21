@@ -26,6 +26,10 @@ remains unconfirmed and all original review decisions remain intact.
 
 ![Native report with separate topsoil and compost quantities](screenshots/report-layers.jpg)
 
+The follow-up [Area assembly panel](../area-assembly-panel/README.md) brings
+these existing records into one browser view. The evidence below records the
+native workflow before that panel was added.
+
 ## Existing capability versus remaining work
 
 The two soil rows are a native assembly: **1 CY per 81 SF** each, with package

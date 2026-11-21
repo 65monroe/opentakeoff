@@ -54,6 +54,24 @@
 .workspace-footer { border-top: var(--rule-soft); padding: var(--sp-2) var(--sp-4); font-size: var(--fs-xs); }
 .workspace-footer span { color: var(--ink-secondary); }
 .workspace-panel .workspace-more { width: 100%; }
+.workspace-panel .workspace-assembly-open { width: 100%; margin-block: var(--sp-3); text-align: left; }
+.area-assembly-panel { flex: 1; min-height: 0; overflow: auto; padding: var(--sp-3) var(--sp-4); }
+.area-assembly-panel header { display: grid; gap: var(--sp-2); }
+.area-assembly-panel h3, .area-assembly-panel h4 { margin: var(--sp-2) 0; font-size: var(--fs-m); }
+.area-assembly-panel h4 { margin-top: var(--sp-4); color: var(--ink-secondary); }
+.area-assembly-row { border-top: var(--rule-soft); padding-block: var(--sp-2); }
+.area-assembly-readout { display: flex; align-items: baseline; justify-content: space-between; gap: var(--sp-2); }
+.area-assembly-readout > strong:first-child { min-width: 0; overflow-wrap: anywhere; }
+.area-assembly-panel p, .area-assembly-panel summary { font-size: var(--fs-xs); line-height: 1.5; margin-block: var(--sp-1); overflow-wrap: anywhere; }
+.area-assembly-panel p { color: var(--ink-secondary); }
+.area-assembly-panel [role=status], .area-assembly-panel [role=alert] { color: var(--c-warning); }
+.area-assembly-actions { display: flex; align-items: start; flex-wrap: wrap; gap: var(--sp-2); margin-top: var(--sp-2); }
+.area-assembly-actions button { font-size: var(--fs-xs); }
+.area-assembly-panel label { display: grid; gap: var(--sp-1); }
+.area-assembly-panel input, .area-assembly-panel select { max-width: 100%; color: var(--ink); background: var(--surface-pop); }
+.area-assembly-panel button:disabled { cursor: default; opacity: .5; }
+.area-assembly-library { margin-top: var(--sp-2); }
+.area-material-draft { margin-block: var(--sp-2); padding: var(--sp-2); border: var(--rule-soft); }
 @media (max-width: 1100px) { .workspace-panel { position: absolute; inset: 0 0 0 auto; width: min(100%, calc(var(--props-w) + var(--sp-8) * 3)); box-shadow: var(--shadow-2); } }
 @media (max-width: 640px) { .workspace-panel { position: fixed; inset: 0 0 var(--status-h); width: auto; border-left: 0; } }
 

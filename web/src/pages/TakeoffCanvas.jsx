@@ -9895,25 +9895,26 @@ export default function TakeoffCanvas() {
   });
   // a saved assembly (lib/assemblies.js) → new rows on the active condition, through the same
   // family seam as one added row; items the condition already names are skipped
-  const applyAssembly = (assembly) => setConditions((cs) => {
-    const cur = cs.find((c) => c.id === activeCond);
+  const applyAssembly = (assembly, conditionId = activeCond) => setConditions((cs) => {
+    const cur = cs.find((c) => c.id === conditionId);
     const { rows } = assemblyRows(assembly, uid, cur?.materials);
     if (!cur || !rows.length) return cs;
-    let next = cs.map((c) => (c.id === activeCond ? { ...c, materials: [...(c.materials || []), ...rows], updated_at: nowIso() } : c));
-    if (isFamilyParent(cs, activeCond)) for (const row of rows) next = propagateRowAdd(next, activeCond, row, uid);
+    let next = cs.map((c) => (c.id === conditionId ? { ...c, materials: [...(c.materials || []), ...rows], updated_at: nowIso() } : c));
+    if (isFamilyParent(cs, conditionId)) for (const row of rows) next = propagateRowAdd(next, conditionId, row, uid);
     return next;
   });
-  const updateMaterial = (mid, patch) => setConditions((cs) => {
-    const cur = cs.find((c) => c.id === activeCond);
+  const updateMaterial = (mid, patch, conditionId = activeCond) => setConditions((cs) => {
+    const cur = cs.find((c) => c.id === conditionId);
+    if (!cur?.materials?.some(m => m.id === mid)) return cs;
     // NAME edits re-classify a geometry-less line's kind
-    const next = cs.map((c) => (c.id === activeCond ? {
+    const next = cs.map((c) => (c.id === conditionId ? {
       ...c, updated_at: nowIso(),
       materials: (c.materials || []).map((m) => (m.id === mid ? matEditPatch(m, patch) : m)),
     } : c));
-    if (cur?.variant_of) return next.map((c) => (c.id === activeCond ? markRowLocal(c, mid) : c));
-    if (!isFamilyParent(cs, activeCond)) return next;
-    const row = (next.find((c) => c.id === activeCond)?.materials || []).find((m) => m.id === mid);
-    return row ? propagateRowPatch(next, activeCond, mid, row) : next;
+    if (cur?.variant_of) return next.map((c) => (c.id === conditionId ? markRowLocal(c, mid) : c));
+    if (!isFamilyParent(cs, conditionId)) return next;
+    const row = (next.find((c) => c.id === conditionId)?.materials || []).find((m) => m.id === mid);
+    return row ? propagateRowPatch(next, conditionId, mid, row) : next;
   });
   // Removing a row: on a twin it leaves a tombstone (so the panel can show it, and so a later
   // family edit can't bring it back); on a parent it clears the twins' following copies but
@@ -13093,6 +13094,9 @@ export default function TakeoffCanvas() {
           proposalCount={agentProposals.length} onLocate={locateWork}
           gridFrames={new Map(panels.map(p=>[p.key,{widthPx:p.img.w,heightPx:p.img.h,upp:uppFor(p.key)}]))}
           onGrid={(area, grid) => dispatchShape({ type: "areaGrid", id: area.id, grid })}
+          onAssemblyMaterial={(conditionId, id, patch) => updateMaterial(id, patch, conditionId)}
+          onApplyAssembly={(conditionId, assembly) => applyAssembly(assembly, conditionId)}
+          onLabel={(id, value) => dispatchShape({ type: 'label', ids: [id], value })}
           onReview={(id) => dispatchShape({ type: "review", ids: [id] })}
           onClose={() => { setAgentOpen(false); workButtonRef.current?.focus(); }} onReport={() => setShowReport(true)}>
           <AgentChat

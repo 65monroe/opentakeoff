@@ -1,0 +1,117 @@
+{
+  "source": "Consecutive browser captures during actual UI actions; playback slowed for readability, not a timing study",
+  "actions": [
+    "Show bed",
+    "Show SET source without leaving bed panel",
+    "Show edging",
+    "Preview compost rate 64.8 (1.71 CY)",
+    "Cancel and return to bed"
+  ],
+  "frames": [
+    {
+      "file": "000.jpg",
+      "ms": 62
+    },
+    {
+      "file": "001.jpg",
+      "ms": 137
+    },
+    {
+      "file": "002.jpg",
+      "ms": 199
+    },
+    {
+      "file": "003.jpg",
+      "ms": 279
+    },
+    {
+      "file": "004.jpg",
+      "ms": 370
+    },
+    {
+      "file": "005.jpg",
+      "ms": 444
+    },
+    {
+      "file": "006.jpg",
+      "ms": 515
+    },
+    {
+      "file": "007.jpg",
+      "ms": 610
+    },
+    {
+      "file": "008.jpg",
+      "ms": 803
+    },
+    {
+      "file": "009.jpg",
+      "ms": 897
+    },
+    {
+      "file": "010.jpg",
+      "ms": 1015
+    },
+    {
+      "file": "011.jpg",
+      "ms": 1146
+    },
+    {
+      "file": "012.jpg",
+      "ms": 1246
+    },
+    {
+      "file": "013.jpg",
+      "ms": 1410
+    },
+    {
+      "file": "014.jpg",
+      "ms": 1506
+    },
+    {
+      "file": "015.jpg",
+      "ms": 1567
+    },
+    {
+      "file": "016.jpg",
+      "ms": 1694
+    },
+    {
+      "file": "017.jpg",
+      "ms": 1770
+    },
+    {
+      "file": "018.jpg",
+      "ms": 1847
+    },
+    {
+      "file": "019.jpg",
+      "ms": 1931
+    },
+    {
+      "file": "020.jpg",
+      "ms": 1995
+    },
+    {
+      "file": "021.jpg",
+      "ms": 2060
+    },
+    {
+      "file": "022.jpg",
+      "ms": 2138
+    },
+    {
+      "file": "023.jpg",
+      "ms": 2200
+    },
+    {
+      "file": "024.jpg",
+      "ms": 2262
+    },
+    {
+      "file": "025.jpg",
+      "ms": 2328
+    }
+  ],
+  "playback": "Six times slower; minimum 200 ms per frame; final frame held. No performance claim."
+}

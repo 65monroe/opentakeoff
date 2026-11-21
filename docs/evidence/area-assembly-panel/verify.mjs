@@ -1,0 +1,40 @@
+import assert from 'node:assert/strict';
+import { readFile, writeFile } from 'node:fs/promises';
+import { createHash } from 'node:crypto';
+import { conditionTotals } from '../../../web/src/lib/totals.js';
+import { parseProjectArchive, buildProjectArchive } from '../../../web/src/lib/projectArchive.js';
+
+const local = process.argv.includes('--browser');
+const dir = local ? 'tmp/area-assembly-panel' : 'docs/evidence/area-assembly-panel';
+const read = async file => JSON.parse(await readFile(file, 'utf8'));
+const base = await read('docs/evidence/area-assembly-prototype/prototype.takeoff.json');
+const edited = await read(`${dir}/edited.json`);
+for (const name of ['after-cancel', 'restored-prototype', 'after-repeat']) assert.deepEqual(await read(`${dir}/${name}.json`), base, name);
+for (const name of ['after-reload', 'after-reopen']) assert.deepEqual(await read(`${dir}/${name}.json`), edited, name);
+assert.deepEqual(edited.shapes, base.shapes, 'every measurement, original geometry, quantity and review');
+const bedId = base.conditions.find(c => c.finish_tag === 'BED-C1').id;
+const expected = structuredClone(base), beforeBed = base.conditions.find(c => c.id === bedId), changedBed = edited.conditions.find(c => c.id === bedId);
+const target = expected.conditions.find(c => c.id === bedId);
+target.updated_at = changedBed.updated_at;
+Object.assign(target.materials[1], { name: 'Compost — 5 in (edit test)', per: 64.8, note: 'Temporary edit test: assumed 5-inch layer; CY = SF / 64.8. Not a source specification.' });
+assert.deepEqual(edited, expected, 'only the explicit compost edit and condition timestamp may change');
+assert.deepEqual(changedBed.materials.map(m => m.id), beforeBed.materials.map(m => m.id));
+assert.deepEqual(conditionTotals([changedBed], edited.shapes)[0].materials.map(m => [m.qty, m.unit]), [[1.36, 'CY'], [1.71, 'CY']]);
+const bundledBase = await read('docs/evidence/area-grid-count/demo-takeoff.json'), bundled = await read(`${dir}/bundled-applied.json`);
+assert.deepEqual(bundled.shapes, bundledBase.shapes);
+assert.deepEqual(bundled, await read(`${dir}/bundled-after-cancel.json`));
+assert.equal(bundled.conditions[0].id, bundledBase.conditions[0].id);
+assert.equal(bundled.conditions[0].materials.length, 2);
+assert.deepEqual(conditionTotals(bundled.conditions, bundled.shapes)[0].materials.map(m => m.qty), [1.58, 1.58]);
+if (local) {
+  assert.deepEqual(await read(`${dir}/live-restored.json`), await read(`${dir}/live-baseline.json`));
+  const a = await read(`${dir}/live-baseline.otprofile`), b = await read(`${dir}/profile-restored.otprofile`);
+  delete a.created; delete b.created; assert.deepEqual(b, a);
+  const archive = await parseProjectArchive(await readFile(`${dir}/live-baseline.otk`));
+  const restored = await parseProjectArchive(await readFile(`${dir}/live-restored.otk`));
+  const hashes = async files => Promise.all(files.map(async f => [f.name, createHash('sha256').update(new Uint8Array(await f.arrayBuffer())).digest('hex')]));
+  assert.deepEqual(await hashes(restored.pdfs), await hashes(archive.pdfs));
+  const pdf = archive.pdfs.find(f => f.name === 'ccfp-L1.0.pdf');
+  await writeFile(`${dir}/public-bed-panel.otk`, await buildProjectArchive({ takeoff: base, sheets: [{ name: pdf.name }], loadPdfData: async () => new Uint8Array(await pdf.arrayBuffer()), projectName: 'Public bed — area assembly panel' }));
+}
+console.log('PASS: all 8 shape records, 6 condition IDs and material row IDs preserved; only temporary compost edit changes its material quantity; cancel, repeat application, reload and archive reopen agree.' + (local ? ' Original workspace, profile and PDF bytes restored.' : ' See verification.json for recorded browser restoration checks.'));

@@ -7,13 +7,17 @@ import { isCalloutQuantity, linkedCalloutAreas } from "../lib/calloutQuantity.js
 import "./workspacePanel.css";
 import AreaGridPanel from './AreaGridPanel.jsx';
 import { getAreaGrid } from '../lib/areaGrid.js';
+import AreaAssemblyPanel from './AreaAssemblyPanel.jsx';
+import { assemblyAreas } from '../lib/areaAssembly.js';
 
 export default function WorkspacePanel({ open, shapes, conditions, selectedId, sheetLabel, fmtArea, fmtLength,
-  scales, scaleUnconfirmed, running, proposalCount, onLocate, onReview, onClose, onReport, onGrid, gridFrames, children, dockSide, width, dockHandle }) {
+  scales, scaleUnconfirmed, running, proposalCount, onLocate, onReview, onClose, onReport, onGrid, onAssemblyMaterial, onApplyAssembly, onLabel, gridFrames, children, dockSide, width, dockHandle }) {
   const [tab, setTab] = useState("work");
   const [filter, setFilter] = useState("all");
   const [query, setQuery] = useState("");
   const [limit, setLimit] = useState(50);
+  const [assemblyAreaId, setAssemblyAreaId] = useState(null);
+  const assemblyArea = shapes.find(s => s.id === assemblyAreaId && s.measure_role === 'floor_area');
   const pending = shapes.filter((s) => workReviewState(s) === "Needs review").length;
   const rows = useMemo(() => filterWork(shapes, { filter, query,
     conditionLabel: (id) => conditions[id]?.finish_tag || "", sheetLabel }), [shapes, filter, query, conditions, sheetLabel]);
@@ -54,6 +58,7 @@ export default function WorkspacePanel({ open, shapes, conditions, selectedId, s
       </div>
       <div id="workspace-agent-view" role="tabpanel" aria-labelledby="workspace-agent-tab" hidden={tab !== "agent"} className="workspace-agent-view">{uiText(children)}</div>
       <div id="workspace-work-view" role="tabpanel" aria-labelledby="workspace-work-tab" hidden={tab !== "work"} className="workspace-work-view">
+        {assemblyArea ? <AreaAssemblyPanel key={assemblyArea.id} area={assemblyArea} shapes={shapes} conditions={conditions} onLocate={onLocate} onBack={() => setAssemblyAreaId(null)} onMaterial={onAssemblyMaterial} onApply={onApplyAssembly} onLabel={onLabel} fmtArea={fmtArea} fmtLength={fmtLength} /> : <>
         <div className="workspace-filters">
           <label className="workspace-search"><span>{uiText("Find work")}</span><input name="work-search" value={query} onChange={(e) => setQuery(e.target.value)} placeholder={uiText("Condition, sheet, label, or author")} /></label>
           <div className="workspace-filter-buttons" aria-label={uiText("Filter measurements")}>
@@ -100,9 +105,11 @@ export default function WorkspacePanel({ open, shapes, conditions, selectedId, s
             {plantingAreas.map((area) => <button key={area.id} type="button" onClick={() => onLocate(area)}>{uiText("Edit planting area")}{plantingAreas.length > 1 ? ` · ${area.label || conditions[area.condition_id]?.finish_tag}` : ""}</button>)}
           </div>}
           <div className="workspace-inspector-actions"><button type="button" onClick={() => onLocate(selected)}>{uiText("Show on plan")}</button>{selected.origin?.reviewed === false && <button type="button" className="workspace-primary" onClick={() => onReview(selected.id)}>{uiText("Mark reviewed")}</button>}</div>
+          {onAssemblyMaterial && assemblyAreas(selected, shapes).map(area => <button type="button" key={area.id} className="workspace-assembly-open" onClick={() => setAssemblyAreaId(area.id)}>{uiText('Area assembly')} · {area.label || conditions[area.condition_id]?.finish_tag}</button>)}
           {gridArea && onGrid && <AreaGridPanel key={`${gridArea.id}:${JSON.stringify(getAreaGrid(gridArea))}`} area={gridArea} source={gridSource} frame={gridFrames?.get(gridArea.sheet_id)} onSave={onGrid} />}
         </section>}
         <footer className="workspace-footer"><span>{uiText(rows.length)} {uiText("of ")}{uiText(shapes.length)} {uiText("measurements")}</span><button type="button" onClick={onReport}>{uiText("Open report →")}</button></footer>
+        </>}
       </div>
     </aside>
   );
