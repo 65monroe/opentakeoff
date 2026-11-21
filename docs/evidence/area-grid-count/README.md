@@ -157,6 +157,42 @@ engine in follow-up changes. Keep the scope to one concern, as required by
 trade names alone does not make a change easier to review. No issue or PR is
 created by this documentation update.
 
+### One boundary with several calculations: proposed follow-up
+
+An editable area can be the source for several separately reviewable results:
+area SF, selected-edge LF, layout EA and support EA. Each calculation needs its
+own inputs, units, source references and status. A future interface can group
+these results under their source area without requiring another trace. This
+branch stores one grid configuration per area; it does not implement multiple
+layouts or an automatically synchronized set of derived quantities.
+
+OpenTakeoff already provides supporting-material assemblies and
+[`ceiling_takeoff`](../../../mcp/src/suites.ts), which derives tiles, runners,
+tees, hanger estimates and wall angle from traced areas. The current
+[`ceilingQuantities`](../../../web/src/lib/suiteMath.ts) uses area-based density
+formulas and explicitly lists border cuts and special hanger rules as gaps.
+Build on these existing calculations instead of introducing a parallel totals
+system. A boundary edit should recompute affected proposals and flag their
+previous reviews as stale; it must not silently change an accepted quantity.
+That behavior needs its own design and tests before implementation.
+
+Keep layout spacing separate from the item's physical dimensions. A plant
+container designation does not establish its canopy diameter or on-center
+spacing; use the drawing's stated spacing and any separately specified spread.
+The [AmericanHort nursery stock standard](https://americanhort.org/wp-content/uploads/2026/02/nursery-stock-standards.pdf)
+distinguishes container class from plant size in sections 1.1.1 and 1.1.3.
+If a circle visualizes spacing, label it as a spacing guide. A tile or paver
+layout instead needs physical width and length plus joint/module assumptions.
+Allow editable reference defaults for container or item footprints, with the
+source and assumed status visible until verified. Keep footprint, on-center
+spacing and any canopy/spread requirement as separate values. A container
+footprint can help review the layout without claiming to show mature plant
+coverage. These footprint controls are proposed; the current grid still shows
+position markers.
+Intersecting those cells with the area can identify full and cut pieces;
+turning cut pieces into purchased units also needs an explicit offcut-reuse and
+waste policy. A visible footprint alone does not establish an order quantity.
+
 ## Reproduce and inspect
 
 ```sh
