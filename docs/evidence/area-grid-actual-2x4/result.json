@@ -1,0 +1,20 @@
+{
+  "shape_id": "shp-531f70fb-c173-4e4e-80fc-ac3c8b66a39e",
+  "changed": [
+    "area_grid"
+  ],
+  "measure_role": "floor_area",
+  "nverts": 4,
+  "area_sf": 899,
+  "perimeter_lf": 120,
+  "agent_edits": 0,
+  "grid_count": 120,
+  "grid_cuts": {
+    "full_tiles": 78,
+    "cut_cells": 42,
+    "edge_cut_pieces": 42,
+    "covered_sf": 899.0000000000002,
+    "full_sf": 624,
+    "cut_sf": 275.00000000000017
+  }
+}

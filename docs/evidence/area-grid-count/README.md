@@ -5,6 +5,12 @@ without a plant code or a printed quantity. Planting remains the first public
 example; a bundled finish-plan demonstration exercises a generic layout with no
 printed source. Calculated positions do not add EA or replace observed counts.
 
+The current branch also has [editable footprints](../area-grid-footprints/README.md),
+[full/cut tile calculations](../area-grid-cuts/README.md), and a freshly tested
+[actual public 2-by-4 ceiling grid](../area-grid-actual-2x4/README.md): 78 full
+tiles and 42 edge cuts, with source-derived alignment and save/reopen evidence.
+The original screenshots below document the first generic-grid increment.
+
 This work stays on the fork branch `codex/area-grid-count`. It continues the
 planting-grid prototype at `1a0420c7aea7d64aca09db7c16bb72804a7d6d06`; no new PR,
 production deployment, or upstream merge is part of this update. It still depends
@@ -97,9 +103,10 @@ The tradeoff is deliberate: generated positions remain a comparison, so adopting
 them as an order/takeoff quantity needs a separate explicit workflow. Applications
 include specified plant, post and support layouts. This version uses one equal
 spacing value, square or equilateral triangular rows, rotation, X/Y shifts, edge
-clearance and hole exclusion. It does not handle unequal rectangular spacing,
-component sizing, tile cuts, joint allowances, perimeter supports or compliance
-with a design standard.
+clearance and hole exclusion in the initial increment documented here. Later
+increments add unequal rectangular spacing, editable footprints and full/cut
+module intersections; their evidence is linked above. Joint allowances,
+perimeter supports and compliance with a design standard remain outside scope.
 
 New explicit saves use `area_grid` and `single_item: true`. Legacy
 `planting_grid`/`single_species` records remain unchanged on read, import and
@@ -117,42 +124,47 @@ Selecting its specific callout supplies that source when creating a new grid.
 ## Shared use across trades
 
 The proposed contribution is one reusable area-layout calculation, with planting
-as the first verified public example. Ceiling tiles and pavers are useful next
-examples of the same layout problem. They also need rules that a point grid
-does not represent. Broader use is a reason to share the engine; it is not
-evidence that all three takeoffs are complete.
+as the first verified public example. Public square and rectangular ceiling
+examples now exercise module intersections as well. Pavers remain a possible
+follow-up; their joints and bond patterns need additional rules. Broader use is
+a reason to share the engine; it is not evidence that all three takeoffs are complete.
 
 | Use | Shared calculation | Additional work before claiming a takeoff |
 | --- | --- | --- |
 | Planting | Square or triangular positions, spacing, rotation, shifts, clearance, clipping and holes | Verify the specified spacing and bed allocation; keep printed quantities separate from generated positions |
-| Ceiling tiles | Grid origin, orientation and boundary geometry | Rectangular modules, balanced borders, intersecting tile cells and cut pieces, fixture deductions, runners, tees and hanger rules |
-| Pavers | Grid origin, orientation and boundary geometry | Unit dimensions, joints, bond patterns, cut pieces, reusable offcuts and explicit ordering assumptions |
+| Ceiling tiles | Source-aligned square/rectangular modules, footprints, intersecting cells and full/cut pieces | Balanced borders, public fixture-deduction evidence, runners, tees, hangers and procurement rules |
+| Pavers | Rectangular module geometry and full/cut intersections can be reused | A public paving example, joint allowances, bond patterns, reusable offcuts and explicit ordering assumptions |
 
 [Ceiling layout issue #661](https://github.com/Kentucky-ai/opentakeoff/issues/661)
-is open as checked on November 20, 2026. It requests balanced borders, whole
+is open as checked on November 21, 2026. It requests balanced borders, whole
 tiles including border cuts, runner lengths, fixture deductions and hanger
 rules, with Hendersonville A-121A evidence. This branch can inform that work;
 it does not resolve the issue. The existing ceiling suite is unchanged.
+[Planting suite issue #659](https://github.com/Kentucky-ai/opentakeoff/issues/659)
+is also related: the SET example verifies a spacing comparison, not the complete
+suite. Use related-work links for both issues, not closing keywords.
 [Issue #653](https://github.com/Kentucky-ai/opentakeoff/issues/653) concerns
 reading a ceiling lattice without stopping at one tile. That boundary-detection
 problem remains separate from calculating a layout inside an established area.
 
 A tile that crosses an edge can need a cut piece even when its center lies
 outside the area. Counting grid centers therefore cannot establish tile or
-paver order quantities. This version also uses equal spacing on both axes, so
-it does not represent a 2-by-4-foot ceiling module.
+paver order quantities. The newer [actual 2-by-4 example](../area-grid-actual-2x4/README.md)
+tests unequal axes against the printed source; its 78 full and 42 cut pieces
+remain layout results rather than a purchased-tile quantity.
 
 | Layer | Responsibility in this branch |
 | --- | --- |
-| Shared engine | Calculate rotated and offset positions from calibrated dimensions, apply boundary and hole rules, and return the same result for the same inputs |
+| Shared engine | Calculate rotated/offset positions and nominal module intersections from calibrated dimensions; apply boundary/hole rules and return deterministic full/cut results |
 | MCP | Accept and validate documented inputs through `edit_shape area_grid`, call the shared engine, and retain the source and assumptions |
 | Browser | Edit those inputs, show the calculated positions, and preserve them through save, Undo and reopen |
 | Suite guidance | Tell the agent which source to read, which inputs to supply, and which discrepancies require review; do not ask the model to invent spacing or perform the layout arithmetic |
 
-For a future PR, describe this shared capability and link #661 as related work.
-Add a source-backed ceiling or paver example before advertising those workflows
-as tested. Cell intersection and trade-specific ordering can build on the same
-engine in follow-up changes. Keep the scope to one concern, as required by
+For a future PR, describe this shared capability and link #659/#661 as related
+work. Public planting and ceiling cases are tested within their documented
+limits; paver workflows are not. Marked-grid export and public fixture/border
+checks are the next useful work, while trade-specific ordering and multi-measure
+assemblies can follow separately. Keep the scope to one concern, as required by
 [CONTRIBUTING.md](../../../CONTRIBUTING.md#pull-requests--how-we-work); adding
 trade names alone does not make a change easier to review. No issue or PR is
 created by this documentation update.

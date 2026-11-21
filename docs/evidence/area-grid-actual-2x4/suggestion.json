@@ -1,0 +1,131 @@
+{
+  "selection": "Visually verified bay grid strokes, raw indices 157–195; excludes clip/fill paths, wall faces, lamps and exterior grid bubbles.",
+  "indices": [
+    157,
+    158,
+    159,
+    160,
+    161,
+    162,
+    163,
+    164,
+    165,
+    166,
+    167,
+    168,
+    169,
+    170,
+    171,
+    172,
+    173,
+    174,
+    175,
+    176,
+    177,
+    178,
+    179,
+    180,
+    181,
+    182,
+    183,
+    184,
+    185,
+    186,
+    187,
+    188,
+    189,
+    190,
+    191,
+    192,
+    193,
+    194,
+    195
+  ],
+  "fit": {
+    "angle_deg": 0,
+    "tolerance_px": 0.3,
+    "x": {
+      "positions_px": [
+        2362.08,
+        2398.08,
+        2434.08,
+        2470.08,
+        2506.08,
+        2542.08,
+        2578.08,
+        2614.08,
+        2650.08,
+        2686.08,
+        2722.08,
+        2758.08,
+        2794.08,
+        2830.08
+      ],
+      "pitch_px": 36,
+      "anchor_px": 2362.08,
+      "line_count": 14,
+      "max_residual_px": 0
+    },
+    "y": {
+      "positions_px": [
+        3052.56,
+        3124.32,
+        3196.32,
+        3268.32,
+        3340.32,
+        3412.08,
+        3484.08
+      ],
+      "pitch_px": 72,
+      "anchor_px": 3052.32,
+      "line_count": 7,
+      "max_residual_px": 0.24
+    }
+  },
+  "origin": [
+    2342.4,
+    2990.64
+  ],
+  "center_offsets_ft": [
+    0.093333,
+    1.426667
+  ],
+  "correct": {
+    "x": 14,
+    "y": 7,
+    "total": 21
+  },
+  "wrong_square": {
+    "x": 7,
+    "y": 7,
+    "total": 21
+  },
+  "wrong_rotated": {
+    "x": 7,
+    "y": 7,
+    "total": 21
+  },
+  "grid": {
+    "single_item": true,
+    "pattern": "rectangular",
+    "spacing_ft": 2,
+    "spacing_y_ft": 4,
+    "angle_deg": 0,
+    "offset_x_ft": 0.093333,
+    "offset_y_ft": 1.426667,
+    "inset_ft": 0,
+    "origin_norm": [
+      0.3873015873015873,
+      0.6922777777777778
+    ],
+    "reference": "Public Rancho Cordova AM3.10, west bay: printed 2X4 GRID at 1/8 inch = 1 foot. MCP source vectors: 14 vertical and 7 horizontal grid lines, 36/72 px pitch; centers offset from the NW wall face. Gross ceiling module layout; suspended linear lights do not deduct tile modules. Support hardware and physical tile face/joints are not evaluated.",
+    "footprint": {
+      "kind": "rectangle",
+      "width_ft": 2,
+      "depth_ft": 4,
+      "basis": "specified",
+      "reference": "AM3.10 west bay printed 2X4 GRID: nominal module dimensions, not physical tile face dimensions."
+    },
+    "cut_pieces": true
+  }
+}

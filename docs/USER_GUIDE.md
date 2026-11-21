@@ -360,6 +360,8 @@ check, not a purchasing quantity: waste and offcut reuse remain uncalculated.
 See the [public ceiling cut example](evidence/area-grid-cuts/README.md).
 The [2-by-4 comparison](evidence/area-grid-rectangles/README.md) uses the same
 public boundary and separately records both orientations and their assumptions.
+The [actual AM3.10 2-by-4 grid](evidence/area-grid-actual-2x4/README.md) adds a
+printed rectangular source, MCP-derived alignment and browser save/reopen checks.
 
 See the [footprint evidence](evidence/area-grid-footprints/README.md) for the
 SET bed and a public reflected ceiling plan.
