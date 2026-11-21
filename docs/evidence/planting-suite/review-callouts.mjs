@@ -90,7 +90,7 @@ try {
   await call('import_takeoff',{path:resolve(out,'takeoff.json')});
   const reopened=await call('export_takeoff');
   for(const field of ['shapes','conditions','sheets','markups','proposals']) assert.deepEqual(reopened[field],payload[field],`reload ${field}`);
-  const result={base_commit:'99f83814d18852adb389182f179377f939e40164',baseline_shape_ids:baseline.shapes.map(s=>s.id),preserved_existing_records:true,new_callout_ids:created.map(c=>c.shape_id),located_ea:{GDI:1,TAM:2,SET:0},printed_ea:{SET:185},source_arithmetic:'127 + 58 = 185',schedule_SET_ea:185,shape_records:5,pending_review:5,idempotent_retry:true,reopen_exact:['shapes','conditions','sheets','markups','proposals'],browser_test:'unverified: Computer Use stopped at URL verification'};
+  const result={base_commit:'99f83814d18852adb389182f179377f939e40164',baseline_shape_ids:baseline.shapes.map(s=>s.id),preserved_existing_records:true,new_callout_ids:created.map(c=>c.shape_id),located_ea:{GDI:1,TAM:2,SET:0},printed_ea:{SET:185},source_arithmetic:'127 + 58 = 185',schedule_SET_ea:185,shape_records:5,pending_review:5,idempotent_retry:true,reopen_exact:['shapes','conditions','sheets','markups','proposals'],browser_test:'not run by this MCP replay; see browser/README.md for the separately recorded browser test'};
   await writeFile(resolve(out,'results.json'),JSON.stringify(result,null,2)+'\n');
   console.log(JSON.stringify(result,null,2));
 } finally {

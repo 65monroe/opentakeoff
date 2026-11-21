@@ -1,0 +1,74 @@
+{
+  "status": "pass",
+  "scope": "Recorded browser downloads; this script does not repeat the UI test",
+  "comparison": "Complete takeoff objects match the MCP baseline, except the expected open-sheet tab list",
+  "permitted_difference": {
+    "field": "sheet_tabs",
+    "baseline": [],
+    "browser": [
+      "ccfp-L1.0.pdf"
+    ]
+  },
+  "browser_exports_equal": true,
+  "report_exports_equal": true,
+  "shapes": [
+    {
+      "id": "shp-f7d8f092-c466-4319-abf4-6343b11eb262",
+      "condition_id": "cnd-14331cc4-5f98-421d-b1ee-6f7709b86538",
+      "quantity": 1,
+      "reviewed": false,
+      "source_id": null
+    },
+    {
+      "id": "shp-eb323ad7-dfab-4ab6-9cb1-f5c7038ddb1e",
+      "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+      "quantity": 1,
+      "reviewed": false,
+      "source_id": null
+    },
+    {
+      "id": "shp-0eabbe89-46ea-45a0-bee2-ee29efb2c340",
+      "condition_id": "cnd-b1c79f65-d8f1-43cb-b2d1-c4d43fc8b117",
+      "quantity": 1,
+      "reviewed": false,
+      "source_id": null
+    },
+    {
+      "id": "shp-43598f04-0a43-4076-b83c-b30f565e73f7",
+      "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+      "quantity": 127,
+      "reviewed": false,
+      "source_id": "C1"
+    },
+    {
+      "id": "shp-ae34713e-4ea6-47a6-913f-ee3191267952",
+      "condition_id": "cnd-41a71b3b-30e9-42e5-8c80-dfa056962dba",
+      "quantity": 58,
+      "reviewed": false,
+      "source_id": "C2"
+    }
+  ],
+  "condition_totals_ea": {
+    "GDI": 1,
+    "TAM": 2,
+    "SET": 185
+  },
+  "set_count_basis": {
+    "located_ea": 0,
+    "printed_ea": 185
+  },
+  "files": [
+    {
+      "file": "takeoff-before-reopen.json",
+      "sha256": "2a41d5ad48f6355e14c37dea00a602ec24c685b0e50459852c79765395d19235"
+    },
+    {
+      "file": "takeoff-after-reload.json",
+      "sha256": "2a41d5ad48f6355e14c37dea00a602ec24c685b0e50459852c79765395d19235"
+    },
+    {
+      "file": "takeoff-after-archive-reopen.json",
+      "sha256": "2a41d5ad48f6355e14c37dea00a602ec24c685b0e50459852c79765395d19235"
+    }
+  ]
+}

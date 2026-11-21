@@ -24,12 +24,16 @@ The original observations remain in [BASELINE-RESULTS.md](BASELINE-RESULTS.md).
 | Report | Located/printed split plus source ledger | JSON, CSV and workbook code paths pass |
 | Marked PDF | Source text readable, bases disclosed | Poppler cover and plan inspected; automatic point labels removed after an overlap was found |
 | DXF / geometry contribution | Do not present anchors as installed geometry | DXF skips with reason; contribution excludes and counts source records |
-| Actual browser import / Show on plan / reload | Review both public sources and save/reopen | **Unverified**: Computer Use stopped at URL verification |
+| Actual browser import / Show on plan / reload | Review both public sources and save/reopen | Pass in the local in-app browser; both source locations checked before/after reload and exported-archive reopen |
+| Browser export preservation | Keep baseline records and decisions | Complete takeoff equality except the opened-sheet tab list; all 5 pending; report JSON identical |
+| Dark-theme report appearance | Readable report table | Limitation: body text has poor contrast; quantity basis and exported totals verified, visual readiness not claimed |
 
 [Recorded results](reviewable/results.json) list the preserved and new IDs.
 The [MCP transcript](reviewable/transcript.json) is an ordered tool trace, not a
 browser recording. Inputs are visually checked source coordinates, not automatic
 detector output. No timing, accuracy, full-plan completeness or approval claim.
+The separate [browser evidence](browser/README.md) contains actual screenshots,
+downloaded files and a reproducible [persistence check](browser/verify-exports.mjs).
 
 ## Checks
 
@@ -39,6 +43,9 @@ MCP build and distribution smoke checks are recorded in
 CI or a released MCP package. Existing React-hook, bundle-size and pdf.js notices
 are not new failures. Poppler reports missing fallback fonts; the selected source
 text, callouts and cover were inspected visually rather than trusting that log.
+The [browser follow-up checks](browser/checks.json) record the repeated web gate
+(3,837 passed, 4 skipped), protocol gate (62 passed), references and links on the
+unchanged application code used for the browser captures.
 
 Reproduce with the commands in [README.md](README.md). For the checks:
 
@@ -68,12 +75,12 @@ strict mode; the protocol tests pass after that correction.
   at 5184 by 3456 pixels. Calibration remains agent-set and unconfirmed.
 - The count extension does not alter the canvas schema identifier. Older readers
   may preserve its fields without understanding its source-anchor display.
-- The local Vite server was started at `127.0.0.1:5199`. Native Google Chrome
-  navigation was attempted, but the runtime stopped before app verification.
-  No alternative UI-control mechanism was used after that stop. The build hash
-  in [checks.json](reviewable/checks.json) identifies code, not a tested browser.
-- Current public-plan browser screenshots, changed-surface screenshots on the
-  bundled sample, and a short actual-browser recording remain required before
-  this is ready for review. The source/PDF exhibits do not substitute for them.
+- The earlier native Chrome attempt at `127.0.0.1:5199` was unverified. The later
+  authorized in-app browser run at `127.0.0.1:5200` passed both public source
+  tests on build `6b14613160b3927a690270275654092d9f4bd3a2`; the
+  [browser evidence](browser/README.md) pins its loaded bundle and hashes.
+- Public-plan browser stills are now captured. Changed-surface evidence on the
+  bundled sample and a continuous actual-browser recording remain required
+  before this is ready for review. The report contrast also needs follow-up.
 - The contributor's existing CLA is linked in [the baseline](BASELINE-RESULTS.md).
   No maintainer agreement, approval, merge or release is claimed.

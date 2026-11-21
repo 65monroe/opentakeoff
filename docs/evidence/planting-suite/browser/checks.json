@@ -1,0 +1,37 @@
+{
+  "tested_date": "2026-11-20",
+  "timezone": "America/New_York",
+  "branch": "codex/planting-suite",
+  "application_commit": "6b14613160b3927a690270275654092d9f4bd3a2",
+  "browser": "Codex in-app browser",
+  "origin": "http://127.0.0.1:5200/",
+  "server": "Vite preview of web/dist",
+  "loaded_bundle": "/assets/index-DnTr0fqi.js",
+  "bundle_sha256": "eae9b6e75dcc8f0e92dc7f4a4b2f18a5d9c79d727ce6dff9126436cbab168486",
+  "application_code_changed_during_test": false,
+  "checks": [
+    { "command": "npm run check --prefix web", "status": "pass", "passed": 3837, "skipped": 4, "failed": 0, "includes": ["typecheck", "lint", "runtime assets", "tests", "benchmark", "build", "OCR distribution"] },
+    { "command": "npm run check --prefix protocol", "status": "pass", "passed": 62, "failed": 0, "schemas": 11, "transport_cases": 16 },
+    { "command": "npm run check:tool-count --prefix mcp", "status": "pass", "default_tools": 71, "gated_tools": 73, "setup_tools": 22 },
+    { "command": "npm run check:wiki --prefix mcp", "status": "pass", "pages": 11 },
+    { "command": "node scripts/check-doc-links.mjs", "status": "pass", "primary_documents": 49 },
+    { "command": "node docs/evidence/planting-suite/browser/verify-exports.mjs", "status": "pass", "result": "persistence-check.json" }
+  ],
+  "browser_saved_archive": {
+    "committed": false,
+    "reason": "Contains the public PDF; real plan PDFs are excluded from Git",
+    "sha256": "9c31cf46e83274f02fa38cd519f998fdf0eefe224c3888220b27bc53e0a80bd2",
+    "native_parser_takeoff_equals_browser_export": true,
+    "embedded_pdf_bytes_equal_original_extracted_source": true,
+    "embedded_pdf_sha256": "fe0d7d35fcf8bdf05021e68d996063bcdbc69fdc4c35ccda0b18d8f77a318efa"
+  },
+  "review_state": "All five records pending before and after; no acceptance action performed",
+  "limits": [
+    "Stills, not a continuous recording",
+    "New flow on bundled sample remains outstanding",
+    "Dark-theme report text contrast is poor",
+    "Source-assisted public sample, not a blind AI benchmark or complete landscape takeoff",
+    "No CLG skills, memory, customer drawings or private catalog data used",
+    "No production test, new PR, merge or deployment"
+  ]
+}

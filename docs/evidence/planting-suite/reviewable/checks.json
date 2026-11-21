@@ -95,16 +95,17 @@
     "archive": "Native .otk writer/parser: exact takeoff and PDF-byte round trip; PDF and archive excluded from Git"
   },
   "browser": {
-    "status": "unverified",
-    "attempted_browser": "Native Google Chrome on Windows",
-    "local_origin": "http://127.0.0.1:5199/",
-    "reason": "Computer Use stopped because it could not verify the current browser URL. No alternative UI-control method used after the stop.",
+    "status": "public SET navigation and persistence passed; contribution evidence incomplete",
+    "browser": "Codex in-app browser",
+    "local_origin": "http://127.0.0.1:5200/",
+    "build_commit": "6b14613160b3927a690270275654092d9f4bd3a2",
+    "evidence": "../browser/README.md",
+    "persistence_check": "../browser/persistence-check.json",
+    "earlier_attempt": "Native Chrome at port 5199 remained unverified after a URL-verification stop. The later authorized in-app browser test is recorded separately.",
     "remaining": [
-      "Import public archive",
-      "Inspect both source receipts and Show on plan",
-      "Verify report and reload persistence",
       "Bundled-sample changed-surface screenshots",
-      "Actual-browser review-flow recording"
+      "Continuous actual-browser review-flow recording",
+      "Dark-theme report contrast follow-up"
     ]
   },
   "provenance": {

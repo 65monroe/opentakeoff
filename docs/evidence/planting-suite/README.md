@@ -7,9 +7,11 @@ The report distinguishes individually located EA from printed EA.
 
 This work stays on the contributor's `codex/planting-suite` fork branch for
 [#659](https://github.com/Kentucky-ai/opentakeoff/issues/659). No new PR is opened.
-**Browser verification is unfinished:** Computer Use stopped when it could not
-verify the current browser URL. The MCP replay, export checks and automated
-checks below do not stand in for the requested browser test or recording.
+**Both public SET browser tests pass:** the local in-app browser locates each
+source, preserves it after reload and reopening the exported archive, and keeps
+all five records pending. See the [browser evidence](browser/README.md) for
+screenshots, exact export comparisons and limitations. A continuous recording
+and the new flow on the bundled sample remain outstanding.
 
 ## Clean baseline
 
@@ -63,10 +65,11 @@ comparison is disclosed separately and does not change the observed quantities.
 - [Marked-PDF cover](reviewable/marked-cover.png), [marked plan](reviewable/marked-plan.png)
 - [West source in marked PDF](reviewable/pdf-west-detail.png), [east source](reviewable/pdf-east-detail.png)
 - [West MCP overlay](reviewable/west-callout.png), [east MCP overlay](reviewable/east-callout.png)
+- [Actual browser receipts, source navigation and persistence](browser/README.md)
 - [Checks and remaining work](RESULTS.md)
 
-The plan images are actual MCP renders and Poppler renders of the marked PDF.
-They are not browser screenshots. The older bundled-plan Trade screenshots in
+The images in `reviewable/` are MCP renders and Poppler renders of the marked PDF;
+the images in `browser/` are actual in-app browser screenshots. The older bundled-plan Trade screenshots in
 [the baseline](BASELINE.md) verify only that earlier increment's Trade controls.
 No real plan PDF or `.otk` containing one is committed to Git.
 
@@ -91,9 +94,12 @@ MCP reload must preserve all records exactly. The archive packer uses the existi
 OpenTakeoff writer and checks exact takeoff and PDF-byte equality on unpacking;
 it creates no geometry or quantities.
 
-## Remaining browser test
+## Browser verification
 
-Run `npm run dev --prefix web -- --host 127.0.0.1 --port 5199 --strictPort`.
+The completed public-plan test used a local preview at `127.0.0.1:5200`.
+The [browser evidence](browser/README.md) identifies the tested build and gives
+the exact save/reopen steps. For a new development run, use
+`npm run dev --prefix web -- --host 127.0.0.1 --port 5199 --strictPort`.
 Use a genuinely empty workspace at that origin. An `.otk` load replaces the
 workspace, so do not load it into a customer project. Another tab at the same
 origin can share its saved workspace.
@@ -116,7 +122,10 @@ origin can share its saved workspace.
    labeled synthetic source quantities. Capture each changed surface and a short
    recording before calling the contribution ready for maintainer review.
 
-These steps are a test plan, not a claim that they have been executed.
+The recorded public run covers steps 1–5 except browser CSV/Excel downloads.
+The exported `.otk` was also reopened and both source locations checked again.
+Step 6, a continuous recording, and the dark-theme report contrast follow-up
+remain outstanding. See the browser result for the precise tested scope.
 
 ## Design and limits
 

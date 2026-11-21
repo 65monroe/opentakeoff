@@ -30,5 +30,5 @@
     "markups",
     "proposals"
   ],
-  "browser_test": "unverified: Computer Use stopped at URL verification"
+  "browser_test": "Separate subsequent run passed both public SET source checks and save/reopen; see ../browser/README.md and ../browser/persistence-check.json. This MCP replay did not perform the browser test."
 }
