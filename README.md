@@ -110,6 +110,12 @@ The full tool reference is [`mcp/README.md`](mcp/README.md).
 
 ## How a takeoff runs
 
+Planting quantities can retain their printed source and link to an editable bed.
+**Show on plan** frames both; **Edit planting area** adjusts coverage while
+printed EA and its review decision stay unchanged. See the
+[planting workflow](docs/USER_GUIDE.md#landscape-planting). Area SF does not imply
+a grid-derived plant count.
+
 <img src="docs/img/brand/how-it-works.svg" alt="Open the plan, set the scale, trace rooms on the wall faces, derive base and transitions, deliver a marked-up planset PDF" width="100%">
 
 <img src="docs/img/mcp-live-demo.gif" alt="A real run at 3× speed: an AI agent in a terminal takes off three patient rooms on a VA medical center finish plan over MCP. Each export lands in the web app as dashed pencil proposals, and the operator accepts them, 743.64 SF in all." width="100%"/>

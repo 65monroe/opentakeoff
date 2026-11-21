@@ -6,6 +6,40 @@ import { InMemoryTransport } from "@modelcontextprotocol/sdk/inMemory.js";
 import { buildServer } from "../server.ts";
 import { Session } from "../src/session.ts";
 
+test("editable planting areas link over MCP without touching accepted source records", async () => {
+  const session = new Session();
+  const [ct,st] = InMemoryTransport.createLinkedPair();
+  const server = buildServer(session); await server.connect(st);
+  const client = new Client({name:"area-link-test",version:"1"}); await client.connect(ct);
+  const call = async (name:string,args:Record<string,unknown>,error=false) => {
+    const reply:any=await client.callTool({name,arguments:args});
+    assert.equal(!!reply.isError,error,JSON.stringify(reply));
+    return reply.structuredContent ?? JSON.parse(reply.content[0].text);
+  };
+  try {
+    await session.loadPlan(fileURLToPath(new URL("../../demo/sample-plan.pdf",import.meta.url)));
+    const sheet="sample-plan.pdf"; session.setScale(sheet,{use_detected:true});
+    const source=session.recordCalloutQuantity({sheet,condition:"pa",quantity:12,at:[100,100],source_id:"C1",text:"12 pa",reference:"Synthetic source"});
+    session.shapes[0].origin!.reviewed=true; // Fixture only; no agent approval tool.
+    const original=structuredClone(session.shapes[0]);
+    const area=session.measurePolygon(sheet,[[200,200],[400,200],[400,400],[200,400]],{condition:"BED",role:"floor_area"});
+    const before=structuredClone(session.exportPayload());
+    await call("edit_shape",{shape_id:area.shape_id,source_callout_ids:[source.shape_id]});
+    assert.deepEqual(session.shapes[0],original);
+    assert.deepEqual(session.shapes[1].source_callout_ids,[source.shape_id]);
+    const linked=structuredClone(session.exportPayload());
+    for(const patch of [{source_callout_ids:["missing"]},{source_callout_ids:[source.shape_id,source.shape_id]},{role:"count"}]) {
+      await call("edit_shape",{shape_id:area.shape_id,...patch},true);
+      assert.deepEqual(session.exportPayload(),linked);
+    }
+    await call("edit_shape",{shape_id:area.shape_id,verts:[[200,200],[500,200],[400,400],[200,400]]});
+    assert.deepEqual(session.shapes[0],original);
+    assert.deepEqual(session.shapes[1].source_callout_ids,[source.shape_id]);
+    await call("undo_last",{}); assert.deepEqual(session.exportPayload(),linked);
+    await call("undo_last",{}); assert.deepEqual(session.exportPayload(),before);
+  } finally { await client.close(); await server.close(); }
+});
+
 test("printed EA: source receipts, idempotency, refusal, review preservation and undo over MCP", async () => {
   const session = new Session();
   const [ct, st] = InMemoryTransport.createLinkedPair();

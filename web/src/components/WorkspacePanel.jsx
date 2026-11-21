@@ -3,7 +3,7 @@ import { useEffect, useMemo, useState } from "react";
 import { filterWork, workActor, workMethod, workQuantity, workReviewState } from "../lib/workReview.js";
 import { Z } from "../lib/ui.js";
 import { ScanStar } from "../brand/marks.jsx";
-import { isCalloutQuantity } from "../lib/calloutQuantity.js";
+import { isCalloutQuantity, linkedCalloutAreas } from "../lib/calloutQuantity.js";
 import "./workspacePanel.css";
 
 export default function WorkspacePanel({ open, shapes, conditions, selectedId, sheetLabel, fmtArea, fmtLength,
@@ -16,6 +16,7 @@ export default function WorkspacePanel({ open, shapes, conditions, selectedId, s
   const rows = useMemo(() => filterWork(shapes, { filter, query,
     conditionLabel: (id) => conditions[id]?.finish_tag || "", sheetLabel }), [shapes, filter, query, conditions, sheetLabel]);
   const selected = shapes.find((s) => s.id === selectedId);
+  const plantingAreas = linkedCalloutAreas(selected, shapes);
   useEffect(() => { setLimit(50); }, [filter, query]);
   const quantity = (shape) => {
     const q = workQuantity(shape);
@@ -75,11 +76,23 @@ export default function WorkspacePanel({ open, shapes, conditions, selectedId, s
               <div><dt>{uiText("Drawing text")}</dt><dd>{selected.quantity_source.text}</dd></div>
               <div><dt>{uiText("Source reference")}</dt><dd>{selected.quantity_source.reference}</dd></div>
               <div><dt>{uiText("Source ID")}</dt><dd>{selected.quantity_source.id}</dd></div>
+              {plantingAreas.map((area) => <div key={area.id}><dt>{uiText("Planting area")}</dt><dd>{area.label || conditions[area.condition_id]?.finish_tag} · {quantity(area)}</dd></div>)}
             </> : <div><dt>{uiText("Geometry")}</dt><dd>{uiText(selected.verts_norm?.length || 0)} {uiText("vertices · ")}{uiText(selected.verts_norm_holes?.length || 0)} {uiText("holes")}</dd></div>}
             {evidence.matched_text && <div><dt>{uiText("Drawing text")}</dt><dd>{uiText(String(evidence.matched_text))}</dd></div>}
             {evidence.schedule_row_tag && <div><dt>{uiText("Schedule tag")}</dt><dd>{uiText(String(evidence.schedule_row_tag))}</dd></div>}
           </dl>
           <p className="workspace-receipt-note">{uiText("Recorded provenance. Review status does not verify measurement accuracy.")}</p>
+          {Array.isArray(selected.source_callout_ids) && !!selected.source_callout_ids.length && <div className="workspace-inspector-actions workspace-area-actions" aria-label={uiText("Printed sources")}>
+            {selected.source_callout_ids.map((id) => {
+              const source = shapes.find((s) => s.id === id && s.sheet_id === selected.sheet_id && isCalloutQuantity(s));
+              return source ? <button key={id} type="button" onClick={() => onLocate(source, { sourceOnly: true })}>{uiText("Show callout")} · {source.quantity_source.text}</button> : <p key={id}>{uiText("Source callout unavailable")} · {id}</p>;
+            })}
+            <p className="workspace-receipt-note">{uiText("Editing this area changes SF, not its linked printed EA. Shared beds do not locate individual plants.")}</p>
+          </div>}
+          {!!plantingAreas.length && <div className="workspace-inspector-actions workspace-area-actions">
+            <button type="button" onClick={() => onLocate(selected, { sourceOnly: true })}>{uiText("Show source callout")}</button>
+            {plantingAreas.map((area) => <button key={area.id} type="button" onClick={() => onLocate(area)}>{uiText("Edit planting area")}{plantingAreas.length > 1 ? ` · ${area.label || conditions[area.condition_id]?.finish_tag}` : ""}</button>)}
+          </div>}
           <div className="workspace-inspector-actions"><button type="button" onClick={() => onLocate(selected)}>{uiText("Show on plan")}</button>{selected.origin?.reviewed === false && <button type="button" className="workspace-primary" onClick={() => onReview(selected.id)}>{uiText("Mark reviewed")}</button>}</div>
         </section>}
         <footer className="workspace-footer"><span>{uiText(rows.length)} {uiText("of ")}{uiText(shapes.length)} {uiText("measurements")}</span><button type="button" onClick={onReport}>{uiText("Open report →")}</button></footer>

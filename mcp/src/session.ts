@@ -14,7 +14,7 @@ import { expandForScaleNotes, mixedScaleWarning } from "./scalewarn.ts";
 import { classifyLayerName, layerRoleCodes, segRoles, type LayerInfo } from "../../web/src/lib/layers.ts";
 import { buildSheetGraph, resolveTag, classifySheetRole, rowKeyAnswersFor, type SheetGraph, type SheetSpans, type Bbox } from "../../web/src/lib/sheetgraph.ts";
 import { UserError, round1, round2 } from "./format.ts";
-import { calloutQuantityError } from "../../web/src/lib/calloutQuantity.js";
+import { calloutQuantityError, calloutAreaError } from "../../web/src/lib/calloutQuantity.js";
 // Condition twins — the inheritance rule, shared with the canvas so a headless session and
 // the app can never disagree about what a twin holds (web/test/variants.test.ts).
 import {
@@ -381,6 +381,7 @@ export interface Shape {
   computed: { area_sf?: number; perimeter_lf?: number; count?: number; plan_lf?: number; vertical_lf?: number };
   /** The single vertex locates printed source text, not an installed item. */
   quantity_source?: { kind: "printed_callout"; unit: "EA"; id: string; text: string; reference: string };
+  source_callout_ids?: string[];
   /** surface_area only: the height this shape was quantified at (canvas
    * commitSurface snapshots the condition's H onto the shape). */
   height_ft?: number;
@@ -4698,6 +4699,7 @@ export class Session {
         ...(x.computed.perimeter_lf !== undefined ? { perimeter_lf: x.computed.perimeter_lf } : {}),
         ...(x.computed.count !== undefined ? { count: x.computed.count } : {}),
         ...(x.quantity_source ? { quantity_source: x.quantity_source } : {}),
+        ...(x.source_callout_ids ? { source_callout_ids: x.source_callout_ids } : {}),
         ...(x.height_ft !== undefined ? { height_ft: x.height_ft } : {}),
         ...(x.label ? { label: x.label } : {}),
         nverts: x.verts_norm.length,
@@ -4808,18 +4810,21 @@ export class Session {
    * layer exists to collect. Freezing proposed_verts_norm stays correct on the
    * human's first edit, because the geometry a reviewer saw IS the agent's
    * final revision, not its first draft. */
-  editShape(id: string, patch: { verts?: Point[]; condition?: string; role?: MeasureRole; label?: string; rise_ft?: number | null; drop_ft?: number | null }) {
+  editShape(id: string, patch: { verts?: Point[]; condition?: string; role?: MeasureRole; label?: string; rise_ft?: number | null; drop_ft?: number | null; source_callout_ids?: string[] | null }) {
     const i = this.shapes.findIndex((x) => x.id === id);
     if (i < 0) throw new UserError(`No shape with id ${JSON.stringify(id)}.`);
     const cur = this.shapes[i];
     if (cur.origin?.reviewed === true) {
       throw new UserError(`Shape ${JSON.stringify(id)} was affirmed by a human — reviewed work is ink, not pencil, and cannot be edited by an agent.`);
     }
-    if (patch.verts === undefined && patch.condition === undefined && patch.role === undefined && patch.label === undefined && patch.rise_ft === undefined && patch.drop_ft === undefined) {
-      throw new UserError("Nothing to change — pass at least one of verts, condition, role, label, rise_ft, drop_ft.");
+    if (patch.verts === undefined && patch.condition === undefined && patch.role === undefined && patch.label === undefined && patch.rise_ft === undefined && patch.drop_ft === undefined && patch.source_callout_ids === undefined) {
+      throw new UserError("Nothing to change — pass at least one of verts, condition, role, label, rise_ft, drop_ft, source_callout_ids.");
     }
     // #441 — legs belong to a linear run (the role AFTER this call)
     const roleAfter = patch.role ?? cur.measure_role;
+    const sourceIds = patch.source_callout_ids === null ? undefined : patch.source_callout_ids ?? cur.source_callout_ids;
+    const areaError = calloutAreaError({ ...cur, measure_role: roleAfter, source_callout_ids: sourceIds }, this.shapes);
+    if (areaError) throw new UserError(areaError);
     if ((patch.rise_ft !== undefined || patch.drop_ft !== undefined) && roleAfter !== "linear") {
       throw new UserError(`rise_ft / drop_ft are a linear run's vertical legs — ${JSON.stringify(id)} ${patch.role !== undefined ? `would be ${roleAfter}` : `is ${roleAfter}`}. A wall's vertical is its height_ft.`);
     }
@@ -4926,6 +4931,8 @@ export class Session {
     // the spread above carried the old label through — clearing means the key
     // GOES, so an export never ships label: "" for "no room"
     if (!nextLabel) delete this.shapes[i].label;
+    if (sourceIds) this.shapes[i].source_callout_ids = [...sourceIds];
+    else delete this.shapes[i].source_callout_ids;
     // a cleared leg, or a role flip away from linear, drops the key outright
     if (legs.rise_ft === undefined) delete this.shapes[i].rise_ft;
     if (legs.drop_ft === undefined) delete this.shapes[i].drop_ft;
@@ -4938,6 +4945,7 @@ export class Session {
       ...(patch.label !== undefined ? ["label"] : []),
       ...(patch.rise_ft !== undefined ? ["rise_ft"] : []),
       ...(patch.drop_ft !== undefined ? ["drop_ft"] : []),
+      ...(patch.source_callout_ids !== undefined ? ["source_callout_ids"] : []),
     ];
     return {
       shape_id: id,

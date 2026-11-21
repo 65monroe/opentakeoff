@@ -20,7 +20,7 @@ import { TAKEOFF_SCHEMA as ANN_SCHEMA } from "./takeoffConstants.ts";
 import { sanitizeApprovals } from "./approvals.js";
 import { normalizeAgentReview } from "./reviewState.js";
 import { isValidMultiplier } from "./multiplier.js";
-import { calloutQuantityError } from "./calloutQuantity.js";
+import { calloutQuantityError, calloutAreaError } from "./calloutQuantity.js";
 import { sanitizeStitches, stitchPlacementsMatch } from "./stitches.ts";
 
 /** Parse + gate an import file's text. Throws with copy the message bar shows
@@ -68,7 +68,7 @@ export function mergeTakeoffImport(current, imported, knownFiles = null) {
   const impShapes = arr(imported.shapes).filter((s) => s && typeof s === "object" && typeof s.sheet_id === "string" && typeof s.id === "string").map(normalizeAgentReview);
   const impConds = arr(imported.conditions).filter((c) => c && typeof c === "object" && typeof c.id === "string");
   for (const shape of impShapes) {
-    const error = calloutQuantityError(shape);
+    const error = calloutQuantityError(shape) || calloutAreaError(shape);
     if (error) throw new Error(`Couldn't import takeoff: ${shape.id}: ${error}`);
   }
   // Same rule edit_condition applies at the tool surface (#455): every reader

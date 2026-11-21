@@ -608,6 +608,7 @@ export const listShapesOutput = {
     perimeter_lf: z.number().optional(),
     count: z.number().optional(),
     quantity_source: quantitySource.optional().describe("Printed EA basis; the vertex locates source text rather than an individual item"),
+    source_callout_ids: z.array(z.string()).optional().describe("For a planting area, printed source measurement IDs; coverage SF is separate from their EA"),
     height_ft: z.number().optional().describe("surface_area shapes — the height they were quantified at"),
     label: z.string().optional().describe("The room (or phase/area) this shape belongs to — detect_rooms stamps the room number it traced from; edit_shape sets or clears it. Absent when unlabeled"),
     nverts: z.number().int(),
@@ -630,7 +631,7 @@ export const deleteShapeOutput = {
  * re-measures (closed area vs open length). */
 export const editShapeOutput = {
   shape_id: z.string(),
-  changed: z.array(z.enum(["verts", "condition", "role", "label", "rise_ft", "drop_ft"])).describe("Which fields this call actually changed"),
+  changed: z.array(z.enum(["verts", "condition", "role", "label", "rise_ft", "drop_ft", "source_callout_ids"])).describe("Which fields this call actually changed"),
   measure_role: z.enum(["floor_area", "deduct", "linear", "surface_area", "count"]),
   nverts: z.number().int(),
   area_sf: z.number().optional().describe("0 for linear shapes; LF × height for surface_area; absent for count"),

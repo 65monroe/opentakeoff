@@ -1,0 +1,84 @@
+{
+  "sheet": "ccfp-L1.0.pdf",
+  "coordinates": "full-sheet image pixels; 5184 x 3456",
+  "beds": [
+    {
+      "id": "C1",
+      "condition": "BED-C1",
+      "label": "C1 SET hatch",
+      "verts": [
+        [
+          2817,
+          967.5
+        ],
+        [
+          2951.5,
+          1007
+        ],
+        [
+          2878,
+          1034
+        ],
+        [
+          2808,
+          1022.5
+        ]
+      ],
+      "arc_through": [
+        2
+      ],
+      "note": "SET-only herringbone region at the 127 SET leader. Curved south boundary traced with an arc; no individual plant positions inferred.",
+      "region": {
+        "x0": 2480,
+        "y0": 730,
+        "x1": 3080,
+        "y1": 1160
+      }
+    },
+    {
+      "id": "C2",
+      "condition": "BED-C2",
+      "label": "C2 shared bed; north edge approximate",
+      "verts": [
+        [
+          3449,
+          1233
+        ],
+        [
+          3532,
+          1233
+        ],
+        [
+          3532,
+          1315
+        ],
+        [
+          3561,
+          1342
+        ],
+        [
+          3525,
+          1373
+        ],
+        [
+          3514,
+          1426
+        ],
+        [
+          3449,
+          1466
+        ]
+      ],
+      "arc_through": [
+        4
+      ],
+      "note": "Shared mixed-species hatch at the leader for the list ending 58 SET. Excludes the separate herringbone pocket to the east. North edge is provisional beneath shrub/furnishing symbols; verify its extent before using SF. The outline does not allocate the bed among species.",
+      "region": {
+        "x0": 3380,
+        "y0": 1170,
+        "x1": 3890,
+        "y1": 1520
+      }
+    }
+  ]
+}

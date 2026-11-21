@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- **Editable planting areas linked to printed quantities.** `edit_shape source_callout_ids` associates a normal area with same-sheet printed source records. Work and review frames and highlights the linked bed and source, offers **Show source callout** and **Edit planting area**, and keeps SF separate from unchanged printed EA. Shared beds can cite several species. Existing source IDs, geometry and review decisions are untouched.
+
 - **Landscape planting and printed quantities (Division 32, #659).** `open_suite {suite: "planting"}` guides exact-code counts and source checks. `record_callout_quantity` adds a pending EA record at a printed callout, with source text/reference and idempotent source IDs. Work and review locates its source; reports distinguish located EA from printed EA. Existing annotations are not converted automatically. The Trade menus include **Landscape planting**, assigned explicitly without renaming codes.
 
 ## 2026-11-20 — Public test sheets

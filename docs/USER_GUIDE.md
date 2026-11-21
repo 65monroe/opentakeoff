@@ -284,6 +284,14 @@ Click **Show on plan** to locate the source callout, marked with an open diamond
 The anchor is not a plant location. **Mark reviewed** records your decision; an
 agent cannot create it. Finding a hidden condition reveals it for inspection.
 
+When a planting area is linked, **Show on plan** frames the bed and its source
+callout together and highlights the boundary. **Show source callout** returns
+to the printed text. **Edit planting area** selects the existing area and its
+normal vertex grips. Drag a grip to adjust the bed; undo restores the boundary.
+The area receipt links back to its printed sources and reports missing ones.
+Shared beds may cite several species. Area edits change SF, never the linked
+printed EA or its review decision. Grid-derived counts are not implemented.
+
 The report separates located EA from printed EA. CSV, Excel and JSON retain the
 source ledger, and the marked PDF labels printed quantities. Existing notes are
 not automatically converted to quantity records. See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).

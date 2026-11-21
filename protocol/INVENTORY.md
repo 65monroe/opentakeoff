@@ -24,6 +24,16 @@ fields modeled by this draft, including nested definitions.
 
 ## Measurement, calibration, and authorship
 
+An optional `source_callout_ids` array on a `floor_area` stores unique printed
+callout measurement IDs describing that planting area. The area owns the links;
+source counts and review decisions do not change. Several species can share a
+bed, and SF never derives or adds EA. MCP `edit_shape` validates same-sheet
+printed sources and supports `null` to unlink. Import preserves unresolved IDs;
+the receipt reports an unavailable source, and navigation never follows an
+invalid or cross-sheet reference. Deletion does not silently erase citations.
+Native area editing and undo preserve the links. Older readers can retain this
+extension without offering linked navigation; the writer identifier is unchanged.
+
 Printed quantities extend existing count records with `quantity_source`
 (`kind: "printed_callout"`, `unit: "EA"`, stable source `id`, exact printed
 `text`, and `reference`). `computed.count` is the positive whole quantity; the

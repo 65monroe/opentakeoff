@@ -1,6 +1,6 @@
 import { test } from "node:test";
 import assert from "node:assert/strict";
-import { calloutQuantityError, countBasisText } from "../src/lib/calloutQuantity.js";
+import { calloutQuantityError, countBasisText, calloutAreaError, linkedCalloutAreas } from "../src/lib/calloutQuantity.js";
 import { conditionTotals, totalsToCsv, reportJson, sheetTotals } from "../src/lib/totals.js";
 import { reportWorkbook } from "../src/lib/xlsx.js";
 import { mergeTakeoffImport } from "../src/lib/importTakeoff.js";
@@ -13,6 +13,26 @@ import { buildSheetDxf } from "../src/lib/dxf.ts";
 const cond = { id: "c", finish_tag: "pa", multiplier: 1, waste_pct: 5, materials: [] };
 const located = { id: "one", condition_id: "c", sheet_id: "source.pdf", measure_role: "count", verts_norm: [[.1,.1]] as [number,number][], computed: {count:1}, origin: { method: "manual", actor: "agent", reviewed: true } };
 const callout = { ...located, id: "callout", verts_norm: [[.2,.2]] as [number,number][], computed: {count:12}, quantity_source: {kind:"printed_callout",unit:"EA",id:"C1",text:"(12) pa",reference:"L1.0 west bed"}, origin:{method:"printed_callout",actor:"agent",reviewed:false} };
+test("shared planting coverage preserves source counts, missing links are not invented, import and geometry undo retain links", () => {
+  const source = { ...callout, origin: { ...callout.origin, reviewed: true } };
+  const area = { ...located, id: "bed", measure_role: "floor_area", source_callout_ids: [source.id], verts_norm: [[.2,.2],[.3,.2],[.3,.3]], computed: {area_sf:50,perimeter_lf:30} };
+  const shapes = [source,area];
+  assert.equal(calloutAreaError(area, shapes), null);
+  assert.deepEqual(linkedCalloutAreas(source, shapes), [area]);
+  assert.equal(calloutAreaError({...area,source_callout_ids:["absent"]}),null,"unresolved import references remain recoverable");
+  assert.match(calloutAreaError({...area,source_callout_ids:["absent"]},shapes) ?? "",/existing printed/);
+  assert.deepEqual(linkedCalloutAreas(source,[source,{...area,sheet_id:"other.pdf"}]),[]);
+  for(const patch of [{measure_role:"count"},{source_callout_ids:[]},{source_callout_ids:[source.id,source.id]}]) assert.ok(calloutAreaError({...area,...patch}));
+  const before = {schema:"opentakeoff.takeoff_canvas.v1",conditions:[cond],shapes,sheets:[{sheet_id:"source.pdf",units_per_px:.2}],markups:[]};
+  const imported = mergeTakeoffImport({},before).payload;
+  assert.deepEqual(imported.shapes,shapes);
+  const next = applyShapeCommand(shapes,{type:"geom",id:area.id,verts_norm:[[.2,.2],[.4,.2],[.3,.3]],computed:{area_sf:100,perimeter_lf:40},editKind:"reshape"});
+  assert.deepEqual(next.shapes[0],source,"editing coverage cannot change accepted source EA");
+  assert.deepEqual(next.shapes[1].source_callout_ids,[source.id]);
+  assert.deepEqual(applyShapeCommand(next.shapes,next.inverse).shapes,shapes);
+  const total=conditionTotals([cond],shapes)[0];
+  assert.equal(total.ea,12); assert.equal(total.floor_sf,50);
+});
 test("printed callout import preserves IDs and decisions, refuses invalid quantities before merging", () => {
   const before = { schema:"opentakeoff.takeoff_canvas.v1", conditions:[cond], shapes:[located], sheets:[], markups:[] };
   const incoming = {...before, shapes:[callout]};

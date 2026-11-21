@@ -15,6 +15,12 @@ it does not read or infer the quantity. Its single anchor opens the callout in
 **Work and review**, with a separate printed basis in the report. Same-source
 retries preserve the ID and review state; conflicts refuse without mutation.
 
+For editable planting scope, trace a separate bed with `measure_polygon`, then
+use `edit_shape {shape_id: "<area-id>", source_callout_ids: ["<callout-id>"]}`.
+The same-sheet links belong to the area, leaving source records untouched.
+Pass `null` to remove the links. SF and printed EA remain separate; no grid
+count is inferred. The browser offers bed navigation and source-text navigation.
+
 This page walks the surface in depth, in the order an agent reaches for it. Two
 shorter reads sit either side of it: [`AGENT_GUIDE.md`](AGENT_GUIDE.md) is the
 operating manual—how a takeoff is run, what withholds, what refuses—and

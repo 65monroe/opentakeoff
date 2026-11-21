@@ -71,6 +71,14 @@ until the estimator reviews it. Repeating the same source returns its existing
 ID; conflicting retries refuse. Ordinary annotations remain notes and are not
 converted automatically. Never add a callout for plants already counted by symbol.
 
+Link the bed after following its leader and hatch: `measure_polygon` under a
+separate bed condition, then `edit_shape source_callout_ids` on that area with
+the printed measurement IDs. Several species may share a bed. **Show on plan**
+frames the area and source; **Show source callout** and **Edit planting area**
+separate source inspection from boundary editing. Source records remain intact,
+SF stays separate from EA, and obscured boundaries stay flagged for review.
+This does not implement a spacing or grid-derived count.
+
 The report splits located EA from printed EA; CSV, Excel and JSON also carry
 the source ledger. The marked PDF labels printed quantities. DXF skips these
 anchors with a reason, and the geometry contribution omits them with a count.

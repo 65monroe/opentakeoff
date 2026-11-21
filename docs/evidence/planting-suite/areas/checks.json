@@ -1,0 +1,46 @@
+{
+  "date": "2026-11-20",
+  "branch": "codex/planting-suite",
+  "parent_commit": "4e3c6261d12749c0b94ea42ab93ff345fb691133",
+  "scope": "Local checks and public-plan evidence; no upstream PR, CI or deployment claim",
+  "runtime": "Node 24.22.3; local MCP 0.9.117",
+  "browser": {
+    "name": "Codex in-app browser",
+    "url": "http://127.0.0.1:5200/",
+    "server": "Vite preview serving web/dist",
+    "full_flow_bundle": "index-Bdz18p33.js",
+    "full_flow_sha256": "181120311507695c425fee889fa794951ced2f4345a145a93989e80f4437c6da",
+    "final_bundle": "index-CIshPzjF.js",
+    "final_sha256": "28982eb4189ef64164bd817592d5bf886df5325bdf130fcb0db3d208e9ecf1fc",
+    "final_build_difference": "Receipt layout only: wrap area actions, shorter single-bed edit button, defensive array guard. Final build reloaded saved project; both Show on plan routes and C1 native grips checked again.",
+    "final_screenshots": ["browser-c1-final.jpg", "browser-c1-edit-final.jpg", "browser-c2-final.jpg"],
+    "full_flow": ["Backup live project", "Merge two new area records", "C1 and C2 Show on plan", "C1 source-only navigation", "C1 and C2 native vertex drag and Undo", "C1 reverse link to source", "JSON and native archive exports", "Open exported native archive", "C1 and C2 Show on plan after reopen", "Download and compare complete exports"],
+    "observed": "7 records pending, 0 kept; SET 127 + 58 = 185 printed EA; separate 110.5 and 329.88 SF areas",
+    "continuous_recording": false
+  },
+  "checks": [
+    {"command": "npm run check --prefix web", "result": "pass", "tests_passed": 3838, "tests_skipped": 4, "tests_failed": 0, "includes": "typecheck, lint, tests, benchmark, build, OCR distribution check"},
+    {"command": "npm run typecheck --prefix mcp", "result": "pass"},
+    {"command": "npm test --prefix mcp", "result": "pass", "tests_passed": 332, "tests_skipped": 1, "tests_failed": 0},
+    {"command": "npm run check --prefix protocol", "result": "pass", "tests_passed": 63, "tests_failed": 0, "schemas": 11, "transport_cases": 16},
+    {"command": "npm run check:tool-count --prefix mcp", "result": "pass", "default_tools": 71, "gated_tools": 73, "setup_tools": 22},
+    {"command": "npm run check:wiki --prefix mcp", "result": "pass", "pages": 11},
+    {"command": "npm run check:protocol-resources --prefix mcp", "result": "pass", "schemas": 11},
+    {"command": "node scripts/check-doc-links.mjs", "result": "pass", "primary_documents": 49},
+    {"command": "npm run build --prefix mcp", "result": "pass"},
+    {"command": "npm run smoke:dist --prefix mcp", "result": "pass", "flat_tools": 71, "staged_tools": 23},
+    {"command": "node docs/evidence/planting-suite/areas/verify-exports.mjs", "result": "pass", "baseline_records_exact": 5, "new_areas_exact_after_undo": 2, "complete_export_equal_after_archive_reopen": true}
+  ],
+  "environment_notes": [
+    "Windows npm wrapper used an installed npm CLI with the same package scripts; no alternate test commands substituted.",
+    "MCP tests and distribution smoke were rerun outside the restricted sandbox because their junction/symlink fixtures require filesystem permissions. Final runs passed.",
+    "Existing React-hook, pdf.js, bundle-size and benchmark notices are recorded as warnings, not hidden failures."
+  ],
+  "limits": [
+    "C2 north edge approximate beneath symbols; SF pending boundary review.",
+    "Existing 1 inch = 20 feet scale remains agent-set and unconfirmed.",
+    "No invented individual SET locations, grid count, species allocation or full-plan takeoff.",
+    "No CLG skills, memory, private plans or catalogs used.",
+    "Continuous recording, bundled-sample flow and human evaluation remain future contribution evidence."
+  ]
+}

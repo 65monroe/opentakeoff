@@ -18,6 +18,14 @@ Never add a callout for items already counted by symbol. Check the report's
 located/printed EA split and reopen the editable export. Ordinary annotations
 remain notes; the tool does not parse them or authenticate human review.
 
+To locate a quantity's planting scope, follow its leader and hatch boundary,
+trace the bed with `measure_polygon` under a separate condition, then call
+`edit_shape` on the area with `source_callout_ids: ["<measurement-id>"]`.
+Each cited record must be a printed callout on the same sheet; several species
+can share an area. Only the area gains a relationship: source IDs, quantities,
+geometry and review decisions stay unchanged. Flag approximate edges and keep
+the new area pending. SF is coverage, not a new or derived EA count.
+
 > **One-Click is temporarily gated.** On a default build `one_click` and `detect_rooms` do not
 > exist — they are not registered, `tools/list` never names them, and calling them is an
 > unknown-tool error. The initialize instructions say so and name the move: a room's polygon is

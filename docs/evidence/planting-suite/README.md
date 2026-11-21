@@ -5,6 +5,11 @@ existing count, review and undo machinery. Each record stores the printed text,
 source reference and one source anchor. That anchor is not a plant location.
 The report distinguishes individually located EA from printed EA.
 
+**Latest fork increment:** both SET records also link to editable planting areas.
+Show on plan frames each source and bed together; boundary edit/undo and exported
+archive reopening preserve all five original records exactly. See the
+[linked-area evidence](areas/README.md), including the provisional C2 north edge.
+
 This work stays on the contributor's `codex/planting-suite` fork branch for
 [#659](https://github.com/Kentucky-ai/opentakeoff/issues/659). No new PR is opened.
 **Both public SET browser tests pass:** the local in-app browser locates each

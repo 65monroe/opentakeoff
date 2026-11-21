@@ -1,5 +1,10 @@
 # Printed quantity validation
 
+The subsequent [linked-area increment](areas/README.md) adds two editable bed
+outlines without changing the five records below. Its current checks and browser
+preservation evidence are separate; the results below document the earlier
+printed-callout increment.
+
 Tested on 2026-11-20, Node 24.22.3, local MCP 0.9.117. The public replay extends
 fork baseline `99f83814d18852adb389182f179377f939e40164`, which starts from upstream
 `8a31fb49d5a2c286c665017219073b0abe61695b`. It does not include either review PR.

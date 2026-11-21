@@ -31,7 +31,7 @@ import { isPdfSource, rangeParams } from "../lib/pdfSource";
 import { store, isStaleTabError, STALE_TAB_MESSAGE, friendlyStoreError, projectIdFromUrl, emptyAnnotations, metaGet, metaPut, metaDelete, sha256Hex } from "../lib/store.js";
 import { forgetThumbs, releaseThumbs } from "../lib/thumbs.js";
 import { Z } from "../lib/ui.js";
-import { isCalloutQuantity } from "../lib/calloutQuantity.js";
+import { isCalloutQuantity, linkedCalloutAreas } from "../lib/calloutQuantity.js";
 import { getFocusMode, toggleFocusMode, onFocusModeChange } from "../lib/focusMode.js";
 import { seedStampLibrary, instantiateStamp, markupToStampElement } from "../lib/stamps.js";
 import { extractSvgPrimitives, svgToStamp } from "../lib/svgImport.js";
@@ -850,6 +850,7 @@ export default function TakeoffCanvas() {
   const [workspaceDragging, setWorkspaceDragging] = useState(null);
 
   const [workLocateId, setWorkLocateId] = useState(null);
+  const workSourceOnlyRef = useRef(false);
   const workButtonRef = useRef(null);
   // ── roll goods (#136) — view state; the figured layouts are a memo below ──
   const [rollShow, setRollShow] = useState(true);         // draw the figured cuts over the plan (on: opting a condition in shows its cuts immediately)
@@ -1746,6 +1747,7 @@ export default function TakeoffCanvas() {
     const drawn = viewHidden.size ? visibleShapes.filter((s) => !viewHidden.has(s.condition_id)) : visibleShapes;
     return [...drawn].sort((a, b) => tierOf(a) - tierOf(b));
   }, [visibleShapes, viewHidden]);
+  const linkedWorkAreaIds = useMemo(() => new Set(linkedCalloutAreas(shapes.find((s) => s.id === selectedId), shapes).map((s) => s.id)), [shapes, selectedId]);
   // Reference-pane shapes (split screen, Task 5): deliberately NOT filtered
   // through `visibleShapes` — the reference pane can frame a sheet the
   // primary's sheetGroup doesn't include at all (the tab-drop gesture from
@@ -8492,9 +8494,11 @@ export default function TakeoffCanvas() {
     if (!frameShapes((s) => ids.has(s.id))) setCommitMsg(uiText(`Open ${tabLabel(pair.sheet_id)} to look at this pair.`));
   }
 
-  function locateWork(shape) {
-    setHiddenConds((h) => revealed(h, shape.condition_id));
-    if (tradeHidden.has(shape.condition_id)) setViewTrade(ALL_TRADES);
+  function locateWork(shape, { sourceOnly = false } = {}) {
+    const targets = [shape, ...linkedCalloutAreas(shape, shapes)];
+    setHiddenConds((h) => targets.reduce((next, target) => revealed(next, target.condition_id), h));
+    if (targets.some((target) => tradeHidden.has(target.condition_id))) setViewTrade(ALL_TRADES);
+    workSourceOnlyRef.current = sourceOnly;
     setWorkLocateId(shape.id);
     if (!panelKeySet.has(shape.sheet_id)) openSheets([shape.sheet_id], false);
     setTool("select");
@@ -8509,7 +8513,8 @@ export default function TakeoffCanvas() {
     const el = containerRef.current;
     if (!shape) { setWorkLocateId(null); return; }
     if (!sp?.img?.w || !el) return;
-    const pts = (shape.verts_norm || []).filter((v) => v.length === 2 && v.every(Number.isFinite));
+    const targets = workSourceOnlyRef.current ? [shape] : [shape, ...linkedCalloutAreas(shape, shapes)];
+    const pts = targets.flatMap((target) => target.verts_norm || []).filter((v) => v.length === 2 && v.every(Number.isFinite));
     if (pts.length) {
       const xs = pts.map(([x]) => x * sp.img.w + sp.xOffset), ys = pts.map(([, y]) => y * sp.img.h);
       const x0 = Math.min(...xs), y0 = Math.min(...ys), w = Math.max(1, Math.max(...xs) - x0), h = Math.max(1, Math.max(...ys) - y0);
@@ -11081,7 +11086,7 @@ export default function TakeoffCanvas() {
                         measure_role switch. `sel`/`DS.selection` only matter when
                         `sel` is true, which never happens on the reference side. */}
                     {uiText(pShapes.map((s) => renderShapeGlyph(s, {
-                    dn, cond: condById[s.condition_id], sel: s.id === selectedId,
+                    dn, cond: condById[s.condition_id], sel: s.id === selectedId || linkedWorkAreaIds.has(s.id),
                     z: tf.scale, darkMode, selection: DS.selection, patId,
                     })))}
                   {/* vertex handles for the selected shape (drag to reshape) */}

@@ -62,6 +62,25 @@ test("printed quantity records preserve their source, IDs, quantities and review
   assert.equal(ajv.getSchema("https://opentakeoff.kentucky-ai.com/protocol/legacy/takeoff-canvas.v1.schema.json")(bad), false);
 });
 
+test("linked planting areas preserve callouts through import and project archive", async () => {
+  const session = new Session(); await session.loadPlan(plan);
+  session.setScale(sheet,{use_detected:true});
+  const source=session.recordCalloutQuantity({sheet,condition:"pa",quantity:12,at:[100,100],source_id:"C1",text:"12 pa",reference:"Synthetic bundled source"});
+  const original=structuredClone(session.shapes[0]);
+  const area=session.measurePolygon(sheet,[[200,200],[400,200],[400,400]],{condition:"BED",role:"floor_area"});
+  session.editShape(area.shape_id,{source_callout_ids:[source.shape_id]});
+  const payload=session.exportPayload(); checkBoth(payload);
+  const imported=mergeTakeoffImport(emptyAnnotations(),payload).payload;
+  assert.deepEqual(imported.shapes[0],original);
+  assert.deepEqual(imported.shapes,payload.shapes);
+  const archive=await buildProjectArchive({takeoff:payload,sheets:[{name:sheet}],loadPdfData:async()=>new Uint8Array(await readFile(plan))});
+  assert.deepEqual((await parseProjectArchive(archive)).takeoff,payload);
+  for(const patch of [{source_callout_ids:[]},{source_callout_ids:[source.shape_id,source.shape_id]},{measure_role:"count"}]) {
+    const bad=structuredClone(payload); Object.assign(bad.shapes[1],patch);
+    assert.equal(ajv.getSchema("https://opentakeoff.kentucky-ai.com/protocol/legacy/takeoff-canvas.v1.schema.json")(bad),false);
+  }
+});
+
 test("MCP commits every manual measurement role with agent provenance and unconfirmed scale", async () => {
   const session = new Session();
   await session.loadPlan(plan);

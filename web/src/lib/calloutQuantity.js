@@ -2,6 +2,26 @@
 // on the existing count record so review, IDs and undo use the same machinery.
 export const isCalloutQuantity = (s) => s?.quantity_source?.kind === "printed_callout";
 
+// The area owns the relationship so attaching coverage never edits or approves
+// the source quantity. Several printed species can share one editable bed.
+export function calloutAreaError(area, shapes) {
+  if (area?.source_callout_ids === undefined) return null;
+  const ids = area.source_callout_ids;
+  if (area.measure_role !== "floor_area" || !Array.isArray(ids) || !ids.length ||
+      ids.some((id) => typeof id !== "string" || !id.trim()) || new Set(ids).size !== ids.length) {
+    return "A linked planting area needs unique source callout IDs on a floor_area record.";
+  }
+  if (shapes && ids.some((id) => !shapes.some((s) => s.id === id && s.sheet_id === area.sheet_id && isCalloutQuantity(s)))) {
+    return "Each planting-area source must be an existing printed callout on the same sheet.";
+  }
+  return null;
+}
+
+export function linkedCalloutAreas(callout, shapes) {
+  if (!isCalloutQuantity(callout)) return [];
+  return shapes.filter((s) => !calloutAreaError(s) && s.sheet_id === callout.sheet_id && s.source_callout_ids?.includes(callout.id));
+}
+
 export function calloutQuantityError(s) {
   if (s?.quantity_source === undefined) return null;
   const q = s.quantity_source;
