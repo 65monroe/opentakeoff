@@ -1,0 +1,40 @@
+{
+  "source": "Consecutive actual browser captures; slower playback for readability, not a timing test",
+  "actions": [
+    "Preview 4 inches",
+    "Reject zero depth",
+    "Preview 2.5 inches",
+    "Cancel preserves saved 6-inch row"
+  ],
+  "frames": [
+    {
+      "file": "000.jpg",
+      "ms": 58
+    },
+    {
+      "file": "001.jpg",
+      "ms": 118
+    },
+    {
+      "file": "002.jpg",
+      "ms": 169
+    },
+    {
+      "file": "003.jpg",
+      "ms": 238
+    },
+    {
+      "file": "004.jpg",
+      "ms": 296
+    },
+    {
+      "file": "005.jpg",
+      "ms": 360
+    },
+    {
+      "file": "006.jpg",
+      "ms": 397
+    }
+  ],
+  "playback": "Six times slower; minimum 300 ms/frame; final frame held. No performance claim."
+}

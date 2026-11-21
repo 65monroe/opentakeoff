@@ -33,10 +33,29 @@ export function areaAssembly(area, shapes, conditions) {
     total: conditionTotals([{ ...condition, materials: [material] }], shapes)[0].materials[0],
     // Equivalent depth is a conversion of an existing coverage rate, never a
     // new source specification or an independently persisted depth field.
-    depth: material.unit?.toUpperCase() === 'CY' && material.basis === 'area' &&
-      itemRule(material) === 'coverage' && Number(material.per) > 0 ? 324 / Number(material.per) : null,
+    depth: materialDepthInches(material),
   }));
   return { condition, materials, sources, edges, editReason };
+}
+
+export function hasMaterialDepth(row) {
+  return typeof row.unit === 'string' && row.unit.trim().toUpperCase() === 'CY' &&
+    (row.basis || 'area') === 'area' && itemRule(row) === 'coverage';
+}
+
+export function materialDepthInches(row) {
+  const per = Number(row.per);
+  return hasMaterialDepth(row) && Number.isFinite(per) && per > 0 && Number.isFinite(324 / per) ? 324 / per : null;
+}
+
+// A depth is an editor for the existing SF-per-CY rate, not another persisted
+// input or quantity. Keep full numeric precision; totals owns display rounding.
+export function materialDepthEdit(row, input) {
+  const depth = Number(input), per = 324 / depth;
+  if (!hasMaterialDepth(row)) return { error: 'Depth requires an area coverage row measured in CY.' };
+  if (!String(input).trim() || !Number.isFinite(depth) || depth <= 0 || !Number.isFinite(per) || per <= 0)
+    return { error: 'Enter a depth greater than zero in inches.' };
+  return { patch: { per } };
 }
 
 export function materialDraftError(row) {

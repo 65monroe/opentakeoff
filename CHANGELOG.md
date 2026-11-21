@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Edit uniform area-material depth directly in inches in **Area assembly → Edit material**. CY preview and saved quantities use the existing SF-per-CY rule; zero, negative, blank and nonfinite depths cannot be saved. No new persisted field, measurement, plant count or review change. See the [public depth tests](docs/evidence/area-assembly-depth/README.md).
+
 - Add an **Area assembly** view in Work and review. Edit existing material rows with preview, Save and Cancel; keep linked printed EA and derived LF accessible from the same bed panel. Source/run navigation keeps the bed context. Shared conditions and material families stay in the condition editor. Existing quantities, geometry and review states do not change by opening the panel. See the [public bed evidence](docs/evidence/area-assembly-panel/README.md).
 
 - Support rectangular Area grid count layouts with separate X/Y pitches, including nominal 2-by-4 ceiling tiles. Full tiles and connected edge cuts use the same rectangular lattice in the browser and MCP. Existing square layouts and takeoff records remain unchanged until an explicit grid edit. Public A111 examples compare both orientations against independent arithmetic; the [actual AM3.10 2-by-4 grid](docs/evidence/area-grid-actual-2x4/README.md) also verifies source alignment, 78 full / 42 cut pieces, Show on plan and save/reopen. Purchasing, joints and offcut reuse remain outside scope.

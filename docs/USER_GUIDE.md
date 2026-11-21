@@ -312,7 +312,15 @@ rule, rate, unit, rounding, waste or note. **Preview** uses the same calculation
 as the report. Click **Save material** to update that row or **Cancel** to discard
 the draft. For example, 4 inches of a uniform layer is 1 CY per 81 SF; the
 equivalent depth shown beside the total is a conversion of that rate, not a
-specification read from the plan. Update the name and note when changing a rate.
+specification read from the plan. For an area coverage row measured in CY,
+enter **Depth (in)** directly: `CY = SF × depth / 324`. The field updates the
+existing rate (`per = 324 / depth`); changing that rate also updates the depth
+display. Fractions such as 2.5 inches work. Blank, zero, negative or nonfinite
+depths withhold the preview and disable Save. Existing multiplier, material
+waste and package rounding still apply. No separate depth field is saved.
+Update the material name and source note when changing a depth or rate; these
+free-text labels are not automatically rewritten. **Cancel** keeps the original
+row. Other units and count/linear rules keep their existing rate editor.
 
 Expand **Saved assemblies** to save or apply the existing material recipe.
 Matching material names are skipped on repeat application. Recipes travel in

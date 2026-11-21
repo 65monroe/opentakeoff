@@ -1,27 +1,41 @@
 import { useState } from 'react';
 import { localizeText as uiText } from '../lib/i18n/core.js';
-import { areaAssembly, materialDraftError, materialDraftPatch } from '../lib/areaAssembly.js';
+import { areaAssembly, hasMaterialDepth, materialDepthInches, materialDepthEdit, materialDraftError, materialDraftPatch } from '../lib/areaAssembly.js';
 import { conditionTotals } from '../lib/totals.js';
 import { workReviewState } from '../lib/workReview.js';
 import { AssemblyBar, MaterialsEditor, useAssemblyLibrary } from './TakeoffsPanel.jsx';
 
 function MaterialRow({ row, condition, shapes, disabled, onSave }) {
   const [draft, setDraft] = useState(null);
+  const [depthInput, setDepthInput] = useState(null);
   const { material, total, depth } = row;
-  const error = draft ? materialDraftError(draft) : '';
+  const depthError = draft && depthInput !== null ? materialDepthEdit(draft, depthInput).error : '';
+  const error = depthError || (draft ? materialDraftError(draft) : '');
   const patch = draft ? materialDraftPatch(material, draft) : {};
-  const preview = draft && conditionTotals([{ ...condition, materials: [draft] }], shapes)[0].materials[0];
+  const preview = draft && !error && conditionTotals([{ ...condition, materials: [draft] }], shapes)[0].materials[0];
+  const updateDraft = fields => {
+    setDraft(d => ({ ...d, ...fields }));
+    if (['per', 'basis', 'unit', 'rule'].some(key => key in fields)) setDepthInput(null);
+  };
+  const startEdit = () => { setDraft(structuredClone(material)); setDepthInput(null); };
   return <article className="area-assembly-row" aria-label={material.name || uiText('Unnamed material')}>
     <div className="area-assembly-readout"><strong>{material.name || uiText('Unnamed material')}</strong><strong className="workspace-quantity">{total ? `${total.qty} ${total.unit}` : uiText('Not figured')}</strong></div>
     {depth !== null && <p>{uiText('Equivalent uniform depth')} · {Number(depth.toFixed(4))} {uiText('in')}</p>}
     {draft ? <div className="area-material-draft">
-      <MaterialsEditor materials={[draft]} onUpdate={(_id, fields) => setDraft(d => ({ ...d, ...fields }))} />
+      {hasMaterialDepth(draft) && <label>{uiText('Depth (in)')}<input name="material-depth-in" type="number" min="0" step="any"
+        value={depthInput ?? (materialDepthInches(draft) ?? '')} onChange={e => {
+          const value = e.target.value, change = materialDepthEdit(draft, value);
+          setDepthInput(value);
+          if (change.patch) setDraft(d => ({ ...d, ...change.patch }));
+        }} /></label>}
+      {hasMaterialDepth(draft) && <p>{uiText('CY = area SF × depth in inches ÷ 324. Existing multiplier, material waste and rounding still apply.')}</p>}
+      <MaterialsEditor materials={[draft]} onUpdate={(_id, fields) => updateDraft(fields)} />
       <p>{uiText('Preview')} · {preview ? `${preview.qty} ${preview.unit}` : uiText('Not figured')}</p>
-      <p>{uiText('Keep the material name and source note consistent with any changed rate. A coverage edit does not change measured SF, EA or LF.')}</p>
+      <p>{uiText('Keep the material name and source note consistent with any changed depth or rate. Labels and source notes are not rewritten. Measured SF, EA and LF stay unchanged.')}</p>
       {error && <p role="alert">{uiText(error)}</p>}
       <div className="area-assembly-actions"><button type="button" disabled={disabled || !!error || !Object.keys(patch).length} onClick={() => { onSave(material.id, patch); setDraft(null); }}>{uiText('Save material')}</button><button type="button" onClick={() => setDraft(null)}>{uiText('Cancel')}</button></div>
     </div> : <div className="area-assembly-actions">
-      <button type="button" disabled={disabled} onClick={() => setDraft(structuredClone(material))}>{uiText('Edit material')}</button>
+      <button type="button" disabled={disabled} onClick={startEdit}>{uiText('Edit material')}</button>
       {material.note && <details><summary>{uiText('Source and calculation')}</summary><p>{material.note}</p></details>}
     </div>}
   </article>;
