@@ -19,6 +19,9 @@ the source hash, seven boundary vertices and calibration. The same northwest
 bay is reused; it is not retraced. The legend permits existing 2-by-2 or 2-by-4
 grid; the prior trace inferred 2-by-2 from this bay's lines. **The new 2-by-4
 layouts are assumed alternatives, not a claim that this bay specifies them.**
+The follow-up [MCP source-alignment test](../area-grid-source/README.md) reads
+the actual bay grid and records an unapplied square-layout suggestion; it does
+not change either rectangular example.
 Tile face dimensions and joints remain unverified. Scale stays agent-set and
 unconfirmed. Origin, one-foot shifts and zero clearance stay fixed in both
 alternatives; only the stated pattern, Y pitch, depth and angle change.

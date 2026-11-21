@@ -1,0 +1,153 @@
+{
+  "status": "unapplied source-alignment suggestion; module specification still requires review",
+  "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+  "condition_id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+  "source": {
+    "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+    "page": 1,
+    "frame_px": [
+      5184,
+      3456
+    ],
+    "coordinates": "full-sheet image pixels, top left origin, y down",
+    "candidate_selection": "Analyst-selected pen bucket 1, luminance 216, no curve/clip/fill flags, midpoint inside existing bay",
+    "candidate_indices": [
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88
+    ],
+    "vectors_returned": 267,
+    "page_image_area_fraction": 0.01632019238325903,
+    "image_check": "The page has a small image area. The bay strokes are present as repeated raw PDF vectors and were visually checked against view_sheet."
+  },
+  "fit": {
+    "angle_deg": 0,
+    "tolerance_px": 0.3,
+    "x": {
+      "positions_px": [
+        1883.76,
+        1901.76,
+        1919.76,
+        1937.76,
+        1955.76,
+        1973.76,
+        1991.76,
+        2009.52,
+        2027.52
+      ],
+      "pitch_px": 18,
+      "anchor_px": 1883.76,
+      "line_count": 9,
+      "max_residual_px": 0.24
+    },
+    "y": {
+      "positions_px": [
+        197.28,
+        215.28,
+        233.28,
+        251.28,
+        269.28,
+        287.28,
+        305.28
+      ],
+      "pitch_px": 18,
+      "anchor_px": 197.28,
+      "line_count": 7,
+      "max_residual_px": 0
+    }
+  },
+  "suggested_layout": {
+    "pattern": "square",
+    "angle_deg": 0,
+    "spacing_ft": 2,
+    "spacing_y_ft_for_comparison_only": 2,
+    "origin_px": [
+      1883.76,
+      197.28
+    ],
+    "origin_norm": [
+      0.3633796296296296,
+      0.05708333333333333
+    ],
+    "offset_x_ft": 1,
+    "offset_y_ft": 1,
+    "offset_basis": "Module centers, half a pitch from the observed edge lines, relative to the unchanged origin"
+  },
+  "line_agreement": {
+    "drawn_square": {
+      "x": 9,
+      "y": 7,
+      "total": 16
+    },
+    "alternative_2_by_4_at_0": [
+      {
+        "parity": 0,
+        "x": 9,
+        "y": 4,
+        "total": 16
+      },
+      {
+        "parity": 1,
+        "x": 9,
+        "y": 3,
+        "total": 16
+      }
+    ],
+    "alternative_2_by_4_at_90": [
+      {
+        "parity": 0,
+        "x": 5,
+        "y": 7,
+        "total": 16
+      },
+      {
+        "parity": 1,
+        "x": 4,
+        "y": 7,
+        "total": 16
+      }
+    ]
+  },
+  "caveats": [
+    "The legend permits 2-by-2 or 2-by-4. Repeated lines support a 2-foot square drawn grid; they do not establish a tile procurement specification.",
+    "Square geometry is unchanged at 90 degrees. Main-runner direction is not established.",
+    "Scale is agent-set and unconfirmed. Pixel pitch is observed; feet depend on that calibration.",
+    "Source X positions include a 0.24-pixel deviation (0.32 inch at the saved scale); the fitted lattice is an approximation.",
+    "No search for a target quantity, fewer cuts, best purchasing result or approval is performed."
+  ],
+  "preservation": {
+    "complete_project_equal": true,
+    "project_json_sha256": "de5242d1fbe27b767e70a2c0a0e5c5fd119bbd721b96cef45e0a6165157af589",
+    "shapes": 1,
+    "conditions": 1,
+    "stored_quantity": {
+      "area_sf": 175.73,
+      "perimeter_lf": 60.4
+    },
+    "review": {
+      "method": "manual",
+      "actor": "agent",
+      "reviewed": false,
+      "assignment": {
+        "source": "asserted"
+      },
+      "agent_edits": 1
+    },
+    "grid_configuration_unchanged": true,
+    "new_measurements": 0,
+    "new_approvals": 0
+  }
+}

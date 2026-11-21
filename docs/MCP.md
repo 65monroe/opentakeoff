@@ -49,6 +49,16 @@ For a rectangular lattice use `pattern: "rectangular"`, `spacing_ft` for X pitch
 and required `spacing_y_ft` for Y pitch. Both pitches are in grid-local feet;
 `angle_deg` rotates both. Omit `spacing_y_ft` for other patterns. Existing square
 and triangular records keep their exact behavior without migration.
+
+To investigate the drawn grid before editing, use `get_sheet_vectors`,
+`read_sheet_text` and an unmarked `view_sheet` crop. Raw strokes require agent
+interpretation; there is no automatic ceiling orientation/offset reader. Fit
+the source lines first, then convert edge positions to center offsets relative
+to the existing origin. Keep an uncertain suggestion separate from saved
+`area_grid` settings. The [public A111 read-only example](evidence/area-grid-source/README.md)
+shows a square drawn grid and explains why its legend does not select either
+2-by-4 alternative. Do not select orientation or phase by desired quantities.
+
 Set optional `area_grid.cut_pieces: true` to clip contiguous square or rectangular
 modules to the outline and holes. Use square or rectangular pattern, zero
 clearance and footprint width/depth matching X/Y pitch. For 2-by-4 tiles use

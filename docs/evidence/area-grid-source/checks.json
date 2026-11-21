@@ -1,0 +1,75 @@
+{
+  "date": "2026-11-21",
+  "timezone": "America/New_York",
+  "branch": "codex/area-grid-count",
+  "runtime_source_commit": "0b1afcc5a83163c3cad9a62a224c0a38dd1f2f40",
+  "scope": "Read-only MCP source experiment plus documentation. No application, schema, suite or runtime change. Fork only; no new PR, issue, comment, merge or deployment.",
+  "runtime": {
+    "node": "24.22.3",
+    "mcp": "Local server source, actual SDK stdio transport: node --import tsx server.ts in mcp/",
+    "mcp_version": "0.9.117",
+    "browser": "Not accessed or modified by this experiment",
+    "source_pdf": "demo/public-sheets/mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+    "source_pdf_sha256": "e9f66a799fdf094ff7b3d43f79acc8d0af9cf53773e992d451f97ddceed91ad3"
+  },
+  "checks": [
+    {
+      "command": "node docs/evidence/area-grid-source/replay.mjs tmp/area-grid-source-final",
+      "result": "pass",
+      "evidence": "transcript.json",
+      "notes": "Actual MCP raw source read: 267 bay strokes, 0 dropped; 9 neighboring gypsum strokes. Full imported/before/after equality. No editing or approval calls."
+    },
+    {
+      "command": "node docs/evidence/area-grid-source/analyze.mjs tmp/area-grid-source-final",
+      "result": "pass",
+      "evidence": "suggestion.json",
+      "notes": "Analyst-selected source family; evidence-only fit. 9 vertical plus 7 horizontal lines; median 18 px pitch, 0 degrees; 1 ft X/Y center offsets; maximum residual 0.24 px."
+    },
+    {
+      "command": "node --test docs/evidence/area-grid-source/verify.test.mjs",
+      "result": "pass",
+      "passed": 8,
+      "failed": 0,
+      "notes": "Exact public source assertions, center/edge distinction, alternative layouts, real gypsum negative case, wrong phase, shifted/missing line refusals, rotated rectangular synthetic fixture and full project equality."
+    },
+    {
+      "command": "npm run check --prefix web",
+      "result": "pass",
+      "tests": 3858,
+      "passed": 3854,
+      "skipped": 4,
+      "failed": 0,
+      "notes": "Typecheck, lint, tests, benchmark, build and OCR distribution gate passed. Existing warnings remain. Reused the installed dependency tree; no lockfile or dependency change."
+    },
+    {
+      "command": "npm run check --prefix protocol",
+      "result": "pass",
+      "passed": 64,
+      "failed": 0,
+      "notes": "11 schemas and 16 transport cases checked."
+    },
+    {
+      "command": "npm run check:tool-count --prefix mcp",
+      "result": "pass",
+      "notes": "71 default, 73 gated, 22 setup; versions and runtime schema inventory agree."
+    },
+    {
+      "command": "npm run check:wiki --prefix mcp",
+      "result": "pass",
+      "notes": "11 public wiki pages agree with source."
+    },
+    {
+      "command": "node docs/evidence/area-grid-source/verify.test.mjs tmp/area-grid-source-final",
+      "result": "pass",
+      "passed": 8,
+      "failed": 0,
+      "notes": "The same expectations also pass against the fresh replay output, independently of the committed fixtures."
+    },
+    {
+      "command": "node scripts/check-doc-links.mjs",
+      "result": "pass",
+      "notes": "49 registered documents checked; local relative paths and anchors resolve."
+    }
+  ],
+  "disclosure": "Previous public source and layouts were already seen. Fresh vectors were read for the fit; saved angle/pitch/offset did not seed it. No CLG skills or memory, private plans/catalogs, or external takeoff scripts. This is not a blind takeoff or a native automatic detector. Local checks do not establish human approval or GitHub CI."
+}
