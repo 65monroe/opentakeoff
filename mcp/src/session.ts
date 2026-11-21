@@ -16,6 +16,7 @@ import { buildSheetGraph, resolveTag, classifySheetRole, rowKeyAnswersFor, type 
 import { UserError, round1, round2 } from "./format.ts";
 import { calloutQuantityError, calloutAreaError } from "../../web/src/lib/calloutQuantity.js";
 import { areaGrid, areaGridError, withAreaGrid } from "../../web/src/lib/areaGrid.js";
+import { areaGridCuts } from "../../web/src/lib/areaGridCuts.js";
 // Condition twins — the inheritance rule, shared with the canvas so a headless session and
 // the app can never disagree about what a twin holds (web/test/variants.test.ts).
 import {
@@ -383,7 +384,7 @@ export interface Shape {
   /** The single vertex locates printed source text, not an installed item. */
   quantity_source?: { kind: "printed_callout"; unit: "EA"; id: string; text: string; reference: string };
   source_callout_ids?: string[];
-  area_grid?: {source_callout_id?:string;single_item:true;spacing_ft:number;pattern:'square'|'triangular';angle_deg:number;inset_ft:number;offset_x_ft:number;offset_y_ft:number;origin_norm:[number,number];reference:string;footprint?:({kind:'circle';diameter_ft:number}|{kind:'rectangle';width_ft:number;depth_ft:number}) & {basis:'assumed'|'specified';reference:string}};
+  area_grid?: {source_callout_id?:string;single_item:true;spacing_ft:number;pattern:'square'|'triangular';angle_deg:number;inset_ft:number;offset_x_ft:number;offset_y_ft:number;origin_norm:[number,number];reference:string;cut_pieces?:boolean;footprint?:({kind:'circle';diameter_ft:number}|{kind:'rectangle';width_ft:number;depth_ft:number}) & {basis:'assumed'|'specified';reference:string}};
   planting_grid?: {source_callout_id:string;single_species:true;spacing_ft:number;pattern:'square'|'triangular';angle_deg:number;inset_ft:number;offset_x_ft:number;offset_y_ft:number;origin_norm:[number,number];reference:string};
   /** surface_area only: the height this shape was quantified at (canvas
    * commitSurface snapshots the condition's H onto the shape). */
@@ -4833,10 +4834,12 @@ export class Session {
       const sheet=this.sheet(cur.sheet_id);
       const grid=areaGrid(next,{widthPx:sheet.widthPx,heightPx:sheet.heightPx,upp:sheet.upp});
       if (grid.error) throw new UserError(grid.error);
+      const cuts=areaGridCuts(next,{widthPx:sheet.widthPx,heightPx:sheet.heightPx,upp:sheet.upp});
+      if (cuts?.error) throw new UserError(cuts.error);
       const before=structuredClone(cur);
       this.shapes[i]=next;
       this.record({op:'edit',tool:'edit_shape',before});
-      return {shape_id:id,changed:[key,...(key==='area_grid' && cur.planting_grid !== undefined ? ['planting_grid'] : [])],measure_role:cur.measure_role,nverts:cur.verts_norm.length,...cur.computed,...(cur.label?{label:cur.label}:{}),agent_edits:cur.origin?.agent_edits ?? 0,...(grid.count!==null?{grid_count:grid.count}:{})};
+      return {shape_id:id,changed:[key,...(key==='area_grid' && cur.planting_grid !== undefined ? ['planting_grid'] : [])],measure_role:cur.measure_role,nverts:cur.verts_norm.length,...cur.computed,...(cur.label?{label:cur.label}:{}),agent_edits:cur.origin?.agent_edits ?? 0,...(grid.count!==null?{grid_count:grid.count}:{}),...(cuts?{grid_cuts:{full_tiles:cuts.full_tiles,cut_cells:cuts.cut_cells,edge_cut_pieces:cuts.edge_cut_pieces,covered_sf:cuts.covered_sf,full_sf:cuts.full_sf,cut_sf:cuts.cut_sf}}:{})};
     }
     if (patch.verts === undefined && patch.condition === undefined && patch.role === undefined && patch.label === undefined && patch.rise_ft === undefined && patch.drop_ft === undefined && patch.source_callout_ids === undefined) {
       throw new UserError("Nothing to change — pass at least one of verts, condition, role, label, rise_ft, drop_ft, source_callout_ids, area_grid.");

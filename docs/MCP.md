@@ -45,8 +45,20 @@ The source basis is not approval. Compare alternative patterns only as stated
 assumptions when the drawing does not specify one; numerical closeness alone
 does not select a pattern.
 
+Set optional `area_grid.cut_pieces: true` to clip contiguous square modules to
+the outline and holes. Use square pattern, zero clearance and rectangle width
+and depth equal to spacing. The returned `grid_cuts` separates `full_tiles`,
+`cut_cells`, `edge_cut_pieces`, `full_sf`, `cut_sf` and `covered_sf`. A cut cell
+can yield multiple disconnected pieces; a hole within one connected piece does
+not make it two pieces. All intersecting cells are considered, including those
+whose centers fall outside. `grid_count` retains its previous center semantics.
+Invalid topology and more than 2,500 candidates refuse without mutation. The
+browser and `view_sheet` show clipped cuts; marked-PDF/report exports still omit
+the grid analysis. These are nominal modules, not purchase counts; separate
+joints, waste and offcut reuse remain outside this calculation.
+
 View the overlay and reopen the editable export. Do not claim inferred sizing,
-cut-piece quantities or code compliance. Mixed planting beds require verified
+purchase quantities or code compliance. Mixed planting beds require verified
 species subareas. Static marked-PDF and report exports omit the grid comparison.
 See the [public example and reproduction](evidence/area-grid-count/README.md).
 

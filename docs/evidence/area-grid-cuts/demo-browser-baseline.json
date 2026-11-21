@@ -1,0 +1,93 @@
+{
+  "schema": "opentakeoff.takeoff_canvas.v1",
+  "project_name": "",
+  "sheets": [
+    {
+      "sheet_id": "sample-finish-plan.pdf",
+      "units_per_px": 0.05555555555555555,
+      "scale_source": "detected",
+      "scale_confirmed": false
+    }
+  ],
+  "conditions": [
+    {
+      "id": "cnd-da707523-8179-44bb-bc98-f08842c22cda",
+      "created_at": "2026-11-21T03:02:41.738Z",
+      "finish_tag": "DEMO-SUPPORT-LAYOUT",
+      "color": "#c96442",
+      "fill": "#c96442",
+      "hatch": "diag",
+      "multiplier": 1,
+      "waste_pct": 0,
+      "materials": []
+    }
+  ],
+  "shapes": [
+    {
+      "id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+      "sheet_id": "sample-finish-plan.pdf",
+      "condition_id": "cnd-da707523-8179-44bb-bc98-f08842c22cda",
+      "measure_role": "floor_area",
+      "verts_norm": [
+        [
+          0.35714285714285715,
+          0.17222222222222222
+        ],
+        [
+          0.40476190476190477,
+          0.17222222222222222
+        ],
+        [
+          0.40476190476190477,
+          0.20555555555555555
+        ],
+        [
+          0.35714285714285715,
+          0.20555555555555555
+        ]
+      ],
+      "computed": {
+        "area_sf": 128,
+        "perimeter_lf": 48
+      },
+      "origin": {
+        "method": "manual",
+        "actor": "agent",
+        "reviewed": false,
+        "assignment": {
+          "source": "asserted"
+        },
+        "agent_edits": 1
+      },
+      "label": "Assumed layout zone; not specified work",
+      "area_grid": {
+        "spacing_ft": 4,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 2,
+        "offset_y_ft": 2,
+        "origin_norm": [
+          0.35714285714285715,
+          0.17222222222222222
+        ],
+        "reference": "Bundled AF101 demonstration only: assumed 4 ft support grid, 2 ft shifts, 0 deg, no edge clearance; no such support work specified by this finish plan.",
+        "single_item": true,
+        "footprint": {
+          "kind": "rectangle",
+          "width_ft": 4,
+          "depth_ft": 4,
+          "basis": "assumed",
+          "reference": "Bundled finish-plan demonstration only: nominal 4-foot square module at existing support grid spacing; not specified work."
+        }
+      }
+    }
+  ],
+  "markups": [],
+  "rfis": [],
+  "sheet_group": [],
+  "last_group": [],
+  "sheet_tabs": [
+    "sample-finish-plan.pdf"
+  ]
+}

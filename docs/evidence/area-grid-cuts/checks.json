@@ -1,0 +1,45 @@
+{
+  "date": "2026-11-20",
+  "timezone": "America/New_York",
+  "branch": "codex/area-grid-count",
+  "base_commit": "e3bfef0578de4ea4f73138a504a1f239597f9953",
+  "scope": "Local checks and public-plan browser evidence; no upstream PR or deployment. No claim about GitHub CI or human approval.",
+  "node": "24.22.3",
+  "browser": {
+    "surface": "Codex in-app browser, tab 6",
+    "url": "http://127.0.0.1:5200/",
+    "build": "Vite production preview from the checked local branch",
+    "entry": "web/dist/assets/index-DlIorEuN.js",
+    "entry_sha256": "a01a69e369c120405effe540e87467e5639da9992d72ef0c846667c2e39b10d1",
+    "checks": [
+      "Public A111: enable, Save grid, Show on plan, inspect full/cut outlines and cut schedule",
+      "Public A111: Undo restores the complete pre-edit browser JSON",
+      "Public A111: archive export/reopen preserves complete JSON, including cut option",
+      "Bundled AF101: enable, save, Show on plan, archive export/reopen preserves complete JSON",
+      "Unsupported depth unequal to spacing disables Save grid; restored without mutation",
+      "Original public SET browser workspace restored exactly from backup"
+    ],
+    "screenshots": ["ceiling-cut-controls.jpg", "ceiling-summary.jpg", "ceiling-cut-schedule.jpg", "ceiling-reopened.jpg", "unsupported-layout.jpg", "demo-reopened.jpg"],
+    "recording": "public-cut-flow.gif",
+    "recording_metadata": "recording.json"
+  },
+  "checks": [
+    {"command": "npm ci --prefix web --no-audit --no-fund", "result": "pass"},
+    {"command": "npm run check --prefix web", "result": "pass", "tests": 3855, "passed": 3851, "skipped": 4, "failed": 0, "notes": "Typecheck, lint, tests, benchmark, build and OCR distribution check passed; three existing lint warnings and existing large-chunk build warning."},
+    {"command": "npm run typecheck --prefix mcp", "result": "pass"},
+    {"command": "npm test --prefix mcp", "result": "pass", "tests": 336, "passed": 335, "skipped": 1, "failed": 0, "notes": "Final full run after wiki regeneration, with loopback and temporary-junction access. Initial sandbox run hit environment refusals and a stale wiki digest."},
+    {"command": "npm run check --prefix protocol", "result": "pass", "tests": 64, "passed": 64, "failed": 0, "schemas": 11, "transport_cases": 16},
+    {"command": "npm run check:tool-count --prefix mcp", "result": "pass", "default_tools": 71, "gated_tools": 73, "setup_tools": 22},
+    {"command": "npm run build --prefix mcp", "result": "pass", "notes": "Includes protocol-resource and wiki freshness checks."},
+    {"command": "npm run smoke:dist --prefix mcp", "result": "pass", "notes": "Packaged stdio server: flat 71 tools, staged 23 tools, 11 protocol schemas and 11 wiki pages."},
+    {"command": "node docs/evidence/area-grid-cuts/replay.mjs /absolute/path/output", "result": "pass", "notes": "Actual MCP stdio replay; complete transcript committed with local paths redacted."},
+    {"command": "node docs/evidence/area-grid-cuts/verify.mjs", "result": "pass", "notes": "Independent expected cells and areas; exact browser Undo, save/reopen and original public workspace restoration."},
+    {"command": "node scripts/check-doc-links.mjs", "result": "pass", "notes": "49 files; every relative path and anchor resolves."},
+    {"command": "git diff --check", "result": "pass"}
+  ],
+  "public_ceiling": {"full_tiles": 31, "cut_cells": 32, "edge_cut_pieces": 32, "covered_sf": 175.72693333333333, "unchanged_centers": 45, "unchanged_stored_sf": 175.73},
+  "bundled_sample": {"full_tiles": 8, "edge_cut_pieces": 0, "covered_sf": 128, "basis": "Assumed 4-foot square demonstration module, not specified work"},
+  "preservation": "Only area_grid.cut_pieces is added to each test record. Existing IDs, source geometry, stored quantities, calibration, sources and review decisions remain identical. No approvals created.",
+  "independence": "No CLG skills or memory. Existing disclosed public traces and footprint evidence intentionally reused; this is not a blind takeoff.",
+  "limits": "Nominal contiguous square modules only. Counts are layout pieces, not purchased tiles. Actual face size, joints, offcut reuse, waste and fabrication requirements remain unverified or unsupported. Static marked-PDF and quantity reports omit derived cuts."
+}

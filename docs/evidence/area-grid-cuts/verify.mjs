@@ -1,0 +1,30 @@
+import assert from 'node:assert/strict';
+import {readFileSync} from 'node:fs';
+import {areaGridCuts} from '../../../web/src/lib/areaGridCuts.js';
+import {areaGrid} from '../../../web/src/lib/areaGrid.js';
+const read=name=>JSON.parse(readFileSync(new URL(name,import.meta.url),'utf8'));
+const before=read('ceiling-before.json'),after=read('ceiling-cuts.json');
+const copy=structuredClone(after);delete copy.shapes[0].area_grid.cut_pieces;
+assert.deepEqual(copy,before,'Only the cut calculation flag changes in MCP');
+for(const key of ['shapes','conditions','sheets'])assert.deepEqual(before[key],read('../area-grid-footprints/ceiling-after-reopen.json')[key]);
+assert.deepEqual(read('ceiling-undo.json'),before);
+const expected=read('expected.json'),frame={widthPx:5184,heightPx:3456,upp:after.sheets[0].units_per_px};
+const calc=areaGridCuts(after.shapes[0],frame);
+assert.equal(calc.error,null);assert.equal(calc.full_tiles,31);assert.equal(calc.cut_cells,32);assert.equal(calc.edge_cut_pieces,32);
+assert.equal(areaGrid(after.shapes[0],frame).count,45);
+assert.deepEqual(calc.cells.map(c=>[c.key,c.kind]),expected.cells.map(c=>[c.key,c.kind]));
+calc.cells.forEach((c,i)=>assert.ok(Math.abs(c.area_sf-expected.cells[i].area_sf)<1e-8));
+assert.ok(Math.abs(calc.covered_sf-expected.covered_sf)<1e-8);
+assert.deepEqual(calc,read('ceiling-calculation.json'));
+for(const prefix of ['ceiling','demo']){
+ const baseline=read(`${prefix}-browser-baseline.json`),saved=read(`${prefix}-before-reopen.json`),reopened=read(`${prefix}-after-reopen.json`);
+ assert.deepEqual(saved,reopened,`${prefix}: exact browser archive reopen`);
+ const stripped=structuredClone(saved);delete stripped.shapes[0].area_grid.cut_pieces;
+ assert.deepEqual(stripped,baseline,`${prefix}: no record, quantity or review mutation`);
+}
+assert.deepEqual(read('ceiling-browser-undo.json'),read('ceiling-browser-baseline.json'));
+assert.deepEqual(read('live-restored.json'),read('live-baseline.json'),'Complete original browser SET project restored');
+const demo=read('demo-after-reopen.json');
+assert.equal(areaGridCuts(demo.shapes[0],{widthPx:6048,heightPx:4320,upp:demo.sheets[0].units_per_px}).full_tiles,8);
+assert.equal(demo.shapes[0].computed.area_sf,128);
+console.log('PASS: 31 full tiles + 32 edge cut pieces agree cell by cell with independent oracle; same 45 centers and 175.73 SF. Existing ceiling IDs, geometry, quantities and reviews preserved. Exact browser Undo/reopen and complete live SET restoration. Bundled 128 SF example: eight full modules.');

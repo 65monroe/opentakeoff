@@ -23,6 +23,17 @@ test('MCP overlay draws physical footprints at the same grid centers without cli
   assert.deepEqual(paths[1],[[-140,20],[460,20],[460,320],[-140,320]],'4-by-2-ft footprint at the center; full extent remains visible beyond the 2-by-2-ft area');
 });
 
+test('MCP cut overlay separates full modules and clipped pieces with dash cues',()=>{
+  const paths:{points:number[][],dash:number[]}[]=[];let path:number[][]=[],dash:number[]=[];
+  const ctx={strokeStyle:'',fillStyle:'',lineWidth:0,font:'',beginPath(){path=[];},moveTo(x:number,y:number){path.push([x,y]);},lineTo(x:number,y:number){path.push([x,y]);},closePath(){},stroke(){paths.push({points:path,dash});},setLineDash(v:number[]){dash=v;},fillText(){}};
+  const shape:any={id:'same',sheet_id:'s',condition_id:'ACT',measure_role:'floor_area',verts_norm:[[0,0],[1,0],[1,1],[0,1]],computed:{area_sf:9},area_grid:{single_item:true,spacing_ft:2,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:1,offset_y_ft:1,origin_norm:[0,0],reference:'Test',cut_pieces:true,footprint:{kind:'rectangle',width_ft:2,depth_ft:2,basis:'assumed',reference:'Test'}}};
+  drawShapes(ctx,(x,y)=>[x,y],[shape],300,300,300,.01);
+  assert.equal(paths.length,5,'one source boundary, one full tile and three cut pieces');
+  assert.equal(paths.slice(1).filter(p=>p.dash.length===0).length,1);
+  assert.equal(paths.slice(1).filter(p=>p.dash.length>0).length,3);
+  assert.ok(paths.every(p=>p.points.every(([x,y])=>x>=0&&y>=0&&x<=300&&y<=300)),'cuts stay within source boundary');
+});
+
 test("auto: reciprocal of the sheet's upp; refused until the scale is set", () => {
   const fromAuto = gridPxPerFoot("auto", 1 / 36);
   assert.ok(fromAuto !== null && Math.abs(fromAuto - 36) < 1e-9, "auto agrees with the 1/4\" drawing scale");

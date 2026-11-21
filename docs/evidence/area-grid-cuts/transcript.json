@@ -1,0 +1,893 @@
+[
+  {
+    "tool": "load_plan",
+    "args": {
+      "path": "<REPO>\\demo\\public-sheets\\mo-veterans-home-A111-reflected-ceiling-plan.pdf"
+    },
+    "result": {
+      "file": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "files": [
+        "mo-veterans-home-A111-reflected-ceiling-plan.pdf"
+      ],
+      "page_count": 1,
+      "sheets": [
+        {
+          "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "page": 1,
+          "width_pt": 2592,
+          "height_pt": 1728,
+          "width_px": 5184,
+          "height_px": 3456,
+          "sheet_number": "A111",
+          "detected_scale": "1/16\" = 1'-0\""
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "import_takeoff",
+    "args": {
+      "path": "<REPO>\\docs\\evidence\\area-grid-footprints\\ceiling-after-reopen.json"
+    },
+    "result": {
+      "file": "ceiling-after-reopen.json",
+      "replaced": true,
+      "shapes_added": 1,
+      "shapes_pending": 1,
+      "conditions_merged": 0,
+      "conditions_added": 1,
+      "scales_adopted": 1,
+      "unknown_files": [],
+      "rules_imported": 0,
+      "shapes_total": 1,
+      "note": "Empty session — the import IS the takeoff now. Unreviewed machine shapes stay pencil; verify with view_sheet overlay:true."
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<REPO>\\tmp\\area-grid-cuts\\replay\\ceiling-before.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "units_per_px": 0.1111111111111111,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "created_at": "2026-11-21T03:35:28.421Z",
+          "finish_tag": "ACT-EXISTING-TEST",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "condition_id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.3614351851851852,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.07645833333333334
+            ],
+            [
+              0.36856481481481485,
+              0.066875
+            ],
+            [
+              0.3614351851851852,
+              0.066875
+            ]
+          ],
+          "computed": {
+            "area_sf": 175.73,
+            "perimeter_lf": 60.4
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "Northwest bay, northern wing; existing ceiling footprint test",
+          "area_grid": {
+            "spacing_ft": 2,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 1,
+            "offset_y_ft": 1,
+            "origin_norm": [
+              0.3633796296296296,
+              0.05708333333333333
+            ],
+            "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.",
+            "single_item": true,
+            "footprint": {
+              "kind": "rectangle",
+              "width_ft": 2,
+              "depth_ft": 2,
+              "basis": "assumed",
+              "reference": "Nominal 2-by-2-foot module inferred from this drawn grid; A111 legend allows 2-by-2 or 2-by-4. Physical tile face and joint dimensions unverified."
+            }
+          }
+        }
+      ],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "takeoff_summary",
+    "args": {},
+    "result": {
+      "conditions": [
+        {
+          "id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "finish_tag": "ACT-EXISTING-TEST",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 1,
+          "floor_sf": 175.73,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 0,
+          "total_sf": 175.73,
+          "floor_sf_net": 175.73,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 175.73,
+          "sy_net": 19.53
+        }
+      ],
+      "totals": {
+        "total_sf": 175.73,
+        "total_sf_net": 175.73,
+        "lf": 0,
+        "lf_net": 0,
+        "ea": 0,
+        "sy_net": 19.53
+      },
+      "shared_floor_sf": 0,
+      "scale_unconfirmed": [
+        "mo-veterans-home-A111-reflected-ceiling-plan.pdf"
+      ]
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "area_grid": {
+        "spacing_ft": 2,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 1,
+        "offset_y_ft": 1,
+        "origin_norm": [
+          0.3633796296296296,
+          0.05708333333333333
+        ],
+        "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.",
+        "single_item": true,
+        "footprint": {
+          "kind": "rectangle",
+          "width_ft": 2,
+          "depth_ft": 2,
+          "basis": "assumed",
+          "reference": "Nominal 2-by-2-foot module inferred from this drawn grid; A111 legend allows 2-by-2 or 2-by-4. Physical tile face and joint dimensions unverified."
+        },
+        "cut_pieces": true
+      }
+    },
+    "result": {
+      "shape_id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "changed": [
+        "area_grid"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 7,
+      "area_sf": 175.73,
+      "perimeter_lf": 60.4,
+      "label": "Northwest bay, northern wing; existing ceiling footprint test",
+      "agent_edits": 1,
+      "grid_count": 45,
+      "grid_cuts": {
+        "full_tiles": 31,
+        "cut_cells": 32,
+        "edge_cut_pieces": 32,
+        "covered_sf": 175.7269333333335,
+        "full_sf": 124,
+        "cut_sf": 51.72693333333351
+      }
+    }
+  },
+  {
+    "tool": "takeoff_summary",
+    "args": {},
+    "result": {
+      "conditions": [
+        {
+          "id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "finish_tag": "ACT-EXISTING-TEST",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "shape_count": 1,
+          "floor_sf": 175.73,
+          "wall_sf": 0,
+          "border_sf": 0,
+          "lf": 0,
+          "ea": 0,
+          "total_sf": 175.73,
+          "floor_sf_net": 175.73,
+          "wall_sf_net": 0,
+          "border_sf_net": 0,
+          "lf_net": 0,
+          "total_sf_net": 175.73,
+          "sy_net": 19.53
+        }
+      ],
+      "totals": {
+        "total_sf": 175.73,
+        "total_sf_net": 175.73,
+        "lf": 0,
+        "lf_net": 0,
+        "ea": 0,
+        "sy_net": 19.53
+      },
+      "shared_floor_sf": 0,
+      "scale_unconfirmed": [
+        "mo-veterans-home-A111-reflected-ceiling-plan.pdf"
+      ]
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<REPO>\\tmp\\area-grid-cuts\\replay\\ceiling-cuts.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "units_per_px": 0.1111111111111111,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "created_at": "2026-11-21T03:35:28.421Z",
+          "finish_tag": "ACT-EXISTING-TEST",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "condition_id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.3614351851851852,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.07645833333333334
+            ],
+            [
+              0.36856481481481485,
+              0.066875
+            ],
+            [
+              0.3614351851851852,
+              0.066875
+            ]
+          ],
+          "computed": {
+            "area_sf": 175.73,
+            "perimeter_lf": 60.4
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "Northwest bay, northern wing; existing ceiling footprint test",
+          "area_grid": {
+            "spacing_ft": 2,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 1,
+            "offset_y_ft": 1,
+            "origin_norm": [
+              0.3633796296296296,
+              0.05708333333333333
+            ],
+            "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.",
+            "single_item": true,
+            "footprint": {
+              "kind": "rectangle",
+              "width_ft": 2,
+              "depth_ft": 2,
+              "basis": "assumed",
+              "reference": "Nominal 2-by-2-foot module inferred from this drawn grid; A111 legend allows 2-by-2 or 2-by-4. Physical tile face and joint dimensions unverified."
+            },
+            "cut_pieces": true
+          }
+        }
+      ],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "view_sheet",
+    "args": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "overlay": true,
+      "region": {
+        "x0": 1850,
+        "y0": 175,
+        "x1": 2050,
+        "y1": 330
+      },
+      "px": 1400
+    },
+    "result": {
+      "sheet": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "page": 1,
+      "sheet_px": [
+        5184,
+        3456
+      ],
+      "region": [
+        1850,
+        175,
+        2050,
+        330
+      ],
+      "img_px": [
+        1400,
+        1085
+      ],
+      "zoom": 7,
+      "overlay": true,
+      "shapes_drawn": 1,
+      "grid_px_per_foot": 0
+    }
+  },
+  {
+    "tool": "undo_last",
+    "args": {},
+    "result": {
+      "undone": 1,
+      "steps": [
+        {
+          "seq": 2,
+          "op": "edit",
+          "tool": "edit_shape",
+          "shapes": 1
+        }
+      ],
+      "shape_count": 1,
+      "remaining": 1
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<REPO>\\tmp\\area-grid-cuts\\replay\\ceiling-undo.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "units_per_px": 0.1111111111111111,
+          "scale_source": "upp",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "created_at": "2026-11-21T03:35:28.421Z",
+          "finish_tag": "ACT-EXISTING-TEST",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+          "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+          "condition_id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.3614351851851852,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.05625
+            ],
+            [
+              0.3937962962962963,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.08916666666666667
+            ],
+            [
+              0.3749537037037037,
+              0.07645833333333334
+            ],
+            [
+              0.36856481481481485,
+              0.066875
+            ],
+            [
+              0.3614351851851852,
+              0.066875
+            ]
+          ],
+          "computed": {
+            "area_sf": 175.73,
+            "perimeter_lf": 60.4
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "Northwest bay, northern wing; existing ceiling footprint test",
+          "area_grid": {
+            "spacing_ft": 2,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 1,
+            "offset_y_ft": 1,
+            "origin_norm": [
+              0.3633796296296296,
+              0.05708333333333333
+            ],
+            "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.",
+            "single_item": true,
+            "footprint": {
+              "kind": "rectangle",
+              "width_ft": 2,
+              "depth_ft": 2,
+              "basis": "assumed",
+              "reference": "Nominal 2-by-2-foot module inferred from this drawn grid; A111 legend allows 2-by-2 or 2-by-4. Physical tile face and joint dimensions unverified."
+            }
+          }
+        }
+      ],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "load_plan",
+    "args": {
+      "path": "<REPO>\\demo\\sample-finish-plan.pdf"
+    },
+    "result": {
+      "file": "sample-finish-plan.pdf",
+      "files": [
+        "sample-finish-plan.pdf"
+      ],
+      "page_count": 2,
+      "sheets": [
+        {
+          "sheet": "sample-finish-plan.pdf",
+          "page": 1,
+          "width_pt": 3024,
+          "height_pt": 2160,
+          "width_px": 6048,
+          "height_px": 4320,
+          "sheet_number": "AF101",
+          "detected_scale": "1/8\" = 1'-0\""
+        },
+        {
+          "sheet": "sample-finish-plan.pdf#2",
+          "page": 2,
+          "width_pt": 3024,
+          "height_pt": 2160,
+          "width_px": 6048,
+          "height_px": 4320,
+          "sheet_number": "AF600"
+        }
+      ],
+      "note": "Replaced the previous session — all prior scales, conditions, and shapes were cleared."
+    }
+  },
+  {
+    "tool": "import_takeoff",
+    "args": {
+      "path": "<REPO>\\docs\\evidence\\area-grid-footprints\\demo-after-reopen.json"
+    },
+    "result": {
+      "file": "demo-after-reopen.json",
+      "replaced": true,
+      "shapes_added": 1,
+      "shapes_pending": 1,
+      "conditions_merged": 0,
+      "conditions_added": 1,
+      "scales_adopted": 1,
+      "unknown_files": [],
+      "rules_imported": 0,
+      "shapes_total": 1,
+      "note": "Empty session — the import IS the takeoff now. Unreviewed machine shapes stay pencil; verify with view_sheet overlay:true."
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+      "area_grid": {
+        "spacing_ft": 4,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 2,
+        "offset_y_ft": 2,
+        "origin_norm": [
+          0.35714285714285715,
+          0.17222222222222222
+        ],
+        "reference": "Bundled AF101 demonstration only: assumed 4 ft support grid, 2 ft shifts, 0 deg, no edge clearance; no such support work specified by this finish plan.",
+        "single_item": true,
+        "footprint": {
+          "kind": "rectangle",
+          "width_ft": 4,
+          "depth_ft": 4,
+          "basis": "assumed",
+          "reference": "Bundled finish-plan demonstration only: nominal 4-foot square module at existing support grid spacing; not specified work."
+        }
+      }
+    },
+    "result": {
+      "shape_id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+      "changed": [
+        "area_grid"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 4,
+      "area_sf": 128,
+      "perimeter_lf": 48,
+      "label": "Assumed layout zone; not specified work",
+      "agent_edits": 1,
+      "grid_count": 8
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<REPO>\\tmp\\area-grid-cuts\\replay\\demo-before.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "sample-finish-plan.pdf",
+          "units_per_px": 0.05555555555555555,
+          "scale_source": "detected",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-da707523-8179-44bb-bc98-f08842c22cda",
+          "created_at": "2026-11-21T03:02:41.738Z",
+          "finish_tag": "DEMO-SUPPORT-LAYOUT",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+          "sheet_id": "sample-finish-plan.pdf",
+          "condition_id": "cnd-da707523-8179-44bb-bc98-f08842c22cda",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.35714285714285715,
+              0.17222222222222222
+            ],
+            [
+              0.40476190476190477,
+              0.17222222222222222
+            ],
+            [
+              0.40476190476190477,
+              0.20555555555555555
+            ],
+            [
+              0.35714285714285715,
+              0.20555555555555555
+            ]
+          ],
+          "computed": {
+            "area_sf": 128,
+            "perimeter_lf": 48
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "Assumed layout zone; not specified work",
+          "area_grid": {
+            "spacing_ft": 4,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 2,
+            "offset_y_ft": 2,
+            "origin_norm": [
+              0.35714285714285715,
+              0.17222222222222222
+            ],
+            "reference": "Bundled AF101 demonstration only: assumed 4 ft support grid, 2 ft shifts, 0 deg, no edge clearance; no such support work specified by this finish plan.",
+            "single_item": true,
+            "footprint": {
+              "kind": "rectangle",
+              "width_ft": 4,
+              "depth_ft": 4,
+              "basis": "assumed",
+              "reference": "Bundled finish-plan demonstration only: nominal 4-foot square module at existing support grid spacing; not specified work."
+            }
+          }
+        }
+      ],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  },
+  {
+    "tool": "edit_shape",
+    "args": {
+      "shape_id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+      "area_grid": {
+        "spacing_ft": 4,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 2,
+        "offset_y_ft": 2,
+        "origin_norm": [
+          0.35714285714285715,
+          0.17222222222222222
+        ],
+        "reference": "Bundled AF101 demonstration only: assumed 4 ft support grid, 2 ft shifts, 0 deg, no edge clearance; no such support work specified by this finish plan.",
+        "single_item": true,
+        "footprint": {
+          "kind": "rectangle",
+          "width_ft": 4,
+          "depth_ft": 4,
+          "basis": "assumed",
+          "reference": "Bundled finish-plan demonstration only: nominal 4-foot square module at existing support grid spacing; not specified work."
+        },
+        "cut_pieces": true
+      }
+    },
+    "result": {
+      "shape_id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+      "changed": [
+        "area_grid"
+      ],
+      "measure_role": "floor_area",
+      "nverts": 4,
+      "area_sf": 128,
+      "perimeter_lf": 48,
+      "label": "Assumed layout zone; not specified work",
+      "agent_edits": 1,
+      "grid_count": 8,
+      "grid_cuts": {
+        "full_tiles": 8,
+        "cut_cells": 0,
+        "edge_cut_pieces": 0,
+        "covered_sf": 127.99999999999989,
+        "full_sf": 127.99999999999989,
+        "cut_sf": 0
+      }
+    }
+  },
+  {
+    "tool": "export_takeoff",
+    "args": {
+      "path": "<REPO>\\tmp\\area-grid-cuts\\replay\\demo-cuts.json"
+    },
+    "result": {
+      "schema": "opentakeoff.takeoff_canvas.v1",
+      "project_name": "",
+      "sheets": [
+        {
+          "sheet_id": "sample-finish-plan.pdf",
+          "units_per_px": 0.05555555555555555,
+          "scale_source": "detected",
+          "scale_confirmed": false
+        }
+      ],
+      "conditions": [
+        {
+          "id": "cnd-da707523-8179-44bb-bc98-f08842c22cda",
+          "created_at": "2026-11-21T03:02:41.738Z",
+          "finish_tag": "DEMO-SUPPORT-LAYOUT",
+          "color": "#c96442",
+          "fill": "#c96442",
+          "hatch": "diag",
+          "multiplier": 1,
+          "waste_pct": 0,
+          "materials": []
+        }
+      ],
+      "shapes": [
+        {
+          "id": "shp-590177e0-5e24-419a-ab50-14e8ede0f38d",
+          "sheet_id": "sample-finish-plan.pdf",
+          "condition_id": "cnd-da707523-8179-44bb-bc98-f08842c22cda",
+          "measure_role": "floor_area",
+          "verts_norm": [
+            [
+              0.35714285714285715,
+              0.17222222222222222
+            ],
+            [
+              0.40476190476190477,
+              0.17222222222222222
+            ],
+            [
+              0.40476190476190477,
+              0.20555555555555555
+            ],
+            [
+              0.35714285714285715,
+              0.20555555555555555
+            ]
+          ],
+          "computed": {
+            "area_sf": 128,
+            "perimeter_lf": 48
+          },
+          "origin": {
+            "method": "manual",
+            "actor": "agent",
+            "reviewed": false,
+            "assignment": {
+              "source": "asserted"
+            },
+            "agent_edits": 1
+          },
+          "label": "Assumed layout zone; not specified work",
+          "area_grid": {
+            "spacing_ft": 4,
+            "pattern": "square",
+            "angle_deg": 0,
+            "inset_ft": 0,
+            "offset_x_ft": 2,
+            "offset_y_ft": 2,
+            "origin_norm": [
+              0.35714285714285715,
+              0.17222222222222222
+            ],
+            "reference": "Bundled AF101 demonstration only: assumed 4 ft support grid, 2 ft shifts, 0 deg, no edge clearance; no such support work specified by this finish plan.",
+            "single_item": true,
+            "footprint": {
+              "kind": "rectangle",
+              "width_ft": 4,
+              "depth_ft": 4,
+              "basis": "assumed",
+              "reference": "Bundled finish-plan demonstration only: nominal 4-foot square module at existing support grid spacing; not specified work."
+            },
+            "cut_pieces": true
+          }
+        }
+      ],
+      "markups": [],
+      "rfis": [],
+      "sheet_group": [],
+      "last_group": [],
+      "sheet_tabs": []
+    }
+  }
+]

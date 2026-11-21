@@ -39,6 +39,15 @@ a layout. If unstated, compare labeled alternatives with fixed spacing, boundary
 origin, shifts and clearance; a smaller quantity difference is not evidence that
 one pattern is correct. Never silently adopt a generated total or tune offsets
 to force a printed count.
+For contiguous square modules, optional `cut_pieces: true` clips every intersecting
+cell to the boundary and holes, including cells whose centers fall outside.
+It requires a square pattern, zero clearance and a rectangle footprint whose
+width and depth equal spacing. Report `grid_cuts.full_tiles` and
+`edge_cut_pieces` separately; one cut cell can produce disconnected pieces.
+Check that `covered_sf` reconciles with the traced area. Do not promote those
+results to purchased EA: joint dimensions, waste and offcut reuse are not modeled.
+Invalid topology refuses without repair. Existing measurement and review fields
+stay unchanged; these are derived layout results, not individual observations.
 Existing planting-grid data is read without migration; explicit generic edits
 replace only its layout metadata, and Undo restores the original.
 See [planting scope and limits](wiki/suites.md#planting-scope-and-current-limits).

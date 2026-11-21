@@ -3,7 +3,8 @@
 ## Unreleased
 
 - Generalize the fork prototype as **Area grid count** for a repeating item type within an area, with an optional printed-quantity comparison. Preserve legacy planting-grid records unchanged on read; explicit edits use `area_grid`, with exact Undo. Planting remains the first public example.
-- Add editable circle and rectangle footprints to Area grid count, with physical dimensions and a stated or assumed source. Browser and MCP overlays share the outlines. Footprints preserve grid positions, IDs, quantities and review; cut-piece calculations remain unsupported. Public SET and ceiling-plan evidence accompanies the change.
+- Add editable circle and rectangle footprints to Area grid count, with physical dimensions and a stated or assumed source. Browser and MCP overlays share the outlines. Footprints preserve grid positions, IDs, quantities and review. Public SET and ceiling-plan evidence accompanies the change.
+- Add opt-in square-module cut calculations: separate full tiles and connected edge cut pieces, include cells with centers outside the boundary, and reconcile clipped coverage. Browser and MCP display the same clipped geometry. Existing takeoff quantities and review decisions stay unchanged; no purchasing quantity, offcut reuse or waste is inferred. Public A111 evidence includes an independent exact-arithmetic check.
 
 
 

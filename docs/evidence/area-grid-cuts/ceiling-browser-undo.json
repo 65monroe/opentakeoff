@@ -1,0 +1,105 @@
+{
+  "schema": "opentakeoff.takeoff_canvas.v1",
+  "project_name": "",
+  "sheets": [
+    {
+      "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "units_per_px": 0.1111111111111111,
+      "scale_source": "upp",
+      "scale_confirmed": false
+    }
+  ],
+  "conditions": [
+    {
+      "id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+      "created_at": "2026-11-21T03:35:28.421Z",
+      "finish_tag": "ACT-EXISTING-TEST",
+      "color": "#c96442",
+      "fill": "#c96442",
+      "hatch": "diag",
+      "multiplier": 1,
+      "waste_pct": 0,
+      "materials": []
+    }
+  ],
+  "shapes": [
+    {
+      "id": "shp-1db5dfa0-f9ae-489a-8bd3-0e4ec9ba067a",
+      "sheet_id": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+      "condition_id": "cnd-99390bdb-e86a-4c25-8b9c-48effdb33b08",
+      "measure_role": "floor_area",
+      "verts_norm": [
+        [
+          0.3614351851851852,
+          0.05625
+        ],
+        [
+          0.3937962962962963,
+          0.05625
+        ],
+        [
+          0.3937962962962963,
+          0.08916666666666667
+        ],
+        [
+          0.3749537037037037,
+          0.08916666666666667
+        ],
+        [
+          0.3749537037037037,
+          0.07645833333333334
+        ],
+        [
+          0.36856481481481485,
+          0.066875
+        ],
+        [
+          0.3614351851851852,
+          0.066875
+        ]
+      ],
+      "computed": {
+        "area_sf": 175.73,
+        "perimeter_lf": 60.4
+      },
+      "origin": {
+        "method": "manual",
+        "actor": "agent",
+        "reviewed": false,
+        "assignment": {
+          "source": "asserted"
+        },
+        "agent_edits": 1
+      },
+      "label": "Northwest bay, northern wing; existing ceiling footprint test",
+      "area_grid": {
+        "spacing_ft": 2,
+        "pattern": "square",
+        "angle_deg": 0,
+        "inset_ft": 0,
+        "offset_x_ft": 1,
+        "offset_y_ft": 1,
+        "origin_norm": [
+          0.3633796296296296,
+          0.05708333333333333
+        ],
+        "reference": "A111 existing ceiling grid: 18 px between drawn lines at 9 px/ft; origin from grid intersection, centers shifted 1 ft. One bay only; not an ordering takeoff.",
+        "single_item": true,
+        "footprint": {
+          "kind": "rectangle",
+          "width_ft": 2,
+          "depth_ft": 2,
+          "basis": "assumed",
+          "reference": "Nominal 2-by-2-foot module inferred from this drawn grid; A111 legend allows 2-by-2 or 2-by-4. Physical tile face and joint dimensions unverified."
+        }
+      }
+    }
+  ],
+  "markups": [],
+  "rfis": [],
+  "sheet_group": [],
+  "last_group": [],
+  "sheet_tabs": [
+    "mo-veterans-home-A111-reflected-ceiling-plan.pdf"
+  ]
+}

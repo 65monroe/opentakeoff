@@ -36,8 +36,8 @@ Optional `area_grid.footprint` stores `kind` (circle or rectangle), positive
 dimensions in feet (`diameter_ft`, or `width_ft` and `depth_ft`), `basis`
 (`assumed` or `specified`) and `reference`. Browser and MCP render the same
 48-segment circles or rotated rectangles around existing grid centers, without
-clipping their edges. Dimensions are independent of spacing. There is no
-footprint-to-quantity calculation, review change or automatic default. Omitted
+clipping their edges by default. Dimensions are independent of spacing. The
+optional clipping mode below adds no takeoff quantity, review change or automatic default. Omitted
 footprints retain the original position-marker display. Grid edit, import,
 archive and Undo preserve these fields; the writer identifier is unchanged.
 
@@ -55,6 +55,14 @@ change or default migration is introduced.
 Import checks structure and preserves unresolved citations for recovery;
 comparison is withheld if the source is unavailable. Editable JSON and native
 archives preserve settings. Static PDF/report exports omit the grid comparison.
+Optional `area_grid.cut_pieces` opts into derived square-module clipping. It
+stores only a boolean, not derived cell geometry or quantities. The runtime
+requires a square pattern, zero clearance and rectangle dimensions equal to
+spacing. Full tiles, cut cells, connected edge cut pieces and clipped areas
+are recomputed from the unchanged source geometry, including its holes and
+boundary-crossing cells with outside centers. Invalid topology refuses without
+repair. Existing IDs, calibration, quantities, reviews and machine originals
+remain unchanged. The extension does not change the writer identifier.
 Tests: `web/test/areaGrid.test.ts`, the legacy grid tests, MCP callout and
 protocol current-record tests.
 

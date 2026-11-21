@@ -6,6 +6,8 @@ import { RENDER_SCALE } from "../../web/src/lib/sheets.ts";
 import { UserError } from "./format.ts";
 import type { Shape } from "./session.ts";
 import { areaGrid, getAreaGrid, areaGridFootprintOutline } from '../../web/src/lib/areaGrid.js';
+import { areaGridCuts } from '../../web/src/lib/areaGridCuts.js';
+import { SVG } from '../../web/src/lib/ui.js';
 
 /** The slice of CanvasRenderingContext2D the drawing uses — structural, so
  * @napi-rs/canvas's context satisfies it without a type dependency. */
@@ -144,6 +146,22 @@ export function drawShapes(ctx: Ctx2D, toCanvas: ToCanvas, shapes: Shape[], shee
     if (s.measure_role !== "linear" && s.measure_role !== "surface_area") ctx.closePath();
     ctx.stroke();
     if(getAreaGrid(s)) {
+      const cuts=areaGridCuts(s,{widthPx:sheetW,heightPx:sheetH,upp});
+      if(cuts) {
+        for(const cell of cuts.cells) {
+          ctx.strokeStyle=cell.kind==='cut'?SVG.danger:PENCIL;
+          ctx.setLineDash(cell.kind==='cut'?[w*4,w*2]:[]);
+          for(const piece of cell.pieces) {
+            ctx.beginPath();
+            for(const ring of [piece.outer,...piece.holes]) {
+              ring.forEach(([nx,ny],i)=>{const [x,y]=toCanvas(nx*sheetW,ny*sheetH);if(i===0)ctx.moveTo(x,y);else ctx.lineTo(x,y);});
+              ctx.closePath();
+            }
+            ctx.stroke();
+          }
+        }
+        continue;
+      }
       const grid=areaGrid(s,{widthPx:sheetW,heightPx:sheetH,upp});
       const footprint=areaGridFootprintOutline(s,{widthPx:sheetW,heightPx:sheetH,upp});
       ctx.setLineDash([]);

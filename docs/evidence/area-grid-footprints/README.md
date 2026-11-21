@@ -8,6 +8,7 @@ work or calculate cut pieces.
 
 This is fork-only work on `codex/area-grid-count`, continuing the
 [area grid example](../area-grid-count/README.md). No new upstream PR is opened.
+This snapshot predates the opt-in [square-module cut calculation](../area-grid-cuts/README.md).
 The public examples are planting and an existing ceiling bay; this is not a
 completed ceiling-layout or purchasing tool.
 

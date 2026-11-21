@@ -255,14 +255,14 @@ test('generic area grids and legacy planting grids preserve exact metadata throu
   const session=new Session();await session.loadPlan(plan);session.setScale(sheet,{use_detected:true});
   const area=session.measurePolygon(sheet,[[200,200],[400,200],[400,400],[200,400]],{condition:'SUPPORT-LAYOUT',role:'floor_area'});
   const before=structuredClone(session.exportPayload());
-  session.editShape(area.shape_id,{area_grid:{single_item:true,spacing_ft:1,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:.5,offset_y_ft:.5,origin_norm:[.1,.1],reference:'Synthetic support layout; no printed source',footprint:{kind:'rectangle',width_ft:.5,depth_ft:.75,basis:'assumed',reference:'Synthetic item dimensions'}}});
+  session.editShape(area.shape_id,{area_grid:{single_item:true,spacing_ft:1,pattern:'square',angle_deg:0,inset_ft:0,offset_x_ft:.5,offset_y_ft:.5,origin_norm:[.1,.1],reference:'Synthetic support layout; no printed source',cut_pieces:true,footprint:{kind:'rectangle',width_ft:1,depth_ft:1,basis:'assumed',reference:'Synthetic nominal module'}}});
   const payload=session.exportPayload();checkBoth(payload);
   assert.deepEqual(mergeTakeoffImport(emptyAnnotations(),payload).payload.shapes,payload.shapes);
   const archive=await buildProjectArchive({takeoff:payload,sheets:[{name:sheet}],loadPdfData:async()=>new Uint8Array(await readFile(plan))});
   assert.deepEqual((await parseProjectArchive(archive)).takeoff,payload);
   const old={...payload.shapes[0]};delete old.area_grid;assert.deepEqual(old,before.shapes[0]);
   for (const footprint of [{kind:'circle',diameter_ft:.625,basis:'specified',reference:'Synthetic source'}, {kind:'rectangle',width_ft:2,depth_ft:4,basis:'assumed',reference:'Synthetic source'}]) {
-    const copy=structuredClone(payload);copy.shapes[0].area_grid.footprint=footprint;checkBoth(copy);
+    const copy=structuredClone(payload);copy.shapes[0].area_grid.footprint=footprint;delete copy.shapes[0].area_grid.cut_pieces;checkBoth(copy);
   }
   for (const footprint of [{kind:'circle',diameter_ft:0,basis:'assumed',reference:'Test'}, {kind:'rectangle',width_ft:2,basis:'specified',reference:'Test'}, {kind:'circle',diameter_ft:1,basis:'approved',reference:'Test'}]) {
     const bad=structuredClone(payload);bad.shapes[0].area_grid.footprint=footprint;
@@ -272,4 +272,6 @@ test('generic area grids and legacy planting grids preserve exact metadata throu
     const bad=structuredClone(payload);Object.assign(bad.shapes[0],patch);
     assert.equal(ajv.getSchema('https://opentakeoff.kentucky-ai.com/protocol/legacy/takeoff-canvas.v1.schema.json')(bad),false);
   }
+  const badFlag=structuredClone(payload);badFlag.shapes[0].area_grid.cut_pieces='true';
+  assert.equal(ajv.getSchema('https://opentakeoff.kentucky-ai.com/protocol/legacy/takeoff-canvas.v1.schema.json')(badFlag),false);
 });

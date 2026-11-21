@@ -320,10 +320,10 @@ Choose **Circle** and enter **Diameter (in)**, or choose **Rectangle** and enter
 basis** to **Assumed** or **Specified in source**, and enter **Dimension source
 or assumption**. Click **Save grid**. Rectangles follow the grid angle; both
 outlines scale with the drawing. Choose **Position markers only** to remove
-the footprint while keeping the grid. Dimensions never set spacing or change
+the footprint while keeping the grid (turn off cut calculation first). Dimensions never set spacing or change
 counts. A source basis is a citation, not review approval. Container diameter,
 plant spread and on-center spacing are separate values. Full outlines can cross
-the area edge; they are not clipped tiles or calculated cut pieces.
+the area edge by default; enable cut calculation below to clip square modules.
 
 When the area has a linked printed source, the receipt also compares its EA
 with the generated count. Otherwise it shows **no printed comparison**. Inspect
@@ -337,6 +337,19 @@ format. JSON and project archives preserve it. Static marked PDFs and quantity
 report exports currently omit the grid comparison; existing EA and SF remain
 unchanged. The first [public-plan example](evidence/area-grid-count/README.md)
 is the SET planting bed.
+For a square ceiling module, select **Calculate full tiles and edge cuts** and
+click **Save grid**. Use **Square**, zero **Edge clearance (in)**, and rectangle
+width and depth equal to spacing. Nominal modules include their grid pitch;
+separate joints are not modeled. The result separates **full tiles** from
+**edge cut pieces** and shows covered SF. Full modules have solid outlines;
+cuts have red dashed outlines. **Edge cut schedule** lists the retained area
+and piece count for each cut cell. One cell can leave multiple disconnected
+pieces. Modules crossing the boundary count even when their centers lie outside.
+The existing center count and takeoff quantities stay unchanged. Invalid geometry
+or more than 2,500 candidate modules withholds the calculation. This is a layout
+check, not a purchasing quantity: waste and offcut reuse remain uncalculated.
+See the [public ceiling cut example](evidence/area-grid-cuts/README.md).
+
 See the [footprint evidence](evidence/area-grid-footprints/README.md) for the
 SET bed and a public reflected ceiling plan.
 

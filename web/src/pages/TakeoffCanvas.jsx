@@ -32,7 +32,8 @@ import { store, isStaleTabError, STALE_TAB_MESSAGE, friendlyStoreError, projectI
 import { forgetThumbs, releaseThumbs } from "../lib/thumbs.js";
 import { Z } from "../lib/ui.js";
 import { isCalloutQuantity, linkedCalloutAreas } from "../lib/calloutQuantity.js";
-import { areaGrid, getAreaGrid, areaGridFootprintOutline, plantingReviewTargets } from "../lib/areaGrid.js";
+import { getAreaGrid, plantingReviewTargets } from "../lib/areaGrid.js";
+import AreaGridOverlay from '../components/AreaGridOverlay.jsx';
 import { getFocusMode, toggleFocusMode, onFocusModeChange } from "../lib/focusMode.js";
 import { seedStampLibrary, instantiateStamp, markupToStampElement } from "../lib/stamps.js";
 import { extractSvgPrimitives, svgToStamp } from "../lib/svgImport.js";
@@ -11092,17 +11093,7 @@ export default function TakeoffCanvas() {
                     dn, cond: condById[s.condition_id], sel: s.id === selectedId || linkedWorkAreaIds.has(s.id),
                     z: tf.scale, darkMode, selection: DS.selection, patId,
                     })))}
-                  {pShapes.filter(s=>getAreaGrid(s)).map(s=>{
-                    const frame={widthPx:p.img.w,heightPx:p.img.h,upp:uppFor(p.key)};
-                    const grid=areaGrid(s,frame);
-                    const footprint=areaGridFootprintOutline(s,frame).map(([x,y])=>`${x*p.img.w},${y*p.img.h}`).join(' ');
-                    const r=getAreaGrid(s).spacing_ft/uppFor(p.key)*0.16;
-                    return <g key={`grid-${s.id}`} pointerEvents="none" aria-label={`${grid.count ?? 0} generated grid positions`}>
-                      {grid.points_norm.map(([x,y],i)=>footprint
-                        ? <polygon key={i} data-grid-footprint={getAreaGrid(s).footprint.kind} transform={`translate(${x*p.img.w} ${y*p.img.h})`} points={footprint} fill="none" stroke={condById[s.condition_id]?.color || DS.selection.color} strokeWidth={1.25/tf.scale} />
-                        : <circle key={i} cx={x*p.img.w} cy={y*p.img.h} r={r} fill="none" stroke={condById[s.condition_id]?.color || DS.selection.color} strokeWidth={1.25/tf.scale} />)}
-                    </g>;
-                  })}
+                  {pShapes.filter(s=>getAreaGrid(s)).map(s=><AreaGridOverlay key={`grid-${s.id}`} area={s} widthPx={p.img.w} heightPx={p.img.h} upp={uppFor(p.key)} zoom={tf.scale} color={condById[s.condition_id]?.color || DS.selection.color}/>)}
                   {/* vertex handles for the selected shape (drag to reshape) */}
                   {selectedId && (() => {
                     const sel = pShapes.find((s) => s.id === selectedId);

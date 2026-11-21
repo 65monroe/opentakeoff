@@ -26,6 +26,11 @@ export function areaGridError(area, shapes) {
   if (legacy && (!area.planting_grid || area.planting_grid.single_species !== true || !area.planting_grid.source_callout_id)) return 'Legacy planting grid needs its single-species declaration and source.';
   if (g === undefined) return null;
   const f = g?.footprint;
+  if (g?.cut_pieces !== undefined && typeof g.cut_pieces !== 'boolean') return 'Cut-piece calculation must be on or off.';
+  if (g?.cut_pieces && (g.pattern!=='square' || g.inset_ft!==0 || f?.kind!=='rectangle' ||
+      ![f.width_ft,f.depth_ft].every(v=>Number.isFinite(v)&&Math.abs(v-g.spacing_ft)<=1e-9))) {
+    return 'Cuts require a square pattern, zero edge clearance, and rectangle width and depth equal to spacing. Use nominal module dimensions; separate joints are not modeled.';
+  }
   if (f !== undefined && (!f || !['circle', 'rectangle'].includes(f.kind) ||
       !['assumed', 'specified'].includes(f.basis) || typeof f.reference !== 'string' || !f.reference.trim() ||
       (f.kind === 'circle' ? !Number.isFinite(f.diameter_ft) || f.diameter_ft <= 0 :
