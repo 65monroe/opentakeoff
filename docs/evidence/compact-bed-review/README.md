@@ -1,5 +1,8 @@
 # Compact bed review and grid settings
 
+Start with the [area review packet](../area-review/README.md) for the landscape
+rationale, ceiling follow-ups, design alternatives and final check results.
+
 The C1 source-note mismatch recorded below was subsequently corrected in the
 [triangular-layout note follow-up](../c1-spacing-note/README.md). These captures
 and baseline exports retain the original trial state.

@@ -1,0 +1,12 @@
+{
+  "scope": "Public evidence images changed on this fork since 8a31fb4, including working changes",
+  "decoded_images": 203,
+  "decoded_frames": 279,
+  "formats": {
+    "JPEG": 158,
+    "GIF": 8,
+    "PNG": 37
+  },
+  "errors": [],
+  "limit": "Decoding is an integrity check, not a claim that every historical screenshot was visually re-reviewed."
+}

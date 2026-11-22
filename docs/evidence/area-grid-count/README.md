@@ -1,5 +1,8 @@
 # Area grid count
 
+Current scope, alternatives and checks: [area review packet](../area-review/README.md).
+The increment evidence below remains unchanged for reproducibility.
+
 Area grid count calculates repeated positions inside an editable area. It works
 without a plant code or a printed quantity. Planting remains the first public
 example; a bundled finish-plan demonstration exercises a generic layout with no

@@ -2,6 +2,10 @@
 
 The buildable map: what OpenTakeoff does and exactly where each piece lives, so you (or your coding agent) can extend a specific capability without spelunking. The UI for nearly everything is in `web/src/pages/TakeoffCanvas.jsx` (one deliberately monolithic component); the pure logic lives in `web/src/lib/`.
 
+For this fork's area grid and assembly changes, start with the
+[public review packet](docs/evidence/area-review/README.md): landscape purpose,
+tested ceiling examples, alternatives, existing capability and remaining limits.
+
 | Capability | What it does | Where the logic lives |
 |---|---|---|
 | **Area grid count** | Square/triangular/rectangular positions clipped to a floor-area outline and holes; angle, shifts and edge clearance; optional printed-quantity comparison. Works without a plant code or callout. Editable circle/rectangle footprints with separate dimension sources; separate X/Y spacing for rectangular layouts and optional full tiles and edge cut pieces; settings and Undo; no extra EA or automatic approval | `web/src/lib/areaGrid.js`, `AreaGridPanel.jsx`, `shapeCommands.js`; MCP `edit_shape area_grid` |

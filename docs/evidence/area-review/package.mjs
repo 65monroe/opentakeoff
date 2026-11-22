@@ -1,0 +1,24 @@
+// Package the fixed-ID current planting example; never import it into a live job.
+import {readFile,writeFile} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {createRequire} from 'node:module';
+import {resolve,relative} from 'node:path';
+import assert from 'node:assert/strict';
+import {buildProjectArchive,parseProjectArchive} from '../../../web/src/lib/projectArchive.js';
+const [sourcePath,output]=process.argv.slice(2);
+if(!sourcePath||!output)throw new Error('Usage: node docs/evidence/area-review/package.mjs /path/public-addendum.pdf /path/public-beds.otk (output outside tracked evidence)');
+const require=createRequire(new URL('../../../web/package.json',import.meta.url));
+const {PDFDocument}=require('pdf-lib');
+const takeoff=JSON.parse(await readFile(new URL('../c1-spacing-note/corrected.takeoff.json',import.meta.url),'utf8'));
+const source=JSON.parse(await readFile(new URL('../planting-suite/source.json',import.meta.url),'utf8'));
+const bytes=await readFile(sourcePath);
+assert.equal(createHash('sha256').update(bytes).digest('hex'),source.sha256,'Public source differs from tested revision');
+const doc=await PDFDocument.load(bytes),sheet=await PDFDocument.create();
+const [page]=await sheet.copyPages(doc,[source.pdf_page-1]);sheet.addPage(page);
+const pdf=await sheet.save();
+const outRelative=relative(resolve('docs/evidence'),resolve(output));
+if(!outRelative.startsWith('..'))throw new Error('Keep PDF-containing archives outside tracked evidence.');
+const archive=await buildProjectArchive({takeoff,sheets:[{name:'ccfp-L1.0.pdf'}],loadPdfData:async()=>pdf});
+assert.deepEqual((await parseProjectArchive(archive)).takeoff,takeoff);
+await writeFile(output,archive);
+console.log(JSON.stringify({output,measurements:takeoff.shapes.length,conditions:takeoff.conditions.length,pdf_sha256:createHash('sha256').update(pdf).digest('hex')}));

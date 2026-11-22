@@ -1,5 +1,9 @@
 # Actual public 2-by-4 ceiling grid
 
+Current compact-panel captures and cross-example scope:
+[area review packet](../area-review/README.md). The source, arithmetic and
+save/reopen records below remain the original dedicated test.
+
 The generic **Area grid count** branch now has a source-backed rectangular
 ceiling example. The printed **2X4 GRID** and its actual linework agree:
 **78 full tiles + 42 edge cut pieces** in a **899 SF** bay. MCP alignment,

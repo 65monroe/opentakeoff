@@ -1,5 +1,8 @@
 # Public bed: native assembly prototype
 
+Current scope, alternatives and checks: [area review packet](../area-review/README.md).
+This native-assembly fixture is separate from the later mixed-bed archive.
+
 One existing public bed supplies two separate 4-inch material layers, its
 existing printed plant quantity, and a pending edging run. The soil recipe uses
 OpenTakeoff's existing assemblies. This increment changes example data and

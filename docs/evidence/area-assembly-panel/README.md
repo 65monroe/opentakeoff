@@ -1,5 +1,8 @@
 # Area assembly panel — fork prototype
 
+Current scope, compact UI and checks: [area review packet](../area-review/README.md).
+The captures below show this earlier increment, not the current panel.
+
 The [depth-field follow-up](../area-assembly-depth/README.md) adds direct inch
 entry to these existing material rows. The captures below document the panel
 before that follow-up.

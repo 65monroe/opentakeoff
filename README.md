@@ -116,7 +116,8 @@ printed plant EA and derived edging LF together. Compact count rows offer
 and **Adjust grid**. Edit a uniform CY layer's
 depth in inches and preview its volume, or jump to its source/run without leaving the bed context. See the
 [panel workflow](docs/USER_GUIDE.md#area-assembly) and
-[public-plan evidence](docs/evidence/area-assembly-panel/README.md).
+[public review packet](docs/evidence/area-review/README.md) for the landscape
+rationale, ceiling examples, design alternatives, checks and current limits.
 
 Planting quantities can retain their printed source and link to an editable bed.
 **Show on plan** frames the bed; **Source** keeps the printed evidence accessible.

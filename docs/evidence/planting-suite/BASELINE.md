@@ -91,7 +91,7 @@ claimed as completed browser evidence.
 | [Measured tree overlay](screenshots/measured-trees.png) | Three count points centered on three printed tree symbols; their quantity callout is not counted again |
 | [Printed scale](screenshots/scale.png) | 1 inch = 20 feet; agent-set and unconfirmed |
 | [Rendered marked PDF](screenshots/marked-pdf.png) | Counts, original callouts and exported source notes remain visible |
-| [Bundled-plan condition property](screenshots/bundled-condition-trade.png), [trade filter](screenshots/bundled-trade-filter.png) | The two existing controls expose Landscape planting. CPT-1 is temporarily reassigned only to exercise the controls; no plant measurement is claimed on the finish plan. The assignment was restored afterward. |
+| [Bundled-plan condition property](screenshots/bundled-condition-trade.jpg), [trade filter](screenshots/bundled-trade-filter.jpg) | The two existing controls expose Landscape planting. CPT-1 is temporarily reassigned only to exercise the controls; no plant measurement is claimed on the finish plan. The assignment was restored afterward. |
 
 The browser captures are actual app screens, not mockups. The plan crops and
 count overlay are actual `view_sheet` outputs. The marked-PDF image is a Poppler

@@ -1,0 +1,77 @@
+{
+  "date": "2026-11-22",
+  "branch": "codex/area-assembly-prototype",
+  "tested_application_head": "b3604b8b623d8019080640588d0f0def7a77a7a3",
+  "environment": "Windows; Node 24.22.3; existing installed dependencies",
+  "scope": "Final documentation/evidence audit. No application code or takeoff records changed. Local results, not upstream CI or maintainer approval.",
+  "checks": [
+    {
+      "command": "npm run check --prefix web",
+      "result": "PASS",
+      "tests_passed": 3863,
+      "tests_skipped": 4,
+      "tests_failed": 0,
+      "lint_errors": 0,
+      "lint_warnings": 3,
+      "notes": "Typecheck, lint, reader/ORT gates, tests, benchmark, production build and OCR distribution checks passed. Existing hook warnings in RevisionOverlay.jsx and View3D.jsx; existing documented benchmark exemptions and bundle-size warnings remain. No performance improvement claimed."
+    },
+    {"command": "npm run typecheck --prefix mcp", "result": "PASS"},
+    {
+      "command": "npm test --prefix mcp",
+      "result": "PASS",
+      "tests_passed": 335,
+      "tests_skipped": 1,
+      "tests_failed": 0,
+      "notes": "Initial sandbox run failed on loopback binding and temporary symlink permissions. The complete rerun with local OS permissions passed; no tests were weakened."
+    },
+    {"command": "npm run build --prefix mcp", "result": "PASS"},
+    {
+      "command": "npm run smoke:dist --prefix mcp",
+      "result": "PASS",
+      "notes": "Initial sandbox run could not create a temporary symlink. Rerun passed: 71 flat tools, 23 staged tools, 11 protocol schemas and 11 wiki pages exercised over stdio."
+    },
+    {
+      "command": "npm run check:tool-count --prefix mcp",
+      "result": "PASS",
+      "default_tools": 71,
+      "gated_tools": 73,
+      "setup_tools": 22,
+      "stale_markers": 0
+    },
+    {"command": "npm run check:wiki --prefix mcp", "result": "PASS", "public_pages": 11},
+    {
+      "command": "npm run check --prefix protocol",
+      "result": "PASS",
+      "tests_passed": 64,
+      "tests_failed": 0,
+      "schemas": 11,
+      "transport_cases": 16
+    },
+    {
+      "command": "node docs/evidence/area-review/verify.mjs",
+      "result": "PASS",
+      "evidence_gates_passed": 13,
+      "notes": "Current shared implementation against committed grid, footprint, cut, alignment, assembly, depth, mixed-bed, compact-panel and C1-note fixtures; no historical files rewritten."
+    },
+    {
+      "command": "node docs/evidence/area-review/verify-browser.mjs",
+      "result": "PASS",
+      "details": "browser-checks.json",
+      "notes": "Fresh UI exports: exact ceiling project equality; exact planting backup/restoration equality, including stored PDFs."
+    },
+    {
+      "command": "node docs/evidence/area-review/package.mjs path/to/public-addendum.pdf tmp/public-beds.otk",
+      "result": "PASS",
+      "notes": "Original public PDF hash checked; extracted L1.0; archive roundtrip preserves 14 measurements and 12 conditions. Archive remains local."
+    },
+    {"command": "node scripts/check-doc-links.mjs", "result": "PASS", "top_level_documents": 49},
+    {"command": "node docs/evidence/area-review/audit.mjs", "result": "PASS", "details": "file-audit.json"},
+    {"command": "python docs/evidence/area-review/media-audit.py", "result": "PASS", "dependency": "Pillow 13.0.0 in a temporary audit directory", "details": "media-audit.json"}
+  ],
+  "remaining_submission_steps": [
+    "Split the integration stack into bounded dependent patches; compare with current upstream at submission time.",
+    "Carry the linked public examples, alternatives and reviewer limitations into each proposed draft.",
+    "Run CI on each actual proposed PR head. No PR is opened by this audit.",
+    "Maintainer scope/design agreement and human review remain outstanding."
+  ]
+}

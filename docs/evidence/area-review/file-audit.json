@@ -1,0 +1,20 @@
+{
+  "base": "8a31fb4",
+  "scope": "Fork evidence added or changed since base; includes working changes; excludes this generated report",
+  "files": 482,
+  "bytes": 50321298,
+  "kinds": {
+    "jpg": 158,
+    "md": 22,
+    "json": 210,
+    "gif": 8,
+    "mjs": 43,
+    "png": 37,
+    "py": 3,
+    "html": 1
+  },
+  "parsed_json": 210,
+  "local_links": 490,
+  "errors": [],
+  "warnings": []
+}

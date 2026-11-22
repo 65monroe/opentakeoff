@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Organize the fork's area grid and assembly evidence around the original planting-bed workflow, with public ceiling examples, labeled design alternatives, a changed-surface index and reproducible checks. This documentation audit changes no application behavior or project records. See the [review packet](docs/evidence/area-review/README.md).
+
 - Correct the public C1 example's grid reference to label its triangular layout as an assumption. Save/reopen preserves every other project field, including IDs, quantities and reviews. See the [note correction evidence](docs/evidence/c1-spacing-note/README.md).
 
 - Compact the fork's **Area assembly** linked counts into code, EA, review and **Locate** rows with one source-detail section. Collapse empty material controls under **Add materials**. **Area grid count** now starts with saved results and **Adjust grid**, with optional settings collapsed and draft Cancel. Existing records and calculations are unchanged. See the [public-bed checks](docs/evidence/compact-bed-review/README.md).

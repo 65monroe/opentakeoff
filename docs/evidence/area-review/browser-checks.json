@@ -1,0 +1,72 @@
+{
+  "date": "2026-11-22",
+  "browser": "Codex in-app browser, existing 127.0.0.1:5200 tab",
+  "app_source_commit": "37f568b",
+  "documentation_head_before_audit": "b3604b8b623d8019080640588d0f0def7a77a7a3",
+  "script_asset": "assets/index-DeAp0Zrx.js",
+  "script_sha256": "2f7f1f159714719296665d612bfa9388359e900b98335e74798242a72f9c8742",
+  "public_2x4": {
+    "actual_current_build_flow": [
+      "Open saved archive",
+      "Select ACT-2X4-PUBLIC",
+      "Show on plan",
+      "Open edge-cut schedule",
+      "Adjust grid",
+      "Cancel",
+      "Export"
+    ],
+    "full_project_equality": true,
+    "results": {
+      "area_sf": 899,
+      "full_tiles": 78,
+      "edge_cut_pieces": 42
+    },
+    "save_reopen_evidence": "../area-grid-actual-2x4/README.md"
+  },
+  "planting_restoration": {
+    "actual_flow": [
+      "Export fresh JSON and archive backup",
+      "Restore backup after ceiling test",
+      "Locate SET in compact C2 panel",
+      "Remove only temporary AM3.10 PDF",
+      "Export JSON and archive"
+    ],
+    "full_project_equality": true,
+    "archive_takeoff_and_pdf_equality": true,
+    "measurements": 14,
+    "conditions": 12,
+    "pending_review": 14,
+    "preserved": [
+      "All project fields",
+      "IDs",
+      "Geometry",
+      "Quantities",
+      "Calibration",
+      "Sources",
+      "Review states",
+      "Original PDF inventory and bytes"
+    ],
+    "plans": [
+      {
+        "name": "ccfp-L1.0.pdf",
+        "bytes": 1200134,
+        "sha256": "fe0d7d35fcf8bdf05021e68d996063bcdbc69fdc4c35ccda0b18d8f77a318efa"
+      },
+      {
+        "name": "mo-veterans-home-A111-reflected-ceiling-plan.pdf",
+        "bytes": 310279,
+        "sha256": "e9f66a799fdf094ff7b3d43f79acc8d0af9cf53773e992d451f97ddceed91ad3"
+      },
+      {
+        "name": "sample-finish-plan.pdf",
+        "bytes": 1176246,
+        "sha256": "53aa2a44efc8f9a2e625ed223fcfbf9ee19d15eb8469ba57183874b6a8e2a56f"
+      }
+    ],
+    "save_reopen_evidence": "../c1-spacing-note/README.md"
+  },
+  "limits": [
+    "This audit revisits the current UI and restores the backup; prior dedicated save/reopen runs are linked separately.",
+    "Desktop layout checked; no mobile or human review-speed claim."
+  ]
+}

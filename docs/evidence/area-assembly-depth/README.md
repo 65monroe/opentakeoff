@@ -1,5 +1,8 @@
 # Editable material depth in inches
 
+Current scope, compact UI and checks: [area review packet](../area-review/README.md).
+The depth-edit captures below precede the compact panel.
+
 In **Area assembly → Edit material**, enter **Depth (in)** to preview and save
 CY directly. Topsoil and compost remain separate existing assembly rows.
 The editor converts depth to the existing rate (`per = 324 / inches`), so

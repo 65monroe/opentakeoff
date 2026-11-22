@@ -1,5 +1,8 @@
 # Eight printed quantities on one shared bed
 
+Current scope, compact UI and checks: [area review packet](../area-review/README.md).
+The source records below are preserved; the later panel uses compact rows.
+
 The public C2 bed now links ACD, CPE, CPN, ERA, HAC, PHD, POR and the existing
 58 SET in the same **Area assembly** panel. Each code has its own printed EA,
 source anchor, reference and pending review record. This adds example data
