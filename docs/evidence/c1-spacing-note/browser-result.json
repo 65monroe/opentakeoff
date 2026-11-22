@@ -1,0 +1,10 @@
+{
+  "date": "2026-11-22",
+  "browser": "Codex in-app browser",
+  "url": "http://127.0.0.1:5200/",
+  "note": "Triangular pattern assumed. L1.0 / C1 / SET: 12 in o.c. per schedule; 0 deg rotation, 6 in X/Y shifts and no edge clearance assumed. Calculated layout, not observed plant positions.",
+  "exactNoteMatch": true,
+  "grid": "Area grid count\nPrinted quantity\n127 EA\nCalculated layout\n129\npositions\n\n2 more than printed\n\n12″ · Triangular\nClose settings\nSpacing (in)\nPattern\nSquare\nTriangular\nRectangular\nOne item type and spacing throughout this area\nAlignment · 0° · 6″ / 6″ shifts\nFootprint · 7.5″ circle\nSource and assumptions\nSpacing source and layout assumptions\n\nGenerated positions are a layout calculation, not observed items. Footprint dimensions and spacing need separate evidence or stated assumptions.\n\nPreview: 129 positions · difference 2 from printed EA\n\nSave grid\nCancel\nRemove grid\nPrinted source · 127 - SET",
+  "saveEnabled": false,
+  "asset": "/assets/index-DeAp0Zrx.js"
+}

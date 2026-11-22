@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Correct the public C1 example's grid reference to label its triangular layout as an assumption. Save/reopen preserves every other project field, including IDs, quantities and reviews. See the [note correction evidence](docs/evidence/c1-spacing-note/README.md).
+
 - Compact the fork's **Area assembly** linked counts into code, EA, review and **Locate** rows with one source-detail section. Collapse empty material controls under **Add materials**. **Area grid count** now starts with saved results and **Adjust grid**, with optional settings collapsed and draft Cancel. Existing records and calculations are unchanged. See the [public-bed checks](docs/evidence/compact-bed-review/README.md).
 
 - Edit uniform area-material depth directly in inches in **Area assembly → Edit material**. CY preview and saved quantities use the existing SF-per-CY rule; zero, negative, blank and nonfinite depths cannot be saved. No new persisted field, measurement, plant count or review change. See the [public depth tests](docs/evidence/area-assembly-depth/README.md).

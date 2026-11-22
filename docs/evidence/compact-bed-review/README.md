@@ -1,5 +1,9 @@
 # Compact bed review and grid settings
 
+The C1 source-note mismatch recorded below was subsequently corrected in the
+[triangular-layout note follow-up](../c1-spacing-note/README.md). These captures
+and baseline exports retain the original trial state.
+
 Review a shared bed in compact code, EA, review and **Locate** rows. Select a
 code for one expandable **Source details** section. Empty material controls
 collapse under **Add materials**; existing materials and derived lengths keep
