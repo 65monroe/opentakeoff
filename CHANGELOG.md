@@ -2,6 +2,8 @@
 
 ## Unreleased
 
+- Compact the fork's **Area assembly** linked counts into code, EA, review and **Locate** rows with one source-detail section. Collapse empty material controls under **Add materials**. **Area grid count** now starts with saved results and **Adjust grid**, with optional settings collapsed and draft Cancel. Existing records and calculations are unchanged. See the [public-bed checks](docs/evidence/compact-bed-review/README.md).
+
 - Edit uniform area-material depth directly in inches in **Area assembly → Edit material**. CY preview and saved quantities use the existing SF-per-CY rule; zero, negative, blank and nonfinite depths cannot be saved. No new persisted field, measurement, plant count or review change. See the [public depth tests](docs/evidence/area-assembly-depth/README.md).
 
 - Add an **Area assembly** view in Work and review. Edit existing material rows with preview, Save and Cancel; keep linked printed EA and derived LF accessible from the same bed panel. Source/run navigation keeps the bed context. Shared conditions and material families stay in the condition editor. Existing quantities, geometry and review states do not change by opening the panel. See the [public bed evidence](docs/evidence/area-assembly-panel/README.md).

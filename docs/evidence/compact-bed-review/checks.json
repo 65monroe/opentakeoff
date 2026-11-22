@@ -1,0 +1,39 @@
+{
+  "date": "2026-11-21",
+  "timezone": "America/New_York",
+  "branch": "codex/area-assembly-prototype",
+  "base_commit": "9665b635761390519db630ddcdedc09fd6d095ea",
+  "node": "24.22.3",
+  "browser": "Codex in-app browser, existing tab 6",
+  "url": "http://127.0.0.1:5200/",
+  "verified_viewport": {"width": 1280, "height": 900},
+  "viewport_override_restored": true,
+  "build_asset": "/assets/index-DeAp0Zrx.js",
+  "build_asset_sha256": "2f7f1f159714719296665d612bfa9388359e900b98335e74798242a72f9c8742",
+  "checks": {
+    "npm ci --prefix web": "PASS; running local preview was stopped to release the Rollup file lock, then restarted after build",
+    "npm run check --prefix web": "PASS: typecheck, lint, ORT/door-reader checks, 3863 tests passed, 4 skipped, benchmark, build and OCR distribution checks",
+    "npm run check:tool-count --prefix mcp": "PASS: version agreement, 71 default / 73 gated / 22 setup tools, runtime schemas and inventory",
+    "npm run check:wiki --prefix mcp": "PASS: 11 public pages",
+    "npm run check --prefix protocol": "PASS: 64 tests, 11 schemas, 16 transport cases",
+    "node scripts/check-doc-links.mjs": "PASS",
+    "node docs/evidence/compact-bed-review/verify.mjs --browser": "PASS: exact project preservation, 8 source IDs, material/bundled Cancel, all stored PDF bytes, negative controls",
+    "browser_console_errors": 0
+  },
+  "public_baseline": {
+    "measurements": 14,
+    "conditions": 12,
+    "needs_review": 14,
+    "accepted_during_test": 0,
+    "c1_printed_ea": 127,
+    "c1_calculated_positions": 129,
+    "c2_printed_ea": 232,
+    "c2_codes": 8
+  },
+  "limits": [
+    "Pre-existing C1 triangular pattern still has a source note saying square; both preserved.",
+    "C2 north boundary remains approximate; no species-area allocation or mixed-bed grid inferred.",
+    "Existing proposal banners remain. Mobile visual layout and human review speed are unverified.",
+    "Local fork build only; no new PR, merge or deployment. No CLG skills or memory used."
+  ]
+}

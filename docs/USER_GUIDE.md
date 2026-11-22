@@ -304,7 +304,7 @@ not automatically converted to quantity records. See [planting scope and limits]
 Select a floor-area measurement in **Work and review**, then click **Area
 assembly**. You can also open it from a printed quantity or derived run with
 an existing link to that area. The panel keeps the bed selected as its context
-while **Show source callout** or **Edit run on plan** locates the linked record.
+while **Locate** or **Edit run on plan** locates the linked record.
 Click **Back to measurements** to return to the list.
 
 Click **Edit material** to change an existing material's native coverage/count
@@ -323,15 +323,19 @@ free-text labels are not automatically rewritten. **Cancel** keeps the original
 row. Other units and count/linear rules keep their existing rate editor.
 
 Expand **Saved assemblies** to save or apply the existing material recipe.
+When the area has no material rows, expand **Add materials** instead.
 Matching material names are skipped on repeat application. Recipes travel in
 the profile; applied rows travel in the project archive. This view does not
 introduce parameterized or nested assemblies. When a condition covers several
 measurements or belongs to a material family, edit it in the condition panel
 where that wider scope is visible.
 
-**Linked counts** shows each explicitly linked printed EA record, its source and
-review state. A source shared by several areas is identified; its quantity is
-not apportioned. **Derived lengths** shows existing runs linked by their recorded
+**Linked counts · Printed EA** shows a compact table of codes, quantities and
+review states. Click a code to select its **Source details**, or click **Locate**
+to select the row and highlight its printed callout while keeping the bed panel
+open. Expand **Source details** for the source text, reference, measurement ID
+and **Edit label**. A **Shared** source serves several areas; its quantity is
+not apportioned. Missing sources remain visible. **Derived lengths** shows existing runs linked by their recorded
 source area. **Edit label** changes the existing measurement label. Counts stay
 with the source record and lengths stay with their geometry; there is no free
 quantity override in this panel. **Edit area on plan** exposes the normal area
@@ -349,17 +353,21 @@ positions on a specified layout. The calculation does not locate drawn items,
 infer component dimensions or establish a compliant design. Cut pieces require
 the separate option described below.
 
-Enter **Spacing (in)** and choose **Pattern**. **Orientation and edges** contains
+The compact summary keeps **Printed quantity** separate from **Calculated
+layout** and shows their difference. Click **Adjust grid** to edit a saved layout,
+or **Set up grid** to create one. Enter **Spacing (in)** and choose **Pattern**. **Alignment** contains
 **Angle (degrees)**, **Edge clearance (in)**, **Grid shift X (in)** and **Grid
-shift Y (in)**. Enter **Spacing source and layout assumptions**, select **This
-outline applies to one item type and spacing throughout.**, and click **Save
-grid**. Hollow circles show generated positions clipped to the outline and holes.
+shift Y (in)**. Expand **Source and assumptions**, enter **Spacing source and
+layout assumptions**, select **One item type and spacing throughout this area**,
+and click **Save grid**. The numeric preview updates while editing. **Cancel**
+or **Close settings** discards the draft; reopening restores the saved settings.
+Hollow circles show generated positions clipped to the outline and holes.
 They are a layout calculation; they do not add EA or change the measured SF.
 Choose **Rectangular** for unequal pitches. Enter **Spacing X (in)** and
 **Spacing Y (in)**; both axes rotate with **Angle (degrees)**. Existing square
 and triangular grids retain their original single-spacing behavior.
 
-Open **Item footprint** to replace position markers with physical outlines.
+Open **Footprint** to replace position markers with physical outlines.
 Choose **Circle** and enter **Diameter (in)**, or choose **Rectangle** and enter
 **Width along grid X (in)** and **Depth along grid Y (in)**. Set **Dimension
 basis** to **Assumed** or **Specified in source**, and enter **Dimension source
@@ -398,6 +406,10 @@ orientation recalculates layout centers and cuts, while saved takeoff quantities
 remain unchanged. Invalid geometry
 or more than 2,500 candidate modules withholds the calculation. This is a layout
 check, not a purchasing quantity: waste and offcut reuse remain uncalculated.
+The cut option appears for rectangular footprints with a square or rectangular
+pattern, or while cuts are enabled so you can turn them off. An incompatible
+draft reports the error and disables Save; hiding controls never changes a saved grid.
+See the [compact panel browser checks](evidence/compact-bed-review/README.md).
 See the [public ceiling cut example](evidence/area-grid-cuts/README.md).
 The [2-by-4 comparison](evidence/area-grid-rectangles/README.md) uses the same
 public boundary and separately records both orientations and their assumptions.

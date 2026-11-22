@@ -45,6 +45,8 @@ export default function AreaAssemblyPanel({ area, shapes, conditions, onBack, on
   const model = areaAssembly(area, shapes, conditions);
   const assemblies = useAssemblyLibrary();
   const [editingLabel, setEditingLabel] = useState(null);
+  const [sourceId, setSourceId] = useState(null);
+  const selectedSource = model.sources.find(row => row.id === sourceId && row.shape) || model.sources.find(row => row.shape);
   const name = shape => conditions[shape.condition_id]?.finish_tag || uiText('Unassigned');
   const labelEditor = shape => editingLabel?.id === shape.id ? <form className="area-assembly-actions" onSubmit={e => { e.preventDefault(); onLabel(shape.id, editingLabel.value); setEditingLabel(null); }}>
     <label>{uiText('Measurement label')}<input value={editingLabel.value} onChange={e => setEditingLabel({ id: shape.id, value: e.target.value })} /></label>
@@ -55,25 +57,33 @@ export default function AreaAssemblyPanel({ area, shapes, conditions, onBack, on
       <div className="area-assembly-readout"><strong className="workspace-quantity">{fmtArea(area.computed?.area_sf || 0)}</strong><span>{uiText(workReviewState(area))}</span></div>
       <button type="button" onClick={() => onLocate(area)}>{uiText('Edit area on plan')}</button>
     </header>
-    <h4>{uiText('Materials')}</h4>
+    <h4>{uiText('Linked counts')} · {uiText('Printed EA')}</h4>
+    {!model.sources.length && <p>{uiText('No linked printed counts.')}</p>}
+    {!!model.sources.length && <table className="area-source-table" aria-label={uiText('Linked printed quantities')}>
+      <thead><tr><th scope="col">{uiText('Code')}</th><th scope="col">EA</th><th scope="col">{uiText('Review')}</th><th scope="col">{uiText('On plan')}</th></tr></thead>
+      <tbody>{model.sources.map(({ id, shape, shared }) => <tr key={id} className={selectedSource?.id === id ? 'is-selected' : ''}>
+        {!shape ? <td colSpan={4}><p role="status">{uiText('Source callout unavailable')} · {id}</p></td> : <>
+          <th scope="row"><button type="button" aria-pressed={selectedSource?.id === id} onClick={() => { setSourceId(id); setEditingLabel(null); }}>{name(shape)}</button>{shared && <span className="area-source-shared">{uiText('Shared')}</span>}</th>
+          <td className="workspace-quantity">{shape.computed?.count}</td>
+          <td className={workReviewState(shape) === 'Needs review' ? 'workspace-pending' : ''}>{uiText(workReviewState(shape))}</td>
+          <td><button type="button" aria-label={`${uiText('Locate')} ${name(shape)}`} onClick={() => { setSourceId(id); setEditingLabel(null); onLocate(shape, { sourceOnly: true }); }}>{uiText('Locate')}</button></td>
+        </>}
+      </tr>)}</tbody>
+    </table>}
+    {selectedSource && <details className="area-source-details" key={selectedSource.id}>
+      <summary>{name(selectedSource.shape)} · {uiText('Source details')}</summary>
+      <p>{selectedSource.shape.quantity_source.text} · {uiText(workReviewState(selectedSource.shape))}</p>
+      {selectedSource.shared && <p role="status">{uiText('This source serves multiple areas. Its quantity is not allocated to this bed.')}</p>}
+      <p>{selectedSource.shape.quantity_source.reference}</p><p>{selectedSource.id}</p>
+      {selectedSource.shape.label && <p>{selectedSource.shape.label}</p>}
+      {labelEditor(selectedSource.shape)}
+    </details>}
+    {!!model.materials.length && <h4>{uiText('Materials')}</h4>}
     {model.editReason && <p role="status">{uiText(model.editReason)}</p>}
     {Number(model.condition?.multiplier || 1) !== 1 && <p>{uiText('Material totals include condition multiplier')} ×{model.condition.multiplier}.</p>}
     {model.materials.map(row => <MaterialRow key={`${row.material.id}:${JSON.stringify(row.material)}`} row={row} condition={model.condition} shapes={shapes} disabled={!!model.editReason} onSave={(id, patch) => onMaterial(area.condition_id, id, patch)} />)}
-    {!model.materials.length && <p>{uiText('No material rows. Apply an existing assembly below.')}</p>}
-    {model.condition && !model.editReason && <details className="area-assembly-library"><summary>{uiText('Saved assemblies')}</summary><AssemblyBar cond={model.condition} assemblies={assemblies} onApply={a => onApply(area.condition_id, a)} /></details>}
-    <h4>{uiText('Linked counts')}</h4>
-    {!model.sources.length && <p>{uiText('No linked printed counts. Individual locations are not inferred from this area.')}</p>}
-    {model.sources.map(({ id, shape, shared }) => <article key={id} className="area-assembly-row">
-      {!shape ? <p role="status">{uiText('Source callout unavailable')} · {id}</p> : <>
-        <div className="area-assembly-readout"><strong>{name(shape)}</strong><strong className="workspace-quantity">{shape.computed?.count} EA</strong></div>
-        <p>{uiText('Printed quantity')} · {uiText(workReviewState(shape))}</p>
-        {shared && <p role="status">{uiText('This source serves multiple areas. Its quantity is not allocated to this bed.')}</p>}
-        <details><summary>{uiText('Source')} · {shape.quantity_source.text}</summary><p>{shape.quantity_source.reference}</p><p>{shape.id}</p></details>
-        <div className="area-assembly-actions"><button type="button" onClick={() => onLocate(shape, { sourceOnly: true })}>{uiText('Show source callout')}</button>{labelEditor(shape)}</div>
-      </>}
-    </article>)}
-    <h4>{uiText('Derived lengths')}</h4>
-    {!model.edges.length && <p>{uiText('No derived runs linked to this area.')}</p>}
+    {model.condition && !model.editReason && <details className="area-assembly-library"><summary>{uiText(model.materials.length ? 'Saved assemblies' : 'Add materials')}</summary><AssemblyBar cond={model.condition} assemblies={assemblies} onApply={a => onApply(area.condition_id, a)} /></details>}
+    {!!model.edges.length && <h4>{uiText('Derived lengths')}</h4>}
     {model.edges.map(({ shape, stale }) => <article key={shape.id} className="area-assembly-row">
       <div className="area-assembly-readout"><strong>{name(shape)}</strong><strong className="workspace-quantity">{fmtLength(shape.computed?.perimeter_lf || 0)}</strong></div>
       <p>{uiText(workReviewState(shape))} · {shape.label}</p>
@@ -81,6 +91,5 @@ export default function AreaAssemblyPanel({ area, shapes, conditions, onBack, on
       <p>{uiText('Derived boundary snapshot')} · {shape.origin.derived.gross_lf} {uiText('LF gross')} − {shape.origin.derived.openings_lf} {uiText('LF openings')}</p>
       <div className="area-assembly-actions"><button type="button" onClick={() => onLocate(shape)}>{uiText('Edit run on plan')}</button>{labelEditor(shape)}</div>
     </article>)}
-    <p className="workspace-receipt-note">{uiText('EA stays with its source; LF stays with its measured run. Area edits do not silently update either. Nothing here approves a measurement.')}</p>
   </section>;
 }

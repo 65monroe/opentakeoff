@@ -111,7 +111,9 @@ The full tool reference is [`mcp/README.md`](mcp/README.md).
 ## How a takeoff runs
 
 The fork's **Area assembly** panel brings a bed's existing material rows, linked
-printed plant EA and derived edging LF together. Edit a uniform CY layer's
+printed plant EA and derived edging LF together. Compact count rows offer
+**Locate** and one expandable source detail. Grid results start with a summary
+and **Adjust grid**. Edit a uniform CY layer's
 depth in inches and preview its volume, or jump to its source/run without leaving the bed context. See the
 [panel workflow](docs/USER_GUIDE.md#area-assembly) and
 [public-plan evidence](docs/evidence/area-assembly-panel/README.md).

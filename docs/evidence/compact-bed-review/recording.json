@@ -1,0 +1,57 @@
+[
+  {
+    "file": "02-source-ACD.jpg",
+    "action": "Locate ACD",
+    "time": "2026-11-22T02:39:09.016Z"
+  },
+  {
+    "file": "02-source-CPE.jpg",
+    "action": "Locate CPE",
+    "time": "2026-11-22T02:39:09.373Z"
+  },
+  {
+    "file": "02-source-CPN.jpg",
+    "action": "Locate CPN",
+    "time": "2026-11-22T02:39:09.773Z"
+  },
+  {
+    "file": "02-source-ERA.jpg",
+    "action": "Locate ERA",
+    "time": "2026-11-22T02:39:10.173Z"
+  },
+  {
+    "file": "02-source-HAC.jpg",
+    "action": "Locate HAC",
+    "time": "2026-11-22T02:39:10.575Z"
+  },
+  {
+    "file": "02-source-PHD.jpg",
+    "action": "Locate PHD",
+    "time": "2026-11-22T02:39:10.983Z"
+  },
+  {
+    "file": "02-source-POR.jpg",
+    "action": "Locate POR",
+    "time": "2026-11-22T02:39:11.389Z"
+  },
+  {
+    "file": "02-source-SET.jpg",
+    "action": "Locate SET",
+    "time": "2026-11-22T02:39:11.813Z"
+  },
+  {
+    "file": "18-flow-grid-open.jpg",
+    "action": "Adjust grid, saved triangular settings",
+    "time": "2026-11-22T02:43:13.746Z"
+  },
+  {
+    "file": "19-flow-grid-draft.jpg",
+    "action": "Square draft: preview 110; saved layout 129",
+    "time": "2026-11-22T02:43:13.808Z"
+  },
+  {
+    "file": "20-flow-grid-cancel.jpg",
+    "action": "Cancel restores saved triangular settings",
+    "time": "2026-11-22T02:43:14.175Z"
+  }
+]
